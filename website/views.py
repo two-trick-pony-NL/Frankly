@@ -79,18 +79,18 @@ def create_post():
 
     return render_template('create_post.html', user=current_user)
 
-@views.route("/send-feedback/<user>/<nps>", methods=['GET', 'POST'])
-def send_feedback(user, nps):
+@views.route("/send-feedback/<user>/<rating>", methods=['GET', 'POST'])
+def send_feedback(user, rating):
     if request.method == "POST":
         text = request.form.get('text')
 
         if not text:
             flash('Post cannot be empty', category='warning')
         else:
-            post = Post(text=text, nps=nps, author=user)
+            post = Post(text=text, rating=rating, author=user)
             db.session.add(post)
             db.session.commit()
-            flash('Post created!', category='success')
+            flash('Feedback received!', category='success')
             return redirect(url_for('views.thanks'))
 
     return render_template('create_post.html', user=current_user)    

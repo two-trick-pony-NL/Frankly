@@ -21,14 +21,14 @@
               labels: {{ labels | safe }},
               datasets: [
                 {
-                label: "NPS Score",
+                label: " Score",
                 data: {{ values |safe }},
                 fill: false,
                 borderColor: "rgb(180, 231, 218)",
                 lineTension: 0.5
                 },
                 {
-                label: "Your NPS Target",
+                label: "Your Target",
                 data: {{ target |safe }},
                 fill: false,
                 borderColor: "rgb(172, 173, 198)",
@@ -73,8 +73,13 @@
         {% for post in posts %}
         <div class="card border-dark">
           <div class="card-header d-flex justify-content-between align-items-center">
-            <!--<a href="/posts/{{post.user.username}}">Score: {{post.nps}}</a> From customer: {{post.nps}}-->
-            <h2>NPS: <span class="badge text-dark">{{post.nps}}</span></h2> From customer: {{post.nps}}
+            {% if post.rating > 2 %}
+            <h1><i class="far fa-smile" color-primary></i></h1> From customer: {{post.email}}
+            {%elif post.rating > 1 %}
+            <h1><i class="far fa-meh" bg-primary></i></h1> From customer: {{post.email}}
+            {%elif post.rating < 2 %}
+            <h1><i class="far fa-frown" bg-primary></i></h1> From customer: {{post.email}}
+            {%endif%}
             <div>
               <span id="likes-count-{{post.id}}">
               {{ post.likes|length }}</span> 
