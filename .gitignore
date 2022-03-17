@@ -1,0 +1,3 @@
+*.db
+*.cfg
+/website/static/qrcodes/
