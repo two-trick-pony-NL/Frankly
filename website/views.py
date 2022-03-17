@@ -120,7 +120,7 @@ def posts(username):
 
     if not user:
         flash('No user with that username exists.', category='warning')
-        return redirect(url_for('views.dashboard'))
+        return redirect(url_for('views.dashboard', username=username))
 
     posts = user.posts
     return render_template("posts.html", user=current_user, posts=posts, username=username)
@@ -142,8 +142,7 @@ def create_comment(post_id):
             db.session.commit()
         else:
             flash('Post does not exist.', category='warning')
-
-    return redirect(url_for('views.dashboard', username = current_user.id))
+    return redirect(url_for('views.dashboard', username = current_user.username))
 
 
 @views.route("/delete-comment/<comment_id>")
