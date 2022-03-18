@@ -71,7 +71,10 @@
           ]
         },
         options: {
-          responsive: true
+          responsive: true,
+          legend: {
+            display: false
+          }
         }
       });
     </script></div>
@@ -154,7 +157,7 @@
         </div>
       </div>
       <div class="card-body">
-        <div class="card-text">{{post.text}}</div>
+        <div class="card-text"><h3><b>{{post.text}}</b></h3></div>
         <br />
         <div class="collapse" id="comments-{{post.id}}">
           <div class="card">
