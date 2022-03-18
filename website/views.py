@@ -71,6 +71,11 @@ def dashboard(username):
 def settings():
     return render_template("settings.html", user=current_user)
 
+@views.route("/createassets")
+@login_required
+def createassets():
+    return render_template("createassets.html", user=current_user)    
+
 @views.route("/thanks")
 def thanks():
     return render_template("thanks.html", user=current_user)
