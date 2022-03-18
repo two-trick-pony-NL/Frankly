@@ -5,187 +5,228 @@
 
 {% block Content%}
 
-<div class="container">
-  <br>
-  <h1> {{ username }} </h1>
-  <div class="row">
+<div class="container"></div>
+<br><br>
+<!--Header of dasbhoard-->
+<h1> {{ username }} // Dashboard</h1>
+<br>
+<nav class="nav nav-pills flex-column flex-sm-row">
+  <a class="flex-sm-fill text-sm-center bg-grey nav-link active" href="#">Active</a>
+  <a class="flex-sm-fill text-sm-center nav-link" href="#">Link</a>
+  <a class="flex-sm-fill text-sm-center nav-link" href="#">Link</a>
+  <a class="flex-sm-fill text-sm-center nav-link disabled" href="#">Disabled</a>
+</nav>
+<hr>
+<!--Splitting up in grid view for the graphs-->
+<div class="row">
+  <div class="col-sm-2 ">
     <div class="row">
-      <br>
-      <div class="pt-4 pb-4 mw-100 gap-3">
-      <canvas id="lineChart" width="900" height="200"></canvas>
-        <script>
-          var ctx = document.getElementById("lineChart").getContext("2d");
-          var lineChart = new Chart(ctx, {
-            type: "line",
-            data: {
-              labels: {{ labels | safe }},
-              datasets: [
-                {
-                label: " Score",
-                data: {{ values |safe }},
-                fill: false,
-                borderColor: "rgb(180, 231, 218)",
-                lineTension: 0.5
-                },
-                {
-                label: "Your Target",
-                data: {{ target |safe }},
-                fill: false,
-                borderColor: "rgb(172, 173, 198)",
-                lineTension: 0.5
-                },
-              ]
-            },
-            options: {
-              responsive: true
-            }
-          });
-        </script>
-      </div>  
-    </div>
-  <div class="col-sm">
-
-    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-      <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
-      <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</a>
-      <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>
-      <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>
-    </div>
-    <div class="tab-content" id="v-pills-tabContent">
-      <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">...</div>
-      <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">...</div>
-      <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
-      <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
-    </div>
-  </div>
-    <div class="col-sm"> 
-      <div class="card" style="width: 18rem;">
-        <img src="{{ url_for('static',filename='qrcodes/User_29_promotor.png')}}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Your Promotor QR Code</h5>
-          <p class="card-text">Respondents can scan this QR code to tell you they are happy with your service!</p>
-          <a href="#" class="btn btn-dark">Go somewhere</a>
+      <div class="jumbotron jumbotron-fluid rounded bg-light">
+        <div class="container">
+          <br><br>
+          <h1 class="display-4">{{ grapevinescore }}</h1>
+          <p class="lead">Grapevine Score</p>
         </div>
       </div>
+    <br>
+    
     </div>
-    <div class="col-sm">
-      <div id="posts"></br > </br > 
-        {% for post in posts %}
-        <div class="card border-dark">
-          <div class="card-header d-flex justify-content-between align-items-center">
-            {% if post.rating > 2 %}
-            <h1><i class="far fa-smile" color-primary></i></h1> From customer: {{post.email}}
-            {%elif post.rating > 1 %}
-            <h1><i class="far fa-meh" bg-primary></i></h1> From customer: {{post.email}}
-            {%elif post.rating < 2 %}
-            <h1><i class="far fa-frown" bg-primary></i></h1> From customer: {{post.email}}
-            {%endif%}
-            <div>
-              <span id="likes-count-{{post.id}}">
-              {{ post.likes|length }}</span> 
-              {% if user.id in post.likes|map(attribute="author")|list %}
-              <i
-                class="fas fa-thumbs-up"
-                id="like-button-{{post.id}}"
-                onclick="like({{post.id}})"
-              ></i>
-              {% else %}
-              <i
-                class="far fa-thumbs-up"
-                id="like-button-{{post.id}}"
-                onclick="like({{post.id}})"
-              ></i>
-              {% endif %} {% if user.id == post.author %}
-              <div class="btn-group">
-                <button
-                  type="button"
-                  class="btn btn-sm btn-dark dropdown-toggle"
-                  data-bs-toggle="dropdown"
-                ></button>
-                <ul class="dropdown-menu">
-                  <li>
-                    <a href="/delete-post/{{post.id}}" class="dropdown-item"
-                      >Delete</a
-                    >
-                  </li>
-                </ul>
-              </div>
-              {% endif %}
-            </div>
+    
+  </div>
+  <div class="col-sm-2">
+    <div class="row">
+      <div class="jumbotron jumbotron-fluid rounded bg-light ">
+        <div class="container">
+          <br><br>
+          <h1 class="display-4">{{ totalresponses }}</h1>
+          <p class="lead">Total responses</p>
+        </div>
+      </div>
+    <br>
+    
+    </div>
+    
+  </div>
+
+  <div class="col-sm-8">
+    <!--Drawing the bar chart-->
+
+    <canvas id="lineChart" width="900" height="200"></canvas>
+    <script>
+      var ctx = document.getElementById("lineChart").getContext("2d");
+      var lineChart = new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: {{ labels | safe }},
+          datasets: [
+            {
+            data: {{ values |safe }},
+            fill: true,
+            backgroundColor: [
+              'rgb(180, 231, 218)',
+              'rgb(245, 228, 81)',
+              'rgb(172, 173, 200)'
+            ],
+            },
+          ]
+        },
+        options: {
+          responsive: true
+        }
+      });
+    </script></div>
+</div
+
+>
+<div class="row justify-content-between">
+  <hr>
+  <div class="col-sm-4"><canvas id="pieChart" width="900" height="200"></canvas>
+    <script>
+      var ctx = document.getElementById("pieChart").getContext("2d");
+      var pieChart = new Chart(ctx, {
+        type: "doughnut",
+        data: {
+          labels: {{ labels | safe }},
+          datasets: [
+            {
+              backgroundColor: [
+              'rgb(180, 231, 218)',
+              'rgb(245, 228, 81)',
+              'rgb(172, 173, 200)'
+            ],
+            label: " Score",
+            data: {{ values |safe }},
+            fill: false,
+            lineTension: 0.5
+            },
+          ]
+        },
+        options: {
+          responsive: true
+        }
+      });
+    </script></div>
+  <div class="col-sm-8"><div id="posts"></br >
+    <h2> What your users are saying:</h2><br>
+    {% for post in posts %}
+    <div class="card border-grey">
+        {% if post.rating > 2 %}
+        <div class="card-header d-flex bg-primary justify-content-between align-items-center">
+        <h1><i class="far fa-smile" color-primary></i></h1> From customer: {{post.email}}
+        {%elif post.rating > 1 %}
+        <div class="card-header d-flex bg-secondary justify-content-between align-items-center">
+        <h1><i class="far fa-meh" bg-primary></i></h1> From customer: {{post.email}}
+        {%elif post.rating < 2 %}
+        <div class="card-header d-flex bg-third justify-content-between align-items-center">
+        <h1><i class="far fa-frown" bg-primary></i></h1> From customer: {{post.email}}
+        {%endif%}
+        <div>
+          <span id="likes-count-{{post.id}}">
+          {{ post.likes|length }}</span> 
+          {% if user.id in post.likes|map(attribute="author")|list %}
+          <i
+            class="fas fa-thumbs-up"
+            id="like-button-{{post.id}}"
+            onclick="like({{post.id}})"
+          ></i>
+          {% else %}
+          <i
+            class="far fa-thumbs-up"
+            id="like-button-{{post.id}}"
+            onclick="like({{post.id}})"
+          ></i>
+          {% endif %} {% if user.id == post.author %}
+          <div class="btn-group">
+            <button
+              type="button"
+              class="btn btn-sm btn-dark dropdown-toggle"
+              data-bs-toggle="dropdown"
+            ></button>
+            <ul class="dropdown-menu">
+              <li>
+                <a href="/delete-post/{{post.id}}" class="dropdown-item"
+                  >Delete</a
+                >
+              </li>
+            </ul>
           </div>
-          <div class="card-body">
-            <div class="card-text">{{post.text}}</div>
-            <br />
-            <div class="collapse" id="comments-{{post.id}}">
-              <div class="card">
-                <div class="card-body" id="comments-expanded-{{post.id}}">
-                  {% for comment in post.comments %}
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div>
-                      <a href="/posts/{{comment.user.username}}"
-                        >{{comment.user.username}}</a
-                      >: {{comment.text}}
-                    </div>
-                    <div>
-                      <small class="text-muted"> {{comment.date_created}}</small>
-                      {% if user.id == comment.author or user.id == post.author %}
-                      <div class="btn-group">
-                        <button
-                          type="button"
-                          class="btn btn-sm btn-dark dropdown-toggle"
-                          data-bs-toggle="dropdown"
-                        ></button>
-                        <ul class="dropdown-menu">
-                          <li>
-                            <a
-                              href="/delete-comment/{{comment.id}}"
-                              class="dropdown-item"
-                              >Delete</a
-                            >
-                          </li>
-                        </ul>
-                      </div>
-                      {% endif %}
-                    </div>
+          {% endif %}
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-text">{{post.text}}</div>
+        <br />
+        <div class="collapse" id="comments-{{post.id}}">
+          <div class="card">
+            <div class="card-body" id="comments-expanded-{{post.id}}">
+              {% for comment in post.comments %}
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <a href="/posts/{{comment.user.username}}"
+                    >{{comment.user.username}}</a
+                  >: {{comment.text}}
+                </div>
+                <div>
+                  <small class="text-muted"> {{comment.date_created}}</small>
+                  {% if user.id == comment.author or user.id == post.author %}
+                  <div class="btn-group">
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-dark dropdown-toggle"
+                      data-bs-toggle="dropdown"
+                    ></button>
+                    <ul class="dropdown-menu">
+                      <li>
+                        <a
+                          href="/delete-comment/{{comment.id}}"
+                          class="dropdown-item"
+                          >Delete</a
+                        >
+                      </li>
+                    </ul>
                   </div>
-                  {% endfor %}
+                  {% endif %}
                 </div>
               </div>
+              {% endfor %}
             </div>
-            <p class="card-text">
-              {% if post.comments|length > 0 %}
-              <a data-bs-toggle="collapse" href="#comments-{{post.id}}" role="button">
-                <small>View {{post.comments|length}} Comments</small>
-              </a>
-              {% else %}
-              <small class="text-muted">No Comments</small>
-              {% endif %}
-            </p>
-            <form
-              class="input-group mb-3"
-              method="POST"
-              action="/create-comment/{{post.id}}"
-            >
-              <input
-                type="text"
-                id="text"
-                name="text"
-                class="form-control"
-                placeholder="Comment something!"
-              />
-              <button type="submit" class="btn btn-dark">Comment</button>
-            </form>
           </div>
-          <div class="card-footer text-muted">{{post.date_created}}</div>
         </div>
-      </br > {% endfor %}
-      </div>    
-  
+        <p class="card-text">
+          {% if post.comments|length > 0 %}
+          <a data-bs-toggle="collapse" href="#comments-{{post.id}}" role="button">
+            <small>View {{post.comments|length}} Comments</small>
+          </a>
+          {% else %}
+          <small class="text-muted">No Comments</small>
+          {% endif %}
+        </p>
+        <form
+          class="input-group mb-3"
+          method="POST"
+          action="/create-comment/{{post.id}}"
+        >
+          <input
+            type="text"
+            id="text"
+            name="text"
+            class="form-control"
+            placeholder="Comment something!"
+          />
+          <button type="submit" class="btn btn-dark">Comment</button>
+        </form>
+      </div>
+      <div class="card-footer text-muted">{{post.date_created}}</div>
     </div>
-  </div>
+  </br > {% endfor %}
+  </div>    
+
+</div>t</div>
+  
 </div>
 
 
-    
+</div>
+
 {% endblock%}
         

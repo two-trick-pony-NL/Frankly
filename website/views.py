@@ -16,17 +16,8 @@ def home():
 @views.route("/dashboard/<username>")
 @login_required
 def dashboard(username):
-    data = [
-        ("01-01-2021", 25,40),
-        ("01-02-2021", 34,40),
-        ("01-03-2021", 12,40),
-        ("01-04-2021", 17,40),
-        ("01-05-2021", 60,40),
-        ("01-06-2021", 45,40)
-    ]
-    labels = [row[0] for row in data]
-    values = [row[1] for row in data]
-    target = [row[2] for row in data]
+
+
 
     user = User.query.filter_by(username=username).first()
 
@@ -43,11 +34,37 @@ def dashboard(username):
     
     print(user)    
     posts = Post.query.filter_by(author=user.id).order_by(Post.date_created.desc())
+    print(posts)
     print(username)
     userID = str(current_user.id)
     QRCodeURL = "static/qrcodes/User_"+userID+"_promotor.png"
     print(QRCodeURL)
-    return render_template("dashboard.html", QRCodeURL=QRCodeURL, user=current_user, posts=posts, username=username, labels=labels, values=values, target=target)
+    nmbr_happy_users = Post.query.filter(
+        Post.author.like(user.id),
+        Post.rating.like(3)
+        ).count()
+
+    nmbr_medium_users = Post.query.filter(
+        Post.author.like(user.id),
+        Post.rating.like(2)
+        ).count()
+
+    nmbr_unhappy_users = Post.query.filter(
+        Post.author.like(user.id),
+        Post.rating.like(1)
+        ).count()    
+    totalresponses = nmbr_happy_users+nmbr_medium_users+nmbr_unhappy_users
+
+    data = [
+        ("Happy Users", nmbr_happy_users,"#fff"),
+        ("Medium Users", nmbr_medium_users, "#fff"),
+        ("Unhappy Users", nmbr_unhappy_users, "#fff")
+    ]
+    labels = [row[0] for row in data]
+    values = [row[1] for row in data]
+    grapevinescore = ((nmbr_happy_users/totalresponses)-(nmbr_unhappy_users/totalresponses))*100
+
+    return render_template("dashboard.html", grapevinescore=grapevinescore, totalresponses=totalresponses, nmbr_happy_users=nmbr_happy_users, nmbr_medium_users=nmbr_medium_users, nmbr_unhappy_users=nmbr_unhappy_users,QRCodeURL=QRCodeURL, user=current_user, posts=posts, username=username, labels=labels, values=values)
   
 @views.route("/settings")
 @login_required
