@@ -13,8 +13,47 @@
 <hr>
 <div class="container">
   <div class="row">
-    <div class="col">Column</div>
-    <div class="col">Column</div>
+    <div class="col-2">Column</div>
+    <div class="col-8">
+      <div class="card-group">
+        <div class="card">
+          <br>
+          <h1>Hi! </h1>
+          <h3>Hoe vond je het?</h3>
+          <div class="card-body ">
+            <h5 class="card-title"></h5>
+            <p class="card-text">Scan & Stem!</p>
+            <p class="card-text"><small class="text-muted"></small></p>
+          </div>
+        </div>
+        <div class="card">
+          <img class="card-img-top bg-primary" src="{{ url_for('static',filename='qrcodes/User_1_promotor.png')}}" alt="Card image cap">
+          <div class="card-body bg-primary">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+          </div>
+        </div>
+        <div class="card">
+          <img class="card-img-top" src="{{ url_for('static',filename='qrcodes/User_1_neutral.png')}}" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+          </div>
+        </div>
+        <div class="card">
+          <img class="card-img-top" src="{{ url_for('static',filename='qrcodes/User_1_detractor.png')}}" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
     <div class="w-100"></div>
     <div class="col">Column</div>
     <div class="col">Column</div>

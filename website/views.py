@@ -66,15 +66,17 @@ def dashboard(username):
 
     return render_template("dashboard.html", grapevinescore=grapevinescore, totalresponses=totalresponses, nmbr_happy_users=nmbr_happy_users, nmbr_medium_users=nmbr_medium_users, nmbr_unhappy_users=nmbr_unhappy_users,QRCodeURL=QRCodeURL, user=current_user, posts=posts, username=username, labels=labels, values=values)
   
-@views.route("/settings")
+@views.route("/settings/<username>")
 @login_required
-def settings():
-    return render_template("settings.html", user=current_user)
+def settings(username):
+    user = User.query.filter_by(username=username).first()
+    return render_template("settings.html", user=current_user, username=username,)  
 
-@views.route("/createassets")
+@views.route("/createassets/<username>")
 @login_required
-def createassets():
-    return render_template("createassets.html", user=current_user)    
+def createassets(username):
+    user = User.query.filter_by(username=username).first()
+    return render_template("createassets.html", user=current_user, username=username,)    
 
 @views.route("/thanks")
 def thanks():
