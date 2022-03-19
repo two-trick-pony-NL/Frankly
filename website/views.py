@@ -5,14 +5,14 @@ from . import db
 
 views = Blueprint("views", __name__)
 
-
+#Renders the homepage and the / redirect
 @views.route("/")
 @views.route("/home")
 def home():
     posts = Post.query.all()
     return render_template("home.html", user=current_user, posts=posts)
 
-
+#Renders the userdashboard requires a username to select the correct user dashboard
 @views.route("/dashboard/<username>")
 @login_required
 def dashboard(username):
@@ -29,16 +29,11 @@ def dashboard(username):
     if user != current_user:
         flash("You have no access to this page" , category="warning")    
         return redirect(url_for('views.home'))
-#Sorting Posts newest first
-    #posts = user.posts
-    
-    print(user)    
+#Sorting Posts newest first       
     posts = Post.query.filter_by(author=user.id).order_by(Post.date_created.desc())
-    print(posts)
-    print(username)
     userID = str(current_user.id)
     QRCodeURL = "static/qrcodes/User_"+userID+"_promotor.png"
-    print(QRCodeURL)
+    #Collecting all the responses filtered by Happy, neutral and Unhappy
     nmbr_happy_users = Post.query.filter(
         Post.author.like(user.id),
         Post.rating.like(3)
@@ -53,29 +48,41 @@ def dashboard(username):
         Post.author.like(user.id),
         Post.rating.like(1)
         ).count()    
+    #Adding up all responses    
     totalresponses = nmbr_happy_users+nmbr_medium_users+nmbr_unhappy_users
-
+    #Making a dataframe out of the filtered responses so we an draw the graphs in the dashboard
     data = [
-        ("Happy Users", nmbr_happy_users,"#fff"),
-        ("Medium Users", nmbr_medium_users, "#fff"),
-        ("Unhappy Users", nmbr_unhappy_users, "#fff")
+        ("Happy Users", nmbr_happy_users),
+        ("Medium Users", nmbr_medium_users),
+        ("Unhappy Users", nmbr_unhappy_users)
     ]
     labels = [row[0] for row in data]
     values = [row[1] for row in data]
-    grapevinescore = ((nmbr_happy_users/totalresponses)-(nmbr_unhappy_users/totalresponses))*100
-
+    #NPS style calculation
+    try:
+        grapevinescore = round(((nmbr_happy_users/totalresponses)-(nmbr_unhappy_users/totalresponses))*100)
+    except: 
+        grapevinescore = 0    
     return render_template("dashboard.html", grapevinescore=grapevinescore, totalresponses=totalresponses, nmbr_happy_users=nmbr_happy_users, nmbr_medium_users=nmbr_medium_users, nmbr_unhappy_users=nmbr_unhappy_users,QRCodeURL=QRCodeURL, user=current_user, posts=posts, username=username, labels=labels, values=values)
   
 @views.route("/settings/<username>")
 @login_required
 def settings(username):
     user = User.query.filter_by(username=username).first()
+    #Making sure the logged in user is the owner of the dashboard
+    if user != current_user:
+        flash("You have no access to this page" , category="warning")    
+        return redirect(url_for('views.home'))
     return render_template("settings.html", user=current_user, username=username,)  
 
 @views.route("/createassets/<username>")
 @login_required
 def createassets(username):
     user = User.query.filter_by(username=username).first()
+    #Making sure the logged in user is the owner of the dashboard
+    if user != current_user:
+        flash("You have no access to this page" , category="warning")    
+        return redirect(url_for('views.home'))
     return render_template("createassets.html", user=current_user, username=username,)    
 
 @views.route("/thanks")
