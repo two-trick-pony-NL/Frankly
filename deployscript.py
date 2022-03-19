@@ -1,4 +1,13 @@
 import os
+
+"""
+This file helps deploy the application by building the dockerfile and sending the docker image to amazon
+
+
+"""
+
+
+
 print("#####################")
 print(" \nDeployment started \n")
 print("#####################")

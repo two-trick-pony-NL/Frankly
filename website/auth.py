@@ -14,27 +14,7 @@ rexexusername = re.compile("^[a-zA-Z0-9_]*$")
 
 auth = Blueprint("auth", __name__)
 
-""" These sections are no longer used
-@auth.route("/login", methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-        email = request.form.get("email")
-        password = request.form.get("password")
-
-        user = User.query.filter_by(email=email).first()
-        if user:
-            if check_password_hash(user.password, password):
-                flash("Logged in!", category='success')
-                login_user(user, remember=True)
-                return redirect(url_for('views.home'))
-            else:
-                flash("Password is incorrect.", category='danger')
-        else:
-            flash("Email does not exist.", category='danger')
-
-    return render_template("login.html", user=current_user)
-"""
-
+#This function handles signin
 @auth.route("/sign-in", methods=['GET', 'POST'])
 def signin():
     if request.method == 'POST':
@@ -46,6 +26,7 @@ def signin():
             if check_password_hash(user.password, password):
                 flash("Logged in!", category='success')
                 login_user(user, remember=True)
+                createQR(userID)
                 return redirect(url_for('views.dashboard', user=current_user, username=user.username))
             else:
                 flash("Password is incorrect.", category='danger')
@@ -54,9 +35,9 @@ def signin():
 
     return render_template("signin.html", user=current_user)    
 
-
-@auth.route("/sign-up1", methods=['GET', 'POST'])
-def sign_up1():
+#This function handles signup 
+@auth.route("/sign-up", methods=['GET', 'POST'])
+def sign_up():
     if request.method == 'POST':
         email = request.form.get("email")
         username = request.form.get("username")
@@ -95,55 +76,20 @@ def sign_up1():
             login_user(new_user, remember=True)
             flash("Account created succesfully, welcome!", "success")
             userID = current_user.id
-            print(userID)
-            createQR(userID)
-            return redirect(url_for('views.dashboard', username=username))
-
-    return render_template("signup1.html", user=current_user)
-
-
-"""
-@auth.route("/sign-up", methods=['GET', 'POST'])
-def sign_up():
-    if request.method == 'POST':
-        email = request.form.get("email")
-        username = request.form.get("username")
-        password1 = request.form.get("password1")
-        password2 = request.form.get("password2")
-
-        email_exists = User.query.filter_by(email=email).first()
-        username_exists = User.query.filter_by(username=username).first()
-
-        if email_exists:
-            flash("Email is already in use.", category="danger")
-        elif username_exists:
-            flash("Username is already in use.", category="danger")
-        elif password1 != password2:
-            flash("Password don\'t match!", category="danger")
-        elif len(username) < 2:
-            flash("Username is too short.", category="danger")
-        elif len(password1) < 6:
-            flash("Password is too short.", category="danger")
-        elif len(email) < 4:
-            flash("Email is invalid.", category="danger")
-        else:
-            new_user = User(email=email, username=username, password=generate_password_hash(
-                password1, method='sha256'))
-            db.session.add(new_user)
-            db.session.commit()
-            login_user(new_user, remember=True)
-            flash("User created!", category="success")
-            userID = current_user.id
+            print("User created:")
             print(userID)
             createQR(userID)
             return redirect(url_for('views.dashboard', username=username))
 
     return render_template("signup.html", user=current_user)
- """
 
+
+
+#Handles the logout function
 @auth.route("/logout")
 @login_required
 def logout():
     logout_user()
     flash("You Logged out -- See you soon! !", category="success")
+    print("User logged out")
     return redirect(url_for("views.home"))
