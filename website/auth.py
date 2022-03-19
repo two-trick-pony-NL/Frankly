@@ -26,6 +26,7 @@ def signin():
             if check_password_hash(user.password, password):
                 flash("Logged in!", category='success')
                 login_user(user, remember=True)
+                userID=user.id
                 createQR(userID)
                 return redirect(url_for('views.dashboard', user=current_user, username=user.username))
             else:

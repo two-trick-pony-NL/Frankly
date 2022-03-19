@@ -5,6 +5,7 @@ from . import db
 
 views = Blueprint("views", __name__)
 
+#this file renders navigation on the page. All endpoints and logic are here. See auth and payment for endpoints on those topics
 #Renders the homepage and the / redirect
 @views.route("/")
 @views.route("/home")
@@ -79,11 +80,16 @@ def settings(username):
 @login_required
 def createassets(username):
     user = User.query.filter_by(username=username).first()
+    userID = user.id
+    userID = str(userID)
+    urlPromotorQR = userID+"_promotor.png"
+    urlNeutralQR = userID+"_neutral.png"
+    urlDetractorQR = userID+"_detractor.png"
     #Making sure the logged in user is the owner of the dashboard
     if user != current_user:
         flash("You have no access to this page" , category="warning")    
         return redirect(url_for('views.home'))
-    return render_template("createassets.html", user=current_user, username=username,)    
+    return render_template("createassets.html", user=current_user,urlDetractorQR=urlDetractorQR,urlNeutralQR=urlNeutralQR, urlPromotorQR= urlPromotorQR, username=username,)    
 
 @views.route("/thanks")
 def thanks():

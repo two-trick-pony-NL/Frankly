@@ -27,27 +27,24 @@
           </div>
         </div>
         <div class="card">
-          <img class="card-img-top bg-primary" src="{{ url_for('static',filename='qrcodes/User_1_promotor.png')}}" alt="Card image cap">
+          <img class="card-img-top bg-secondary" src="{{ url_for('static',filename='assets/img/happy.png') }}" alt="Card image cap">
+          <img class="card-img-top bg-secondary" src="{{ url_for('static',filename='qrcodes/User_')}}{{urlPromotorQR}}" alt="Card image cap">
+          <div class="card-body bg-secondary">
+            <h5 class="card-title">Scan this QR code if you were happy with the service!</h5>
+          </div>
+        </div>
+        <div class="card">
+          <img class="card-img-top bg-primary" src="{{ url_for('static',filename='assets/img/neutral.png') }}" alt="Card image cap">
+          <img class="card-img-top" src="{{ url_for('static',filename='qrcodes/User_')}}{{urlNeutralQR}}" alt="Card image cap">
           <div class="card-body bg-primary">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            <h5 class="card-title">Scan this QR code if you were neutral about the service</h5>
           </div>
         </div>
         <div class="card">
-          <img class="card-img-top" src="{{ url_for('static',filename='qrcodes/User_1_neutral.png')}}" alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-          </div>
-        </div>
-        <div class="card">
-          <img class="card-img-top" src="{{ url_for('static',filename='qrcodes/User_1_detractor.png')}}" alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+          <img class="card-img-top bg-primary" src="{{ url_for('static',filename='assets/img/unhappy.png') }}" alt="Card image cap">
+          <img class="card-img-top" src="{{ url_for('static',filename='qrcodes/User_')}}{{urlDetractorQR}}" alt="Card image cap">
+          <div class="card-body bg-third">
+            <h5 class="card-title">Scan this QR code if you felt that the service could have been a bit better</h5>
           </div>
         </div>
       </div>
