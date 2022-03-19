@@ -13,10 +13,11 @@ COPY requirements.txt .
 # Install any dependencies
 RUN pip3 install -r requirements.txt
 
-
 # Copy the content of the local src directory to the working directory
 COPY app.py .
+COPY gunicorn.sh .
 COPY website ./website
 COPY Env_Settings.cfg .
 # Specify the command to run on container start
-CMD [ "python3", "./app.py" ]
+#CMD [ "python3", "./app.py" ]
+ENTRYPOINT ["./gunicorn.sh"]

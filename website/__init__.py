@@ -3,11 +3,9 @@ from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_login import LoginManager
 from configparser import ConfigParser
+from sqlalchemy import true
 
 db = SQLAlchemy()
-DB_NAME = "database.db"
-
-
 config = ConfigParser()
 config.read('Env_Settings.cfg')
 token = config.get('SECRET_KEY', 'Session_Key')
@@ -43,8 +41,6 @@ def create_app():
 
     return app
 
-
 def create_database(app):
-    if not path.exists("website/" + DB_NAME):
         db.create_all(app=app)
-        print("Created database!")
+        print("Connected to SQL database!")
