@@ -1,5 +1,4 @@
 {"grapevine": {
     "image": ":grapevine.grapevine.latest",
-    "command": ["python3 app.py"],
     "ports": {"80": "HTTP"}
   }}
