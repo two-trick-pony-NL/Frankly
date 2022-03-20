@@ -99,7 +99,6 @@
                 {% if messages %}
                     {% for category, message in messages %}
                     <div class="alert alert-{{ category }} alert-dismissible" role="alert">
-                    <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <strong><i class="fa-solid fa-bell-on"></i></strong> {{ message }}
                     </div>
                     {% endfor %}

@@ -7893,9 +7893,6 @@ textarea.form-control-lg {
   --bs-bg-opacity: 1;
 }
 
-.bg-gradient {
-  background-image: var(--bs-gradient) !important;
-}
 
 .user-select-all {
   -webkit-user-select: all !important;
@@ -11303,7 +11300,7 @@ html {
 }
 
 .bg-gradient-primary-to-secondary {
-  background: linear-gradient(45deg, #2937f0, #9f1ae2) !important;
+  background: linear-gradient(45deg, #ACADC6, #ACADC6) !important;
 }
 
 .font-alt {
@@ -11311,7 +11308,7 @@ html {
 }
 
 .text-gradient {
-  background: -webkit-linear-gradient(#2937f0, #9f1ae2);
+  background: -webkit-linear-gradient(#ACADC6, #ACADC6);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
