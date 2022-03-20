@@ -37,6 +37,7 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{{ url_for('static',filename='styles/styles.css') }}" rel="stylesheet" />
         
+        
     </head>
     <!-- This SCRIPT  manages fading out of the alert after 2 secods-->  
 <script>
@@ -110,51 +111,19 @@
         </section>
 
 
-        <!-- Footer-->
-        <footer class="footer text-center bg-third " >
-            <div class="container" >
-                <div class="row">
-                    <!-- Footer Location-->
-                    <div class="col-lg-4 mb-5 mb-lg-0">
-                        <h4 class="text-uppercase mb-4">Privacy statement</h4>
-                        <p class="lead mb-0">
-                            We use cookies to make this website work, read about what we use them for in our privacy policy.
-                        </p>
-                    </div>
-                    <!-- Footer Social Icons
-                    <div class="col-lg-4 mb-5 mb-lg-0">
-                        <h4 class="text-uppercase mb-4">Around the Web</h4>
-                        <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-facebook-f"></i></a>
-                        <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-twitter"></i></a>
-                        <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-linkedin-in"></i></a>
-                        <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-dribbble"></i></a>
-                    </div>-->
-                    <!-- Footer About Text-->
-                    <div class="col-lg-4">
-                        <h4 class="text-uppercase mb-4">About Grapevine</h4>
-                        <p class="lead mb-0">
-                            Grapevine is an initiative by Joep and Peter, what started as a side project ended up changing the world. 
-                        </p>
-                    </div>
-                </div>
+            <!-- Footer-->
+    <footer class="bg-black text-center py-5">
+        <div class="container px-5">
+            <div class="text-white-50 small">
+                <div class="mb-2">&copy; Grapevine All Rights Reserved.</div>
+                <a href="#!">Privacy</a>
+                <span class="mx-1">&middot;</span>
+                <a href="#!">Terms</a>
+                <span class="mx-1">&middot;</span>
+                <a href="#!">FAQ</a>
             </div>
-            <!-- This SCRIPT  manages fading out of the alert after 2 secods-->  
-<script>
-    window.setTimeout(function() {
-        $(".alert").fadeTo(500, 0).slideUp(500, function(){
-            $(this).remove(); 
-        });
-    }, 7000);
-    </script>
-    <!-- end of the script that runs alerts-->  
-        </footer>
-        <!-- Copyright Section-->
-        <div class="copyright py-4 text-center text-white">
-            <div class="container"><small>Copyright &copy; GrapeVine 2021</small></div>
         </div>
-        
-        
-        </div>
+    </footer>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>  

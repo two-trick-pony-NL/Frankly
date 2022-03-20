@@ -13,6 +13,13 @@ def home():
     posts = Post.query.all()
     return render_template("home.html", user=current_user, posts=posts)
 
+
+
+@views.route("/newstyle")
+def newstyle():
+    posts = Post.query.all()
+    return render_template("newstyle.html", user=current_user, posts=posts)    
+
 #Renders the userdashboard requires a username to select the correct user dashboard
 @views.route("/dashboard/<username>")
 @login_required
