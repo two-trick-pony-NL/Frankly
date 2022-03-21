@@ -14,3 +14,14 @@ To run a developmentserver run:
 For production server: 
 - gunicorn.sh (for local running)
 - deployscript.py to deploy to Lightsail and start the server there (This probably only works for me as you need very specific keys to deploy to amazon) 
+
+## Feature roadmap
+
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
+
+
