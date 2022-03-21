@@ -63,9 +63,10 @@
                  <a class="navbar-brand text-dark" href="/">GrapeVine</a>
                  {% endif%}
                  <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-dark rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                     Menu
-                     <i class="fas fa-bars"></i>
+                     <a class="btn bg-secondary-outline py-3 px-4 border-dark " href="/sign-in" >log in!</a>  
+                     <a class="btn bg-secondary py-3 px-4 border-dark " href="/sign-up" >Try for free!</a>  
                  </button>
+                 
                  <div class="collapse navbar-collapse" id="navbarResponsive">
                      <ul class="navbar-nav ms-auto">
                          
@@ -76,9 +77,9 @@
                          <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 text-dark rounded" href="/settings/{{user.username}}">Settings</a></li>
                          <a href="/createassets/{{user.username}}"class="btn btn-dark" role="button">Get Feedback now!</a>
                      {% else %}
-                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 text-dark rounded" href="/sign-up">Sign Up</a></li>
+                         
                          <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 text-dark rounded" href="/sign-in">Sign In</a></li>
-                      
+                         <a class="btn bg-secondary py-3 px-4 border-dark " href="/sign-up" >Try for free!</a>  
                      {% endif%}
                      </ul>
                  </div>
@@ -107,9 +108,9 @@
                     <!-- Mashead text and app badges-->
                     <div class="mb-5 mb-lg-0 text-center text-lg-start">
                         <h1 class="display-1 lh-1 mb-3">Ask for feedback without asking for too much.</h1>
-                        <p class="lead fw-normal mb-5">Customers don't answer your sleep-inducing questionnaires, but you need feedback. Worry no more. Grapevine is hard to ignore.</p>
+                        <p class="lead fw-normal mb-5">Customers don't answer your sleep-inducing questionnaires, but you need feedback. Worry no more, you'll hear the feedback through the Grapevine.</p>
                         <div class="d-flex flex-column flex-lg-row align-items-center">
-                            <a class="btn bg-secondary py-3 px-4 bold rounded-pill" href="/sign-up" >Try for free!</a>    
+                            <a class="btn bg-secondary py-3 px-4 border-dark " href="/sign-up" >Try for free!</a>    
                         
                         </div>
                     </div>
@@ -170,7 +171,7 @@
                                 <div class="text-center">
                                     <i class="bi-camera icon-feature text-gradient d-block mb-3"></i>
                                     <h3 class="font-alt">Live Dashboard</h3>
-                                    <p class="text mb-0">Each response is processed instantly and shows up in your dashboard</p>
+                                    <p class="text mb-0">Each response is processed instantly and shows up on your dashboard</p>
                                 </div>
                             </div>
                         </div>
@@ -187,8 +188,8 @@
                                 <!-- Feature item-->
                                 <div class="text-center">
                                     <i class="bi-patch-check icon-feature text-gradient d-block mb-3"></i>
-                                    <h3 class="font-alt">1 Free campaign</h3>
-                                    <p class="text mb-0">Your first campaign will be free, forever. Advanced options with multiple campaigns are available</p>
+                                    <h3 class="font-alt">Free forever</h3>
+                                    <p class="text mb-0">Your first campaign will be free, forever. If your needs are bigger, then you can have up to 5 campagins at a time in our Premium plan</p>
                                 </div>
                             </div>
                         </div>
@@ -232,7 +233,7 @@
             <div class="row gx-5 align-items-center justify-content-center justify-content-lg-between">
                 <div class="col-12 col-lg-5">
                     <h2 class="display-4 lh-1 mb-4">Digital meets real life through our QR codes</h2>
-                    <p class="lead fw-normal text mb-5 mb-lg-0">Although our software runs on the latest technologies, we do fully integrate with our offline world. From the dashboard you can print your own QR codes that you can place a area your customers visit. </p>
+                    <p class="lead fw-normal text mb-5 mb-lg-0">We understand your customers don't want to create an account to go through some server, they can simply scan a QR code after an event, or while waiting for their appointment.  </p>
                 </div>
                 <div class="col-sm-8 col-md-6">
                     <div class="px-5 px-sm-0"><img class="img-fluid" src="{{ url_for('static',filename='assets/img/qr-code.png') }}" alt="..." /></div>
@@ -249,7 +250,7 @@
                     <br />
                     Start getting feedback.
                 </h2>
-                <a class="btn btn-outline-light py-3 px-4 rounded-pill" href="/sign-up" target="_blank">Sign up to Grapevine</a>
+                <a class="btn btn-outline-light py-3 px-4 rounded-pill" href="mailto:grapevine@petervandoorn.com" target="_blank">Get in touch</a>
             </div>
         </div>
     </section>
