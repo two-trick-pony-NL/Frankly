@@ -14,17 +14,10 @@ def home():
     return render_template("home.html", user=current_user, posts=posts)
 
 
-
-@views.route("/newstyle")
-def newstyle():
-    posts = Post.query.all()
-    return render_template("newstyle.html", user=current_user, posts=posts)    
-
 #Renders the userdashboard requires a username to select the correct user dashboard
 @views.route("/dashboard/<username>")
 @login_required
 def dashboard(username):
-
 
 
     user = User.query.filter_by(username=username).first()
@@ -98,14 +91,12 @@ def createassets(username):
         return redirect(url_for('views.home'))
     return render_template("createassets.html", user=current_user,urlDetractorQR=urlDetractorQR,urlNeutralQR=urlNeutralQR, urlPromotorQR= urlPromotorQR, username=username,)    
 
-@views.route("/thanks")
-def thanks():
-    return render_template("thanks.html", user=current_user)
       
 @views.route("/demo")
 def demo():
     return render_template("demo.html", user=current_user)
 
+"""
 @views.route("/create-post", methods=['GET', 'POST'])
 @login_required
 def create_post():
@@ -122,7 +113,7 @@ def create_post():
             return redirect(url_for('views.dashboard'))
 
     return render_template('create_post.html', user=current_user)
-
+"""
 @views.route("/send-feedback/<user>/<rating>", methods=['GET', 'POST'])
 def send_feedback(user, rating):
     if request.method == "POST":
@@ -134,10 +125,16 @@ def send_feedback(user, rating):
             post = Post(text=text, rating=rating, author=user)
             db.session.add(post)
             db.session.commit()
-            flash('Feedback received!', category='success')
-            return redirect(url_for('views.thanks'))
+            LastPost = Post.query.filter_by(text=text).first()
+            ThisPost = LastPost.id
+            ThisPost = str(ThisPost)
+            print(ThisPost)
 
-    return render_template('create_post.html', user=current_user)    
+            flash('Feedback received!', category='success')
+            #return render_template('chats/chatquestion1.html', text = text, ThisPost=ThisPost)
+            return redirect(url_for('chats.step1', text = text, ThisPost=ThisPost, user=user))
+
+    return render_template('/chats/create_post.html', user=current_user.username)    
 
 
 @views.route("/delete-post/<id>")
@@ -154,7 +151,7 @@ def delete_post(id):
         db.session.commit()
         flash('Post deleted.', category='success')
 
-    return redirect(url_for('views.dashboard'))
+    return redirect(url_for('views.home'))
 
 
 @views.route("/posts/<username>")
@@ -202,7 +199,7 @@ def delete_comment(comment_id):
         db.session.delete(comment)
         db.session.commit()
 
-    return redirect(url_for('views.dashboard'))
+    return redirect(url_for('views.dashboard', username=username))
 
 
 @views.route("/like-post/<post_id>", methods=['POST'])

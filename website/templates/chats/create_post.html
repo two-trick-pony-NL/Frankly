@@ -1,33 +1,46 @@
-{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
-%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://kit.fontawesome.com/999ca2bb93.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>{% block title %}Chat with {{user}}{% endblock %}</title>
+  </head>
+<body>
+
+
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="{{ url_for('static',filename='styles/styleschat.css') }}" rel="stylesheet" />
 <div class="page-content page-container" id="page-content">
-  <div class="padding">
       <div class="row container d-flex justify-content-center">
-          <div class="col-md-6">
+          <div class="col-md-8">
               <div class="card card-bordered">
                   <div class="card-header">
-                      <h4 class="card-title"><strong>Chat with CLIENTNAME</strong></h4>
+                      <h4 class="card-title"><strong>Chat with {{user}}</strong></h4>
                   </div>
-                  <div class="ps-container ps-theme-default ps-active-y" id="chat-content" style="overflow-y: scroll !important; height:400px !important;">
-                      <div class="media media-chat media-chat-reverse"> <img class="avatar" src="https://img.icons8.com/color/36/000000/administrator-male.png" alt="...">
+
+                  <!-- User 1-->
+                  <div class="ps-container ps-theme-default ps-active-y" id="chat-content" style="overflow-y: scroll !important; height:700px !important;">
+                      <div class="media media-chat media-chat"> <img class="avatar" src="https://img.icons8.com/color/36/000000/administrator-male.png" alt="...">
                           <div class="media-body">
-                              <p>Hi, thanks for helping us improve</p>
-                              <p>Just one more question, <br> What could we do in the future to improve our service?</p>
+                              <p>Hi, there! Thanks for letting us know how you liked it!</p>
+                              <p>We have one more question <br> THIS IS MY FIRST QUESTION</p>
                               <p class="meta"><time datetime="2018">23:58</time></p>
                           </div>
                       </div>
-                      <!--
-                      <div class="media media-chat media-chat-reverse">
-                          <div class="media-body">
-                              <p>Hiii, I'm good.</p>
-                              <p>How are you doing?</p>
-                              <p>Long time no see! Tomorrow office. will be free on sunday.</p>
-                              <p class="meta"><time datetime="2018">00:06</time></p>
-                          </div>    
-                      </div>
-                      -->
+                <!-- User 2-->
+                {% block Content%}{% endblock%}                 
                       <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px;">
                           <div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div>
                       </div>
@@ -35,12 +48,11 @@
                           <div class="ps-scrollbar-y" tabindex="0" style="top: 0px; height: 2px;"></div>
                       </div>
                   </div>
-                  <div class="publisher bt-1 border-light"> <img class="avatar avatar-xs" src="https://img.icons8.com/color/36/000000/administrator-male.png" alt="..."> 
-                    
+                  <div class="publisher bt-1 border-dark justify-between"> 
+                    <img class="avatar avatar-xs" src="https://img.icons8.com/color/36/000000/administrator-male.png" alt="..."> 
                     <form method="POST"><input name="text" id="text" class="publisher-input" id="text" type="text" placeholder="Write something"> <button type="submit" class="publisher-btn text-info" data-abc="true"><i class="fa fa-paper-plane"></i></a> </div></form>
                     
               </div>
-          </div>
       </div>
   </div>
 </div>
@@ -54,4 +66,5 @@
       src="{{ url_for('static', filename='index.js')}}"
     ></script>
 
-    {%endblock%}
+</body>
+</html>

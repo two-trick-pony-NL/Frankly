@@ -6,13 +6,13 @@ def createQR(userID):
     userID = str(userID)
     print("Creating new QR codes")
     # Create Promotor QR code
-    img = qrcode.make('https://grapevine.vdotvo9a4e2a6.eu-central-1.cs.amazonlightsail.com//send-feedback/'+userID+'/3')
+    img = qrcode.make('https://grapevine.works/send-feedback/'+userID+'/3')
     img.save("./website/static/qrcodes/User_"+userID+"_promotor.png")
     # Create Neutral QR code
-    img = qrcode.make('https://grapevine.vdotvo9a4e2a6.eu-central-1.cs.amazonlightsail.com//send-feedback/'+userID+'/2')
+    img = qrcode.make('https://grapevine.works/send-feedback/'+userID+'/2')
     img.save("./website/static/qrcodes/User_"+userID+"_neutral.png")
     # Create Detractor QR code
-    img = qrcode.make('https://grapevine.vdotvo9a4e2a6.eu-central-1.cs.amazonlightsail.com//send-feedback/'+userID+'/1')
+    img = qrcode.make('https://grapevine.works/send-feedback/'+userID+'/1')
     img.save("./website/static/qrcodes/User_"+userID+"_detractor.png")
   
 createQR(1)
