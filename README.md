@@ -14,3 +14,15 @@ To run a developmentserver run:
 For production server: 
 - gunicorn.sh (for local running)
 - deployscript.py to deploy to Lightsail and start the server there (This probably only works for me as you need very specific keys to deploy to amazon) 
+
+## Feature roadmap
+
+- [ ] Recieve feedback assets via Whatsapp / Email functionality
+- [ ] Create password reset logic
+- [ ] Add Terms and conditions
+- [ ] Add blog
+- [ ] Link to this github and make user feature ideas possible
+- [ ] Implement pricing for multiple campaigns
+- [ ] Implement logic for calculating pricing
+- [ ] Improve the look and feel of the chat functionality
+- [ ] Add custom questions to be added from the interface
