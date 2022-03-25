@@ -5,8 +5,8 @@ from . import db
 
 chats = Blueprint("chats", __name__)
 
-
-
+"""
+#Here we send the user to the chat windown if the method is get, and on post we receive the first answer
 @chats.route("/create-post", methods=['GET', 'POST'])
 def create_post():
     if request.method == "POST":
@@ -22,40 +22,11 @@ def create_post():
             return redirect(url_for('views.dashboard'))
 
     return render_template('chats/create_post.html', user=current_user.username)
-
-## DO replace the curren_user attribute with the author of the post. Otherwise you have to be signed in to post. 
-
-@chats.route("/step1",methods=['GET', 'POST'])
-def step1():
-    previoustext = request.args.get('text')
-    ThisPost = request.args.get('ThisPost')
-    user = request.args.get('user')
-
-    if request.method == "POST":
-        text = request.form.get('text')
-
-        if not text:
-            flash('Comment cannot be empty.', category='warning')
-        else:
-            post = ThisPost
-            
-            if post:
-                comment = Comment(
-                    text=text, author=user, post_id=ThisPost)
-                db.session.add(comment)
-                db.session.commit()
-
-                flash('Feedback received!', category='success')
-                #return render_template('chats/chatquestion1.html', text = text, ThisPost=ThisPost)
-                return redirect(url_for('chats.step2', text1 = text, ThisPost=ThisPost , previoustext =previoustext, user=user))
-
-    return render_template("chats/chatquestion1.html", user=current_user.username, previoustext=previoustext)  
-
-
+"""
+#Here we ask the second question on the GET request and on Post we receive the second answer
 @chats.route("/step2",methods=['GET', 'POST'])
 def step2():
-    previoustext = request.args.get('previoustext')
-    text1 = request.args.get('text1')
+    answer1 = request.args.get('text')
     ThisPost = request.args.get('ThisPost')
     user = request.args.get('user')
 
@@ -75,13 +46,17 @@ def step2():
 
                 flash('Feedback received!', category='success')
                 #return render_template('chats/chatquestion1.html', text = text, ThisPost=ThisPost)
-                return redirect(url_for('chats.step3', text2 = text, text1 = text1, ThisPost=ThisPost, user=user))     
-    return render_template("chats/chatquestion2.html", user=current_user.username, previoustext=previoustext)  
+                answer2 = text
+                return redirect(url_for('chats.step3', ThisPost=ThisPost, answer2 =answer2 , answer1 =answer1, user=user))
+
+    return render_template("chats/chatquestion2.html", user=user, answer1=answer1)  
+
+#Here we ask the third question on the GET request and on Post we receive the third answer
 
 @chats.route("/step3",methods=['GET', 'POST'])
 def step3():
-    previoustext = request.args.get('previoustext')
-    text1 = request.args.get('text1')
+    answer1 = request.args.get('answer1')
+    answer2 = request.args.get('answer2')
     ThisPost = request.args.get('ThisPost')
     user = request.args.get('user')
 
@@ -101,13 +76,19 @@ def step3():
 
                 flash('Feedback received!', category='success')
                 #return render_template('chats/chatquestion1.html', text = text, ThisPost=ThisPost)
-                return redirect(url_for('chats.thanks'))     
-    return render_template("chats/chatquestion3.html", user=current_user.username, previoustext=previoustext)  
+                answer3 = text
+                return redirect(url_for('chats.thanks', answer1 = answer1, answer2 = answer2,answer3= answer3, ThisPost=ThisPost, user=user))     
+    return render_template("chats/chatquestion3.html", user=user, answer1=answer1,answer2=answer2)  
 
-
-@chats.route("/thanks")
+ 
+@chats.route("/thanks",methods=['GET', 'POST'])
 def thanks():
-    return render_template("chats/thanks.html", user=current_user.username)    
+    answer1 = request.args.get('answer1')
+    answer2 = request.args.get('answer2')
+    answer3 = request.args.get('answer3')
+    ThisPost = request.args.get('ThisPost')
+    user = request.args.get('user')
+    return render_template("chats/thanks.html", answer1=answer1, answer2=answer2, answer3=answer3)    
 
 
 @chats.route("/question-answered1/<post_id>", methods=['GET','POST'])
@@ -125,4 +106,4 @@ def create_comment(post_id):
             db.session.commit()
         else:
             flash('Post does not exist.', category='warning')
-    return redirect(url_for('views.dashboard', username = current_user.username))    
+    return redirect(url_for('views.dashboard', user=user))    

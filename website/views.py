@@ -122,6 +122,7 @@ def send_feedback(user, rating):
         if not text:
             flash('Post cannot be empty', category='warning')
         else:
+            print(user)
             post = Post(text=text, rating=rating, author=user)
             db.session.add(post)
             db.session.commit()
@@ -131,10 +132,9 @@ def send_feedback(user, rating):
             print(ThisPost)
 
             flash('Feedback received!', category='success')
-            #return render_template('chats/chatquestion1.html', text = text, ThisPost=ThisPost)
-            return redirect(url_for('chats.step1', text = text, ThisPost=ThisPost, user=user))
+            return redirect(url_for('chats.step2', text = text, ThisPost=ThisPost, user=user))
 
-    return render_template('/chats/create_post.html', user=current_user.username)    
+    return render_template('/chats/chatquestion1.html')    
 
 
 @views.route("/delete-post/<id>")

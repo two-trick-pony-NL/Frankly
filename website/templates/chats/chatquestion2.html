@@ -1,14 +1,12 @@
 
-{% extends "chats/create_post.html" %} {% block title %}GrapeVine - Giving Feedback made easy{% endblock %} 
+{% extends "chats/chatquestion1.html" %} {% block title %}GrapeVine - Giving Feedback made easy{% endblock %} 
 
 
 
 {% block Content%}
 <div class="media media-chat media-chat-reverse">
         <div class="media-body">
-            <p>{{previoustext}}</p>
-            <p>How are you doing?</p>
-            <p>Long time no see! Tomorrow office. will be free on sunday.</p>
+            <p>{{answer1}}</p>
             <p class="meta"><time datetime="2018">00:06</time></p>
         </div>    
     </div>
@@ -19,24 +17,18 @@
             <p>Here is my SECOND question asking for an answer</p>
             <p class="meta"><time datetime="2018">00:06</time></p>
         </div>    
-    </div>  
+    </div>    
 
-
-    <div class="media media-chat media-chat-reverse">
-        <div class="media-body">
-            <p>{{text1}}</p>
-            <p>How are you doing?</p>
-            <p>Long time no see! Tomorrow office. will be free on sunday.</p>
-            <p class="meta"><time datetime="2018">00:06</time></p>
-        </div>    
+    <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px;">
+        <div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div>
     </div>
+    <div class="ps-scrollbar-y-rail" style="top: 0px; height: 0px; right: 2px;">
+        <div class="ps-scrollbar-y" tabindex="0" style="top: 0px; height: 2px;"></div>
+    </div>
+</div>
+<div class="publisher bt-1 border-dark justify-between"> 
+  <img class="avatar avatar-xs" src="https://img.icons8.com/color/36/000000/administrator-male.png" alt="..."> 
+  <form method="POST"><input name="text" id="text" class="publisher-input" id="text" type="text" placeholder="Write something"> <button type="submit" class="publisher-btn text-info" data-abc="true"><i class="fa fa-paper-plane"></i></a> </div></form>
 
-
-    <div class="media media-chat media-chat">
-        <div class="media-body">
-            <p>Here is my THIRD question asking for an answer</p>
-            <p class="meta"><time datetime="2018">00:06</time></p>
-        </div>    
-    </div> 
 {% endblock%}
         
