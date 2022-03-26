@@ -44,7 +44,6 @@ def step2():
                 db.session.add(comment)
                 db.session.commit()
 
-                flash('Feedback received!', category='success')
                 #return render_template('chats/chatquestion1.html', text = text, ThisPost=ThisPost)
                 answer2 = text
                 return redirect(url_for('chats.step3', ThisPost=ThisPost, answer2 =answer2 , answer1 =answer1, user=user))
@@ -74,7 +73,6 @@ def step3():
                 db.session.add(comment)
                 db.session.commit()
 
-                flash('Feedback received!', category='success')
                 #return render_template('chats/chatquestion1.html', text = text, ThisPost=ThisPost)
                 answer3 = text
                 return redirect(url_for('chats.thanks', answer1 = answer1, answer2 = answer2,answer3= answer3, ThisPost=ThisPost, user=user))     

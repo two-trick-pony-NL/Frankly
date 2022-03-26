@@ -130,8 +130,6 @@ def send_feedback(user, rating):
             ThisPost = LastPost.id
             ThisPost = str(ThisPost)
             print(ThisPost)
-
-            flash('Feedback received!', category='success')
             return redirect(url_for('chats.step2', text = text, ThisPost=ThisPost, user=user))
 
     return render_template('/chats/chatquestion1.html')    
