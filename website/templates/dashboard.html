@@ -13,13 +13,14 @@
 <hr>
 <!--Splitting up in grid view for the graphs-->
 <div class="row">
-  <div class="col-sm-2 ">
+  <div class="col-sm-4 ">
     <div class="row">
       <div class="jumbotron jumbotron-fluid rounded bg-light">
         <div class="container">
           <br><br>
           <h1 class="display-4">{{ grapevinescore }}</h1>
           <p class="lead">Grapevine Score</p>
+          <p>We recalculated your responses into a NPS style score</p>
         </div>
       </div>
     <br>
@@ -27,13 +28,14 @@
     </div>
     
   </div>
-  <div class="col-sm-2">
+  <div class="col-sm-4 height=100%">
     <div class="row">
       <div class="jumbotron jumbotron-fluid rounded bg-light ">
         <div class="container">
           <br><br>
           <h1 class="display-4">{{ totalresponses }}</h1>
           <p class="lead">Total responses</p>
+          <p>The total of all the feedback you have received</p>
         </div>
       </div>
     <br>
@@ -42,9 +44,39 @@
     
   </div>
 
-  <div class="col-sm-8">
-
+  <div class="col-sm-4">
+    <div class="row">
+      <div class="jumbotron jumbotron-fluid rounded bg-light ">
+        <div class="container">
+          <p class="lead">Get your feedback templates now</p>
+          <p>Start asking your clients for feedback, by forwarding them one of our templates. We'll send you a ready-to-send copy that you can forward easily. </p>
+          <br>
+          <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+            <button type="button" class="btn btn-primary text-dark">Email</button>
+            <button type="button" class="btn btn-primary text-dark">Whatsapp</button>
+          
+            <div class="btn-group" role="group">
+              <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle text-dark" data-bs-toggle="dropdown" aria-expanded="false">
+                QR Codes
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                <li><a class="dropdown-item text-dark " href="#">Download our PDF Template</a></li>
+                <li><a class="dropdown-item text-dark" href="#">Download only the QR codes</a></li>
+              </ul>
+              <br>
+            </div>
+          </div>
+        </div>
+      </div>
+    <br>
     
+    </div>
+    
+  </div>
+  
+  <div class="row">
+  <div class="col-12">
+
     <!--Drawing the bar chart-->
 
     <canvas id="lineChart" width="900" height="200"></canvas>
@@ -74,6 +106,7 @@
         }
       });
     </script></div>
+</div>
 </div>
 <!-- Drawing the doughnut chart-->
 <div class="row justify-content-between">
@@ -154,7 +187,7 @@
       <div class="card-body">
         <div class="card-text"><h3><b>{{post.text}}</b></h3></div>
         <br />
-        <div class="collapse" id="comments-{{post.id}}">
+        <div class="collapse text-dark" id="comments-{{post.id}}">
           <div class="card">
             <div class="card-body" id="comments-expanded-{{post.id}}">
               {% for comment in post.comments %}
@@ -193,7 +226,7 @@
         <p class="card-text">
           {% if post.comments|length > 0 %}
           <a data-bs-toggle="collapse" href="#comments-{{post.id}}" role="button">
-            <small>View {{post.comments|length}} Comments</small>
+            <small class="text-dark">View {{post.comments|length}} Comments</small>
           </a>
           {% else %}
           <small class="text-muted">No Comments</small>
