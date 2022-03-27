@@ -11,6 +11,7 @@ import re
 regexemail = re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+')
 regexpassword = re.compile('[A-Za-z0-9@#$%^&+=]{8,}')
 rexexusername = re.compile("^[a-zA-Z0-9_]*$")
+regexphonenumber = re.compile("(^\+[0-9]{2}|^\+[0-9]{2}\(0\)|^\(\+[0-9]{2}\)\(0\)|^00[0-9]{2}|^0)([0-9]{9}$|[0-9\-\s]{10}$)")
 
 auth = Blueprint("auth", __name__)
 
@@ -42,6 +43,7 @@ def sign_up():
     if request.method == 'POST':
         email = request.form.get("email")
         username = request.form.get("username")
+        phonenumber = request.form.get("phonenumber")
         password1 = request.form.get("password1")
         password2 = request.form.get("password2")
         option = request.form.get('option')
@@ -53,6 +55,8 @@ def sign_up():
             flash("Accept the terms and conditions to create an account", category="danger")
         if not re.fullmatch(regexemail, email):
             flash("This is not a valid email address", category="danger")
+        if not re.fullmatch(regexphonenumber, phonenumber):
+            flash("This is not a valid phonenumber -- Use the format +31612345678", category="danger")    
         elif email_exists:
             flash("This Email address is already in use, use another one or log in", category="danger")
         elif username_exists:
@@ -70,7 +74,7 @@ def sign_up():
         elif len(email) < 4:
             flash("Email address is invalid.", category="danger")
         else:
-            new_user = User(email=email, username=username, password=generate_password_hash(
+            new_user = User(email=email, phonenumber=phonenumber, isadmin = False, username=username, password=generate_password_hash(
                 password1, method='sha256'))
             db.session.add(new_user)
             db.session.commit()

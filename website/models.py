@@ -9,6 +9,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(150), unique=True)
     username = db.Column(db.String(150), unique=True)
     password = db.Column(db.String(150))
+    phonenumber = db.Column(db.String(20))
     isadmin = db.Column(db.Boolean())
     haspaid = db.Column(db.Boolean())
     date_created = db.Column(db.DateTime(timezone=True), default=func.now())
@@ -16,6 +17,10 @@ class User(db.Model, UserMixin):
     campaigns = db.relationship('Campaign', backref='user', passive_deletes=True) #This is all campaigns for this user
     comments = db.relationship('Comment', backref='user', passive_deletes=True)
     likes = db.relationship('Like', backref='user', passive_deletes=True)
+    customquestion0 = db.Column(db.String(150))
+    customquestion1 = db.Column(db.String(150))
+    customquestion2 = db.Column(db.String(150))
+    customquestion3 = db.Column(db.String(150))
 
 
 class Campaign(db.Model):
