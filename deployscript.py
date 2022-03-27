@@ -11,9 +11,7 @@ This file helps deploy the application by building the dockerfile and sending th
 print("\n########################\n")
 print("\n---Deployment started---\n")
 print("\n########################\n")
-print("\nStarting up Docker\n")
 
-os.system("open -a docker")
 print("\n########################\n")
 os.system("echo Creating Container image")
 print("\n########################\n")

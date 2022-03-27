@@ -9,7 +9,52 @@
 <br><br>
 <!--Header of dasbhoard-->
 <h1> {{ username }} // Get feedback now</h1>
+<hr>
+<h5>Scan a QR code to get your first piece of feedback!</h5>
+          <div class="card bg-primary" style="width: 500px;">
+            <div class="row no-gutters">
+                <div class="col-sm-5">
+                  <img class="card-img-top bg-secondary" src="{{ url_for('static',filename='qrcodes/User_')}}{{urlPromotorQR}}"  alt="Card image cap">
+                </div>
+                <div class="col-sm-7">
+                    <div class="card-body">
+                        <h5 class="card-title">This QR Code generates a bit of positive feedback</h5>
+                       
+                        
+                    </div>
+                </div>
+            </div>
+          </div>
 
+          <div class="card bg-secondary" style="width: 500px;">
+            <div class="row no-gutters">
+                <div class="col-sm-5">
+                  <img class="card-img-top bg-secondary" src="{{ url_for('static',filename='qrcodes/User_')}}{{urlNeutralQR}}"  alt="Card image cap">
+                </div>
+                <div class="col-sm-7">
+                    <div class="card-body">
+                        <h5 class="card-title">This QR Code generates a bit of neutral feedback</h5>
+                       
+                        
+                    </div>
+                </div>
+            </div>
+          </div>
+
+          <div class="card bg-third" style="width: 500px;">
+            <div class="row no-gutters">
+                <div class="col-sm-5">
+                  <img class="card-img-top bg-secondary" src="{{ url_for('static',filename='qrcodes/User_')}}{{urlDetractorQR}}"  alt="Card image cap">
+                </div>
+                <div class="col-sm-7">
+                    <div class="card-body">
+                        <h5 class="card-title">This QR Code generates a bit of negative feedback</h5>
+                       
+                        
+                    </div>
+                </div>
+            </div>
+          </div>
 <hr>
 <div class="container">
   <div class="row">

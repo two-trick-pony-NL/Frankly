@@ -21,6 +21,12 @@ def dashboard(username):
 
 
     user = User.query.filter_by(username=username).first()
+    userID = user.id
+    userID = str(userID)
+    urlPromotorQR = userID+"_promotor.png"
+    urlNeutralQR = userID+"_neutral.png"
+    urlDetractorQR = userID+"_detractor.png"
+
 
     if not user:
         flash("No user with that username exists, try creating a new account", category='info')
@@ -64,7 +70,7 @@ def dashboard(username):
         grapevinescore = round(((nmbr_happy_users/totalresponses)-(nmbr_unhappy_users/totalresponses))*100)
     except: 
         grapevinescore = 0    
-    return render_template("dashboard.html", grapevinescore=grapevinescore, totalresponses=totalresponses, nmbr_happy_users=nmbr_happy_users, nmbr_medium_users=nmbr_medium_users, nmbr_unhappy_users=nmbr_unhappy_users,QRCodeURL=QRCodeURL, user=current_user, posts=posts, username=username, labels=labels, values=values)
+    return render_template("dashboard.html", urlPromotorQR=urlPromotorQR, urlNeutralQR=urlNeutralQR,urlDetractorQR=urlDetractorQR,  grapevinescore=grapevinescore, totalresponses=totalresponses, nmbr_happy_users=nmbr_happy_users, nmbr_medium_users=nmbr_medium_users, nmbr_unhappy_users=nmbr_unhappy_users,QRCodeURL=QRCodeURL, user=current_user, posts=posts, username=username, labels=labels, values=values)
   
 @views.route("/settings/<username>")
 @login_required
