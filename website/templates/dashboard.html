@@ -5,6 +5,7 @@
 
 {% block Content%}
 
+
 <div class="container"></div>
 <br><br>
 <!--Header of dasbhoard-->
@@ -52,8 +53,8 @@
           <p>Start asking your clients for feedback, by forwarding them one of our templates. We'll send you a ready-to-send copy that you can forward easily. </p>
           <br>
           <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-            <button type="button" class="btn btn-primary text-dark">Email</button>
-            <button type="button" class="btn btn-primary text-dark">Whatsapp</button>
+            <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasEmail" aria-controls="offcanvasEmail">Email</button>
+            <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWhatsapp" aria-controls="offcanvasWhatsapp">Whatsapp</button>
           
             <div class="btn-group" role="group">
               <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle text-dark" data-bs-toggle="dropdown" aria-expanded="false">
@@ -78,6 +79,7 @@
   <div class="col-12">
 
     <!--Drawing the bar chart-->
+    {% if totalresponses  > 0 %}
 
     <canvas id="lineChart" width="900" height="200"></canvas>
     <script>
@@ -106,9 +108,15 @@
         }
       });
     </script></div>
+    {% else %}
+
+
+    
+    {% endif%}
 </div>
 </div>
 <!-- Drawing the doughnut chart-->
+{% if totalresponses  > 0 %}
 <div class="row justify-content-between">
   <hr>
   <div class="col-sm-4"><canvas id="pieChart" width="900" height="200"></canvas>
@@ -137,7 +145,16 @@
         }
       });
     </script></div>
+{% else %}
+<br><br>
+<hr>
+<h1> You have received no feedback yet</h1>
+<p>As soon as your first customers start interacting with your surveys the results will show up here.</p>
+
+{% endif%}
+
   <div class="col-sm-8"><div id="posts"></br >
+    {% if totalresponses  > 0 %}
     <h2> What your users are saying:</h2><br>
     {% for post in posts %}
     <div class="card border-grey">
@@ -224,7 +241,7 @@
           </div>
         </div>
         <p class="card-text">
-          {% if post.comments|length > 0 %}
+          {% if totalresponses > 0 %}
           <a data-bs-toggle="collapse" href="#comments-{{post.id}}" role="button">
             <small class="text-dark">View {{post.comments|length}} Comments</small>
           </a>
@@ -250,7 +267,49 @@
       <div class="card-footer text-muted">{{post.date_created}}</div>
     </div>
   </br > {% endfor %}
-  </div>    
+  </div> 
+  {% else %}
+  <!-- If there are 0 posts we show this accordion helping the user getting started-->
+  <h2>Get started in 3 simple steps:</h2>
+  <div class="accordion" id="accordionPanelsStayOpenExample">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+          Accordion Item #1
+        </button>
+      </h2>
+      <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+        <div class="accordion-body">
+          <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+          Accordion Item #2
+        </button>
+      </h2>
+      <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+        <div class="accordion-body">
+          <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+          Accordion Item #3
+        </button>
+      </h2>
+      <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+        <div class="accordion-body">
+          <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}   
 
 </div>
 </div>
@@ -259,6 +318,85 @@
 
 
 </div>
+
+<!-- These 2 offcanvas items manage the sliding in of information when users tap the whatsapp and Email buttons-->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasWhatsapp" aria-labelledby="offcanvasWhatsapp">
+  <div class="offcanvas-header">
+    <h3 id="offcanvasWhatsapp">How to get feedback through Whatsapp</h3>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <p><i>You can simply receive feedback through whatsapp using our pre-made whatsapp template it works super simple:</i></p>
+    <hr>
+    <h5>Step 1: Send the template to your phone</h5>
+    <p>Grapevine will send you template on your phone, all you have to do is tap this button:</p>
+    <button type="button" class="btn btn-primary text-dark">Send the Whatsapp template to my phone</button>
+    <br>    <br>    <br>
+    <img class="app-badge center-block" src="{{ url_for('static',filename='assets/img/chat.png') }}" alt="..." style="max-width: 50%"/>
+    <br>
+    <br>
+    <hr>
+
+    <br>
+    <h5>Step 2: Share the template with contacts in your phone </h5>
+    <li>Simply hold your finger on the message in Whatsapp, and a menu will pop up. </li>
+   <li>Tap "forward" and select the contacts you want to ask for feedback</li>>
+    <img class="app-badge center-block" src="{{ url_for('static',filename='assets/img/sharing.jpeg') }}" alt="..." style="max-width: 50%"/>
+    <br>
+    <br>
+    <hr>
+    <h5>Or: Copy + paste and make it your own</h5>
+    <p>If you want to ask for feedback anywhere else, simply copy paste the template and make it your own!</p>
+    <pre><code>
+      Hi 
+
+      dhdhdaldi
+      data-sb-feedbackdd
+
+      data-device
+    </code></pre>
+  </div>
+</div>
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasEmail" aria-labelledby="offcanvasEmail">
+  <div class="offcanvas-header">
+    <h3 id="offcanvasWhatsapp">How to get feedback through Email</h3>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <p></p><i>You can simply receive feedback through email using our pre-made email template it works super simple:</i></p>
+    <hr>
+    <h5>Method 1: Send the template to your mailbox</h5>
+    <p>Grapevine will send your template to your mailbox on the email address you used during signup, all you have to do is tap this button:</p>
+    <button type="button" class="btn btn-primary text-dark">Send the template to <b>my</b> email address</button>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <h5>Method 2: Send the feedback template to your contacts directly</h5>
+    <p>Grapevine can also send the email template to one of your contacts directly. Simply add the email address of your recipients and hit send.</p>
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" placeholder="Email address of your recipient" aria-label="Recipient's username" aria-describedby="button-addon2">
+      <button class="btn btn-primary text-dark" type="button" id="button-addon2">Send to client</button>
+    </div>
+    <small>Did you know you can add multiple recipients by separating email addresses using commas?</small>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <h5>Method 3: Copy + paste and make it your own</h5>
+    <p>If you want to ask for feedback anywhere else, simply copy paste the template and make it your own!</p>
+    <pre><code>
+      Hi 
+
+      dhdhdaldi
+      data-sb-feedbackdd
+
+      data-device
+    </code></pre>
+  </div>
+</div>
+
+
 
 {% endblock%}
         
