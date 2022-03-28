@@ -1,17 +1,12 @@
 import os
 
-"""
-This file helps deploy the application by building the dockerfile and sending the docker image to amazon
 
-
-"""
-
+#This file helps deploy the application by building the dockerfile and sending the docker image to amazon
 
 
 print("\n########################\n")
 print("\n---Deployment started---\n")
 print("\n########################\n")
-
 print("\n########################\n")
 os.system("echo Creating Container image")
 print("\n########################\n")
@@ -38,5 +33,5 @@ print("\n\Image is deployed on AWS Lightsail. It might take a few minutes to app
 print("\n########################\n")
 print("Here is the configuration file: ")
 os.system("aws lightsail create-container-service-deployment --service-name grapevine \
---containers file://deploymentconfig.json \
---public-endpoint file://publicendpoint.json")
+--containers file://AWS/deploymentconfig.json \
+--public-endpoint file://AWS/publicendpoint.json")
