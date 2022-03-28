@@ -394,7 +394,7 @@
     <hr>
     <h5>Step 1: Send the template to your phone</h5>
     <p>Grapevine will send you template on your phone, all you have to do is tap this button:</p>
-    <button type="button" class="btn btn-primary text-dark">Send the Whatsapp template to my phone</button>
+    <a href="/sendwhatsapp/{{user.id}}/{{user.phonenumber}}" class="btn btn-primary text-dark" tabindex="-1" role="button">Send the Whatsapp template to my phone</a>
     <br>    <br>    <br>
     <img class="app-badge center-block" src="{{ url_for('static',filename='assets/img/chat.png') }}" alt="..." style="max-width: 50%"/>
     <br>

@@ -31,11 +31,13 @@ def create_app():
     from .auth import auth
     from .payments import payments
     from .chats import chats
+    from .messaging import messaging
 
     app.register_blueprint(views, url_prefix="/")
     app.register_blueprint(auth, url_prefix="/")
     app.register_blueprint(payments, url_prefix="/")
     app.register_blueprint(chats, url_prefix="/")
+    app.register_blueprint(messaging, url_prefix="/")
 
     from .models import User, Post, Comment, Like
     #This function creates a new database if none exists and updates tables if those are updated in the models

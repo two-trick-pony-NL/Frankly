@@ -2,4 +2,4 @@
 *.cfg
 /website/static/qrcodes/
 /__pycache__
-deployscript.py
+/deployscript.py
