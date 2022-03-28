@@ -97,29 +97,7 @@ def createassets(username):
         return redirect(url_for('views.home'))
     return render_template("createassets.html", user=current_user,urlDetractorQR=urlDetractorQR,urlNeutralQR=urlNeutralQR, urlPromotorQR= urlPromotorQR, username=username,)    
 
-      
-@views.route("/demo")
-def demo():
-    return render_template("demo.html", user=current_user)
 
-"""
-@views.route("/create-post", methods=['GET', 'POST'])
-@login_required
-def create_post():
-    if request.method == "POST":
-        text = request.form.get('text')
-
-        if not text:
-            flash('Post cannot be empty', category='warning')
-        else:
-            post = Post(text=text, author=current_user.id)
-            db.session.add(post)
-            db.session.commit()
-            flash('Post created!', category='success')
-            return redirect(url_for('views.dashboard'))
-
-    return render_template('create_post.html', user=current_user)
-"""
 @views.route("/send-feedback/<user>/<rating>", methods=['GET', 'POST'])
 def send_feedback(user, rating):
     if request.method == "POST":
