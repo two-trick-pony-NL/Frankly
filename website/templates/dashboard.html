@@ -2,7 +2,6 @@
 {% extends "theme.html" %} {% block title %}GrapeVine - Giving Feedback made easy{% endblock %} 
 
 
-
 {% block Content%}
 
 
@@ -16,7 +15,7 @@
 <div class="row">
   <div class="col-sm-4 ">
     <div class="row">
-      <div class="jumbotron jumbotron-fluid rounded bg-light">
+      <div class="jumbotron jumbotron-fluid rounded bg-light" style="height: 230px">
         <div class="container">
           <br><br>
           <h1 class="display-4">{{ grapevinescore }}</h1>
@@ -31,7 +30,7 @@
   </div>
   <div class="col-sm-4 height=100%">
     <div class="row">
-      <div class="jumbotron jumbotron-fluid rounded bg-light ">
+      <div class="jumbotron jumbotron-fluid rounded bg-light" style="height: 230px">
         <div class="container">
           <br><br>
           <h1 class="display-4">{{ totalresponses }}</h1>
@@ -47,13 +46,13 @@
 
   <div class="col-sm-4">
     <div class="row">
-      <div class="jumbotron jumbotron-fluid rounded bg-light ">
+      <div class="jumbotron jumbotron-fluid rounded bg-light" style="height: 230px">
         <div class="container">
           <p class="lead">Get your feedback templates now</p>
           <p>Start asking your clients for feedback, by forwarding them one of our templates. We'll send you a ready-to-send copy that you can forward easily. </p>
           <br>
           <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-            <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasEmail" aria-controls="offcanvasEmail">Email</button>
+            <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasEmail" aria-controls="offcanvasEmail"> <i class="fa-solid fa-envelope"></i> Email</button>
             <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWhatsapp" aria-controls="offcanvasWhatsapp">Whatsapp</button>
             <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasQR" aria-controls="offcanvasQR">QR Codes</button>
           </div>
@@ -612,8 +611,8 @@
                   <hr>
                   <h6>Download & Reset</h6>
                   <p>
-                    If you want to start over you can download the feedback you have received so far in a CSV file for your archive and then reset the account. 
-                    Be aware that this is irreversible.    </p>
+                    If you want to start over you can download the feedback you have received so far in a CSV file for your archive and then delete all the responses you have received. 
+                   Be aware that you can't restore deleted responses</p>
                   <button type="button" class="btn btn-primary text-dark">Download CSV</button>
 
                   <button type="button" class="btn btn-danger">Reset account</button>
