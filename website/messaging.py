@@ -38,8 +38,10 @@ def SendWhatsapp(userid, phonenumber):
 
     message = client.messages.create( 
                                 messaging_service_sid='MGcda453ae1d2d1f05cb4b8124367535b5', 
+                                #To enable whatsapp add this line in again
                                 #from_='whatsapp:+14155238886',  
                                 body=message+promotorURL+neutralURL+detractorURL,      
+                                #Replace this line to send whatsapp instead of text
                                 #to='whatsapp:'+phonenumber
                                 to=phonenumber
                             ) 
