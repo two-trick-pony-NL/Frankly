@@ -1,5 +1,4 @@
 from curses import flash
-import pyshorteners
 from flask import Blueprint, render_template, request, flash, redirect, url_for, jsonify, session
 from flask_login import login_required, current_user
 from configparser import ConfigParser
@@ -62,6 +61,8 @@ def SendEmail(userid, email):
     from_email='no-reply@grapevine.works',
     to_emails=email,
     subject='Your Grapevine email template',
+
+    #THis next section is the HTML email body: NOTE IT"S NOT A COMENT
     html_content='''
      <html>
     <head>

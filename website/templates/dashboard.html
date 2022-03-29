@@ -58,11 +58,13 @@
           
             <div class="btn-group" role="group">
               <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle text-dark" data-bs-toggle="dropdown" aria-expanded="false">
-                QR Codes
+               Download QR Codes
               </button>
               <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                <li><a class="dropdown-item text-dark " href="#">Download our PDF Template</a></li>
-                <li><a class="dropdown-item text-dark" href="#">Download only the QR codes</a></li>
+                <li><a class="dropdown-item text-dark " href="/downloadQR/{{user.id}}/promotor">Happy Feedback QR code</a></li>
+                <li><a class="dropdown-item text-dark " href="/downloadQR/{{user.id}}/neutral">Neutral Feedback QR code</a></li>
+                <li><a class="dropdown-item text-dark " href="/downloadQR/{{user.id}}/detractor">Unhappy Feedback QR code</a></li>
+              
               </ul>
               <br>
             </div>

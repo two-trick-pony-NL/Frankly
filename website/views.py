@@ -1,6 +1,7 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for, jsonify, session
+from flask import Blueprint, render_template, request, flash, redirect, url_for, jsonify, send_file
 from flask_login import login_required, current_user
 from .models import Post, User, Comment, Like
+import os
 from . import db
 
 views = Blueprint("views", __name__)
@@ -202,3 +203,24 @@ def like(post_id):
         db.session.commit()
 
     return jsonify({"likes": len(post.likes), "liked": current_user.id in map(lambda x: x.author, post.likes)})
+
+@views.route('/downloadQR/<userid>/promotor')
+@login_required
+def downloadFilePromotor (userid):
+    qr3 = 'User_'+userid+'_promotor.png'
+    file3 = "static/qrcodes/"+qr3
+    return(send_file(file3, as_attachment=True)) 
+
+@views.route('/downloadQR/<userid>/neutral')
+@login_required
+def downloadFileNeutral (userid):
+    qr2 = 'User_'+userid+'_neutral.png'
+    file2 = "static/qrcodes/"+qr2
+    return(send_file(file2, as_attachment=True)) 
+
+@views.route('/downloadQR/<userid>/detractor')
+@login_required
+def downloadFileDetractor (userid):
+    qr1 = 'User_'+userid+'_detractor.png'
+    file1 = "static/qrcodes/"+qr1
+    return(send_file(file1, as_attachment=True)) 

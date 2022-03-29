@@ -16,3 +16,4 @@ def createQR(userID):
     img.save("./website/static/qrcodes/User_"+userID+"_detractor.png")
   
 createQR(1)
+
