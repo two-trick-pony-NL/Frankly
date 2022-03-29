@@ -37,9 +37,11 @@ def SendWhatsapp(userid, phonenumber):
     
 
     message = client.messages.create( 
-                                from_='whatsapp:+14155238886',  
+                                messaging_service_sid='MGcda453ae1d2d1f05cb4b8124367535b5', 
+                                #from_='whatsapp:+14155238886',  
                                 body=message+promotorURL+neutralURL+detractorURL,      
-                                to='whatsapp:'+phonenumber
+                                #to='whatsapp:'+phonenumber
+                                to=phonenumber
                             ) 
     
     print(message.sid)
