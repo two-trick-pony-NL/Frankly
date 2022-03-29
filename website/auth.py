@@ -6,6 +6,7 @@ from .qrgenerator import createQR
 from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 import re
+import phonenumbers
 
 # These regexes are used to check whether the passwords, email addresses and usernames are valid during signup. 
 regexemail = re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+')
@@ -47,7 +48,8 @@ def sign_up():
         password1 = request.form.get("password1")
         password2 = request.form.get("password2")
         option = request.form.get('option')
-
+        my_number = phonenumbers.parse(phonenumber, "NL")
+        phonenumberformatted = phonenumbers.format_number(my_number, phonenumbers.PhoneNumberFormat.E164)
 
         email_exists = User.query.filter_by(email=email).first()
         username_exists = User.query.filter_by(username=username).first()
@@ -74,7 +76,7 @@ def sign_up():
         elif len(email) < 4:
             flash("Email address is invalid.", category="danger")
         else:
-            new_user = User(email=email, phonenumber=phonenumber, isadmin = False, username=username, password=generate_password_hash(
+            new_user = User(email=email, phonenumber=phonenumberformatted, isadmin = False, username=username, password=generate_password_hash(
                 password1, method='sha256'))
             db.session.add(new_user)
             db.session.commit()

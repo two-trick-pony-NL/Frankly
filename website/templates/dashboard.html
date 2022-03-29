@@ -385,6 +385,7 @@
 
 <!-- These 2 offcanvas items manage the sliding in of information when users tap the whatsapp and Email buttons-->
 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasWhatsapp" aria-labelledby="offcanvasWhatsapp">
+  
   <div class="offcanvas-header">
     <h3 id="offcanvasWhatsapp">How to get feedback through Whatsapp</h3>
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -431,7 +432,7 @@
     <hr>
     <h5>Method 1: Send the template to your mailbox</h5>
     <p>Grapevine will send your template to your mailbox on the email address you used during signup, all you have to do is tap this button:</p>
-    <button type="button" class="btn btn-primary text-dark">Send the template to <b>my</b> email address</button>
+    <a href="/sendemail/{{user.id}}/{{user.email}}" class="btn btn-primary text-dark" tabindex="-1" role="button">Send the template to <b>my</b> email address</a>
     <br>
     <br>
     <hr>
