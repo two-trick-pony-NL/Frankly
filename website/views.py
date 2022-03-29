@@ -61,17 +61,36 @@ def dashboard(username):
     #Making a dataframe out of the filtered responses so we an draw the graphs in the dashboard
     data = [
         ("Happy Users", nmbr_happy_users),
-        ("Medium Users", nmbr_medium_users),
+        ("Neutral Users", nmbr_medium_users),
         ("Unhappy Users", nmbr_unhappy_users)
     ]
     labels = [row[0] for row in data]
     values = [row[1] for row in data]
-    #NPS style calculation
+
+    #Calculating the % of happy users for the donut chart and rounding it up to the next whole number. If total responses is 0 we'll return 0 so we don't devide by 0. 
+    try:
+        percentagehappyusers = round((nmbr_happy_users/totalresponses)*100)
+        percentageneutralusers = round((nmbr_medium_users/totalresponses)*100)
+        percentageunhappyusers = round((nmbr_unhappy_users/totalresponses)*100)
+    except:
+        percentagehappyusers = 0      
+        percentageneutralusers = 0
+        percentageunhappyusers = 0
+
+    piedata = [
+        ("Percentage Happy Users",percentagehappyusers ),
+        ("Percentage Neutral Users",percentageneutralusers ),
+        ("Percentage Unhappy Users",percentageunhappyusers ),
+    ]
+    percentagelabels = [row[0] for row in piedata]
+    percentagevalues = [row[1] for row in piedata]
+
+    #NPS style calculation - again trying to avoid deviding by zero
     try:
         grapevinescore = round(((nmbr_happy_users/totalresponses)-(nmbr_unhappy_users/totalresponses))*100)
     except: 
         grapevinescore = 0    
-    return render_template("dashboard.html", urlPromotorQR=urlPromotorQR, urlNeutralQR=urlNeutralQR,urlDetractorQR=urlDetractorQR,  grapevinescore=grapevinescore, totalresponses=totalresponses, nmbr_happy_users=nmbr_happy_users, nmbr_medium_users=nmbr_medium_users, nmbr_unhappy_users=nmbr_unhappy_users,QRCodeURL=QRCodeURL, user=current_user, posts=posts, username=username, labels=labels, values=values)
+    return render_template("dashboard.html", percentagelabels=percentagelabels, percentagevalues=percentagevalues, urlPromotorQR=urlPromotorQR, urlNeutralQR=urlNeutralQR,urlDetractorQR=urlDetractorQR,  grapevinescore=grapevinescore, totalresponses=totalresponses, nmbr_happy_users=nmbr_happy_users, nmbr_medium_users=nmbr_medium_users, nmbr_unhappy_users=nmbr_unhappy_users,QRCodeURL=QRCodeURL, user=current_user, posts=posts, username=username, labels=labels, values=values)
   
 @views.route("/settings/<username>")
 @login_required

@@ -55,19 +55,7 @@
           <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
             <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasEmail" aria-controls="offcanvasEmail">Email</button>
             <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWhatsapp" aria-controls="offcanvasWhatsapp">Whatsapp</button>
-          
-            <div class="btn-group" role="group">
-              <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle text-dark" data-bs-toggle="dropdown" aria-expanded="false">
-               Download QR Codes
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                <li><a class="dropdown-item text-dark " href="/downloadQR/{{user.id}}/promotor">Happy Feedback QR code</a></li>
-                <li><a class="dropdown-item text-dark " href="/downloadQR/{{user.id}}/neutral">Neutral Feedback QR code</a></li>
-                <li><a class="dropdown-item text-dark " href="/downloadQR/{{user.id}}/detractor">Unhappy Feedback QR code</a></li>
-              
-              </ul>
-              <br>
-            </div>
+            <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasQR" aria-controls="offcanvasQR">QR Codes</button>
           </div>
         </div>
       </div>
@@ -127,7 +115,7 @@
       var pieChart = new Chart(ctx, {
         type: "doughnut",
         data: {
-          labels: {{ labels | safe }},
+          labels: {{ percentagelabels | safe }},
           datasets: [
             {
               backgroundColor: [
@@ -136,7 +124,7 @@
               'rgb(172, 173, 200)'
             ],
             label: " Score",
-            data: {{ values |safe }},
+            data: {{ percentagevalues |safe }},
             fill: false,
             lineTension: 0.5
             },
@@ -218,9 +206,7 @@
               {% for comment in post.comments %}
               <div class="d-flex justify-content-between align-items-center">
                 <div>
-                  <a href="/posts/{{comment.user.username}}"
-                    >{{comment.user.username}}</a
-                  >: {{comment.text}}
+                  <ul> {{comment.text}}</ul>
                 </div>
                 <div>
                   <small class="text-muted"> {{comment.date_created}}</small>
@@ -267,9 +253,9 @@
             id="text"
             name="text"
             class="form-control"
-            placeholder="Comment something!"
+            placeholder="Add a note"
           />
-          <button type="submit" class="btn btn-dark">Comment</button>
+          <button type="submit" class="btn btn-dark">Add note</button>
         </form>
       </div>
       <div class="card-footer text-muted">{{post.date_created}}</div>
@@ -290,7 +276,7 @@
         <div class="accordion-body">
           <p>Custom questions allow you to ask your clients for something specific. It helps you ask them: <br>"How did you like your <strong>Pizza</strong>", <br>Instead of just: "How did you like it" </p>
           <p>Grapevine supports 3 custom questions out of the box, where the first question is the main question. Then youhave the ability to add 2 more follow up questions into the mix to ask them for something specific, like what kind of pizza they ordered. </p>
-          <button type="button" class="btn btn-primary text-dark">Set up custom questions</button>
+          <button type="button" class="btn btn-primary text-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Set up custom questions</button>
         </div>
       </div>
     </div>
@@ -462,7 +448,184 @@
     </code></pre>
   </div>
 </div>
+
+
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasQR" aria-labelledby="offcanvasQR">
+  <div class="offcanvas-header">
+    <h3 id="offcanvasWhatsapp">How to get feedback through QRcode</h3>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <p></p><i>You can simply receive feedback by having your customers scan our custom QR Codes. The QR codes will take your users to our chat to answer some followup questions:</i></p>
+    <p>How it works:
+      <ul>1. Your customers scan the QR code that fits with how they liked your service (Happy, neutral, unhappy)</ul>
+      <ul>2. Your customer ends in our custom built chat to answer some follow up questions</ul>
+      <ul>3. The responses end up in your dashboard</ul>
+    </p>
+    <hr>
+    <h5>Step 1: Download our custom QR codes</h5>
+    <p>Grapevine allows for super simple feedback collection through QR codes. There are 3 QR separate QR codes and feedback is given by scanning a specific one.
+      <ul><b>Promotor</b> - If the user scans this QR code you'll receive positive feedback</ul>
+      <ul><b>Neutral</b> - If the user scans this QR code you'll receive neutral feedback</ul>
+      <ul><b>Detractor</b> - If the user scans this QR code you'll receive negative feedback</ul>
+
+    </p>
+    <div class="btn-group" role="group">
+      <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle text-dark" data-bs-toggle="dropdown" aria-expanded="false">
+       Download QR Codes
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+        <li><a class="dropdown-item text-dark " href="/downloadQR/{{user.id}}/promotor">Happy Feedback QR code</a></li>
+        <li><a class="dropdown-item text-dark " href="/downloadQR/{{user.id}}/neutral">Neutral Feedback QR code</a></li>
+        <li><a class="dropdown-item text-dark " href="/downloadQR/{{user.id}}/detractor">Unhappy Feedback QR code</a></li>
+      
+      </ul>
+      <br>
+    </div>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <h5>Step 2: Add the QR codes to a design of your own</h5>
+    <p>Whether you're adding them on a t-shirt, coaster or make stickers to add to your foodtruck, Grapevine has got you covered. These High resolution QR codes work everywhere you put them.</p>
+    <img class="app-badge center-block" src="{{ url_for('static',filename='assets/img/foodtruck.jpg') }}" alt="..." style="max-width: 100%"/>
+      <br>
+    <hr>
+    <div class="card bg-primary" style="max-width: 100%">
+      <div class="row no-gutters">
+          <div class="col-sm-3">
+            <img class="card-img-top bg-secondary" src="{{ url_for('static',filename='qrcodes/User_')}}{{urlPromotorQR}}" style="max-width: 100%" alt="Card image cap">
+          </div>
+          <div class="col-sm-7">
+              <div class="card-body">
+                  <h5 class="card-title">This QR Code generates a bit of positive feedback</h5>
+                 
+                  
+              </div>
+          </div>
+      </div>
+    </div>
+
+    <div class="card bg-secondary" style="max-width: 100%">
+      <div class="row no-gutters">
+          <div class="col-sm-3">
+            <img class="card-img-top bg-secondary" src="{{ url_for('static',filename='qrcodes/User_')}}{{urlNeutralQR}}" style="max-width: 100%" alt="Card image cap">
+          </div>
+          <div class="col-sm-7">
+              <div class="card-body">
+                  <h5 class="card-title">This QR Code generates a bit of neutral feedback</h5>
+                 
+                  
+              </div>
+          </div>
+      </div>
+    </div>
+
+    <div class="card bg-third" style="max-width: 100%">
+      <div class="row no-gutters">
+          <div class="col-sm-3">
+            <img class="card-img-top bg-secondary" src="{{ url_for('static',filename='qrcodes/User_')}}{{urlDetractorQR}}" style="max-width: 100%" alt="Card image cap">
+          </div>
+          <div class="col-sm-7">
+              <div class="card-body">
+                  <h5 class="card-title">This QR Code generates a bit of negative feedback</h5>
+                 
+              </div>    
+              </div>
+          </div>
+      </div>
+      <hr>
+    <br>
+    <h5>Method 2: Or use our custom template with your QR codes</h5>
+    <p>If you want to ask for feedback right now without having to design anything, then just print the standard Grapevine Template and you're on your way!</p>
+    <img class="app-badge center-block" src="{{ url_for('static',filename='assets/img/mockup.jpeg') }}" alt="..." style="max-width: 100%"/>
+    <br><br>
+    <button  type="button" class="btn btn-primary text-dark">Download our QR template </button>
+  </div>
+</div>
 <!-- Here end the 2 offcanvas items -->
+
+<!-- Modal for Settings -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Account Settings</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+                  <form>
+                    <h6>Your details:</h6>
+                    <div class="mb-3 row">
+                      <label for="staticEmail" class="col-sm-2 col-form-label">Username</label>
+                      <div class="col-sm-10">
+                        <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{user.username}}">
+                        
+                      </div>
+                    </div>
+                    <div class="mb-3 row">
+                      <label for="staticEmail" class="col-sm-2 col-form-label">User ID </label>
+                      <div class="col-sm-10">
+                        <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{user.id}}">
+                      </div>
+                    </div>
+                    <div class="mb-3 row">
+                      <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+                      <div class="col-sm-10">
+                        <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{user.email}}">
+                      </div>
+                    </div>
+                    <div class="mb-3 row">
+                      <label for="staticEmail" class="col-sm-2 col-form-label">Phone</label>
+                      <div class="col-sm-10">
+                        <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{user.phonenumber}}">
+                      </div>
+                    </div>
+                    <button type="button" class="btn btn-primary text-dark">Edit</button>
+
+                    <hr>
+                    <h6>Custom questions:</h6>
+                    <p>Custom questions allow you to ask your customers specific things, and to add followup questions. You can add up to 3 custom questions. </p>
+
+
+                    
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label">First question: Ask your customers to rate you</label>
+                      <input type="text" class="form-control" id="FirstCustomQuestion" placeholder="{{user.customquestion0}}" aria-describedby="emailHelp">
+                      
+                      <div id="emailHelp" class="form-text">This question is used in the whatsapp and email template to invoke a response from your customer </div>
+                    </div>
+                    <div class="mb-3">
+                      <label for="exampleInputPassword1" class="form-label">Followup Question 1</label>
+                      <input type="text" class="form-control" placeholder="{{user.customquestion1}}" id="FollowUpQuestion1">
+                      <div id="emailHelp" class="form-text">If users enter the chat, this will be a followup question they will see</div>
+                    </div>
+                    <div class="mb-3">
+                      <label for="exampleInputPassword1" class="form-label">Followup Question 2</label>
+                      <input type="text" class="form-control" placeholder="{{user.customquestion2}}"  id="FollowUpQuestion2">
+                      <div id="emailHelp" class="form-text">If users enter the chat, this will be a followup question they will see </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary text-dark">Save Custom Questions</button>
+                  </form>
+                  <hr>
+                  <h6>Download & Reset</h6>
+                  <p>
+                    If you want to start over you can download the feedback you have received so far in a CSV file for your archive and then reset the account. 
+                    Be aware that this is irreversible.    </p>
+                  <button type="button" class="btn btn-primary text-dark">Download CSV</button>
+
+                  <button type="button" class="btn btn-danger">Reset account</button>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary text-dark" data-bs-dismiss="modal">Back</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
