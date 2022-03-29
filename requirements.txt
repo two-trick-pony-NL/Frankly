@@ -39,3 +39,4 @@ apilytics
 pyshorteners
 twilio
 phonenumbers
+sendgrid

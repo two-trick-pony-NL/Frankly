@@ -48,9 +48,10 @@ def sign_up():
         password1 = request.form.get("password1")
         password2 = request.form.get("password2")
         option = request.form.get('option')
+        #formatting to international standard number
         my_number = phonenumbers.parse(phonenumber, "NL")
         phonenumberformatted = phonenumbers.format_number(my_number, phonenumbers.PhoneNumberFormat.E164)
-
+# checking if user exists
         email_exists = User.query.filter_by(email=email).first()
         username_exists = User.query.filter_by(username=username).first()
         if option != "accepted":
