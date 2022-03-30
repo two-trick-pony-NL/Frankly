@@ -19,11 +19,12 @@ def home():
 @views.route("/dashboard/<username>", methods=['GET', 'POST'])
 @login_required
 def dashboard(username):
-    #If it is a post then the settings have been updated
+    #If it is a post then the user is updating his settings, and the page does not need rendering. 
     if request.method == 'POST':
         FirstCustomQuestion = request.form.get("FirstCustomQuestion")
         FollowUpQuestion1 = request.form.get("FollowUpQuestion1")
         FollowUpQuestion2 = request.form.get("FollowUpQuestion2")
+
         user = User.query.filter_by(username=username).first()
         if len(FirstCustomQuestion) > 0:
             user.customquestion0 =  FirstCustomQuestion
@@ -38,7 +39,7 @@ def dashboard(username):
             db.session.commit()
             print("Third Question updated")
 
-    #Get requests just load the page with the regular logic
+#Get requests just load the page with the regular logic
     user = User.query.filter_by(username=username).first()
     userID = user.id
     userID = str(userID)
