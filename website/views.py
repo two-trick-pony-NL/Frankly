@@ -16,11 +16,29 @@ def home():
 
 
 #Renders the userdashboard requires a username to select the correct user dashboard
-@views.route("/dashboard/<username>")
+@views.route("/dashboard/<username>", methods=['GET', 'POST'])
 @login_required
 def dashboard(username):
+    #If it is a post then the settings have been updated
+    if request.method == 'POST':
+        FirstCustomQuestion = request.form.get("FirstCustomQuestion")
+        FollowUpQuestion1 = request.form.get("FollowUpQuestion1")
+        FollowUpQuestion2 = request.form.get("FollowUpQuestion2")
+        user = User.query.filter_by(username=username).first()
+        if len(FirstCustomQuestion) > 0:
+            user.customquestion0 =  FirstCustomQuestion
+            db.session.commit()
+            print("First Question updated") 
+        if len(FollowUpQuestion1) > 0:
+            user.customquestion1 =  FollowUpQuestion1
+            db.session.commit()
+            print("Second Question updated")
+        if len(FollowUpQuestion2) > 0:
+            user.customquestion2 =  FollowUpQuestion2
+            db.session.commit()
+            print("Third Question updated")
 
-
+    #Get requests just load the page with the regular logic
     user = User.query.filter_by(username=username).first()
     userID = user.id
     userID = str(userID)

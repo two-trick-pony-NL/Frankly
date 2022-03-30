@@ -531,7 +531,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-                  <form>
+                  <form method="POST">
                     <h6>Your details:</h6>
                     <div class="mb-3 row">
                       <label for="staticEmail" class="col-sm-2 col-form-label">Username</label>
@@ -567,22 +567,38 @@
 
                     
                     <div class="mb-3">
-                      <label for="exampleInputEmail1" class="form-label">First question: Ask your customers to rate you</label>
-                      <input type="text" class="form-control" id="FirstCustomQuestion" placeholder="{{user.customquestion0}}" aria-describedby="emailHelp">
+                      <label for="FirstCustomQuestion" class="form-label">First question: Ask your customers to rate you</label>
+                      <input 
+                      type="text" 
+                      class="form-control" 
+                      name="FirstCustomQuestion" 
+                      id="FirstCustomQuestion" 
+                      placeholder="{{user.customquestion0}}" 
+                      aria-describedby="emailHelp"/>
                       
                       <div id="emailHelp" class="form-text">This question is used in the whatsapp and email template to invoke a response from your customer </div>
                     </div>
                     <div class="mb-3">
-                      <label for="exampleInputPassword1" class="form-label">Followup Question 1</label>
-                      <input type="text" class="form-control" placeholder="{{user.customquestion1}}" id="FollowUpQuestion1">
+                      <label for="FollowUpQuestion1" class="form-label">Followup Question 1</label>
+                      <input 
+                      type="text" 
+                      class="form-control" 
+                      placeholder="{{user.customquestion1}}" 
+                      name="FollowUpQuestion1" 
+                      id="FollowUpQuestion1"/>
                       <div id="emailHelp" class="form-text">If users enter the chat, this will be a followup question they will see</div>
                     </div>
                     <div class="mb-3">
-                      <label for="exampleInputPassword1" class="form-label">Followup Question 2</label>
-                      <input type="text" class="form-control" placeholder="{{user.customquestion2}}"  id="FollowUpQuestion2">
+                      <label for="FollowUpQuestion2" class="form-label">Followup Question 2</label>
+                      <input 
+                      type="text" 
+                      class="form-control" 
+                      placeholder="{{user.customquestion2}}" 
+                      name="FollowUpQuestion2" 
+                      id="FollowUpQuestion2"/>
                       <div id="emailHelp" class="form-text">If users enter the chat, this will be a followup question they will see </div>
                     </div>
-                    
+    
                     <button type="submit" class="btn btn-primary text-dark"><i class="bi bi-check2-square"></i> Save Custom Questions</button>
                   </form>
                   <hr>
