@@ -51,7 +51,6 @@
         <div class="container">
           <p class="lead">Get your feedback templates now</p>
           <p>Start asking your clients for feedback, by forwarding them one of our templates. We'll send you a ready-to-send copy that you can forward easily. </p>
-          <br>
           <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
             <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasEmail" aria-controls="offcanvasEmail"><i class="bi bi-envelope-check"></i> Email</button>
             <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWhatsapp" aria-controls="offcanvasWhatsapp"> <i class="bi bi-whatsapp"></i> Whatsapp</button>
@@ -465,7 +464,7 @@
     <br>
     <h5>Step 2: Add the QR codes to a design of your own</h5>
     <p>Whether you're adding them on a t-shirt, coaster or make stickers to add to your foodtruck, Grapevine has got you covered. These High resolution QR codes work everywhere you put them.</p>
-    <img class="app-badge center-block" src="{{ url_for('static',filename='assets/img/foodtruck.jpg') }}" alt="..." style="max-width: 100%"/>
+    <img class="app-badge center-block" src="{{ url_for('static',filename='assets/img/outdoors.jpeg') }}" alt="..." style="max-width: 100%"/>
       <br>
     <hr>
     <div class="card bg-primary" style="max-width: 100%">
@@ -513,11 +512,12 @@
       </div>
       <hr>
     <br>
+    <!--Disabling this section as it;s not functional
     <h5>Method 2: Or use our custom template with your QR codes</h5>
     <p>If you want to ask for feedback right now without having to design anything, then just print the standard Grapevine Template and you're on your way!</p>
     <img class="app-badge center-block" src="{{ url_for('static',filename='assets/img/mockup.jpeg') }}" alt="..." style="max-width: 100%"/>
     <br><br>
-    <button  type="button" class="btn btn-primary text-dark"><i class="bi bi-download"></i> Download our QR template </button>
+    <button  type="button" class="btn btn-primary text-dark"><i class="bi bi-download"></i> Download our QR template </button>-->
   </div>
 </div>
 <!-- Here end the 2 offcanvas items -->
@@ -534,22 +534,17 @@
                   <form method="POST">
                     <h6>Your details:</h6>
                     <div class="mb-3 row">
-                      <label for="staticEmail" class="col-sm-2 col-form-label">Username</label>
-                      <div class="col-sm-10">
-                        <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{user.username}}">
-                        
-                      </div>
-                    </div>
-                    <div class="mb-3 row">
-                      <label for="staticEmail" class="col-sm-2 col-form-label">User ID </label>
-                      <div class="col-sm-10">
-                        <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{user.id}}">
-                      </div>
-                    </div>
-                    <div class="mb-3 row">
                       <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
                       <div class="col-sm-10">
                         <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{user.email}}">
+                      </div>
+                    </div>
+              
+
+                    <div class="mb-3 row">
+                      <label for="staticEmail" class="col-sm-2 col-form-label">Username</label>
+                      <div class="col-sm-10">
+                        <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{user.username}}">
                       </div>
                     </div>
                     <div class="mb-3 row">
@@ -558,7 +553,6 @@
                         <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{user.phonenumber}}">
                       </div>
                     </div>
-                    <button type="button" class="btn btn-primary text-dark"><i class="bi bi-pencil-square"></i> Edit</button>
 
                     <hr>
                     <h6>Custom questions:</h6>
@@ -601,6 +595,7 @@
     
                     <button type="submit" class="btn btn-primary text-dark"><i class="bi bi-check2-square"></i> Save Custom Questions</button>
                   </form>
+                  <!--
                   <hr>
                   <h6>Download & Reset</h6>
                   <p>
@@ -609,11 +604,12 @@
                   <button type="button" class="btn btn-primary text-dark"><i class="bi bi-file-earmark-spreadsheet"></i> Download CSV</button>
 
                   <button type="button" class="btn btn-danger"><i class="bi bi-trash"></i> Reset account</button>
-
+-->
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary text-dark" data-bs-dismiss="modal"><i class="bi bi-back"></i> Back</button>
-        
+      <div class="modal-footer justify-content-between">
+        <small>userid:{{user.id}}</small>
+        <button type="button" class="btn btn-primary text-dark" data-bs-dismiss="modal"><i class="bi bi-back"></i> Back</button>
+       
       </div>
     </div>
   </div>

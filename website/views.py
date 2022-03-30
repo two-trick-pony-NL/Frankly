@@ -111,31 +111,7 @@ def dashboard(username):
         grapevinescore = 0    
     return render_template("dashboard.html", percentagelabels=percentagelabels, percentagevalues=percentagevalues, urlPromotorQR=urlPromotorQR, urlNeutralQR=urlNeutralQR,urlDetractorQR=urlDetractorQR,  grapevinescore=grapevinescore, totalresponses=totalresponses, nmbr_happy_users=nmbr_happy_users, nmbr_medium_users=nmbr_medium_users, nmbr_unhappy_users=nmbr_unhappy_users,QRCodeURL=QRCodeURL, user=current_user, posts=posts, username=username, labels=labels, values=values)
   
-@views.route("/settings/<username>")
-@login_required
-def settings(username):
-    user = User.query.filter_by(username=username).first()
-    #Making sure the logged in user is the owner of the dashboard
-    if user != current_user:
-        flash("You have no access to this page" , category="warning")    
-        return redirect(url_for('views.home'))
-    return render_template("settings.html", user=current_user, username=username,)  
-
-@views.route("/createassets/<username>")
-@login_required
-def createassets(username):
-    user = User.query.filter_by(username=username).first()
-    userID = user.id
-    userID = str(userID)
-    urlPromotorQR = userID+"_promotor.png"
-    urlNeutralQR = userID+"_neutral.png"
-    urlDetractorQR = userID+"_detractor.png"
-    #Making sure the logged in user is the owner of the dashboard
-    if user != current_user:
-        flash("You have no access to this page" , category="warning")    
-        return redirect(url_for('views.home'))
-    return render_template("createassets.html", user=current_user,urlDetractorQR=urlDetractorQR,urlNeutralQR=urlNeutralQR, urlPromotorQR= urlPromotorQR, username=username,)    
-
+  
 
 @views.route("/send-feedback/<user>/<rating>", methods=['GET', 'POST'])
 def send_feedback(user, rating):
