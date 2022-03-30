@@ -52,9 +52,9 @@
           <p>Start asking your clients for feedback, by forwarding them one of our templates. We'll send you a ready-to-send copy that you can forward easily. </p>
           <br>
           <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-            <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasEmail" aria-controls="offcanvasEmail"> <i class="fa-solid fa-envelope"></i> Email</button>
-            <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWhatsapp" aria-controls="offcanvasWhatsapp">Whatsapp</button>
-            <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasQR" aria-controls="offcanvasQR">QR Codes</button>
+            <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasEmail" aria-controls="offcanvasEmail"><i class="bi bi-envelope-check"></i> Email</button>
+            <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWhatsapp" aria-controls="offcanvasWhatsapp"> <i class="bi bi-whatsapp"></i> Whatsapp</button>
+            <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasQR" aria-controls="offcanvasQR"><i class="bi bi-qr-code"></i> QR Codes</button>
           </div>
         </div>
       </div>
@@ -184,11 +184,12 @@
               type="button"
               class="btn btn-sm btn-dark dropdown-toggle"
               data-bs-toggle="dropdown"
-            ></button>
+              
+            ><i class="bi bi-trash"></i></button>
             <ul class="dropdown-menu">
               <li>
                 <a href="/delete-post/{{post.id}}" class="dropdown-item"
-                  >Delete</a
+                  ><i class="bi bi-trash"></i> Delete</a
                 >
               </li>
             </ul>
@@ -215,13 +216,13 @@
                       type="button"
                       class="btn btn-sm btn-dark dropdown-toggle"
                       data-bs-toggle="dropdown"
-                    ></button>
+                    ><i class="bi bi-trash"></i></button>
                     <ul class="dropdown-menu">
                       <li>
                         <a
                           href="/delete-comment/{{comment.id}}"
                           class="dropdown-item"
-                          >Delete</a
+                          ><i class="bi bi-trash"></i> Delete</a
                         >
                       </li>
                     </ul>
@@ -254,7 +255,7 @@
             class="form-control"
             placeholder="Add a note"
           />
-          <button type="submit" class="btn btn-dark">Add note</button>
+          <button type="submit" class="btn btn-dark"><i class="bi bi-pen"></i> Add note</button>
         </form>
       </div>
       <div class="card-footer text-muted">{{post.date_created}}</div>
@@ -275,7 +276,7 @@
         <div class="accordion-body">
           <p>Custom questions allow you to ask your clients for something specific. It helps you ask them: <br>"How did you like your <strong>Pizza</strong>", <br>Instead of just: "How did you like it" </p>
           <p>Grapevine supports 3 custom questions out of the box, where the first question is the main question. Then youhave the ability to add 2 more follow up questions into the mix to ask them for something specific, like what kind of pizza they ordered. </p>
-          <button type="button" class="btn btn-primary text-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Set up custom questions</button>
+          <button type="button" class="btn btn-primary text-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> <i class="bi bi-sliders"></i> Set up custom questions</button>
         </div>
       </div>
     </div>
@@ -290,8 +291,8 @@
           <p>Grapevine allows you to easily connect with your customers. We provide text templates that you can share with your customers. You can send yourself a template on Whatsapp or through email.</p>
           <p>After receiving the template you can easily forward it to a customer you'd like to get some feedback from!</p>
 
-            <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasEmail" aria-controls="offcanvasEmail">Email</button>
-            <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWhatsapp" aria-controls="offcanvasWhatsapp">Whatsapp</button>
+            <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasEmail" aria-controls="offcanvasEmail"><i class="bi bi-envelope-check"></i> Email</button>
+            <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWhatsapp" aria-controls="offcanvasWhatsapp"><i class="bi bi-whatsapp"></i> Whatsapp</button>
         </div>
       </div>
     </div>
@@ -323,35 +324,7 @@
             </div>
           </div>
 
-          <div class="card bg-secondary" style="width: 500px;">
-            <div class="row no-gutters">
-                <div class="col-sm-5">
-                  <img class="card-img-top bg-secondary" src="{{ url_for('static',filename='qrcodes/User_')}}{{urlNeutralQR}}"  alt="Card image cap">
-                </div>
-                <div class="col-sm-7">
-                    <div class="card-body">
-                        <h5 class="card-title">This QR Code generates a bit of neutral feedback</h5>
-                       
-                        
-                    </div>
-                </div>
-            </div>
-          </div>
-
-          <div class="card bg-third" style="width: 500px;">
-            <div class="row no-gutters">
-                <div class="col-sm-5">
-                  <img class="card-img-top bg-secondary" src="{{ url_for('static',filename='qrcodes/User_')}}{{urlDetractorQR}}"  alt="Card image cap">
-                </div>
-                <div class="col-sm-7">
-                    <div class="card-body">
-                        <h5 class="card-title">This QR Code generates a bit of negative feedback</h5>
-                       
-                        
-                    </div>
-                </div>
-            </div>
-          </div>
+          
 
 
           
@@ -382,7 +355,7 @@
     <hr>
     <h5>Step 1: Send the template to your phone</h5>
     <p>Grapevine will send you template on your phone, all you have to do is tap this button:</p>
-    <a href="/sendwhatsapp/{{user.id}}/{{user.phonenumber}}" class="btn btn-primary text-dark" tabindex="-1" role="button">Send the Whatsapp template to my phone</a>
+    <a href="/sendwhatsapp/{{user.id}}/{{user.phonenumber}}" class="btn btn-primary text-dark" tabindex="-1" role="button"><i class="bi bi-send-check"></i> Send the Whatsapp template to my phone</a>
     <br>    <br>    <br>
     <img class="app-badge center-block" src="{{ url_for('static',filename='assets/img/chat.png') }}" alt="..." style="max-width: 50%"/>
     <br>
@@ -419,7 +392,7 @@
     <hr>
     <h5>Method 1: Send the template to your mailbox</h5>
     <p>Grapevine will send your template to your mailbox on the email address you used during signup, all you have to do is tap this button:</p>
-    <a href="/sendemail/{{user.id}}/{{user.email}}" class="btn btn-primary text-dark" tabindex="-1" role="button">Send the template to <b>my</b> email address</a>
+    <a href="/sendemail/{{user.id}}/{{user.email}}" class="btn btn-primary text-dark" tabindex="-1" role="button"> <i class="bi bi-send-check"></i> Send the template to <b>my</b> email address</a>
     <br>
     <br>
     <hr>
@@ -472,7 +445,7 @@
     </p>
     <div class="btn-group" role="group">
       <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle text-dark" data-bs-toggle="dropdown" aria-expanded="false">
-       Download QR Codes
+        <i class="bi bi-download"></i> Download QR Codes
       </button>
       <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
         <li><a class="dropdown-item text-dark " href="/downloadQR/{{user.id}}/promotor">Happy Feedback QR code</a></li>
@@ -540,7 +513,7 @@
     <p>If you want to ask for feedback right now without having to design anything, then just print the standard Grapevine Template and you're on your way!</p>
     <img class="app-badge center-block" src="{{ url_for('static',filename='assets/img/mockup.jpeg') }}" alt="..." style="max-width: 100%"/>
     <br><br>
-    <button  type="button" class="btn btn-primary text-dark">Download our QR template </button>
+    <button  type="button" class="btn btn-primary text-dark"><i class="bi bi-download"></i> Download our QR template </button>
   </div>
 </div>
 <!-- Here end the 2 offcanvas items -->
@@ -581,7 +554,7 @@
                         <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{user.phonenumber}}">
                       </div>
                     </div>
-                    <button type="button" class="btn btn-primary text-dark">Edit</button>
+                    <button type="button" class="btn btn-primary text-dark"><i class="bi bi-pencil-square"></i> Edit</button>
 
                     <hr>
                     <h6>Custom questions:</h6>
@@ -606,20 +579,20 @@
                       <div id="emailHelp" class="form-text">If users enter the chat, this will be a followup question they will see </div>
                     </div>
                     
-                    <button type="submit" class="btn btn-primary text-dark">Save Custom Questions</button>
+                    <button type="submit" class="btn btn-primary text-dark"><i class="bi bi-check2-square"></i> Save Custom Questions</button>
                   </form>
                   <hr>
                   <h6>Download & Reset</h6>
                   <p>
                     If you want to start over you can download the feedback you have received so far in a CSV file for your archive and then delete all the responses you have received. 
                    Be aware that you can't restore deleted responses</p>
-                  <button type="button" class="btn btn-primary text-dark">Download CSV</button>
+                  <button type="button" class="btn btn-primary text-dark"><i class="bi bi-file-earmark-spreadsheet"></i> Download CSV</button>
 
-                  <button type="button" class="btn btn-danger">Reset account</button>
+                  <button type="button" class="btn btn-danger"><i class="bi bi-trash"></i> Reset account</button>
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary text-dark" data-bs-dismiss="modal">Back</button>
+        <button type="button" class="btn btn-secondary text-dark" data-bs-dismiss="modal"><i class="bi bi-back"></i> Back</button>
         
       </div>
     </div>
