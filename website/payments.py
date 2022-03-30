@@ -1,5 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from flask_login import login_user, logout_user, login_required, current_user
+from .models import Post, User, Comment, Like
+from . import db
 
 payments = Blueprint("payments", __name__)
 
@@ -9,5 +11,9 @@ payments = Blueprint("payments", __name__)
 
 @payments.route("/incoming_payment/<paymentID>", methods=['GET', 'POST'])
 def incoming_payment(paymentID):
-    print(paymentID)
-    return('success')
+    user = User.query.filter_by(id=paymentID).first()
+    usernumber = str(user)
+    print("We got paid: $$$$$$$  " +usernumber + " has paid his bill")
+    user.haspaid =  1
+    db.session.commit()
+    return('', 204)

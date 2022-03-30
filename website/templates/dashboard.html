@@ -4,6 +4,41 @@
 
 {% block Content%}
 
+<!-- This is a popup if the user has to pay -->
+
+{% if haspaid  < 1 %}
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script type="text/javascript">
+    window.onload = function () {
+        OpenBootstrapPopup();
+    };
+    function OpenBootstrapPopup() {
+        $("#simpleModal").modal('show');
+    }
+</script>
+<!-- Modal -->
+<div id="simpleModal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title">Your free trial has expired</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              If you want to continue using Grapevine, top up your account to unlock more feedback.<br>
+              Pay here <a href="https://bunq.me/5/{{user.id}}">link text</a> blah blah 
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+      </div>
+  </div>
+</div>
+{%endif%}
+
 
 <div class="container "></div>
 <br><br>

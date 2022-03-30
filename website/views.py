@@ -1,7 +1,6 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for, jsonify, send_file
 from flask_login import login_required, current_user
 from .models import Post, User, Comment, Like
-import os
 from . import db
 
 views = Blueprint("views", __name__)
@@ -41,6 +40,7 @@ def dashboard(username):
 
 #Get requests just load the page with the regular logic
     user = User.query.filter_by(username=username).first()
+    haspaid = user.haspaid
     userID = user.id
     userID = str(userID)
     urlPromotorQR = userID+"_promotor.png"
@@ -109,7 +109,7 @@ def dashboard(username):
         grapevinescore = round(((nmbr_happy_users/totalresponses)-(nmbr_unhappy_users/totalresponses))*100)
     except: 
         grapevinescore = 0    
-    return render_template("dashboard.html", percentagelabels=percentagelabels, percentagevalues=percentagevalues, urlPromotorQR=urlPromotorQR, urlNeutralQR=urlNeutralQR,urlDetractorQR=urlDetractorQR,  grapevinescore=grapevinescore, totalresponses=totalresponses, nmbr_happy_users=nmbr_happy_users, nmbr_medium_users=nmbr_medium_users, nmbr_unhappy_users=nmbr_unhappy_users,QRCodeURL=QRCodeURL, user=current_user, posts=posts, username=username, labels=labels, values=values)
+    return render_template("dashboard.html",haspaid=haspaid, percentagelabels=percentagelabels, percentagevalues=percentagevalues, urlPromotorQR=urlPromotorQR, urlNeutralQR=urlNeutralQR,urlDetractorQR=urlDetractorQR,  grapevinescore=grapevinescore, totalresponses=totalresponses, nmbr_happy_users=nmbr_happy_users, nmbr_medium_users=nmbr_medium_users, nmbr_unhappy_users=nmbr_unhappy_users,QRCodeURL=QRCodeURL, user=current_user, posts=posts, username=username, labels=labels, values=values)
   
   
 
@@ -117,6 +117,9 @@ def dashboard(username):
 def send_feedback(user, rating):
     user = User.query.filter_by(id=user).first()
     print(user)
+    totalposts = Post.query.filter(
+        Post.author.like(user.id)).count()
+    print(totalposts)
     if request.method == "POST":
         text = request.form.get('text')
 
@@ -130,7 +133,9 @@ def send_feedback(user, rating):
             LastPost = Post.query.filter_by(text=text).first()
             ThisPost = LastPost.id
             ThisPost = str(ThisPost)
-            print(ThisPost)
+            if totalposts % 25:
+                user.haspaid =  0
+                db.session.commit()
             return redirect(url_for('chats.step2', text = text, ThisPost=ThisPost, user=user.username, question0 = user.customquestion0, question1 = user.customquestion1, question2 = user.customquestion2))
 
     return render_template('/chats/chatquestion1.html', username=user.username, question0 = user.customquestion0, question1 = user.customquestion1, question2 = user.customquestion2)    
