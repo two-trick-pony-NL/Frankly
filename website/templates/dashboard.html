@@ -5,10 +5,10 @@
 {% block Content%}
 
 
-<div class="container"></div>
+<div class="container "></div>
 <br><br>
 <!--Header of dasbhoard-->
-<h1> {{ username }} // Dashboard</h1>
+<h1 class="d-inline"> {{ username }} // Dashboard</h1>
 
 <hr>
 <!--Splitting up in grid view for the graphs-->
@@ -36,6 +36,7 @@
           <h1 class="display-4">{{ totalresponses }}</h1>
           <p class="lead">Total responses</p>
           <p>The total of all the feedback you have received</p>
+          
         </div>
       </div>
     <br>
@@ -55,8 +56,11 @@
             <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasEmail" aria-controls="offcanvasEmail"><i class="bi bi-envelope-check"></i> Email</button>
             <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWhatsapp" aria-controls="offcanvasWhatsapp"> <i class="bi bi-whatsapp"></i> Whatsapp</button>
             <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasQR" aria-controls="offcanvasQR"><i class="bi bi-qr-code"></i> QR Codes</button>
+          
           </div>
+          
         </div>
+        
       </div>
     <br>
     
@@ -448,9 +452,9 @@
         <i class="bi bi-download"></i> Download QR Codes
       </button>
       <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-        <li><a class="dropdown-item text-dark " href="/downloadQR/{{user.id}}/promotor">Happy Feedback QR code</a></li>
-        <li><a class="dropdown-item text-dark " href="/downloadQR/{{user.id}}/neutral">Neutral Feedback QR code</a></li>
-        <li><a class="dropdown-item text-dark " href="/downloadQR/{{user.id}}/detractor">Unhappy Feedback QR code</a></li>
+        <li><a class="dropdown-item text-dark " href="/downloadQR/{{user.id}}/promotor"><i class="bi bi-emoji-smile"></i> Happy Feedback QR code</a></li>
+        <li><a class="dropdown-item text-dark " href="/downloadQR/{{user.id}}/neutral"><i class="bi bi-emoji-expressionless"></i> Neutral Feedback QR code</a></li>
+        <li><a class="dropdown-item text-dark " href="/downloadQR/{{user.id}}/detractor"><i class="bi bi-emoji-frown"></i> Unhappy Feedback QR code</a></li>
       
       </ul>
       <br>
