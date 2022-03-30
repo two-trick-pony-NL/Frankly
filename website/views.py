@@ -120,6 +120,8 @@ def createassets(username):
 
 @views.route("/send-feedback/<user>/<rating>", methods=['GET', 'POST'])
 def send_feedback(user, rating):
+    user = User.query.filter_by(id=user).first()
+    print(user)
     if request.method == "POST":
         text = request.form.get('text')
 
@@ -127,16 +129,16 @@ def send_feedback(user, rating):
             flash('Post cannot be empty', category='warning')
         else:
             print(user)
-            post = Post(text=text, rating=rating, author=user)
+            post = Post(text=text, rating=rating, author=user.id)
             db.session.add(post)
             db.session.commit()
             LastPost = Post.query.filter_by(text=text).first()
             ThisPost = LastPost.id
             ThisPost = str(ThisPost)
             print(ThisPost)
-            return redirect(url_for('chats.step2', text = text, ThisPost=ThisPost, user=user))
+            return redirect(url_for('chats.step2', text = text, ThisPost=ThisPost, user=user.username, question0 = user.customquestion0, question1 = user.customquestion1, question2 = user.customquestion2))
 
-    return render_template('/chats/chatquestion1.html')    
+    return render_template('/chats/chatquestion1.html', username=user.username, question0 = user.customquestion0, question1 = user.customquestion1, question2 = user.customquestion2)    
 
 
 @views.route("/delete-post/<id>")

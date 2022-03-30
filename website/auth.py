@@ -48,6 +48,9 @@ def sign_up():
         password1 = request.form.get("password1")
         password2 = request.form.get("password2")
         option = request.form.get('option')
+        customquestion0 = "How did you like our service?"
+        customquestion1 = "What do you think we can improve?"
+        customquestion2 = "is there anything else you'd like to tell us?"
         #formatting to international standard number
         my_number = phonenumbers.parse(phonenumber, "NL")
         phonenumberformatted = phonenumbers.format_number(my_number, phonenumbers.PhoneNumberFormat.E164)
@@ -77,7 +80,7 @@ def sign_up():
         elif len(email) < 4:
             flash("Email address is invalid.", category="danger")
         else:
-            new_user = User(email=email, phonenumber=phonenumberformatted, isadmin = False, username=username, password=generate_password_hash(
+            new_user = User(email=email, phonenumber=phonenumberformatted, haspaid = 1, customquestion0 = customquestion0, customquestion1 = customquestion1, customquestion2 = customquestion2, isadmin = False, username=username, password=generate_password_hash(
                 password1, method='sha256'))
             db.session.add(new_user)
             db.session.commit()
