@@ -17,12 +17,12 @@ For production server:
 
 ## Feature roadmap
 
-- [ ] Recieve feedback assets via Whatsapp / Email functionality
+- [x] Recieve feedback assets via Whatsapp / Email functionality
 - [ ] Create password reset logic
 - [ ] Add Terms and conditions
 - [ ] Add blog
 - [ ] Link to this github and make user feature ideas possible
-- [ ] Implement pricing for multiple campaigns
-- [ ] Implement logic for calculating pricing
+- [x] Implement pricing for multiple campaigns
+- [x] Implement logic for calculating pricing
 - [ ] Improve the look and feel of the chat functionality
-- [ ] Add custom questions to be added from the interface
+- [x] Add custom questions to be added from the interface
