@@ -15,7 +15,7 @@ Grapevine helps to make giving feedback easier. Users can generate QR codes that
 ## Installation
 
 #### Set up: 
-- You'll need a config file that containt the API keys to the services used (Twilio, Sendgrid and some other API'). 
+- You'll need a config named `Env_Settings.cfg`  that containt the API keys to the services used (Twilio, Sendgrid and some other API'). 
 - Upon startup the server will load in these keys so it can function 
 
 #### how to run:
