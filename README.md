@@ -13,6 +13,12 @@
 Grapevine helps to make giving feedback easier. Users can generate QR codes that they can add to workshops, powerpoints, put in waiting areas or share after events to collect feedback on how visitors liked the event. 
 
 ## Installation
+
+#### Set up: 
+- You'll need a config file that containt the API keys to the services used (Twilio, Sendgrid and some other API'). 
+- Upon startup the server will load in these keys so it can function 
+
+#### how to run:
 To run a developmentserver run: 
 - python Developmentserver.py
 
