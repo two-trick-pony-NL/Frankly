@@ -22,17 +22,27 @@
   <div class="modal-dialog" role="document">
       <div class="modal-content">
           <div class="modal-header">
-              <h5 class="modal-title">Your free trial has expired</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <h5 class="modal-title">Unlock the next 100 responses for just €3,99</h5>
+              
                   <span aria-hidden="true">&times;</span>
               </button>
           </div>
           <div class="modal-body">
-              If you want to continue using Grapevine, top up your account to unlock more feedback.<br>
-              Pay here <a href="https://bunq.me/5/{{user.id}}">link text</a> blah blah 
+              Hey! We love to see that you already collected 100 responses through Grapevine! It looks like you're on a roll!<br><br>
+              The first 100 responses are on us, but as servers do not come for free we created this pay-as-you-go model for Grapevine. This means that after the first 100 responses you can buy another set of 100 responses for just €3,99. No subscriptions, no recurring fees.Simple, right?<br><br>
+              Simply tap the button below to go to our payment partner bunq.
+
+              <br><br>
+              <div class="d-grid gap-2 col-6 mx-auto">
+                        
+                <a href="https://bunq.me/grapevine/5/{{user.id}}" target="_blank" class="btn btn-primary text-dark" role="button"><i class="bi bi-credit-card"></i> Unlock the next 100 responses</a>
+  
+              </div>
           </div>
           <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <small>It might take a minute or 2 for the payment to come through, but in most cases it's instant.</small>
+            <a class="btn btn-light text-dark" href="/dashboard/{{user.username}}" role="button"><i class="bi bi-arrow-repeat"></i> I have paid, see if my payment arrived yet</a>
+            
           </div>
       </div>
   </div>
