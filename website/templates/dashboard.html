@@ -223,7 +223,7 @@
 <!--Here we have the section that controls pagination-->
 
 <!-- Pagination Links-->
-<div class="text-right">
+<div class="text-right alig">
   <a href="/dashboard/{{user.username}}?page={{posts.prev_num}}"
   
      class="btn btn-outline-dark 
@@ -256,7 +256,6 @@
   </a>
 </div>
 <p class="text-right mt-3">
- Showing page {{ posts.page }} of {{ posts.pages }}
 </p>
 <!-- End of Pagination Links-->
     {% for post in posts.items %}
