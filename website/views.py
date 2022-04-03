@@ -147,13 +147,16 @@ def send_feedback(user, rating):
             print(ModTotalpost)
             print(text)
             # If ModTotalpost == 0 it means that you have reached that number, and then it will set the database that you'll have to pay.
-            if ModTotalpost == 0:
-                user.haspaid =  0
-                print("#####THe payment was triggered")
-                db.session.commit()
-                ModTotalpost == 1
+            if totalposts < 50: #This line is added because the first response will also lead to modulus being 0 and thus trigger payment after just 1 response
+                pass
             else:
-                print("#####The payment was not triggered")
+                if ModTotalpost == 0:
+                    user.haspaid =  0
+                    print("#####THe payment was triggered")
+                    db.session.commit()
+                    ModTotalpost == 1
+                else:
+                    print("#####The payment was not triggered")
             return redirect(url_for('chats.step2', ModTotalpost=ModTotalpost, text = text, ThisPost=ThisPost, user=user.username, question0 = user.customquestion0, question1 = user.customquestion1, question2 = user.customquestion2))
 
     return render_template('/chats/chatquestion1.html', username=user.username, question0 = user.customquestion0, question1 = user.customquestion1, question2 = user.customquestion2)    
