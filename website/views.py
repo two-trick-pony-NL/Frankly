@@ -163,14 +163,12 @@ def delete_post(id):
 
     if not post:
         flash("Post does not exist.", category='warning')
-    elif current_user.id != post.id:
-        flash('You do not have permission to delete this post.', category='warning')
     else:
         db.session.delete(post)
         db.session.commit()
         flash('Post deleted.', category='success')
 
-    return redirect(url_for('views.home'))
+    return redirect(url_for('views.dashboard', username = current_user.username))
 
 
 @views.route("/posts/<username>")
@@ -218,7 +216,7 @@ def delete_comment(comment_id):
         db.session.delete(comment)
         db.session.commit()
 
-    return redirect(url_for('views.dashboard', username=username))
+    return redirect(url_for('views.dashboard', username = current_user.username))
 
 
 @views.route("/like-post/<post_id>", methods=['POST'])
