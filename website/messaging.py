@@ -110,3 +110,33 @@ def SendEmail(userid, email):
         print(e.message)
     flash("Template sent to your mailbox, check your email!", category='success')
     return('', 204) 
+
+
+
+
+#From here for the waiting list
+@messaging.route("/getinvited", methods=['GET', 'POST'])
+def getinvited():
+  if request.method == 'GET':
+    return render_template("getinvited.html", methods = ['GET', 'POST'])
+  else:
+    email = request.form.get("email")  
+    email = str(email)
+    print(email)
+    message = Mail(
+    from_email=('invites@grapevine.works', 'Grapevine'),
+    subject='We added you to our waiting list ',
+    html_content='<p>Keep an eye on your mailbox, as we will send you an invite to start using Grapevine soon!</p>',
+    # for improved deliverability, provide plain text content in addition to html content
+    to_emails=email)
+    try:
+        sg = SendGridAPIClient(sendgrid_api)
+        response = sg.send(message)
+        print(response.status_code)
+        print(response.body)
+        print(response.headers)
+    except Exception as e:
+        print(e.message)
+       
+    flash("You got added to the waitinglist, keep an eye on your mailbox", category='success')
+    return render_template("getinvited.html")

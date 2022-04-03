@@ -1,0 +1,30 @@
+
+{% extends "legal/theme.html" %} {% block title %}GrapeVine - Giving Feedback made easy{% endblock %} 
+
+
+
+{% block Content%}
+<br><br>
+               
+        <form method="POST">
+                <h3 align="center">Get invited to the Grapevine Beta release!</h3>
+                <p>We'll release Grapevine to only a handfull of users at a time, therefor we use a waitinglist. As soon as it's your turn to explore Grapevine we'll send you an email!</p>
+                <div class="form-group">
+                  <label for="email">Email Address</label>
+                  <p class="card-text"><small class="text-muted">An email address where we can reach you</small></p>
+                  <input
+                    type="text"
+                    id="email"
+                    name="email"
+                    class="form-control"
+                    placeholder="Enter Email"
+                  />
+                  <div align="center">
+                    <button class="btn btn-primary" type="submit">Sign Up</button>
+                  </div>
+                </div>
+              </form>
+
+            
+{% endblock%}
+        
