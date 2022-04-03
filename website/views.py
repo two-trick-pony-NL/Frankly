@@ -127,7 +127,6 @@ def dashboard(username):
 @views.route("/send-feedback/<user>/<rating>", methods=['GET', 'POST'])
 def send_feedback(user, rating):
     user = User.query.filter_by(id=user).first()
-    print(user)
     totalposts = Post.query.filter(
         Post.author.like(user.id)).count()
     print(totalposts)
@@ -137,7 +136,6 @@ def send_feedback(user, rating):
         if not text:
             flash('Post cannot be empty', category='warning')
         else:
-            print(user)
             post = Post(text=text, rating=rating, author=user.id)
             db.session.add(post)
             db.session.commit()
@@ -147,10 +145,15 @@ def send_feedback(user, rating):
             #The free responses can be set from the env_settings file, and returns ModTotalPost which is used to determine when a user has to pay. I
             ModTotalpost = totalposts % free_responses
             print(ModTotalpost)
+            print(text)
             # If ModTotalpost == 0 it means that you have reached that number, and then it will set the database that you'll have to pay.
             if ModTotalpost == 0:
                 user.haspaid =  0
+                print("#####THe payment was triggered")
                 db.session.commit()
+                ModTotalpost == 1
+            else:
+                print("#####The payment was not triggered")
             return redirect(url_for('chats.step2', ModTotalpost=ModTotalpost, text = text, ThisPost=ThisPost, user=user.username, question0 = user.customquestion0, question1 = user.customquestion1, question2 = user.customquestion2))
 
     return render_template('/chats/chatquestion1.html', username=user.username, question0 = user.customquestion0, question1 = user.customquestion1, question2 = user.customquestion2)    

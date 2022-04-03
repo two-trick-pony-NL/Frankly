@@ -7,7 +7,8 @@
 <!-- This is a popup if the user has to pay -->
 {% if ModTotalpost  > 80%}
 <div class="alert alert-warning" role="alert">
-  You used more than 80% of your responses, you'll have to top up soon!
+  You used more than 80% of your responses, you'll have to top up soon!<br>
+  <small>You used this much of your responses:</small>
   <div class="progress">
     <div class="progress-bar text-dark" role="progressbar" style="width: {{ModTotalpost}}%;" aria-valuenow="{{ModTotalpost}}" aria-valuemin="0" aria-valuemax="100">{{ModTotalpost}}%</div>
   </div>
