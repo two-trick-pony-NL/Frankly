@@ -100,9 +100,6 @@
 
 
 
-        <!-- Main content of page-->
-        <section class="page-section portfolio" id="portfolio">
-       
         <!-- end of the script that runs alerts--> 
             <!-- Start of the code that runs alerts on the whole system. If there is an alert then it will be appended at the top of the <body> you can pass a category from the Python script to set color.-->  
                 {% with messages = get_flashed_messages(with_categories=true) %}
@@ -115,10 +112,17 @@
                     {% endfor %}
                 {% endif %}
                 {% endwith %} 
-            <div class="container">
+          <br><br><br> <br><br><br><br><br><br>
+
+          <h1>This is our legal section consisting of:</h1>
+         <ul id="menu">
+            <a href="/legal/pricing"><li>Pricing</li></a>
+            <a href="/legal/terms"><li>Terms and Conditions</li></a>
+            <a href="/legal/privacy"><li>Privacy</li></a>
+        </ul>            
+
                 {% block Content%}{% endblock%}
-            </div>
-        </section>
+       
 
 
         <!-- Footer-->
