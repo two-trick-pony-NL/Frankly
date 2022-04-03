@@ -2,9 +2,18 @@
 {% extends "theme.html" %} {% block title %}GrapeVine - Giving Feedback made easy{% endblock %} 
 
 
-{% block Content%}
+{% block Content %}
 
 <!-- This is a popup if the user has to pay -->
+{% if ModTotalpost  > 80%}
+<div class="alert alert-warning" role="alert">
+  You used more than 80% of your responses, you'll have to top up soon!
+  <div class="progress">
+    <div class="progress-bar text-dark" role="progressbar" style="width: {{ModTotalpost}}%;" aria-valuenow="{{ModTotalpost}}" aria-valuemin="0" aria-valuemax="100">{{ModTotalpost}}%</div>
+  </div>
+</div>
+{%endif%}
+
 
 {% if haspaid  < 1 %}
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -35,13 +44,15 @@
               <br><br>
               <div class="d-grid gap-2 col-6 mx-auto">
                         
-                <a href="https://bunq.me/grapevine/5/{{user.id}}" target="_blank" class="btn btn-primary text-dark" role="button"><i class="bi bi-credit-card"></i> Unlock the next 100 responses</a>
+                <a href="https://bunq.me/grapevine/3.99/{{user.id}}/ideal" target="_blank" class="btn btn-primary text-dark" role="button"><img  width="24" height="24" src="{{ url_for('static',filename='/assets/img/ideal.png')}}"  alt="Card image cap"> Pay with iDeal</a>
+                <a href="https://bunq.me/grapevine/3.99/{{user.id}}/card" target="_blank" class="btn btn-primary text-dark" role="button"><i class="bi bi-credit-card"></i> Pay with creditcard</a>
   
               </div>
           </div>
           <div class="modal-footer">
             <small>It might take a minute or 2 for the payment to come through, but in most cases it's instant.</small>
             <a class="btn btn-light text-dark" href="/dashboard/{{user.username}}" role="button"><i class="bi bi-arrow-repeat"></i> I have paid, see if my payment arrived yet</a>
+            
             
           </div>
       </div>
@@ -82,6 +93,7 @@
           <p class="lead">Total responses</p>
           <p>The total of all the feedback you have received</p>
           
+          
         </div>
       </div>
     <br>
@@ -89,6 +101,7 @@
     </div>
     
   </div>
+  
 
   <div class="col-sm-4">
     <div class="row">
@@ -137,12 +150,7 @@
             },
           ]
         },
-        options: {
-          responsive: true,
-          legend: {
-            display: false
-          }
-        }
+        options: { plugins: { legend: { display: false }, } }
       });
     </script></div>
     {% else %}
@@ -178,7 +186,8 @@
           ]
         },
         options: {
-          responsive: true
+          responsive: true,
+          
         }
       });
     </script></div>
@@ -203,13 +212,13 @@
     <div class="card border-grey">
         {% if post.rating > 2 %}
         <div class="card-header d-flex bg-primary justify-content-between align-items-center">
-        <h1><i class="far fa-smile" color-primary></i></h1> From customer: {{post.email}}
+        <h1><i class="far fa-smile" color-primary></i></h1>  <h4>{{user.customquestion0}}</h4>
         {%elif post.rating > 1 %}
         <div class="card-header d-flex bg-secondary justify-content-between align-items-center">
-        <h1><i class="far fa-meh" bg-primary></i></h1> From customer: {{post.email}}
+        <h1><i class="far fa-meh" bg-primary></i></h1>  <h4>{{user.customquestion0}}</h4>
         {%elif post.rating < 2 %}
         <div class="card-header d-flex bg-third justify-content-between align-items-center">
-        <h1><i class="far fa-frown" bg-primary></i></h1> From customer: {{post.email}}
+        <h1><i class="far fa-frown" bg-primary></i></h1> <h4> {{user.customquestion0}}</h4>
         {%endif%}
         <div>
           <span id="likes-count-{{post.id}}">
@@ -251,10 +260,14 @@
         <div class="collapse text-dark" id="comments-{{post.id}}">
           <div class="card">
             <div class="card-body" id="comments-expanded-{{post.id}}">
+              <h5> Followup Answers:</h5>
+                  <small>- {{user.customquestion1}}</small><br>
+                  <small>- {{user.customquestion2}}</small>
               {% for comment in post.comments %}
               <div class="d-flex justify-content-between align-items-center">
                 <div>
-                  <ul> {{comment.text}}</ul>
+                  <br>
+                  <ul>Your customer said: <br> "<i>{{comment.text}}</i>"</ul>
                 </div>
                 <div>
                   <small class="text-muted"> {{comment.date_created}}</small>
@@ -598,6 +611,14 @@
                         <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{user.phonenumber}}">
                       </div>
                     </div>
+                    <hr>
+                    <h6>Your remaining Grapevine Credit:</h6>
+                    With Grapevine you get your first 100 responses for free, after that you an top up for another 100 responses for just €3,99. Here is how much credit you have used.<br><br>
+                    <b>Responses so far:</b>
+                    <div class="progress">
+                      <div class="progress-bar text-dark" role="progressbar" style="width: {{ModTotalpost}}%;" aria-valuenow="{{ModTotalpost}}" aria-valuemin="0" aria-valuemax="100">{{ModTotalpost}}%</div>
+                    </div>
+                    
 
                     <hr>
                     <h6>Custom questions:</h6>

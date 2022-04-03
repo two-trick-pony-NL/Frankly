@@ -1,7 +1,15 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for, jsonify, send_file
 from flask_login import login_required, current_user
 from .models import Post, User, Comment, Like
+from configparser import ConfigParser
 from . import db
+
+#fetching credentials used on this page
+config = ConfigParser()
+config.read('Env_Settings.cfg')
+# Getting the number of responses you need before you have to pay
+free_responses = config.get('free_responses', 'free_responses')
+free_responses = int(free_responses)
 
 views = Blueprint("views", __name__)
 
@@ -77,6 +85,9 @@ def dashboard(username):
         ).count()    
     #Adding up all responses    
     totalresponses = nmbr_happy_users+nmbr_medium_users+nmbr_unhappy_users
+    #Here we calculate what % of the free responses the user used. The modulus calculator sends back the remainder
+    ModTotalpost = totalresponses % free_responses
+    print(ModTotalpost)
     #Making a dataframe out of the filtered responses so we an draw the graphs in the dashboard
     data = [
         ("Happy Users", nmbr_happy_users),
@@ -109,7 +120,7 @@ def dashboard(username):
         grapevinescore = round(((nmbr_happy_users/totalresponses)-(nmbr_unhappy_users/totalresponses))*100)
     except: 
         grapevinescore = 0    
-    return render_template("dashboard.html",haspaid=haspaid, percentagelabels=percentagelabels, percentagevalues=percentagevalues, urlPromotorQR=urlPromotorQR, urlNeutralQR=urlNeutralQR,urlDetractorQR=urlDetractorQR,  grapevinescore=grapevinescore, totalresponses=totalresponses, nmbr_happy_users=nmbr_happy_users, nmbr_medium_users=nmbr_medium_users, nmbr_unhappy_users=nmbr_unhappy_users,QRCodeURL=QRCodeURL, user=current_user, posts=posts, username=username, labels=labels, values=values)
+    return render_template("dashboard.html",haspaid=haspaid, ModTotalpost=ModTotalpost, percentagelabels=percentagelabels, percentagevalues=percentagevalues, urlPromotorQR=urlPromotorQR, urlNeutralQR=urlNeutralQR,urlDetractorQR=urlDetractorQR,  grapevinescore=grapevinescore, totalresponses=totalresponses, nmbr_happy_users=nmbr_happy_users, nmbr_medium_users=nmbr_medium_users, nmbr_unhappy_users=nmbr_unhappy_users,QRCodeURL=QRCodeURL, user=current_user, posts=posts, username=username, labels=labels, values=values)
   
   
 
@@ -133,10 +144,14 @@ def send_feedback(user, rating):
             LastPost = Post.query.filter_by(text=text).first()
             ThisPost = LastPost.id
             ThisPost = str(ThisPost)
-            if totalposts % 25:
+            #The free responses can be set from the env_settings file, and returns ModTotalPost which is used to determine when a user has to pay. I
+            ModTotalpost = totalposts % free_responses
+            print(ModTotalpost)
+            # If ModTotalpost == 0 it means that you have reached that number, and then it will set the database that you'll have to pay.
+            if ModTotalpost == 0:
                 user.haspaid =  0
                 db.session.commit()
-            return redirect(url_for('chats.step2', text = text, ThisPost=ThisPost, user=user.username, question0 = user.customquestion0, question1 = user.customquestion1, question2 = user.customquestion2))
+            return redirect(url_for('chats.step2', ModTotalpost=ModTotalpost, text = text, ThisPost=ThisPost, user=user.username, question0 = user.customquestion0, question1 = user.customquestion1, question2 = user.customquestion2))
 
     return render_template('/chats/chatquestion1.html', username=user.username, question0 = user.customquestion0, question1 = user.customquestion1, question2 = user.customquestion2)    
 
