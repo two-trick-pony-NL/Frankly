@@ -21,6 +21,8 @@ def home():
     posts = Post.query.all()
     return render_template("home.html", user=current_user, posts=posts)
 
+    
+
 
 #Renders the userdashboard requires a username to select the correct user dashboard
 @views.route("/dashboard/<username>", methods=['GET', 'POST'])
@@ -64,9 +66,15 @@ def dashboard(username):
     if user != current_user:
         flash("You have no access to this page" , category="warning")    
         return redirect(url_for('views.home'))
-#Sorting Posts newest first       
+#Sorting Posts newest first
+    #Setting up pagination
+    page = request.args.get('page', 1, type=int)
+    #First getting all posts and ordering decendign order
     posts = Post.query.filter_by(author=user.id).order_by(Post.date_created.desc())
+    #Now breaking up the ordered list into pages
+    posts = posts.paginate(page=page, per_page=5)       
     userID = str(current_user.id)
+    #REnder the URL for the example QR code
     QRCodeURL = "static/qrcodes/User_"+userID+"_promotor.png"
     #Collecting all the responses filtered by Happy, neutral and Unhappy
     nmbr_happy_users = Post.query.filter(
@@ -120,7 +128,7 @@ def dashboard(username):
         grapevinescore = round(((nmbr_happy_users/totalresponses)-(nmbr_unhappy_users/totalresponses))*100)
     except: 
         grapevinescore = 0    
-    return render_template("dashboard.html",haspaid=haspaid, ModTotalpost=ModTotalpost, percentagelabels=percentagelabels, percentagevalues=percentagevalues, urlPromotorQR=urlPromotorQR, urlNeutralQR=urlNeutralQR,urlDetractorQR=urlDetractorQR,  grapevinescore=grapevinescore, totalresponses=totalresponses, nmbr_happy_users=nmbr_happy_users, nmbr_medium_users=nmbr_medium_users, nmbr_unhappy_users=nmbr_unhappy_users,QRCodeURL=QRCodeURL, user=current_user, posts=posts, username=username, labels=labels, values=values)
+    return render_template("dashboard.html",haspaid=haspaid, page=page, ModTotalpost=ModTotalpost, percentagelabels=percentagelabels, percentagevalues=percentagevalues, urlPromotorQR=urlPromotorQR, urlNeutralQR=urlNeutralQR,urlDetractorQR=urlDetractorQR,  grapevinescore=grapevinescore, totalresponses=totalresponses, nmbr_happy_users=nmbr_happy_users, nmbr_medium_users=nmbr_medium_users, nmbr_unhappy_users=nmbr_unhappy_users,QRCodeURL=QRCodeURL, user=current_user, posts=posts, username=username, labels=labels, values=values)
   
   
 
