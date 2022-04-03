@@ -77,7 +77,7 @@
           <br><br>
           <h1 class="display-4">{{ grapevinescore }}</h1>
           <p class="lead">Grapevine Score</p>
-          <p>We recalculated your responses into a NPS style score</p>
+          <p>Your responses converted into a NPS  score</p>
         </div>
       </div>
     <br>
@@ -191,7 +191,17 @@
           
         }
       });
-    </script></div>
+    </script>
+    <br>
+    <h6>Your remaining Grapevine Credit:</h6>
+    With Grapevine you get your first 100 responses for free, after that you an top up for another 100 responses for just €3,99. Here is how much credit you have used.<br><br>
+    <b>Credits used so far:</b><br>
+    <div class="progress">
+      <div class="progress-bar text-dark" role="progressbar" style="width: {{ModTotalpost}}%;" aria-valuenow="{{ModTotalpost}}" aria-valuemin="0" aria-valuemax="100">{{ModTotalpost}}%</div>
+    </div>  
+  </div>
+
+    
 {% else %}
 <br><br>
 <hr>

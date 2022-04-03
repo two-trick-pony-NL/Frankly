@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="Grapevine helps you collect feedback easily through QR Codes" />
+        <meta name="author" content="Grapevine " />
+        <!-- HTML Meta Tags -->
+      <!-- Facebook Meta Tags -->
+      <meta property="og:url" content="https://grapevine.works">
+      <meta property="og:type" content="website">
+      <meta property="og:title" content="Grapevine helps you collect feedback easily through QR Codes">
+      <meta property="og:description" content="Grapevine helps you collect feedback easily through QR Codes">
+      <meta property="og:image" content="{{ url_for('static',filename='assets/img/social.png') }}">
+
+      <!-- Twitter Meta Tags -->
+      <meta name="twitter:card" content="summary_large_image">
+      <meta property="twitter:domain" content="https://grapevine.works">
+      <meta property="twitter:url" content="https://grapevine.works">
+      <meta name="twitter:title" content="Grapevine helps you collect feedback easily through QR Codes">
+      <meta name="twitter:description" content="Grapevine helps you collect feedback easily through QR Codes">
+      <meta name="twitter:image" content="{{ url_for('static',filename='assets/img/social.png') }}">
+
+
+
+
+        <title>{% block title %}{% endblock %}</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="{{ url_for('static',filename='assets/img/favicon.png') }}" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
+         <!-- Charting library import-->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{{ url_for('static',filename='styles/styles.css') }}" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+        <script type="text/javascript">
+            (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "b80qerc4w0");
+        </script>
+    <!-- Matomo -->
+        <script>
+            var _paq = window._paq = window._paq || [];
+            /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+            _paq.push(["setCookieDomain", "*.grapevine.works"]);
+            _paq.push(["setExcludedQueryParams", ["?targeturl.com","targeturl.com"]]);
+            _paq.push(['trackPageView']);
+            _paq.push(['enableLinkTracking']);
+            (function() {
+            var u="//petervandoorn.com/matomo/";
+            _paq.push(['setTrackerUrl', u+'matomo.php']);
+            _paq.push(['setSiteId', '6']);
+            var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+            g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+            })();
+        </script>
+  <!-- End Matomo Code -->    
+    </head>
+    <!-- This SCRIPT  manages fading out of the alert after 2 secods-->  
+<script>
+    window.setTimeout(function() {
+        $(".alert").fadeTo(500, 0).slideUp(500, function(){
+            $(this).remove(); 
+        });
+    }, 7000);
+    </script>
+    <!-- end of the script that runs alerts-->  
+            
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg bg-secondary text-uppercase text-dark fixed-top" id="mainNav">
+            <div class="container">
+                
+                <a class="navbar-brand text-dark" href="/">GrapeVine</a><span class="badge rounded-pill bg-light text-dark">Beta</span>
+                
+                <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-dark rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto">
+                        
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 text-dark rounded" href="/sign-up">Sign Up</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 text-dark rounded" href="/sign-in">Sign In</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 text-dark rounded" href="/demo">Demo</a></li>
+                      
+                    </ul>
+                </div>
+            </div>
+        </nav>       
+   
+
+
+
+
+
+        <!-- Main content of page-->
+        <section class="page-section portfolio" id="portfolio">
+       
+        <!-- end of the script that runs alerts--> 
+            <!-- Start of the code that runs alerts on the whole system. If there is an alert then it will be appended at the top of the <body> you can pass a category from the Python script to set color.-->  
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                <!-- Categories: success (green), info (blue), warning (yellow), danger (red) -->
+                {% if messages %}
+                    {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible" role="alert">
+                    <strong><i class="fa-solid fa-bell-on"></i></strong> {{ message }}
+                    </div>
+                    {% endfor %}
+                {% endif %}
+                {% endwith %} 
+            <div class="container">
+                {% block Content%}{% endblock%}
+            </div>
+        </section>
+
+
+            <!-- Footer-->
+    <footer class="bg-black text-center py-5">
+        <div class="container px-5">
+            <div class="text-white-50 small">
+                <div class="mb-2">&copy; Grapevine All Rights Reserved.</div>
+                <a href="#!">Privacy</a>
+                <span class="mx-1">&middot;</span>
+                <a href="#!">Terms</a>
+                <span class="mx-1">&middot;</span>
+                <a href="#!">FAQ</a>
+            </div>
+        </div>
+    </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>  
+
+        <!-- Core theme JS-->
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <!-- * *                               SB Forms JS                               * *-->
+        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+
+    </body>
+</html>

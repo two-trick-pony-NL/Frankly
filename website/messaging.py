@@ -6,6 +6,8 @@ from twilio.rest import Client
 import os
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
+from . import db
+from .models import Post, User, Comment, Like
 
 messaging = Blueprint("messaging", __name__)
 
@@ -26,12 +28,13 @@ sendgrid_api = config.get('sendgrid_api', 'sendgrid_api')
 @messaging.route("/sendwhatsapp/<userid>/<phonenumber>")
 @login_required
 def SendWhatsapp(userid, phonenumber):
+    user = User.query.filter_by(id=userid).first()
     client = Client(account_sid, auth_token) 
     phonenumber = str(phonenumber)
     promotorURL = str('\n\n\n😃 great! > https://grapevine.works/send-feedback/'+userid+'/3')
     neutralURL = str('\n\n\n😑 mehh! > https://grapevine.works/send-feedback/'+userid+'/2')
     detractorURL = str('\n\n\n😢 Not so good > https://grapevine.works/send-feedback/'+userid+'/1')
-    message = 'Thanks, what did you think of the workshop?'
+    message = user.customquestion0
     print(userid)
     
 
@@ -53,14 +56,15 @@ def SendWhatsapp(userid, phonenumber):
 @messaging.route("/sendemail/<userid>/<email>")
 @login_required
 def SendEmail(userid, email):
+    user = User.query.filter_by(id=userid).first()
     email = str(email)
     promotorURL = str('https://grapevine.works/send-feedback/'+userid+'/3')
     neutralURL = str('https://grapevine.works/send-feedback/'+userid+'/2')
     detractorURL = str('https://grapevine.works/send-feedback/'+userid+'/1')
     message = Mail(
-    from_email='no-reply@grapevine.works',
+    from_email=user.username+'@grapevine.works',
     to_emails=email,
-    subject='Your Grapevine email template',
+    subject= user.customquestion0,
 
     #THis next section is the HTML email body: NOTE IT"S NOT A COMENT
     html_content='''
@@ -72,15 +76,16 @@ def SendEmail(userid, email):
       <div data-role="module-unsubscribe" class="module" role="module" data-type="unsubscribe" style="color:#444444; font-size:12px; line-height:20px; padding:16px 16px 16px 16px; text-align:Center;" data-muid="4e838cf3-9892-4a6d-94d6-170e474d21e5">
       
       
-      <h1>How did you like our workshop?</H1>
+      <h1>'''+user.customquestion0+'''</H1>
       <p>Tell us how you liked the workshop last friday, click the emoji that best suits your experience:</p>
+      <h1>
             <a href="'''+promotorURL+'''" target="_blank" style="font-family:sans-serif;text-decoration:none;">
             😃 great!</a>
             <a href="'''+neutralURL+'''" target="_blank" style="font-family:sans-serif;text-decoration:none;">
             😑 mehh!</a>
               <a href="'''+detractorURL+'''" target="_blank" style="font-family:sans-serif;text-decoration:none;">
             😢 Not so good</a>
-            
+        </h1>    
         <p style="font-size:12px; line-height:20px;">
           <a class="Unsubscribe--unsubscribeLink" href="{{{unsubscribe}}}" target="_blank" style="font-family:sans-serif;text-decoration:none;">
             Unsubscribe
