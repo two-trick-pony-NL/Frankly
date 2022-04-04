@@ -10,7 +10,7 @@ import phonenumbers
 
 # These regexes are used to check whether the passwords, email addresses and usernames are valid during signup. 
 regexemail = re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+')
-regexpassword = re.compile('[A-Za-z0-9@#$%^&+=]{8,}')
+regexpassword = re.compile('^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$')                     
 rexexusername = re.compile("^[a-zA-Z0-9_]*$")
 regexphonenumber = re.compile("(^\+[0-9]{2}|^\+[0-9]{2}\(0\)|^\(\+[0-9]{2}\)\(0\)|^00[0-9]{2}|^0)([0-9]{9}$|[0-9\-\s]{10}$)")
 
