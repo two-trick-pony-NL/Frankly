@@ -69,7 +69,7 @@ def thanks():
     answer1 = request.args.get('answer1')
     answer2 = request.args.get('answer2')
     answer3 = request.args.get('answer3')
-    ThisPost = request.args.get('ThisPost')a
+    ThisPost = request.args.get('ThisPost')
     username = request.args.get('username')
     #user = request.args.get('user')
     user = User.query.filter_by(username=username).first()
