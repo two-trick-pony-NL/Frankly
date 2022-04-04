@@ -51,9 +51,7 @@ def sign_up():
         customquestion0 = "How did you like our service?"
         customquestion1 = "What do you think we can improve?"
         customquestion2 = "is there anything else you'd like to tell us?"
-        #formatting to international standard number
-        my_number = phonenumbers.parse(phonenumber, "NL")
-        phonenumberformatted = phonenumbers.format_number(my_number, phonenumbers.PhoneNumberFormat.E164)
+        
 # checking if user exists
         email_exists = User.query.filter_by(email=email).first()
         username_exists = User.query.filter_by(username=username).first()
@@ -62,7 +60,9 @@ def sign_up():
         if not re.fullmatch(regexemail, email):
             flash("This is not a valid email address", category="danger")
         if not re.fullmatch(regexphonenumber, phonenumber):
-            flash("This is not a valid phonenumber -- Use the format +31612345678", category="danger")    
+            flash("This is not a valid phonenumber -- Use the format +31612345678", category="danger")  
+        elif len(phonenumber) < 6:
+            flash("Phone number is too short ", category="danger")    
         elif email_exists:
             flash("This Email address is already in use, use another one or log in", category="danger")
         elif username_exists:
@@ -80,6 +80,9 @@ def sign_up():
         elif len(email) < 4:
             flash("Email address is invalid.", category="danger")
         else:
+            #formatting to international standard number
+            my_number = phonenumbers.parse(phonenumber, "NL")
+            phonenumberformatted = phonenumbers.format_number(my_number, phonenumbers.PhoneNumberFormat.E164)
             new_user = User(email=email, phonenumber=phonenumberformatted, haspaid = 1, customquestion0 = customquestion0, customquestion1 = customquestion1, customquestion2 = customquestion2, isadmin = False, username=username, password=generate_password_hash(
                 password1, method='sha256'))
             db.session.add(new_user)

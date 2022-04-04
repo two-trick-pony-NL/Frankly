@@ -7,12 +7,25 @@
 <br><br>
         <h1>Sign up to Grapevine </h1>
         <p>Create an account and enjoy all the benefits of instant feedback</p>
-        
-        <form method="POST">
-                <h3 align="center">Sign Up</h3>
-                <div class="form-group">
+      
+
+<!-- revamped signup form-->
+              <form method="POST" class="row g-3">
+                <div class="col-md-12">
+                  <label for="username">Username</label>
+                  <p class="card-text"><small class="text-muted">The username will be shown to your customers, so pick something they will recognize</small></p>
+                  <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    class="form-control"
+                    placeholder="Choose a Username"
+                  />
+                </div>
+                
+                <div class="col-md-6">
                   <label for="email">Email Address</label>
-                  <p class="card-text"><small class="text-muted">An email address where we can reach you</small></p>
+                  <p class="card-text row"><small class="text-muted">An email address where we can reach you</small></p>
                   <input
                     type="text"
                     id="email"
@@ -20,17 +33,11 @@
                     class="form-control"
                     placeholder="Enter Email"
                   />
-                  <label for="username">Username</label>
-                  <p class="card-text"><small class="text-muted">This username is what we'll show your customers when you ask for feedback</small></p>
-                  <input
-                    type="text"
-                    id="username"
-                    name="username"
-                    class="form-control"
-                    placeholder="Enter Username"
-                  />
+                </div>
+
+                <div class="col-md-6">
                   <label for="phonenumber">Phone Number</label>
-                  <p class="card-text"><small class="text-muted">We'll need your phone number in order to send you feedback templates over whatsapp</small></p>
+                  <p class="card-text"><small class="text-muted">So we can text you</small></p>
                   <input
                     type="text"
                     id="phonenumber"
@@ -38,8 +45,12 @@
                     class="form-control"
                     placeholder="+31612345678"
                   />
+                </div>
+               
+
+                <div class="col-md-6">
                   <label for="password1">Password</label>
-                  <p class="card-text"><small class="text-muted">Pick a secure password of minimum 8 characters</small></p>
+                  
                   <input
                     type="password"
                     id="password1"
@@ -47,18 +58,27 @@
                     class="form-control"
                     placeholder="Enter Password"
                   />
-                  <label for="password2">Type your password Again</label>
+                  
+                  
+                </div>
+                <div class="col-md-6">
+                  <label for="password2"></label>
                   <input
                     type="password"
                     id="password2"
                     name="password2"
                     class="form-control"
-                    placeholder="Enter Password Again"
+                    placeholder="repeat your Password"
                   />
-                  <br />
-                  <input class="form-check-input" type="checkbox"type="radio" name="option" id="option" value="accepted"> I accept the <a href="/legal/terms">terms and conditions</a> of Grapevine </input<br>
+                </div>
+                <p class="card-text"><small class="text-muted">Password needs a minimum of 8 charachters a capital letter, number and a symbol</small></p>
+
+                <br />
+                <div class="col-md-12">
+                  <input class="form-check-input" type="checkbox"type="radio" name="option" id="option" value="accepted"> I accept the <a class="text-third" href="/legal/terms">terms and conditions</a> of Grapevine </input<br>
                   <div align="center">
                     <button class="btn btn-primary" type="submit">Sign Up</button>
+                  </div>
                   </div>
                 </div>
               </form>
