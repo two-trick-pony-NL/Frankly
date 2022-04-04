@@ -359,7 +359,10 @@
           <button type="submit" class="btn btn-dark"><i class="bi bi-pen"></i> Add note</button>
         </form>
       </div>
-      <div class="card-footer text-muted">{{post.date_created}}</div>
+      <div class="card-footer text-muted justify-content-between d-inline">
+        <div class="d-inline justify-content-between">{{post.date_created}}</div>
+        <div class="d-inline justify-content-between">{{post.id}}</div>
+      </div>
     </div>
   </br > {% endfor %}
 <!--Here we have the section that controls pagination-->
