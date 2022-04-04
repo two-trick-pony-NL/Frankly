@@ -41,13 +41,35 @@
       })();
     </script>
     <!-- End Matomo Code -->
+
+<!-- Piece of Javascript that ensures we'll always scroll to the bottom of the page-->
+    <script>
+      function scrollToBottom() {
+          window.scrollTo(0, document.section.scrollHeight);
+      }
+      history.scrollRestoration = "manual";
+      window.onload = scrollToBottom;
+  </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+<script>
+
+$("#chat").animate({ scrollTop: $('#chat').prop("scrollHeight")}, 1000);
+
+  </script>
+
   </head>
 <body>
 
-  <section class="msger">
+  <section  id="chat" class="msger">
     <header class="msger-header">
       <div class="msger-header-title">
-        <i class="fas fa-comment-alt"></i> Chat with {{username}}
+        <div
+        class="msg-img"
+        style="background-image: url({{ url_for('static',filename='assets/img/blogger.png') }})"
+       ></div><br>
+         Chat with {{username}} <i class="fas fa-comment-alt"></i>
+       
       </div>
       <div class="msger-header-options">
         <!--<span><i class="fas fa-cog"></i></span>-->
@@ -59,7 +81,7 @@
       <div class="msg left-msg">
         <div
          class="msg-img"
-         style="background-image: url(https://image.flaticon.com/icons/svg/327/327779.svg)"
+         style="background-image: url({{ url_for('static',filename='assets/img/blogger.png') }})"
         ></div>
   
         <div class="msg-bubble">
@@ -69,7 +91,7 @@
           </div>
   
           <div class="msg-text">
-            {{question0}} 😄
+            {{question0}} 
           </div>
         </div>
       </div>
