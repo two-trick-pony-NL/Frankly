@@ -167,7 +167,7 @@ def send_feedback(user, rating):
                     print("#####The payment was not triggered")
             return redirect(url_for('chats.step2', ModTotalpost=ModTotalpost, text = text, ThisPost=ThisPost, user=user.username, question0 = user.customquestion0, question1 = user.customquestion1, question2 = user.customquestion2))
 
-    return render_template('/chats/chatquestion1_new.html', username=user.username, question0 = user.customquestion0, question1 = user.customquestion1, question2 = user.customquestion2)    
+    return render_template('/chats/chatquestion1.html', username=user.username, question0 = user.customquestion0, question1 = user.customquestion1, question2 = user.customquestion2)    
 
 
 @views.route("/delete-post/<id>")

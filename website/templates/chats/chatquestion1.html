@@ -11,6 +11,7 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
+    <link href="{{ url_for('static',filename='styles/styleschat.css') }}" rel="stylesheet" />
     <script
       src="https://kit.fontawesome.com/999ca2bb93.js"
       crossorigin="anonymous"
@@ -40,148 +41,79 @@
       })();
     </script>
     <!-- End Matomo Code -->
+
+<!-- Piece of Javascript that ensures we'll always scroll to the bottom of the page-->
+    <script>
+      function scrollToBottom() {
+          window.scrollTo(0, document.section.scrollHeight);
+      }
+      history.scrollRestoration = "manual";
+      window.onload = scrollToBottom;
+  </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+<script>
+
+$("#chat").animate({ scrollTop: $('#chat').prop("scrollHeight")}, 1000);
+
+  </script>
+
   </head>
 <body>
 
-
-<!-- Core theme CSS (includes Bootstrap)-->
-<link href="{{ url_for('static',filename='styles/styleschat.css') }}" rel="stylesheet" />
-<div class="page-content page-container" id="page-content">
-      <div class="row container d-flex justify-content-center">
-          <div class="col-md-8">
-              <div class="card card-bordered" id="chatbox">
-                  <div class="card-header">
-                      <h4 class="card-title"><strong>Chat with {{username}}</strong></h4>
-                  </div>
-
-                  <!-- User 1-->
-                  <div class="ps-container ps-theme-default ps-active-y" id="chat-content" style="overflow-y: scroll !important; height:700px !important;">
-                      <div class="media media-chat media-chat"> <img class="avatar" src="https://img.icons8.com/color/36/000000/administrator-male.png" alt="...">
-                          <div class="media-body">
-                              <p>Hi, there! If it's OK with you we'd like to ask you a couple of questions!</p>
-                              <p>{{question0}}</p>
-                              <p class="meta"><time datetime="2018">23:58</time></p>
-                          </div>
-                      </div>
-                <!-- User 2-->
-                {% block Content%}
-                
-                <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px;">
-                  <div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div>
-              </div>
-              <div class="ps-scrollbar-y-rail" style="top: 0px; height: 0px; right: 2px;">
-                  <div class="ps-scrollbar-y" tabindex="0" style="top: 0px; height: 2px;"></div>
-              </div>
+  <section  id="chat" class="msger">
+    <header class="msger-header">
+      <div class="msger-header-title d-inline">
+         <h3>
+           <img
+          class="msg-img"
+          style="background-image: url({{ url_for('static',filename='assets/img/blogger.png') }})"
+         ></img>Chat with {{username}} <i class="fas fa-comment-alt"></i>
+        
+        </h3>
+       
+      </div>
+      <div class="msger-header-options">
+        <!--<span><i class="fas fa-cog"></i></span>-->
+      </div>
+    </header>
+  
+    <main class="msger-chat">
+      <!-- Message left-->
+      <div class="msg left-msg">
+        <div
+         class="msg-img"
+         style="background-image: url({{ url_for('static',filename='assets/img/blogger.png') }})"
+        ></div>
+  
+        <div class="msg-bubble">
+          <div class="msg-info">
+            <div class="msg-info-name">{{username}}</div>
+            <div class="msg-info-time">12:45</div>
           </div>
-          <div class="publisher bt-1 border-dark justify-between"> 
-            <img class="avatar avatar-xs" src="https://img.icons8.com/color/36/000000/administrator-male.png" alt="..."> 
-            <form method="POST"><input name="text" id="text" class="publisher-input" id="text" type="text" placeholder="Write something"> <button type="submit" class="publisher-btn text-info" data-abc="true"><i class="fa fa-paper-plane"></i></a> </div></form>
-              
-              
-              {% endblock%}                 
-                      
-                    
-              </div>
-      </div>
-  </div>
-</div>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      type="text/javascript"
-      src="{{ url_for('static', filename='index.js')}}"
-    ></script>
-    
-
-    <script>
-      var objDiv = document.getElementById("chatbox");
-      objDiv.scrollTop = objDiv.scrollHeight;
-      
-    </script>
-
-    <script>
-const msgerForm = get(".msger-inputarea");
-const msgerInput = get(".msger-input");
-const msgerChat = get(".msger-chat");
-
-const BOT_MSGS = [
-  "Hi, how are you?",
-  "Ohh... I can't understand what you trying to say. Sorry!",
-  "I like to play games... But I don't know how to play!",
-  "Sorry if my answers are not relevant. :))",
-  "I feel sleepy! :("
-];
-
-// Icons made by Freepik from www.flaticon.com
-const BOT_IMG = "https://image.flaticon.com/icons/svg/327/327779.svg";
-const PERSON_IMG = "https://image.flaticon.com/icons/svg/145/145867.svg";
-const BOT_NAME = "BOT";
-const PERSON_NAME = "Sajad";
-
-msgerForm.addEventListener("submit", event => {
-  event.preventDefault();
-
-  const msgText = msgerInput.value;
-  if (!msgText) return;
-
-  appendMessage(PERSON_NAME, PERSON_IMG, "right", msgText);
-  msgerInput.value = "";
-
-  botResponse();
-});
-
-function appendMessage(name, img, side, text) {
-  //   Simple solution for small apps
-  const msgHTML = `
-    <div class="msg ${side}-msg">
-      <div class="msg-img" style="background-image: url(${img})"></div>
-
-      <div class="msg-bubble">
-        <div class="msg-info">
-          <div class="msg-info-name">${name}</div>
-          <div class="msg-info-time">${formatDate(new Date())}</div>
+  
+          <div class="msg-text">
+            {{question0}} 
+          </div>
         </div>
-
-        <div class="msg-text">${text}</div>
       </div>
-    </div>
-  `;
-
-  msgerChat.insertAdjacentHTML("beforeend", msgHTML);
-  msgerChat.scrollTop += 500;
-}
-
-function botResponse() {
-  const r = random(0, BOT_MSGS.length - 1);
-  const msgText = BOT_MSGS[r];
-  const delay = msgText.split(" ").length * 100;
-
-  setTimeout(() => {
-    appendMessage(BOT_NAME, BOT_IMG, "left", msgText);
-  }, delay);
-}
-
-// Utils
-function get(selector, root = document) {
-  return root.querySelector(selector);
-}
-
-function formatDate(date) {
-  const h = "0" + date.getHours();
-  const m = "0" + date.getMinutes();
-
-  return `${h.slice(-2)}:${m.slice(-2)}`;
-}
-
-function random(min, max) {
-  return Math.floor(Math.random() * (max - min) + min);
-}
+      <!-- End message Left -->
 
 
 
-    </script>
+{% block Content%}
+
+
+</main>
+  
+  
+<form method="POST"class="msger-inputarea">
+ <input type="text" name="text" id="text" class="msger-input" placeholder="Enter your message...">
+ <button type="submit" class="msger-send-btn"> <i class="fa fa-paper-plane"></i>Send</button>
+</form>
+</section> 
+{% endblock%}
+
+
 </body>
 </html>

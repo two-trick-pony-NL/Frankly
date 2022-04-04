@@ -1,57 +1,130 @@
 
 {% extends "chats/chatquestion1.html" %} {% block title %}GrapeVine - Giving Feedback made easy{% endblock %} 
 
-
-
 {% block Content%}
-<div class="media media-chat media-chat-reverse">
-        <div class="media-body">
-            <p>{{answer1}}</p>
-            <p class="meta"><time datetime="2018">00:06</time></p>
-        </div>    
+<!-- Message right-->
+<div class="msg right-msg">
+    <div
+     class="msg-img"
+     style="background-image: url({{ url_for('static',filename='assets/img/customer-review.png') }})"
+    ></div>
+
+    <div class="msg-bubble">
+      <div class="msg-info">
+        <div class="msg-info-name">You</div>
+        <div class="msg-info-time">12:46</div>
+      </div>
+
+      <div class="msg-text">
+        {{answer1}}
+      </div>
     </div>
+  </div>
+  <!-- EndMessage right-->
 
+  <!-- Message left-->
+  <div class="msg left-msg">
+    <div
+     class="msg-img"
+     style="background-image: url({{ url_for('static',filename='assets/img/blogger.png') }})"
+    ></div>
 
-    <div class="media media-chat media-chat">
-        <div class="media-body">
-            <p>{{question1}}</p>
-            <p class="meta"><time datetime="2018">00:06</time></p>
-        </div>    
-    </div>  
+    <div class="msg-bubble">
+      <div class="msg-info">
+        <div class="msg-info-name">{{username}}</div>
+        <div class="msg-info-time">12:45</div>
+      </div>
 
-
-    <div class="media media-chat media-chat-reverse">
-        <div class="media-body">
-            <p>{{answer2}}</p>
-            <p class="meta"><time datetime="2018">00:06</time></p>
-        </div>    
+      <div class="msg-text">
+        {{question1}} 
+      </div>
     </div>
+  </div>
+  <!-- End message Left -->
 
+  <!-- Message right-->
+<div class="msg right-msg">
+    <div
+     class="msg-img"
+     style="background-image: url({{ url_for('static',filename='assets/img/customer-review.png') }})"
+    ></div>
 
-    <div class="media media-chat media-chat">
-        <div class="media-body">
-            <p>{{question2}}</p>
-            <p class="meta"><time datetime="2018">00:06</time></p>
-        </div>    
-    </div> 
+    <div class="msg-bubble">
+      <div class="msg-info">
+        <div class="msg-info-name">You</div>
+        <div class="msg-info-time">12:46</div>
+      </div>
 
-
-    <div class="media media-chat media-chat-reverse">
-        <div class="media-body">
-            <p>{{answer3}}</p>
-            <p class="meta"><time datetime="2018">00:06</time></p>
-        </div>    
+      <div class="msg-text">
+        {{answer2}}
+      </div>
     </div>
+  </div>
+  <!-- EndMessage right-->
+
+<!-- Message left-->
+<div class="msg left-msg">
+    <div
+     class="msg-img"
+     style="background-image: url({{ url_for('static',filename='assets/img/blogger.png') }})"
+    ></div>
+
+    <div class="msg-bubble">
+      <div class="msg-info">
+        <div class="msg-info-name">{{username}}</div>
+        <div class="msg-info-time">12:45</div>
+      </div>
+
+      <div class="msg-text">
+        {{question1}} 
+      </div>
+    </div>
+  </div>
+  <!-- End message Left -->  
+
+  <!-- Message right-->
+<div class="msg right-msg">
+    <div
+     class="msg-img"
+     style="background-image: url({{ url_for('static',filename='assets/img/customer-review.png') }})"
+    ></div>
+
+    <div class="msg-bubble">
+      <div class="msg-info">
+        <div class="msg-info-name">You</div>
+        <div class="msg-info-time">12:46</div>
+      </div>
+
+      <div class="msg-text">
+        {{answer3}}
+      </div>
+    </div>
+  </div>
+  <!-- EndMessage right-->
+
+  <!-- Message left-->
+  <div class="msg left-msg">
+    <div
+     class="msg-img"
+     style="background-image: url({{ url_for('static',filename='assets/img/blogger.png') }})"
+    ></div>
+
+    <div class="msg-bubble">
+      <div class="msg-info">
+        <div class="msg-info-name">{{username}}</div>
+        <div class="msg-info-time">12:45</div>
+      </div>
+
+      <div class="msg-text">
+        <p>That was all thank you!</p>
+            <p><div style="width:100%;height:0;padding-bottom:66%;position:relative;"><iframe src="https://giphy.com/embed/s2qXK8wAvkHTO" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/party-birthday-celebration-s2qXK8wAvkHTO"></a></p></p> 😄
+      </div>
+    </div>
+  </div>
+  <!-- End message Left -->
 
 
-    <div class="media media-chat media-chat">
-        <div class="media-body">
-            <p>That was all thank you!</p>
-            <p><div style="width:100%;height:0;padding-bottom:66%;position:relative;"><iframe src="https://giphy.com/embed/s2qXK8wAvkHTO" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/party-birthday-celebration-s2qXK8wAvkHTO"></a></p></p>
-            <p class="meta"><time datetime="2018">00:06</time></p>
-        </div>    
-    </div> 
+  
 
-    
 {% endblock%}
         

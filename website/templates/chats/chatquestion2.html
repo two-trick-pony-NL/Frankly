@@ -1,34 +1,55 @@
 
 {% extends "chats/chatquestion1.html" %} {% block title %}GrapeVine - Giving Feedback made easy{% endblock %} 
 
-
-
 {% block Content%}
-<div class="media media-chat media-chat-reverse">
-        <div class="media-body">
-            <p>{{answer1}}</p>
-            <p class="meta"><time datetime="2018">00:06</time></p>
-        </div>    
+<!-- Message right-->
+<div class="msg right-msg">
+    <div
+     class="msg-img"
+     style="background-image: url({{ url_for('static',filename='assets/img/customer-review.png') }})"
+    ></div>
+
+    <div class="msg-bubble">
+      <div class="msg-info">
+        <div class="msg-info-name">You</div>
+        <div class="msg-info-time">12:46</div>
+      </div>
+
+      <div class="msg-text">
+        {{answer1}}
+      </div>
     </div>
+  </div>
+  <!-- EndMessage right-->
 
+  <!-- Message left-->
+  <div class="msg left-msg">
+    <div
+     class="msg-img"
+     style="background-image: url({{ url_for('static',filename='assets/img/blogger.png') }})"
+    ></div>
 
-    <div class="media media-chat media-chat">
-        <div class="media-body">
-            <p>{{question1}}</p>
-            <p class="meta"><time datetime="2018">00:06</time></p>
-        </div>    
-    </div>    
+    <div class="msg-bubble">
+      <div class="msg-info">
+        <div class="msg-info-name">{{username}}</div>
+        <div class="msg-info-time">12:45</div>
+      </div>
 
-    <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px;">
-        <div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div>
+      <div class="msg-text">
+        {{question1}} 
+      </div>
     </div>
-    <div class="ps-scrollbar-y-rail" style="top: 0px; height: 0px; right: 2px;">
-        <div class="ps-scrollbar-y" tabindex="0" style="top: 0px; height: 2px;"></div>
-    </div>
-</div>
-<div class="publisher bt-1 border-dark justify-between"> 
-  <img class="avatar avatar-xs" src="https://img.icons8.com/color/36/000000/administrator-male.png" alt="..."> 
-  <form method="POST"><input name="text" id="text" class="publisher-input" id="text" type="text" placeholder="Write something"> <button type="submit" class="publisher-btn text-info" data-abc="true"><i class="fa fa-paper-plane"></i></a> </div></form>
+  </div>
+  <!-- End message Left -->
 
+
+</main>
+  
+  
+<form method="POST"class="msger-inputarea">
+ <input type="text" name="text" id="text" class="msger-input" placeholder="Enter your message...">
+ <button type="submit" class="msger-send-btn"> <i class="fa fa-paper-plane"></i>Send</button>
+</form>
+</section> 
 {% endblock%}
         
