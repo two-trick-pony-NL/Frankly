@@ -4,17 +4,6 @@
 
 {% block Content %}
 
-<!-- This is a popup if the user has to pay -->
-{% if ModTotalpost  > 80%}
-<div class="alert alert-warning" role="alert">
-  You used more than 80% of your responses, you'll have to top up soon!<br>
-  <small>You used this much of your responses:</small>
-  <div class="progress">
-    <div class="progress-bar text-dark" role="progressbar" style="width: {{ModTotalpost}}%;" aria-valuenow="{{ModTotalpost}}" aria-valuemin="0" aria-valuemax="100">{{ModTotalpost}}%</div>
-  </div>
-</div>
-{%endif%}
-
 
 {% if haspaid  < 1 %}
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -765,7 +754,7 @@
 -->
       </div>
       <div class="modal-footer justify-content-between">
-        <small>userid:{{user.id}}</small>
+        <small>{{user.date_created}} - {{user.id}}</small>
         <button type="button" class="btn btn-primary text-dark" data-bs-dismiss="modal"><i class="bi bi-back"></i> Back</button>
        
       </div>
