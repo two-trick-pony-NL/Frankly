@@ -33,20 +33,25 @@ def dashboard(username):
         FirstCustomQuestion = request.form.get("FirstCustomQuestion")
         FollowUpQuestion1 = request.form.get("FollowUpQuestion1")
         FollowUpQuestion2 = request.form.get("FollowUpQuestion2")
+        userpublicname = request.form.get("userpublicname")
 
         user = User.query.filter_by(username=username).first()
         if len(FirstCustomQuestion) > 0:
             user.customquestion0 =  FirstCustomQuestion
             db.session.commit()
-            print("First Question updated") 
+            
         if len(FollowUpQuestion1) > 0:
             user.customquestion1 =  FollowUpQuestion1
             db.session.commit()
-            print("Second Question updated")
+            
         if len(FollowUpQuestion2) > 0:
             user.customquestion2 =  FollowUpQuestion2
             db.session.commit()
-            print("Third Question updated")
+
+        if len(userpublicname) > 0:
+            user.userpublicname =  userpublicname
+            db.session.commit()
+            
 
 #Get requests just load the page with the regular logic
     user = User.query.filter_by(username=username).first()
@@ -167,7 +172,7 @@ def send_feedback(user, rating):
                     print("#####The payment was not triggered")
             return redirect(url_for('chats.step2', ModTotalpost=ModTotalpost, text = text, ThisPost=ThisPost, user=user.username, question0 = user.customquestion0, question1 = user.customquestion1, question2 = user.customquestion2))
 
-    return render_template('/chats/chatquestion1.html', username=user.username, question0 = user.customquestion0, question1 = user.customquestion1, question2 = user.customquestion2)    
+    return render_template('/chats/chatquestion1.html', publicname=user.userpublicname, username=user.username, question0 = user.customquestion0, question1 = user.customquestion1, question2 = user.customquestion2)    
 
 
 @views.route("/delete-post/<id>")

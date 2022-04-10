@@ -16,7 +16,7 @@
       src="https://kit.fontawesome.com/999ca2bb93.js"
       crossorigin="anonymous"
     ></script>
-    <title>{% block title %}Chat with {{username}}{% endblock %}</title>
+    <title>{% block title %}Chat with {{publicname}}{% endblock %}</title>
     <script type="text/javascript">
       (function(c,l,a,r,i,t,y){
           c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -62,7 +62,7 @@
            <img
           class="msg-img"
           style="background-image: url({{ url_for('static',filename='assets/img/blogger.png') }})"
-         ></img>Chat with {{username}} <i class="fas fa-comment-alt"></i>
+         ></img>Chat with {{publicname}} <i class="fas fa-comment-alt"></i>
         
         </h3>
        
@@ -82,7 +82,7 @@
   
         <div class="msg-bubble">
           <div class="msg-info">
-            <div class="msg-info-name">{{username}}</div>
+            <div class="msg-info-name">{{publicname}}</div>
             <div class="msg-info-time">12:45</div>
           </div>
   

@@ -689,6 +689,9 @@
                         <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{user.username}}">
                       </div>
                     </div>
+
+                  
+                    
                     <div class="mb-3 row">
                       <label for="staticEmail" class="col-sm-2 col-form-label">Phone</label>
                       <div class="col-sm-10">
@@ -705,11 +708,24 @@
                     
 
                     <hr>
-                    <h6>Custom questions:</h6>
-                    <p>Custom questions allow you to ask your customers specific things, and to add followup questions. You can add up to 3 custom questions. </p>
+                    <h6>Customize your chat:</h6>
+                    <p>By customizing these settings, you can change how customers interact with you. You can set the name customers see, and  add custom questions that allow you to ask your customers specific things. You can add up to 3 custom questions. </p>
 
-
+                    <div class="mb-3">
+                      <label for="userpublicname" class="form-label">The name your users see in the chat and email templates</label>
+                      <input 
+                      type="text" 
+                      class="form-control" 
+                      name="userpublicname" 
+                      id="userpublicname" 
+                      placeholder="{{user.userpublicname}}" 
+                      aria-describedby="emailHelp"/>
+                      
+                      <div id="emailHelp" class="form-text">This allows you to pick a name that your users will see when giving you feedback </div>
+                    </div>
                     
+
+
                     <div class="mb-3">
                       <label for="FirstCustomQuestion" class="form-label">First question: Ask your customers to rate you</label>
                       <input 

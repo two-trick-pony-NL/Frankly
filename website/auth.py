@@ -83,7 +83,8 @@ def sign_up():
             #formatting to international standard number
             my_number = phonenumbers.parse(phonenumber, "NL")
             phonenumberformatted = phonenumbers.format_number(my_number, phonenumbers.PhoneNumberFormat.E164)
-            new_user = User(email=email, phonenumber=phonenumberformatted, haspaid = 1, customquestion0 = customquestion0, customquestion1 = customquestion1, customquestion2 = customquestion2, isadmin = False, username=username, password=generate_password_hash(
+
+            new_user = User(email=email, phonenumber=phonenumberformatted, haspaid = 1, customquestion0 = customquestion0, customquestion1 = customquestion1, customquestion2 = customquestion2, isadmin = False, username=username, userpublicname=username,  password=generate_password_hash(
                 password1, method='sha256'))
             db.session.add(new_user)
             db.session.commit()

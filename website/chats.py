@@ -31,7 +31,7 @@ def step2():
                 answer2 = text
                 return redirect(url_for('chats.step3', ThisPost=ThisPost, answer2 =answer2 , answer1 =answer1, user=user.id, username=user.username, question0 = user.customquestion0, question1 = user.customquestion1, question2 = user.customquestion2))
 
-    return render_template("chats/chatquestion2.html", user=user.id, answer1=answer1, username=user.username, question0 = user.customquestion0, question1 = user.customquestion1, question2 = user.customquestion2)  
+    return render_template("chats/chatquestion2.html", publicname=user.userpublicname, user=user.id, answer1=answer1, username=user.username, question0 = user.customquestion0, question1 = user.customquestion1, question2 = user.customquestion2)  
 
 #Here we ask the third question on the GET request and on Post we receive the third answer
 
@@ -60,8 +60,8 @@ def step3():
 
                 #return render_template('chats/chatquestion1.html', text = text, ThisPost=ThisPost)
                 answer3 = text
-                return redirect(url_for('chats.thanks', answer1 = answer1, answer2 = answer2,answer3= answer3, username=username, ThisPost=ThisPost, user=user, question0 = user.customquestion0, question1 = user.customquestion1, question2 = user.customquestion2))     
-    return render_template("chats/chatquestion3.html", user=user, username=user.username, answer1=answer1,answer2=answer2, question0 = user.customquestion0, question1 = user.customquestion1, question2 = user.customquestion2)  
+                return redirect(url_for('chats.thanks', publicname=user.userpublicname, answer1 = answer1, answer2 = answer2,answer3= answer3, username=username, ThisPost=ThisPost, user=user, question0 = user.customquestion0, question1 = user.customquestion1, question2 = user.customquestion2))     
+    return render_template("chats/chatquestion3.html", user=user,publicname=user.userpublicname,  username=user.username, answer1=answer1,answer2=answer2, question0 = user.customquestion0, question1 = user.customquestion1, question2 = user.customquestion2)  
 
  
 @chats.route("/thanks",methods=['GET', 'POST'])
@@ -74,7 +74,7 @@ def thanks():
     #user = request.args.get('user')
     user = User.query.filter_by(username=username).first()
     print(user)
-    return render_template("chats/thanks.html", username = username, answer1=answer1, answer2=answer2, answer3=answer3, question0 = user.customquestion0, question1 = user.customquestion1, question2 = user.customquestion2)    
+    return render_template("chats/thanks.html", username = username,publicname=user.userpublicname, answer1=answer1, answer2=answer2, answer3=answer3, question0 = user.customquestion0, question1 = user.customquestion1, question2 = user.customquestion2)    
 
 
 @chats.route("/question-answered1/<post_id>", methods=['GET','POST'])
