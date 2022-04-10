@@ -1,6 +1,9 @@
 from . import db
 from flask_login import UserMixin
 from sqlalchemy.sql import func
+from flask_migrate import Migrate
+
+
 
 #This file manages the columns defined in the database
 
@@ -23,16 +26,6 @@ class User(db.Model, UserMixin):
     customquestion3 = db.Column(db.String(150))
 
 
-class Campaign(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    campaignname = db.Column(db.String(150), unique=True)
-    date_created = db.Column(db.DateTime(timezone=True), default=func.now())
-    customquestion1 = db.Column(db.String(150))
-    customquestion1 = db.Column(db.String(150))
-    customquestion2 = db.Column(db.String(150))
-    customquestion3 = db.Column(db.String(150))
-    author = db.Column(db.Integer, db.ForeignKey('user.id', ondelete="CASCADE"), nullable=False)
-
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.Text, nullable=False)
@@ -50,7 +43,7 @@ class Post(db.Model):
 
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    text = db.Column(db.String(1000), nullable=False)
+    text = db.Column(db.String(1500), nullable=False)
     date_created = db.Column(db.DateTime(timezone=True), default=func.now())
     author = db.Column(db.Integer, db.ForeignKey(
         'user.id', ondelete="CASCADE"), nullable=False)
