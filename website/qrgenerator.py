@@ -4,7 +4,6 @@ import qrcode
 
 def createQR(userID):
     userID = str(userID)
-    print("Creating new QR codes")
     # Create Promotor QR code
     img = qrcode.make('https://grapevine.works/send-feedback/'+userID+'/3')
     img.save("./website/static/qrcodes/User_"+userID+"_promotor.png")

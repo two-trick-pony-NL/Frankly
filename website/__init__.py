@@ -5,6 +5,8 @@ from flask_login import LoginManager
 from configparser import ConfigParser
 from sqlalchemy import true
 from apilytics.flask import apilytics_middleware
+from flask_migrate import Migrate
+
 
 
 db = SQLAlchemy()
@@ -25,6 +27,7 @@ def create_app():
     #app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
     app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://'+mysqlusername+':'+mysqlpassword+'@petervandoorn.com/grapevine_database'
     db.init_app(app)
+    migrate = Migrate(app, db)
 
 #Importing the views for routing. Views has general navigation, auth handles login in, and signup and payment handles all payment processes.
     from .views import views
@@ -44,6 +47,7 @@ def create_app():
     app.register_blueprint(legal, url_prefix="/legal")
 
     from .models import User, Post, Comment, Like
+
     #This function creates a new database if none exists and updates tables if those are updated in the models
     create_database(app)
 
