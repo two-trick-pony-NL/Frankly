@@ -48,8 +48,9 @@ def create_app():
 
     from .models import User, Post, Comment, Like
 
+#This seems not to be used. 
     #This function creates a new database if none exists and updates tables if those are updated in the models
-    create_database(app)
+    #create_database(app)
 
     login_manager = LoginManager()
     login_manager.login_view = "auth.login"
@@ -61,6 +62,7 @@ def create_app():
 
     return app
 
-def create_database(app):
-        db.create_all(app=app)
-        print("Connected to SQL database!")
+#This seems not to be used. 
+#def create_database(app): 
+ #       db.create_all(app=app)
+ #       print("Connected to SQL database!")
