@@ -12,7 +12,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(150), unique=True)
     username = db.Column(db.String(150), unique=True)
     userpublicname = db.Column(db.String(150))
-    userlogo = db.Column(db.String(350))
+    userlogo = db.Column(db.String(250))
     password = db.Column(db.String(150))
     phonenumber = db.Column(db.String(20))
     isadmin = db.Column(db.Boolean())
@@ -40,7 +40,7 @@ class Post(db.Model):
 
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    text = db.Column(db.String(1500), nullable=False)
+    text = db.Column(db.Text, nullable=False)
     date_created = db.Column(db.DateTime(timezone=True), default=func.now())
     author = db.Column(db.Integer, db.ForeignKey(
         'user.id', ondelete="CASCADE"), nullable=False)
