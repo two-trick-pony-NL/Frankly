@@ -35,6 +35,7 @@ def SendWhatsapp(userid, phonenumber):
     neutralURL = str('\n\n\n😑 mehh! > https://grapevine.works/send-feedback/'+userid+'/2')
     detractorURL = str('\n\n\n😢 Not so good > https://grapevine.works/send-feedback/'+userid+'/1')
     message = user.customquestion0
+    sender= user.userpublicname
     print(userid)
     
 
@@ -42,7 +43,7 @@ def SendWhatsapp(userid, phonenumber):
                                 messaging_service_sid='MGcda453ae1d2d1f05cb4b8124367535b5', 
                                 #To enable whatsapp add this line in again
                                 #from_='whatsapp:+14155238886',  
-                                body=message+promotorURL+neutralURL+detractorURL,      
+                                body=message+promotorURL+neutralURL+detractorURL+"\n\n"+sender,      
                                 #Replace this line to send whatsapp instead of text
                                 #to='whatsapp:'+phonenumber
                                 to=phonenumber
@@ -61,8 +62,9 @@ def SendEmail(userid, email):
     promotorURL = str('https://grapevine.works/send-feedback/'+userid+'/3')
     neutralURL = str('https://grapevine.works/send-feedback/'+userid+'/2')
     detractorURL = str('https://grapevine.works/send-feedback/'+userid+'/1')
+    sender= user.userpublicname
     message = Mail(
-    from_email=user.username+'@grapevine.works',
+    from_email=user.userpublicname+'@grapevine.works',
     to_emails=email,
     subject= user.customquestion0,
 
@@ -77,7 +79,7 @@ def SendEmail(userid, email):
       
       
       <h1>'''+user.customquestion0+'''</H1>
-      <p>Tell us how you liked the workshop last friday, click the emoji that best suits your experience:</p>
+      <p>'''+user.customquestion0+''', click the emoji that best suits your experience:</p>
       <h1>
             <a href="'''+promotorURL+'''" target="_blank" style="font-family:sans-serif;text-decoration:none;">
             😃 great!</a>
