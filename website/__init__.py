@@ -6,27 +6,42 @@ from configparser import ConfigParser
 from sqlalchemy import true
 from apilytics.flask import apilytics_middleware
 from flask_migrate import Migrate
-
+from flask_mail import Mail, Message
 
 
 db = SQLAlchemy()
+mail = Mail()
 config = ConfigParser()
 config.read('Env_Settings.cfg')
 token = config.get('SECRET_KEY', 'Session_Key')
 mysqlusername = config.get('mysqlusername', 'mysqlusername')
 mysqlpassword = config.get('mysqlpassword', 'mysqlpassword')
 apilyticskey = config.get('apilyticskey', 'apilyticskey')
+email_password = config.get('email_password', 'email_password')
 
 #Initializes the app and connects to the SQL database. For development there is also a SQLITE server available. 
 def create_app():
     app = Flask(__name__)
     #This next line allows for analytics to be sent to Apilytics so we can track server performance. 
     app = apilytics_middleware(app, api_key=apilyticskey)
+    #Set secret token for encryption
     app.config['SECRET_KEY'] = token
+    #Not tracking all modifications in our DB
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     #app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
+    #Setting URL for the Database
     app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://'+mysqlusername+':'+mysqlpassword+'@petervandoorn.com/grapevine_database'
+    #Connecting Database to our app
     db.init_app(app)
+    # configuration of mail
+    
+    app.config['MAIL_SERVER']='mail.franklyapp.nl'
+    app.config['MAIL_PORT'] = 465
+    app.config['MAIL_USERNAME'] = 'noreply@franklyapp.nl'
+    app.config['MAIL_PASSWORD'] = email_password
+    app.config['MAIL_USE_TLS'] = False
+    app.config['MAIL_USE_SSL'] = True
+    mail.init_app(app)
     migrate = Migrate(app, db)
 
 #Importing the views for routing. Views has general navigation, auth handles login in, and signup and payment handles all payment processes.

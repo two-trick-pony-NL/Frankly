@@ -5,7 +5,7 @@ from . import db
 from .models import User
 from .qrgenerator import createQR
 from configparser import ConfigParser
-
+from .messaging import newuserconfirmation, passwordresettoken, newpasswordconfirmation
 from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 import re
@@ -103,6 +103,7 @@ def sign_up():
             print("User created:")
             print(userID)
             createQR(userID)
+            newuserconfirmation(email)
             return redirect(url_for('views.dashboard', username=username))
 
     return render_template("signup.html", user=current_user)
@@ -136,8 +137,7 @@ def forgotpassword():
             print("We should send the reset link to that email address")
             print("This is the reset token")
             token = email_exists.id
-            get_reset_token(token)
-
+            passwordresettoken(recipient = email, token = get_reset_token(token))
         else:
             print("we do not know this email address")
             pass
@@ -182,18 +182,16 @@ def resetpassword(token):
             print("Commiting the new password hash to database")
             user.password =  password
             db.session.commit() #commiting the new has to the database
+            newpasswordconfirmation(user.email)
             flash("Your password was reset, log in using your new password", category="success")
             return redirect(url_for('auth.signin'))   
     return redirect(url_for('views.home'))       
     
-
-
-#This function generates a password reset token so we can safely execute password resets
+#This function generates a password reset token so we can safely execute password resets  in the forgot-password function
 def get_reset_token(token):
     payload = {'user_id': token}
     encoded_jwt = jwt.encode(payload, secretkey, algorithm="HS256")
     print(encoded_jwt)
-    
     return encoded_jwt
 
 

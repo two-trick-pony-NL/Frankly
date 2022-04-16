@@ -7,7 +7,10 @@ import os
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 from . import db
+from . import mail
 from .models import Post, User, Comment, Like
+from flask_mail import Mail, Message
+
 
 messaging = Blueprint("messaging", __name__)
 
@@ -115,7 +118,6 @@ def SendEmail(userid, email):
 
 
 
-
 #From here for the waiting list
 @messaging.route("/getinvited", methods=['GET', 'POST'])
 def getinvited():
@@ -142,3 +144,50 @@ def getinvited():
        
     flash("You got added to the waitinglist, keep an eye on your mailbox", category='success')
     return render_template("getinvited.html")
+
+
+#Here we send emails using our own emailserver (not Sendgrid)
+@messaging.route("/testemail")
+def index():
+   msg = Message(
+                'Hello',
+                sender ='noreply@franklyapp.nl',
+                recipients = ['peter@petervandoorn.com']
+               )
+   msg.body = 'Hello Flask message sent from Flask-Mail'
+   mail.send(msg)
+   return 'Sent'
+
+#This function triggers an email to the user if he signs up for Frankly
+def newuserconfirmation(recipient):
+   msg = Message(
+                'Welcome to Frankly!',
+                sender ='noreply@franklyapp.nl',
+                recipients = [recipient]
+               )
+   msg.body = 'Welcome to Frankly! Your account was registered succesfully!'
+   mail.send(msg)
+
+#This function triggers if the user resets their password
+def newpasswordconfirmation(recipient):
+   msg = Message(
+                'Your Frankly password was reset succesfully!',
+                sender ='noreply@franklyapp.nl',
+                recipients = [recipient]
+               )
+   msg.body = 'Your Frankly password was reset succesfully!'
+   mail.send(msg)
+
+# This function sends the user a token to reset their password
+def passwordresettoken(recipient, token):
+   msg = Message(
+                'Reset your Frankly password',
+                sender ='noreply@franklyapp.nl',
+                recipients = [recipient]
+               )
+   msg.body = 'Reset your Frankly password by clicking this link: https://grapevine.works/reset-password/'+token
+   mail.send(msg)   
+     
+
+  
+
