@@ -10,6 +10,7 @@ from . import db
 from . import mail
 from .models import Post, User, Comment, Like
 from flask_mail import Mail, Message
+#I'm using this template for emails: https://github.com/leemunroe/responsive-html-email-template
 
 
 messaging = Blueprint("messaging", __name__)
@@ -40,8 +41,6 @@ def SendWhatsapp(userid, phonenumber):
     message = user.customquestion0
     sender= user.userpublicname
     print(userid)
-    
-
     message = client.messages.create( 
                                 messaging_service_sid='MGcda453ae1d2d1f05cb4b8124367535b5', 
                                 #To enable whatsapp add this line in again
@@ -61,11 +60,27 @@ def SendWhatsapp(userid, phonenumber):
 @login_required
 def SendEmail(userid, email):
     user = User.query.filter_by(id=userid).first()
+    print(user)
+    publicusernamenospaces = user.userpublicname.replace(" ", "_")
     email = str(email)
     promotorURL = str('https://grapevine.works/send-feedback/'+userid+'/3')
     neutralURL = str('https://grapevine.works/send-feedback/'+userid+'/2')
     detractorURL = str('https://grapevine.works/send-feedback/'+userid+'/1')
-    sender= user.userpublicname
+    msg = Message(
+                  user.customquestion0,
+                  sender = publicusernamenospaces+'@franklyapp.nl',
+                  recipients = [email]
+                )
+    #msg.body = 'Welcome to Frankly! Your account was registered succesfully!'
+    msg.html = render_template('emailtemplates/feedbacktemplate.html', question = user.customquestion0, userpublicname = user.userpublicname, promotorURL = promotorURL, neutralURL = neutralURL, detractorURL = detractorURL)
+    mail.send(msg)
+    return('', 204) 
+
+
+
+
+
+"""
     message = Mail(
     from_email=user.userpublicname+'@grapevine.works',
     to_emails=email,
@@ -115,7 +130,7 @@ def SendEmail(userid, email):
         print(e.message)
     flash("Template sent to your mailbox, check your email!", category='success')
     return('', 204) 
-
+"""
 
 
 #From here for the waiting list
