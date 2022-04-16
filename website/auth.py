@@ -10,8 +10,8 @@ from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 import re
 import phonenumbers
-from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
-from authlib.jose import jwt
+#from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+import jwt
 
 config = ConfigParser()
 config.read('Env_Settings.cfg')
@@ -130,10 +130,11 @@ def forgotpassword():
         email_exists = User.query.filter_by(email=email).first()
         print(email_exists)
         if not re.fullmatch(regexemail, email):
-            flash("This is not a valid email address", category="danger")
+            print("This does not meet the regex for email")
         if email_exists:
             print(email)
-            print("WE should send the reset link to that email address")
+            print("We should send the reset link to that email address")
+            print("This is the reset token")
             token = email_exists.id
             get_reset_token(token)
 
@@ -144,29 +145,56 @@ def forgotpassword():
     return render_template('forgotpassword.html', user='none')
 
 
-@auth.route("/reset-password/<token>")
+@auth.route("/reset-password/<token>", methods=['GET', 'POST'])
 def resetpassword(token):
-    if request.method == 'GET':    # On get request we just redirect to the forgotpassword page if the user is logged out 
+    try: #Trying to decode the token into a valid user
+        decoded_jwt = jwt.decode(token, secretkey, algorithms=["HS256"])
+        user_id = decoded_jwt['user_id']
+        print("Valid token, looking up the user")
+        print(decoded_jwt)
+        print(user_id)
+        user = User.query.filter_by(id=user_id).first() 
+    except: #If unsuccessful we'll redirect to the home page and log an error
+        flash("Something went wrong!", category="warning")
+        print("Invalid token provided")
+        return redirect(url_for('views.home'))    
+    
+    if request.method == 'GET':    # On get request we only redirect to the resetpassword page if the user is logged out 
         if current_user.is_authenticated:
             return redirect(url_for('views.home'))
-        return render_template('resetpassword.html', user='none')
-    return
+        else: #Redirecting the user to the resetpassword page and passing along the user we got from the token
+            return render_template('resetpassword.html', user=user)    
+
+    if request.method == 'POST': #On post we start processing the new password
+        password1 = request.form.get("password1")
+        password2 = request.form.get("password2")
+        if password1 != password2: #Check if both inputs match up 
+            print("Passwords do NOT match")
+            flash("The two passwords do not match", category="warning")
+            return redirect(url_for('auth.resetpassword', token=token))
+        elif not re.fullmatch(regexpassword, password1): #Check if the password is a valid password regex
+            flash("This is not a strong password, pick at least 8 charachters and use numbers and symbols", category="danger")
+            return redirect(url_for('auth.resetpassword', token=token))    
+        else: #If all is good we start hashing the new password
+            password=generate_password_hash(password1, method='sha256')
+            print("this is the new password hash")
+            print(password)
+            print("Commiting the new password hash to database")
+            user.password =  password
+            db.session.commit() #commiting the new has to the database
+            flash("Your password was reset, log in using your new password", category="success")
+            return redirect(url_for('auth.signin'))   
+    return redirect(url_for('views.home'))       
+    
 
 
 #This function generates a password reset token so we can safely execute password resets
 def get_reset_token(token):
-    header = {'alg': 'RS256'}
     payload = {'user_id': token}
-    key = secretkey
-    s = jwt.encode(header,payload, key)
-    return s
+    encoded_jwt = jwt.encode(payload, secretkey, algorithm="HS256")
+    print(encoded_jwt)
+    
+    return encoded_jwt
 
-#This function validates reset tokens, and returns the userID that we encrypted within the token
-@staticmethod
-def verify_reset_token(token):
-    s = Serializer(token)
-    try: 
-        user_id = s.loads(token)['user_id']
-    except:
-        return None
-    return User.query.get(user_id)
+
+    
