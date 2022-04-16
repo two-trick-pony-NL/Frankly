@@ -166,6 +166,7 @@ def newuserconfirmation(recipient):
                 recipients = [recipient]
                )
    msg.body = 'Welcome to Frankly! Your account was registered succesfully!'
+   msg.html = render_template('emailtemplates/welcome.html')
    mail.send(msg)
 
 #This function triggers if the user resets their password
@@ -186,6 +187,7 @@ def passwordresettoken(recipient, token):
                 recipients = [recipient]
                )
    msg.body = 'Reset your Frankly password by clicking this link: https://grapevine.works/reset-password/'+token
+   msg.html = render_template('emailtemplates/passwordreset.html', token = token)
    mail.send(msg)   
      
 
