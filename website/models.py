@@ -2,8 +2,11 @@ from . import db
 from flask_login import UserMixin
 from sqlalchemy.sql import func
 from flask_migrate import Migrate
+from configparser import ConfigParser
 
-
+config = ConfigParser()
+config.read('Env_Settings.cfg')
+token = config.get('SECRET_KEY', 'Session_Key')
 
 #This file manages the columns defined in the database
 
@@ -24,6 +27,8 @@ class User(db.Model, UserMixin):
     customquestion0 = db.Column(db.String(150))
     customquestion1 = db.Column(db.String(150))
     customquestion2 = db.Column(db.String(150))
+
+
 
 
 class Post(db.Model):

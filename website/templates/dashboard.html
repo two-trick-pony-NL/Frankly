@@ -54,7 +54,7 @@
 <div class="container "></div>
 <br><br>
 <!--Header of dasbhoard-->
-<h1 class="d-inline"> {{ username }} // Dashboard</h1>
+<h1 class="d-inline align-middle"><img src="{{user.userlogo}}" alt="" width="10%"  class="d-inline-block align-text-top"> {{user.userpublicname}} // Dashboard</h1>
 
 <hr>
 <!--Splitting up in grid view for the graphs-->
@@ -669,12 +669,12 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Account Settings</h5>
+        <h3 class="modal-title" id="staticBackdropLabel">Account Settings</h3>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
                   <form method="POST">
-                    <h6>Your details:</h6>
+                    <h4>Your details:</h4>
                     <div class="mb-3 row">
                       <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
                       <div class="col-sm-10">
@@ -699,7 +699,7 @@
                       </div>
                     </div>
                     <hr>
-                    <h6>Your remaining Grapevine Credit:</h6>
+                    <h4>Your remaining Grapevine Credit:</h4>
                     With Grapevine you get your first 100 responses for free, after that you an top up for another 100 responses for just €3,99. Here is how much credit you have used.<br><br>
                     <b>Responses so far:</b>
                     <div class="progress">
@@ -708,9 +708,10 @@
                     
 
                     <hr>
-                    <h6>Customize your chat:</h6>
+                    <h4>Customize your chat:</h4>
                     <p>By customizing these settings, you can change how customers interact with you. You can set the name customers see, and  add custom questions that allow you to ask your customers specific things You can add up to 3 custom questions. </p>
-
+                    <h5>Branding:</h5>
+                    <h6>Name:</h6>
                     <div class="mb-3">
                       <label for="userpublicname" class="form-label">The name your users see in the chat and email templates</label>
                       <input 
@@ -723,11 +724,31 @@
                       
                       <div id="emailHelp" class="form-text">This allows you to pick a name that your users will see when giving you feedback </div>
                     </div>
-                    
-
+                    <h6>Logo:</h6>
+                    <div class="mb-3">
+                      
+                      <label for="userlogo" class="form-label">This is the logo users will see when interacting with you</label>
+                      <input 
+                      type="text" 
+                      class="form-control" 
+                      name="userlogo" 
+                      id="userlogo" 
+                      placeholder="{{user.userlogo}}" 
+                      aria-describedby="emailHelp"/>
+                      
+                      <div id="emailHelp" class="form-text">Make sure to link to a web-optimized URL of your image. </div>
+                      <div class="card" style="width: 20%">
+                        <img src="{{user.userlogo}}" class="card-img-top" alt="...">
+                        
+                      </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary text-dark"><i class="bi bi-check2-square"></i> Save branding</button>
+                    <hr>
+                    <h5>Custom Questions:</h5>
+                    <h6>First question:</h6>
 
                     <div class="mb-3">
-                      <label for="FirstCustomQuestion" class="form-label">First question: Ask your customers to rate you</label>
+                      <label for="FirstCustomQuestion" class="form-label"> Ask your customers to rate you</label>
                       <input 
                       type="text" 
                       class="form-control" 
@@ -738,6 +759,7 @@
                       
                       <div id="emailHelp" class="form-text">This question is used in the whatsapp and email template to invoke a response from your customer </div>
                     </div>
+                    <h6>Follow up questions:</h6>
                     <div class="mb-3">
                       <label for="FollowUpQuestion1" class="form-label">Followup Question 1</label>
                       <input 
@@ -748,6 +770,7 @@
                       id="FollowUpQuestion1"/>
                       <div id="emailHelp" class="form-text">If users enter the chat, this will be a followup question they will see</div>
                     </div>
+                    
                     <div class="mb-3">
                       <label for="FollowUpQuestion2" class="form-label">Followup Question 2</label>
                       <input 
@@ -774,7 +797,7 @@
       </div>
       <div class="modal-footer justify-content-between">
         <small>{{user.date_created}} - {{user.id}}</small>
-        <button type="button" class="btn btn-primary text-dark" data-bs-dismiss="modal"><i class="bi bi-back"></i> Back</button>
+        <button type="button" class="btn btn-primary text-dark" data-bs-dismiss="modal"> Back</button>
        
       </div>
     </div>

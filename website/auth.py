@@ -1,12 +1,21 @@
+from click import password_option
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from sqlalchemy import false
 from . import db
 from .models import User
 from .qrgenerator import createQR
+from configparser import ConfigParser
+
 from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 import re
 import phonenumbers
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+from authlib.jose import jwt
+
+config = ConfigParser()
+config.read('Env_Settings.cfg')
+secretkey = config.get('SECRET_KEY', 'Session_Key')
 
 # These regexes are used to check whether the passwords, email addresses and usernames are valid during signup. 
 regexemail = re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+')
@@ -108,3 +117,56 @@ def logout():
     flash("You Logged out -- See you soon! !", category="success")
     print("User logged out")
     return redirect(url_for("views.home"))
+
+#Creates and validates tokens for password reset
+@auth.route("/forgot-password", methods=['GET', 'POST'])
+def forgotpassword():
+    if request.method == 'GET':    # On get request we just redirect to the forgotpassword page if the user is logged out 
+        if current_user.is_authenticated:
+            return redirect(url_for('views.home'))
+        return render_template('forgotpassword.html', user='none')
+    if request.method == 'POST': #On post we check if the email is a valid email regex and if we know this emailaddress
+        email = request.form.get("email")
+        email_exists = User.query.filter_by(email=email).first()
+        print(email_exists)
+        if not re.fullmatch(regexemail, email):
+            flash("This is not a valid email address", category="danger")
+        if email_exists:
+            print(email)
+            print("WE should send the reset link to that email address")
+            token = email_exists.id
+            get_reset_token(token)
+
+        else:
+            print("we do not know this email address")
+            pass
+    flash("If we know this email address, then you received an email to reset your password", category='success')
+    return render_template('forgotpassword.html', user='none')
+
+
+@auth.route("/reset-password/<token>")
+def resetpassword(token):
+    if request.method == 'GET':    # On get request we just redirect to the forgotpassword page if the user is logged out 
+        if current_user.is_authenticated:
+            return redirect(url_for('views.home'))
+        return render_template('resetpassword.html', user='none')
+    return
+
+
+#This function generates a password reset token so we can safely execute password resets
+def get_reset_token(token):
+    header = {'alg': 'RS256'}
+    payload = {'user_id': token}
+    key = secretkey
+    s = jwt.encode(header,payload, key)
+    return s
+
+#This function validates reset tokens, and returns the userID that we encrypted within the token
+@staticmethod
+def verify_reset_token(token):
+    s = Serializer(token)
+    try: 
+        user_id = s.loads(token)['user_id']
+    except:
+        return None
+    return User.query.get(user_id)

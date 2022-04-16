@@ -34,6 +34,7 @@ def dashboard(username):
         FollowUpQuestion1 = request.form.get("FollowUpQuestion1")
         FollowUpQuestion2 = request.form.get("FollowUpQuestion2")
         userpublicname = request.form.get("userpublicname")
+        userlogo = request.form.get("userlogo")
 
         user = User.query.filter_by(username=username).first()
         if len(FirstCustomQuestion) > 0:
@@ -51,11 +52,15 @@ def dashboard(username):
         if len(userpublicname) > 0:
             user.userpublicname =  userpublicname
             db.session.commit()
+
+        if len(userlogo) > 0:
+            user.userlogo =  userlogo
+            db.session.commit()    
             
 
 #Get requests just load the page with the regular logic
     user = User.query.filter_by(username=username).first()
-    haspaid = user.haspaid
+    haspaid = bool(user.haspaid)
     userID = user.id
     userID = str(userID)
     urlPromotorQR = userID+"_promotor.png"
@@ -76,6 +81,12 @@ def dashboard(username):
     page = request.args.get('page', 1, type=int)
     #First getting all posts and ordering decendign order
     posts = Post.query.filter_by(author=user.id).order_by(Post.date_created.desc())
+    """This section of code creates a list of all the words used in posts by users, so we can draw a wordcloud.
+    wordcloudlist = []
+    for post in posts: 
+        wordcloudlist.append(post.text)
+    print(wordcloudlist)
+    """    
     #Now breaking up the ordered list into pages
     posts = posts.paginate(page=page, per_page=5)       
     userID = str(current_user.id)
