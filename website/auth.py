@@ -1,4 +1,3 @@
-from click import password_option
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from sqlalchemy import false
 from . import db
@@ -10,7 +9,6 @@ from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 import re
 import phonenumbers
-#from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 import jwt
 
 config = ConfigParser()
@@ -124,11 +122,13 @@ def logout():
 def forgotpassword():
     if request.method == 'GET':    # On get request we just redirect to the forgotpassword page if the user is logged out 
         if current_user.is_authenticated:
-            return redirect(url_for('views.home'))
+            logout_user()
+            return render_template('forgotpassword.html', user='none')
         return render_template('forgotpassword.html', user='none')
     if request.method == 'POST': #On post we check if the email is a valid email regex and if we know this emailaddress
         email = request.form.get("email")
         email_exists = User.query.filter_by(email=email).first()
+        
         print(email_exists)
         if not re.fullmatch(regexemail, email):
             print("This does not meet the regex for email")
