@@ -1,9 +1,9 @@
-<!doctype html>
+  <!doctype html>
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>{{question}}</title>
+    <title>Your frankly invoice</title>
     <style>
       /* -------------------------------------
           GLOBAL RESETS
@@ -333,7 +333,7 @@
     </style>
   </head>
   <body>
-    <span class="preheader">{{question}}</span>
+    <span class="preheader">Your Frankly invoice</span>
     <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
       <tr>
         <td>&nbsp;</td>
@@ -342,70 +342,72 @@
 
             <!-- START CENTERED WHITE CONTAINER -->
             <table role="presentation" class="main">
-                <h1>{{question}}</h1>
+                <h1>Your Frankly invoice</h1>
               <!-- START MAIN CONTENT AREA -->
               <tr>
                 <td class="wrapper">
                   <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                     <tr>
                       <td>
-                        <p>Tap the button that best suits your experience with {{userpublicname}}</p>
-
-                        <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
+                                               
+                        <table style="max-width:670px;margin:50px auto 10px;background-color:#fff;padding:50px;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;-webkit-box-shadow:0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24);-moz-box-shadow:0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24);box-shadow:0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24); border-top: solid 10px green;">
+                          <thead>
+                            <tr>
+                              <th style="text-align:left;"><img style="max-width: 150px;" src="https://www.bachanatours.in/book/img/logo.png" alt="bachana tours"></th>
+                              <th style="text-align:right;font-weight:400;">{{invoicedate}}</th>
+                            </tr>
+                          </thead>
                           <tbody>
                             <tr>
-                              <td align="left">
-                                <table role="presentation" border="0" cellpadding="0" cellspacing="0">
-                                  <tbody>
-                                    <tr>
-                                      <td> <a href="{{promotorURL}}" target="_blank">😃 great!</a> </td>
-                                    </tr>
-                                  </tbody>
-                                </table>
+                              <td style="height:35px;"></td>
+                            </tr>
+                            <tr>
+                              <td colspan="2" style="border: solid 1px #ddd; padding:10px 20px;">
+                                <p style="font-size:14px;margin:0 0 6px 0;"><span style="font-weight:bold;display:inline-block;min-width:150px">Order status</span><b style="color:green;font-weight:normal;margin:0">Success</b></p>
+                                <p style="font-size:14px;margin:0 0 6px 0;"><span style="font-weight:bold;display:inline-block;min-width:146px">Transaction ID</span> {{userid}}-{{invoicedate}}</p>
+                                <p style="font-size:14px;margin:0 0 0 0;"><span style="font-weight:bold;display:inline-block;min-width:146px">Order amount</span> €3.99</p>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="height:35px;"></td>
+                            </tr>
+                            <tr>
+                              <td style="width:50%;padding:20px;vertical-align:top">
+                                <p style="margin:0 0 10px 0;padding:0;font-size:14px;"><span style="display:block;font-weight:bold;font-size:13px">Name</span> {{username}}</p>
+                                <p style="margin:0 0 10px 0;padding:0;font-size:14px;"><span style="display:block;font-weight:bold;font-size:13px;">Email</span> {{email}}</p>
+                                <p style="margin:0 0 10px 0;padding:0;font-size:14px;"><span style="display:block;font-weight:bold;font-size:13px;">Phone</span> {{phonenumber}}</p>
+                                <p style="margin:0 0 10px 0;padding:0;font-size:14px;"><span style="display:block;font-weight:bold;font-size:13px;">User ID.</span> {{userid}}</p>
+                              </td>
+                              
+                            </tr>
+                            <tr>
+                              <td colspan="2" style="font-size:20px;padding:30px 15px 0 15px;">Items</td>
+                            </tr>
+                            <tr>
+                              <td colspan="2" style="padding:15px;">
+                                <p style="font-size:14px;margin:0;padding:10px;border:solid 1px #ddd;font-weight:bold;">
+                                  <span style="display:block;font-size:13px;font-weight:normal;">100 Frankly survey responses</span> €3.99 <b style="font-size:12px;font-weight:300;"> per 100 responses</b>
+                                </p>
                               </td>
                             </tr>
                           </tbody>
-                        </table>
-
-                        <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
-                          <tbody>
+                          <tfooter>
                             <tr>
-                              <td align="left">
-                                <table role="presentation" border="0" cellpadding="0" cellspacing="0">
-                                  <tbody>
-                                    <tr>
-                                      <td> <a href="{{neutralURL}}" target="_blank">😑 mehh!</a> </td>
-                                    </tr>
-                                  </tbody>
-                                </table>
+                              <td colspan="2" style="font-size:14px;padding:50px 15px 0 15px;">
+                                <strong style="display:block;margin:0 0 10px 0;">Regards</strong> Frankly App<br> Utrecht, Netherlands<br><br>
+                                <b>Email:</b> hello@franklyapp.nl
                               </td>
                             </tr>
-                          </tbody>
+                          </tfooter>
                         </table>
-
-                        <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
-                          <tbody>
-                            <tr>
-                              <td align="left">
-                                <table role="presentation" border="0" cellpadding="0" cellspacing="0">
-                                  <tbody>
-                                    <tr>
-                                      <td> <a href="{{detractorURL}}" target="_blank">😢 Not so good</a> </td>
-                                    </tr>
-                                  </tbody>
-                                </table>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-
-                        <p>Have a great day</p>
-                        <p>Cheers, {{userpublicname}}</p>
                       </td>
                     </tr>
                   </table>
                 </td>
               </tr>
+
+
+              
 
             <!-- END MAIN CONTENT AREA -->
             </table>
@@ -417,7 +419,7 @@
                 <tr>
                   <td class="content-block">
                     <span class="apple-link">Frankly - hello@franklyapp.nl</span>
-                    <br> Collect feedback from your users <a href="https://franklyapp.nl">try Frankly</a>.
+                    <!--<br> Don't like these emails? <a href="http://i.imgur.com/CScmqnj.gif">Unsubscribe</a>.-->
                   </td>
                 </tr>
                 <tr>

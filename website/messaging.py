@@ -10,6 +10,7 @@ from . import db
 from . import mail
 from .models import Post, User, Comment, Like
 from flask_mail import Mail, Message
+from datetime import datetime
 #I'm using this template for emails: https://github.com/leemunroe/responsive-html-email-template
 
 
@@ -77,62 +78,6 @@ def SendEmail(userid, email):
     return('', 204) 
 
 
-
-
-
-"""
-    message = Mail(
-    from_email=user.userpublicname+'@franklyapp.nl',
-    to_emails=email,
-    subject= user.customquestion0,
-
-    #THis next section is the HTML email body: NOTE IT"S NOT A COMENT
-    html_content='''
-     <html>
-    <head>
-      <title></title>
-    </head>
-    <body>
-      <div data-role="module-unsubscribe" class="module" role="module" data-type="unsubscribe" style="color:#444444; font-size:12px; line-height:20px; padding:16px 16px 16px 16px; text-align:Center;" data-muid="4e838cf3-9892-4a6d-94d6-170e474d21e5">
-      
-      
-      <h1>'''+user.customquestion0+'''</H1>
-      <p>'''+user.customquestion0+''', click the emoji that best suits your experience:</p>
-      <h1>
-            <a href="'''+promotorURL+'''" target="_blank" style="font-family:sans-serif;text-decoration:none;">
-            😃 great!</a>
-            <a href="'''+neutralURL+'''" target="_blank" style="font-family:sans-serif;text-decoration:none;">
-            😑 mehh!</a>
-              <a href="'''+detractorURL+'''" target="_blank" style="font-family:sans-serif;text-decoration:none;">
-            😢 Not so good</a>
-        </h1>    
-        <p style="font-size:12px; line-height:20px;">
-          <a class="Unsubscribe--unsubscribeLink" href="{{{unsubscribe}}}" target="_blank" style="font-family:sans-serif;text-decoration:none;">
-            Unsubscribe
-          </a>
-          -
-          <a href="{{{unsubscribe_preferences}}}" target="_blank" class="Unsubscribe--unsubscribePreferences" style="font-family:sans-serif;text-decoration:none;">
-            Unsubscribe Preferences
-          </a>
-        </p>
-      </div>
-    </body>
-  </html>
-    
-    ''')
-    try:
-        sg = SendGridAPIClient(sendgrid_api)
-        response = sg.send(message)
-        print(response.status_code)
-        print(response.body)
-        print(response.headers)
-    except Exception as e:
-        print(e.message)
-    flash("Template sent to your mailbox, check your email!", category='success')
-    return('', 204) 
-"""
-
-
 #From here for the waiting list
 @messaging.route("/getinvited", methods=['GET', 'POST'])
 def getinvited():
@@ -161,17 +106,6 @@ def getinvited():
     return render_template("getinvited.html")
 
 
-#Here we send emails using our own emailserver (not Sendgrid)
-@messaging.route("/testemail")
-def index():
-   msg = Message(
-                'Hello',
-                sender ='noreply@franklyapp.nl',
-                recipients = ['peter@petervandoorn.com']
-               )
-   msg.body = 'Hello Flask message sent from Flask-Mail'
-   mail.send(msg)
-   return 'Sent'
 
 #This function triggers an email to the user if he signs up for Frankly
 def newuserconfirmation(recipient):
@@ -204,6 +138,20 @@ def passwordresettoken(recipient, token):
    msg.body = 'Reset your Frankly password by clicking this link: https://franklyapp.nl/reset-password/'+token
    msg.html = render_template('emailtemplates/passwordreset.html', token = token)
    mail.send(msg)   
+
+
+# This function sends the user a confirmation after paying
+def invoiceconfirmation(userid):
+  user = User.query.filter_by(id=userid).first()
+  recipient = user.email
+  invoicedate = datetime.today().strftime('%Y-%m-%d')
+  msg = Message(
+              'Your Frankly Invoice',
+              sender ='noreply@franklyapp.nl',
+              recipients = [recipient]
+              )
+  msg.html = render_template('emailtemplates/invoice.html', invoicedate= invoicedate, userid = userid, email = recipient, username = user.username, phonenumber = user.phonenumber)
+  mail.send(msg)      
      
 
   

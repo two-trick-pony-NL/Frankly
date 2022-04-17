@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, redirect, url_for, request, flash
 from flask_login import login_user, logout_user, login_required, current_user
 from .models import Post, User, Comment, Like
 from . import db
+from .messaging import invoiceconfirmation
 
 payments = Blueprint("payments", __name__)
 
@@ -13,6 +14,7 @@ payments = Blueprint("payments", __name__)
 def incoming_payment(paymentID):
     user = User.query.filter_by(id=paymentID).first()
     usernumber = str(user)
+    invoiceconfirmation(paymentID)
     print("We got paid: $$$$$$$  " +usernumber + " has paid his bill")
     user.haspaid =  1
     db.session.commit()
