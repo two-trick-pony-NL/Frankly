@@ -1,4 +1,4 @@
-# GrapeVine
+# Franklyapp
 ## Currently in pre-production stage
 ![WhatsApp Image 2022-03-18 at 6 31 34 PM](https://user-images.githubusercontent.com/71013416/159140820-3f84a0a2-acf1-43b4-991b-93ff60fd82b4.jpeg)
 
@@ -9,8 +9,8 @@
 ![WhatsApp Image 2022-03-30 at 8 51 00 PM (1)](https://user-images.githubusercontent.com/71013416/161023157-b4e2c01f-53de-44af-90d0-6e676667c86a.jpeg)
 ![WhatsApp Image 2022-03-30 at 8 51 00 PM](https://user-images.githubusercontent.com/71013416/161023180-2cc41cbf-9648-4f59-95da-060578e74263.jpeg)
 
-## Grapevine
-Grapevine helps to make giving feedback easier. Users can generate QR codes that they can add to workshops, powerpoints, put in waiting areas or share after events to collect feedback on how visitors liked the event. 
+## Frankly
+Frankly helps to make giving feedback easier. Users can generate QR codes that they can add to workshops, powerpoints, put in waiting areas or share after events to collect feedback on how visitors liked the event. 
 
 ## Installation
 

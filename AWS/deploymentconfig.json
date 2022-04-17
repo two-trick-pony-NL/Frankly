@@ -1,4 +1,4 @@
-{"grapevine": {
-    "image": ":grapevine.grapevine.latest",
+{"franklyapp": {
+    "image": ":franklyapp.franklyapp.latest",
     "ports": {"80": "HTTP"}
   }}

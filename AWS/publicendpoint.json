@@ -1,5 +1,5 @@
 {
-  "containerName": "grapevine",
+  "containerName": "franklyapp",
   "containerPort": 80,
   "healthCheck": {
       "healthyThreshold": 2,

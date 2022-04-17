@@ -35,9 +35,9 @@ def SendWhatsapp(userid, phonenumber):
     user = User.query.filter_by(id=userid).first()
     client = Client(account_sid, auth_token) 
     phonenumber = str(phonenumber)
-    promotorURL = str('\n\n\n😃 great! > https://grapevine.works/send-feedback/'+userid+'/3')
-    neutralURL = str('\n\n\n😑 mehh! > https://grapevine.works/send-feedback/'+userid+'/2')
-    detractorURL = str('\n\n\n😢 Not so good > https://grapevine.works/send-feedback/'+userid+'/1')
+    promotorURL = str('\n\n\n😃 great! > https://franklyapp.nl/send-feedback/'+userid+'/3')
+    neutralURL = str('\n\n\n😑 mehh! > https://franklyapp.nl/send-feedback/'+userid+'/2')
+    detractorURL = str('\n\n\n😢 Not so good > https://franklyapp.nl/send-feedback/'+userid+'/1')
     message = user.customquestion0
     sender= user.userpublicname
     print(userid)
@@ -63,9 +63,9 @@ def SendEmail(userid, email):
     print(user)
     publicusernamenospaces = user.userpublicname.replace(" ", "_")
     email = str(email)
-    promotorURL = str('https://grapevine.works/send-feedback/'+userid+'/3')
-    neutralURL = str('https://grapevine.works/send-feedback/'+userid+'/2')
-    detractorURL = str('https://grapevine.works/send-feedback/'+userid+'/1')
+    promotorURL = str('https://franklyapp.nl/send-feedback/'+userid+'/3')
+    neutralURL = str('https://franklyapp.nl/send-feedback/'+userid+'/2')
+    detractorURL = str('https://franklyapp.nl/send-feedback/'+userid+'/1')
     msg = Message(
                   user.customquestion0,
                   sender = publicusernamenospaces+'@franklyapp.nl',
@@ -82,7 +82,7 @@ def SendEmail(userid, email):
 
 """
     message = Mail(
-    from_email=user.userpublicname+'@grapevine.works',
+    from_email=user.userpublicname+'@franklyapp.nl',
     to_emails=email,
     subject= user.customquestion0,
 
@@ -143,7 +143,7 @@ def getinvited():
     email = str(email)
     print(email)
     message = Mail(
-    from_email=('invites@grapevine.works', 'Grapevine'),
+    from_email=('invites@franklyapp.nl', 'Grapevine'),
     subject='We added you to our waiting list ',
     html_content='<p>Keep an eye on your mailbox, as we will send you an invite to start using Grapevine soon!</p>',
     # for improved deliverability, provide plain text content in addition to html content
@@ -201,7 +201,7 @@ def passwordresettoken(recipient, token):
                 sender ='noreply@franklyapp.nl',
                 recipients = [recipient]
                )
-   msg.body = 'Reset your Frankly password by clicking this link: https://grapevine.works/reset-password/'+token
+   msg.body = 'Reset your Frankly password by clicking this link: https://franklyapp.nl/reset-password/'+token
    msg.html = render_template('emailtemplates/passwordreset.html', token = token)
    mail.send(msg)   
      

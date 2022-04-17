@@ -5,13 +5,13 @@ import qrcode
 def createQR(userID):
     userID = str(userID)
     # Create Promotor QR code
-    img = qrcode.make('https://grapevine.works/send-feedback/'+userID+'/3')
+    img = qrcode.make('https://franklyapp.nl/send-feedback/'+userID+'/3')
     img.save("./website/static/qrcodes/User_"+userID+"_promotor.png")
     # Create Neutral QR code
-    img = qrcode.make('https://grapevine.works/send-feedback/'+userID+'/2')
+    img = qrcode.make('https://franklyapp.nl/send-feedback/'+userID+'/2')
     img.save("./website/static/qrcodes/User_"+userID+"_neutral.png")
     # Create Detractor QR code
-    img = qrcode.make('https://grapevine.works/send-feedback/'+userID+'/1')
+    img = qrcode.make('https://franklyapp.nl/send-feedback/'+userID+'/1')
     img.save("./website/static/qrcodes/User_"+userID+"_detractor.png")
   
 createQR(1)

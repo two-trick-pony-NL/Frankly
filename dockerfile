@@ -5,7 +5,7 @@ FROM python:3.9.10-buster
 EXPOSE 5000/tcp
 
 # Set the working directory in the container
-WORKDIR /GrapeVine
+WORKDIR /Franklyapp
 
 # Copy the dependencies file to the working directory
 COPY requirements.txt .
