@@ -30,7 +30,7 @@ def create_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     #app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
     #Setting URL for the Database
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://'+mysqlusername+':'+mysqlpassword+'@petervandoorn.com/grapevine_database'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://'+mysqlusername+':'+mysqlpassword+'@petervandoorn.com/frankly_database'
     #Connecting Database to our app
     db.init_app(app)
     # configuration of mail
