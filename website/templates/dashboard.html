@@ -1,5 +1,5 @@
 
-{% extends "theme.html" %} {% block title %}GrapeVine - Giving Feedback made easy{% endblock %} 
+{% extends "theme.html" %} {% block title %}Frankly - Giving Feedback made easy{% endblock %} 
 
 
 {% block Content %}
@@ -27,15 +27,15 @@
               </button>
           </div>
           <div class="modal-body">
-              Hey! We love to see that you already collected 100 responses through Grapevine! It looks like you're on a roll!<br><br>
-              The first 100 responses are on us, but as servers do not come for free we created this pay-as-you-go model for Grapevine. This means that after the first 100 responses you can buy another set of 100 responses for just €3,99. No subscriptions, no recurring fees.Simple, right?<br><br>
+              Hey! We love to see that you already collected 100 responses through Frankly! It looks like you're on a roll!<br><br>
+              The first 100 responses are on us, but as servers do not come for free we created this pay-as-you-go model for Frankly. This means that after the first 100 responses you can buy another set of 100 responses for just €3,99. No subscriptions, no recurring fees.Simple, right?<br><br>
               Simply tap the button below to go to our payment partner bunq.
 
               <br><br>
               <div class="d-grid gap-2 col-6 mx-auto">
                         
-                <a href="https://bunq.me/grapevine/3.99/{{user.id}}/ideal" target="_blank" class="btn btn-primary text-dark" role="button"><img  width="24" height="24" src="{{ url_for('static',filename='/assets/img/ideal.png')}}"  alt="Card image cap"> Pay with iDeal</a>
-                <a href="https://bunq.me/grapevine/3.99/{{user.id}}/card" target="_blank" class="btn btn-primary text-dark" role="button"><i class="bi bi-credit-card"></i> Pay with creditcard</a>
+                <a href="https://bunq.me/franklyapp/3.99/{{user.id}}/ideal" target="_blank" class="btn btn-primary text-dark" role="button"><img  width="24" height="24" src="{{ url_for('static',filename='/assets/img/ideal.png')}}"  alt="Card image cap"> Pay with iDeal</a>
+                <a href="https://bunq.me/franklyapp/3.99/{{user.id}}/card" target="_blank" class="btn btn-primary text-dark" role="button"><i class="bi bi-credit-card"></i> Pay with creditcard</a>
   
               </div>
           </div>
@@ -64,8 +64,8 @@
       <div class="jumbotron jumbotron-fluid rounded bg-light" style="height: 230px">
         <div class="container">
           <br><br>
-          <h1 class="display-4">{{ grapevinescore }}</h1>
-          <p class="lead">Grapevine Score</p>
+          <h1 class="display-4">{{ Franklyscore }}</h1>
+          <p class="lead">Frankly Score</p>
           <p>Your responses converted into a NPS  score</p>
         </div>
       </div>
@@ -182,8 +182,8 @@
       });
     </script>
     <br>
-    <h6>Your remaining Grapevine Credit:</h6>
-    With Grapevine you get your first 100 responses for free, after that you an top up for another 100 responses for just €3,99. Here is how much credit you have used.<br><br>
+    <h6>Your remaining Frankly Credit:</h6>
+    With Frankly you get your first 100 responses for free, after that you an top up for another 100 responses for just €3,99. Here is how much credit you have used.<br><br>
     <b>Credits used so far:</b><br>
     <div class="progress">
       <div class="progress-bar text-dark" role="progressbar" style="width: {{ModTotalpost}}%;" aria-valuenow="{{ModTotalpost}}" aria-valuemin="0" aria-valuemax="100">{{ModTotalpost}}%</div>
@@ -196,8 +196,8 @@
 <hr>
 
 <div class="alert alert-warning" role="alert">
-  <h4 class="alert-heading">Welcome to GrapeVine!</h4>
-  <p>Thank you for trying out Grapevine. We are very pleased to have you on board. From here you are only 2 minutes away of receiving your first pieces of feedback.</p>
+  <h4 class="alert-heading">Welcome to Frankly!</h4>
+  <p>Thank you for trying out Frankly. We are very pleased to have you on board. From here you are only 2 minutes away of receiving your first pieces of feedback.</p>
   <hr>
   <p class="mb-0">Currently you have not received any feedback, yet. But, as soon as your first customers start interacting with your surveys the results will show up here.</p>
 </div>
@@ -420,7 +420,7 @@
       <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
         <div class="accordion-body">
           <p>Custom questions allow you to ask your clients for something specific. It helps you ask them: <br>"How did you like your <strong>Pizza</strong>", <br>Instead of just: "How did you like it" </p>
-          <p>Grapevine supports 3 custom questions out of the box, where the first question is the main question. Then youhave the ability to add 2 more follow up questions into the mix to ask them for something specific, like what kind of pizza they ordered. </p>
+          <p>Frankly supports 3 custom questions out of the box, where the first question is the main question. Then youhave the ability to add 2 more follow up questions into the mix to ask them for something specific, like what kind of pizza they ordered. </p>
           <button type="button" class="btn btn-primary text-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> <i class="bi bi-sliders"></i> Set up custom questions</button>
         </div>
       </div>
@@ -433,7 +433,7 @@
       </h2>
       <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
         <div class="accordion-body">
-          <p>Grapevine allows you to easily connect with your customers. We provide text templates that you can share with your customers. You can send yourself a template on Whatsapp or through email.</p>
+          <p>Frankly allows you to easily connect with your customers. We provide text templates that you can share with your customers. You can send yourself a template on Whatsapp or through email.</p>
           <p>After receiving the template you can easily forward it to a customer you'd like to get some feedback from!</p>
 
             <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasEmail" aria-controls="offcanvasEmail"><i class="bi bi-envelope-check"></i> Email</button>
@@ -449,7 +449,7 @@
       </h2>
       <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
         <div class="accordion-body">
-          <p>The Grapevine QR codes allow you to ask for feedback in the real world. Your customers can scan the QR codes with their phone and let you know if they liked your service in a matter of seconds </p>
+          <p>The Frankly QR codes allow you to ask for feedback in the real world. Your customers can scan the QR codes with their phone and let you know if they liked your service in a matter of seconds </p>
           <p>You can print our read-made template to get started right away, or download your unique QR codes to use in your own designs</p>
 
 
@@ -499,7 +499,7 @@
     <p><i>You can simply receive feedback through whatsapp using our pre-made whatsapp template it works super simple:</i></p>
     <hr>
     <h5>Step 1: Send the template to your phone</h5>
-    <p>Grapevine will send you template on your phone, all you have to do is tap this button:</p>
+    <p>Frankly will send you template on your phone, all you have to do is tap this button:</p>
     <a href="/sendwhatsapp/{{user.id}}/{{user.phonenumber}}" class="btn btn-primary text-dark" tabindex="-1" role="button"><i class="bi bi-send-check"></i> Send the Whatsapp template to my phone</a>
     <br>    <br>    <br>
     <img class="app-badge center-block" src="{{ url_for('static',filename='assets/img/chat.png') }}" alt="..." style="max-width: 50%"/>
@@ -536,14 +536,14 @@
     <p></p><i>You can simply receive feedback through email using our pre-made email template it works super simple:</i></p>
     <hr>
     <h5>Method 1: Send the template to your mailbox</h5>
-    <p>Grapevine will send your template to your mailbox on the email address you used during signup, all you have to do is tap this button:</p>
+    <p>Frankly will send your template to your mailbox on the email address you used during signup, all you have to do is tap this button:</p>
     <a href="/sendemail/{{user.id}}/{{user.email}}" class="btn btn-primary text-dark" tabindex="-1" role="button"> <i class="bi bi-send-check"></i> Send the template to <b>my</b> email address</a>
     <br>
     <br>
     <hr>
     <br>
     <h5>Method 2: Send the feedback template to your contacts directly</h5>
-    <p>Grapevine can also send the email template to one of your contacts directly. Simply add the email address of your recipients and hit send.</p>
+    <p>Frankly can also send the email template to one of your contacts directly. Simply add the email address of your recipients and hit send.</p>
     <div class="input-group mb-3">
       <input type="text" class="form-control" placeholder="Email address of your recipient" aria-label="Recipient's username" aria-describedby="button-addon2">
       <button class="btn btn-primary text-dark" type="button" id="button-addon2">Send to client</button>
@@ -582,7 +582,7 @@
     </p>
     <hr>
     <h5>Step 1: Download our custom QR codes</h5>
-    <p>Grapevine allows for super simple feedback collection through QR codes. There are 3 QR separate QR codes and feedback is given by scanning a specific one.
+    <p>Frankly allows for super simple feedback collection through QR codes. There are 3 QR separate QR codes and feedback is given by scanning a specific one.
       <ul><b>Promotor</b> - If the user scans this QR code you'll receive positive feedback</ul>
       <ul><b>Neutral</b> - If the user scans this QR code you'll receive neutral feedback</ul>
       <ul><b>Detractor</b> - If the user scans this QR code you'll receive negative feedback</ul>
@@ -605,7 +605,7 @@
     <hr>
     <br>
     <h5>Step 2: Add the QR codes to a design of your own</h5>
-    <p>Whether you're adding them on a t-shirt, coaster or make stickers to add to your foodtruck, Grapevine has got you covered. These High resolution QR codes work everywhere you put them.</p>
+    <p>Whether you're adding them on a t-shirt, coaster or make stickers to add to your foodtruck, Frankly has got you covered. These High resolution QR codes work everywhere you put them.</p>
     <img class="app-badge center-block" src="{{ url_for('static',filename='assets/img/outdoors.jpeg') }}" alt="..." style="max-width: 100%"/>
       <br>
     <hr>
@@ -656,7 +656,7 @@
     <br>
     <!--Disabling this section as it;s not functional
     <h5>Method 2: Or use our custom template with your QR codes</h5>
-    <p>If you want to ask for feedback right now without having to design anything, then just print the standard Grapevine Template and you're on your way!</p>
+    <p>If you want to ask for feedback right now without having to design anything, then just print the standard Frankly Template and you're on your way!</p>
     <img class="app-badge center-block" src="{{ url_for('static',filename='assets/img/mockup.jpeg') }}" alt="..." style="max-width: 100%"/>
     <br><br>
     <button  type="button" class="btn btn-primary text-dark"><i class="bi bi-download"></i> Download our QR template </button>-->
@@ -699,8 +699,8 @@
                       </div>
                     </div>
                     <hr>
-                    <h4>Your remaining Grapevine Credit:</h4>
-                    With Grapevine you get your first 100 responses for free, after that you an top up for another 100 responses for just €3,99. Here is how much credit you have used.<br><br>
+                    <h4>Your remaining Frankly Credit:</h4>
+                    With Frankly you get your first 100 responses for free, after that you an top up for another 100 responses for just €3,99. Here is how much credit you have used.<br><br>
                     <b>Responses so far:</b>
                     <div class="progress">
                       <div class="progress-bar text-dark" role="progressbar" style="width: {{ModTotalpost}}%;" aria-valuenow="{{ModTotalpost}}" aria-valuemin="0" aria-valuemax="100">{{ModTotalpost}}%</div>

@@ -6,7 +6,7 @@ from . import db
 payments = Blueprint("payments", __name__)
 
 #Here we created an endpoint that catches a callback from Zapier
-#If a payment comes in on the Grapevine bankaccount it triggers a script at Zapier that calls this endpoint. 
+#If a payment comes in on the Frankly bankaccount it triggers a script at Zapier that calls this endpoint. 
 #We can now add logic that checks if the payment ID is something we expected. 
 
 @payments.route("/incoming_payment/<paymentID>", methods=['GET', 'POST'])

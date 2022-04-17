@@ -143,9 +143,9 @@ def getinvited():
     email = str(email)
     print(email)
     message = Mail(
-    from_email=('invites@franklyapp.nl', 'Grapevine'),
+    from_email=('invites@franklyapp.nl', 'Frankly'),
     subject='We added you to our waiting list ',
-    html_content='<p>Keep an eye on your mailbox, as we will send you an invite to start using Grapevine soon!</p>',
+    html_content='<p>Keep an eye on your mailbox, as we will send you an invite to start using Frankly soon!</p>',
     # for improved deliverability, provide plain text content in addition to html content
     to_emails=email)
     try:
