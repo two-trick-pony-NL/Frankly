@@ -15,7 +15,7 @@ Frankly helps to make giving feedback easier. Users can generate QR codes that t
 ## Installation
 
 #### Set up: 
-- You'll need a configfile named `Env_Settings.cfg`  that containt the API keys to the services used (Twilio, Sendgrid and some other API'). 
+- You'll need a configfile named `Env_Settings.cfg`  that containt the API keys to the services used (Twilio and some other API'). 
 - Upon startup the server will load in these keys so it can function 
 - You'll need an SQL server to store records. Connection details are also added to the env_settings file, however SQLite can be used as well
 

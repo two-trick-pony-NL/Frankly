@@ -66,7 +66,6 @@ pyzmq==22.3.0
 qrcode==7.3.1
 requests==2.27.1
 roundrobin==0.0.2
-sendgrid==6.9.7
 six==1.11.0
 SQLAlchemy==1.4.32
 sqlparse==0.4.2

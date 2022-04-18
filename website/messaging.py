@@ -4,8 +4,6 @@ from flask_login import login_required, current_user
 from configparser import ConfigParser
 from twilio.rest import Client 
 import os
-from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail
 from . import db
 from . import mail
 from .models import Post, User, Comment, Like
@@ -22,11 +20,6 @@ config.read('Env_Settings.cfg')
 #Twilio ID
 account_sid = config.get('account_sid', 'account_sid')
 auth_token = config.get('auth_token', 'auth_token')
-#bitly ID
-bitlykey = config.get('bitlykey', 'bitlykey')
-#Sendgrid ID
-sendgrid_api = config.get('sendgrid_api', 'sendgrid_api')
-
 
 
 #From here we have the Twillio Whatsapp integration
@@ -87,20 +80,14 @@ def getinvited():
     email = request.form.get("email")  
     email = str(email)
     print(email)
-    message = Mail(
-    from_email=('invites@franklyapp.nl', 'Frankly'),
-    subject='We added you to our waiting list ',
-    html_content='<p>Keep an eye on your mailbox, as we will send you an invite to start using Frankly soon!</p>',
-    # for improved deliverability, provide plain text content in addition to html content
-    to_emails=email)
-    try:
-        sg = SendGridAPIClient(sendgrid_api)
-        response = sg.send(message)
-        print(response.status_code)
-        print(response.body)
-        print(response.headers)
-    except Exception as e:
-        print(e.message)
+    msg = Message(
+                'You are added to the frankly waiting list!',
+                sender ='noreply@franklyapp.nl',
+                recipients = [email, 'hello@franklyapp.nl']
+               )
+    msg.body = 'Welcome to Frankly! Your account was registered succesfully!'
+    msg.html = render_template('emailtemplates/getinvited.html', email = email)
+    mail.send(msg)
        
     flash("You got added to the waitinglist, keep an eye on your mailbox", category='success')
     return render_template("getinvited.html")
