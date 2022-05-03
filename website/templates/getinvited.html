@@ -1,30 +1,37 @@
 
-{% extends "legal/theme.html" %} {% block title %}Frankly - Giving Feedback made easy{% endblock %} 
+{% extends "/theme.html" %} {% block title %}Frankly - Giving Feedback made easy{% endblock %} 
 
 
 
 {% block Content%}
 <br><br>
+
+<div class="container align-center>
+  <div class="row">
+    <div class="col-md-7">
                
         <form method="POST">
                 <h3 align="center">Get invited to the Frankly Beta release!</h3>
                 <p>We'll release Frankly to only a handfull of users at a time, therefor we use a waitinglist. As soon as it's your turn to explore Frankly we'll send you an email!</p>
                 <div class="form-group">
-                  <label for="email">Email Address</label>
-                  <p class="card-text"><small class="text-muted">An email address where we can reach you</small></p>
+                  <label for="email">Email Address where we can send your personal Frankly invite</label><br><br>
+                  
                   <input
                     type="text"
                     id="email"
                     name="email"
                     class="form-control"
-                    placeholder="Enter Email"
+                    placeholder="Email address"
                   />
                   <div align="center">
-                    <button class="btn btn-primary" type="submit">Sign Up</button>
+                    <br>
+                    <button class="btn btn-primary text-dark" type="submit">Sign Up to the waiting list</button>
                   </div>
                 </div>
               </form>
-
-            
+              <br><Br>
+    </div>
+  </div>
+</div>            
 {% endblock%}
         

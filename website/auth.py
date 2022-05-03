@@ -39,9 +39,9 @@ def signin():
                 createQR(userID)
                 return redirect(url_for('views.dashboard', user=current_user, username=user.username))
             else:
-                flash("Password is incorrect.", category='danger')
+                flash("e-mail address does not exist, or password is incorrect.", category='danger')
         else:
-            flash("e-mail address does not exist.", category='danger')
+            flash("e-mail address does not exist, or password is incorrect.", category='danger')
 
     return render_template("signin.html", user=current_user)    
 

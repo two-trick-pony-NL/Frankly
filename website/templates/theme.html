@@ -80,7 +80,7 @@
                 <a class="navbar-brand text-dark" href="/dashboard/{{user.username}}"><img class="p-2" href="/dashboard/{{user.username}}" src="{{ url_for('static',filename='assets/img/Favicon.png') }}" width="75"  alt="Frankly"></a>
                 <a class="navbar-brand text-dark" href="/dashboard/{{user.username}}"><!--Frankly--></a><span class="badge rounded-pill bg-third">beta</span>
                 {% else %}
-                <a class="navbar-brand text-dark" href="/"> <img class="p-2" href="/dashboard/{{user.username}}" src="{{ url_for('static',filename='assets/img/Favicon.png') }}" width="75" alt="Frankly"></a>
+                <a class="navbar-brand text-dark" href="/"> <img class="p-2" href="/dashboard/{{user.username}}" src="{{ url_for('static',filename='assets/img/logo.png') }}" width="75" alt="Frankly"></a>
                 <a class="navbar-brand text-dark" href="/"><!--Frankly--></a><span class="badge rounded-pill bg-light text-dark">Beta</span>
                 {% endif%}
                 <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-dark rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -116,7 +116,7 @@
 
         <!-- Main content of page-->
         <section class="page-section portfolio" id="portfolio">
-       
+       <br>
         <!-- end of the script that runs alerts--> 
             <!-- Start of the code that runs alerts on the whole system. If there is an alert then it will be appended at the top of the <body> you can pass a category from the Python script to set color.-->  
                 {% with messages = get_flashed_messages(with_categories=true) %}

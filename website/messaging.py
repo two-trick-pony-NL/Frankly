@@ -75,7 +75,7 @@ def SendEmail(userid, email):
 @messaging.route("/getinvited", methods=['GET', 'POST'])
 def getinvited():
   if request.method == 'GET':
-    return render_template("getinvited.html", methods = ['GET', 'POST'])
+    return render_template("getinvited.html", user = 'none', methods = ['GET', 'POST'])
   else:
     email = request.form.get("email")  
     email = str(email)
@@ -90,7 +90,7 @@ def getinvited():
     mail.send(msg)
        
     flash("You got added to the waitinglist, keep an eye on your mailbox", category='success')
-    return render_template("getinvited.html")
+    return render_template("getinvited.html", user = 'none')
 
 
 
