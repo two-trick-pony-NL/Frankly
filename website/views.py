@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for, jsonify, send_file
+from flask import Blueprint, render_template, request, flash, redirect, url_for, jsonify, send_file, session
 from flask_login import login_required, current_user
 from .models import Post, User, Comment, Like
 from configparser import ConfigParser
@@ -90,15 +90,11 @@ def dashboard(username):
     page = request.args.get('page', 1, type=int)
     #First getting all posts and ordering decendign order
     posts = Post.query.filter_by(author=user.id).order_by(Post.date_created.desc())
-    """This section of code creates a list of all the words used in posts by users, so we can draw a wordcloud."""
-
-
-
+    
+    
+    """This section of code creates a list of all the words used in posts by users, so we can draw a wordcloud.
     wordcloudlist = []
-    #Removing stopwords so only important words remain
-    
-
-    
+    #Removing stopwords so only important words remain   
     for post in posts: 
         wordcloudlist.append(post.text.split())
         for comment in post.comments:   
@@ -111,8 +107,13 @@ def dashboard(username):
     commonwordvalues = [row[1] for row in commonwords]
 
     print(commonwordlabels)     
-    print(commonwordvalues)     
-
+    print(commonwordvalues)
+    session['commonwordlabels'] = commonwordlabels     
+    session['commonwordvalues'] = commonwordvalues   """
+    
+     
+    commonwordlabels = session.get('commonwordlabels')
+    commonwordvalues = session.get('commonwordvalues')
 
     #Now breaking up the ordered list into pages
     posts = posts.paginate(page=page, per_page=5)       

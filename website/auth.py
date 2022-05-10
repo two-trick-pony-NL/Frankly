@@ -1,7 +1,7 @@
-from flask import Blueprint, render_template, redirect, url_for, request, flash
+from flask import Blueprint, render_template, redirect, url_for, request, flash, session
 from sqlalchemy import false
 from . import db
-from .models import User
+from .models import User, Post
 from .qrgenerator import createQR
 from configparser import ConfigParser
 from .messaging import newuserconfirmation, passwordresettoken, newpasswordconfirmation
@@ -10,6 +10,9 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import re
 import phonenumbers
 import jwt
+import itertools
+from collections import Counter
+from stop_words import get_stop_words
 
 config = ConfigParser()
 config.read('Env_Settings.cfg')
@@ -37,6 +40,25 @@ def signin():
                 login_user(user, remember=True)
                 userID=user.id
                 createQR(userID)
+                posts = Post.query.filter_by(author=user.id).order_by(Post.date_created.desc())
+                """This section of code creates a list of all the words used in posts by users, so we can draw a wordcloud."""
+                wordcloudlist = []
+                #Removing stopwords so only important words remain   
+                for post in posts: 
+                    wordcloudlist.append(post.text.split())
+                    for comment in post.comments:   
+                        wordcloudlist.append(comment.text.split()) 
+                mergedwordcloudlist = list(itertools.chain(*wordcloudlist))
+                mergedwordcloudlist = [w for w in mergedwordcloudlist if not w in get_stop_words('english', 'dutch')]
+                commonwords = Counter(mergedwordcloudlist).most_common(10)
+
+                commonwordlabels = [row[0] for row in commonwords]
+                commonwordvalues = [row[1] for row in commonwords]
+                session['commonwordlabels'] = commonwordlabels     
+                session['commonwordvalues'] = commonwordvalues   
+                
+
+
                 return redirect(url_for('views.dashboard', user=current_user, username=user.username))
             else:
                 flash("e-mail address does not exist, or password is incorrect.", category='danger')
@@ -77,8 +99,8 @@ def sign_up():
             flash("This Email address is already in use, use another one or log in", category="danger")
         elif username_exists:
             flash("This username is already in use, pick another one", category="danger")
-        elif not re.fullmatch(regexpassword, password1):
-            flash("This is not a strong enough password. Use a minimum of 8 characters, 1 special character, a number and both lower and uppercase letters", category="danger")
+        #elif not re.fullmatch(regexpassword, password1):
+        #    flash("This is not a strong enough password. Use a minimum of 8 characters, 1 special character, a number and both lower and uppercase letters", category="danger")
         elif password1 != password2:
             flash("Passwords do not match!", category="danger")
         elif len(username) < 3:
