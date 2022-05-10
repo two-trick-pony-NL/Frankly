@@ -90,28 +90,7 @@ def dashboard(username):
     page = request.args.get('page', 1, type=int)
     #First getting all posts and ordering decendign order
     posts = Post.query.filter_by(author=user.id).order_by(Post.date_created.desc())
-    
-    
-    """This section of code creates a list of all the words used in posts by users, so we can draw a wordcloud.
-    wordcloudlist = []
-    #Removing stopwords so only important words remain   
-    for post in posts: 
-        wordcloudlist.append(post.text.split())
-        for comment in post.comments:   
-            wordcloudlist.append(comment.text.split()) 
-    mergedwordcloudlist = list(itertools.chain(*wordcloudlist))
-    mergedwordcloudlist = [w for w in mergedwordcloudlist if not w in get_stop_words('english', 'dutch')]
-    commonwords = Counter(mergedwordcloudlist).most_common(10)
-
-    commonwordlabels = [row[0] for row in commonwords]
-    commonwordvalues = [row[1] for row in commonwords]
-
-    print(commonwordlabels)     
-    print(commonwordvalues)
-    session['commonwordlabels'] = commonwordlabels     
-    session['commonwordvalues'] = commonwordvalues   """
-    
-     
+    #This section fetches common words from the session. We calculate these in the sign-in function. So we only have to do it 1x
     commonwordlabels = session.get('commonwordlabels')
     commonwordvalues = session.get('commonwordvalues')
 
