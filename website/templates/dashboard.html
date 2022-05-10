@@ -140,7 +140,9 @@
             },
           ]
         },
-        options: { plugins: { legend: { display: false }, } }
+        options: { plugins: { 
+          legend: { display: false }
+        } }
       });
     </script></div>
     {% else %}
@@ -152,9 +154,44 @@
 </div>
 <!-- Drawing the doughnut chart-->
 {% if totalresponses  > 0 %}
+<hr>
+<h2> What your users are saying:</h2><br>
+
+
 <div class="row justify-content-between">
-  <hr>
-  <div class="col-sm-4"><canvas id="pieChart" width="900" height="200"></canvas>
+
+  
+  <div class="col-sm-4">
+<!--Commonly used words-->
+<h4>Words your users use:</h4>
+    <canvas id="lineChartWords" width="300" height="200"></canvas>
+  <script>
+    var ctx = document.getElementById("lineChartWords").getContext("2d");
+    var lineChartWords = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: {{ commonwordlabels | safe }},
+        datasets: [
+          {
+          data: {{ commonwordvalues |safe }},
+          fill: true,
+          backgroundColor: [
+            'rgb(180, 231, 218)',
+       
+
+          ],
+          },
+        ]
+      },
+      options: { indexAxis: 'y',responsive: true, plugins: { legend: { display: false },title: { display: true},
+          text: 'Commonly used words' } }
+    });
+  </script>
+<br>
+  <!--Pie chart with-->
+  <h4>How your users are distributed</h4>
+
+    <canvas id="pieChart" width="900" height="200"></canvas>
     <script>
       var ctx = document.getElementById("pieChart").getContext("2d");
       var pieChart = new Chart(ctx, {
@@ -207,46 +244,9 @@
 
   <div class="col-sm-8"><div id="posts"></br >
     {% if totalresponses  > 0 %}
-    <h2> What your users are saying:</h2><br>
     
-<!--Here we have the section that controls pagination-->
+    
 
-<!-- Pagination Links-->
-<div class="text-right alig">
-  <a href="/dashboard/{{user.username}}?page={{posts.prev_num}}"
-  
-     class="btn btn-outline-dark 
-     {% if posts.page == 1 %}disabled{% endif %}">
-      &laquo;
-  </a>
-<!-- Loop through the number of pages to display a link for each-->
-  {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
-{% if page_num %}
-<!-- Check for the active page and set the link to "Active"-->
-          {% if posts.page == page_num %}
-          <a href="/dashboard/{{user.username}}?page={{ page_num }}"
-             class="btn btn-dark">
-              {{ page_num }}
-          </a>
-          {% else %}
-          <a href="/dashboard/{{user.username}}?page={{ page_num }}"
-             class="btn btn-outline-dark">
-              {{ page_num }}
-          </a>
-          {% endif %}
-      {% else %}
-          ...
-      {% endif %}
-  {% endfor %}
-  <a href="/dashboard/{{user.username}}?page={{posts.next_num}}"
-     class="btn btn-outline-dark 
-     {% if posts.page == posts.pages %}disabled{% endif %}">
-      &raquo;
-  </a>
-</div>
-<p class="text-right mt-3">
-</p>
-<!-- End of Pagination Links-->
     {% for post in posts.items %}
     <div class="card border-grey">
         {% if post.rating > 2 %}
@@ -368,6 +368,7 @@
 <!--Here we have the section that controls pagination-->
 
 <!-- Pagination Links-->
+<div class="d-flex flex-row-reverse">
 <div class="text-right">
   <a href="/dashboard/{{user.username}}?page={{posts.prev_num}}"
   
@@ -403,6 +404,7 @@
 <p class="text-right mt-3">
  Showing page {{ posts.page }} of {{ posts.pages }}
 </p>
+</div>
 <!-- End of Pagination Links-->
 
 

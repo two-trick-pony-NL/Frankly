@@ -17,7 +17,7 @@ secretkey = config.get('SECRET_KEY', 'Session_Key')
 
 # These regexes are used to check whether the passwords, email addresses and usernames are valid during signup. 
 regexemail = re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+')
-regexpassword = re.compile('^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$')                     
+regexpassword = re.compile('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){}[]:;<>,.?/~_+-=|\]).{8,32}$')                     
 rexexusername = re.compile("^[a-zA-Z0-9_]*$")
 regexphonenumber = re.compile("(^\+[0-9]{2}|^\+[0-9]{2}\(0\)|^\(\+[0-9]{2}\)\(0\)|^00[0-9]{2}|^0)([0-9]{9}$|[0-9\-\s]{10}$)")
 
@@ -62,12 +62,15 @@ def sign_up():
 # checking if user exists
         email_exists = User.query.filter_by(email=email).first()
         username_exists = User.query.filter_by(username=username).first()
-        if option != "accepted":
+        if not option == "accepted":
             flash("Accept the terms and conditions to create an account", category="danger")
+            return render_template("signup.html", user=current_user) 
         if not re.fullmatch(regexemail, email):
             flash("This is not a valid email address", category="danger")
+            return render_template("signup.html", user=current_user)
         if not re.fullmatch(regexphonenumber, phonenumber):
             flash("This is not a valid phonenumber -- Use the format +31612345678", category="danger")  
+            return render_template("signup.html", user=current_user)
         elif len(phonenumber) < 6:
             flash("Phone number is too short ", category="danger")    
         elif email_exists:
@@ -75,7 +78,7 @@ def sign_up():
         elif username_exists:
             flash("This username is already in use, pick another one", category="danger")
         elif not re.fullmatch(regexpassword, password1):
-            flash("This is not a strong password, pick at least 8 charachters and use numbers and symbols", category="danger")
+            flash("This is not a strong enough password. Use a minimum of 8 characters, 1 special character, a number and both lower and uppercase letters", category="danger")
         elif password1 != password2:
             flash("Passwords do not match!", category="danger")
         elif len(username) < 3:
@@ -86,6 +89,7 @@ def sign_up():
             flash("Password is too short -- Use at least 8 characters, Numbers and Symbols for a strong password", category="danger")
         elif len(email) < 4:
             flash("Email address is invalid.", category="danger")
+            
         else:
             #formatting to international standard number
             my_number = phonenumbers.parse(phonenumber, "NL")
@@ -103,8 +107,9 @@ def sign_up():
             createQR(userID)
             newuserconfirmation(email)
             return redirect(url_for('views.dashboard', username=username))
-
-    return render_template("signup.html", user=current_user)
+        return render_template("signup.html", user=current_user)    
+    else:
+        return render_template("signup.html", user=current_user)
 
 
 

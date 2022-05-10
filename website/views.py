@@ -3,6 +3,11 @@ from flask_login import login_required, current_user
 from .models import Post, User, Comment, Like
 from configparser import ConfigParser
 from . import db
+import itertools
+from collections import Counter
+from stop_words import get_stop_words
+
+
 
 #fetching credentials used on this page
 config = ConfigParser()
@@ -60,7 +65,11 @@ def dashboard(username):
 
 #Get requests just load the page with the regular logic
     user = User.query.filter_by(username=username).first()
+    print("testing which user we are looking at")
+    print(user)
+    print(type(user))
     haspaid = bool(user.haspaid)
+    print(haspaid)
     userID = user.id
     userID = str(userID)
     urlPromotorQR = userID+"_promotor.png"
@@ -81,12 +90,30 @@ def dashboard(username):
     page = request.args.get('page', 1, type=int)
     #First getting all posts and ordering decendign order
     posts = Post.query.filter_by(author=user.id).order_by(Post.date_created.desc())
-    """This section of code creates a list of all the words used in posts by users, so we can draw a wordcloud.
+    """This section of code creates a list of all the words used in posts by users, so we can draw a wordcloud."""
+
+
+
     wordcloudlist = []
+    #Removing stopwords so only important words remain
+    
+
+    
     for post in posts: 
-        wordcloudlist.append(post.text)
-    print(wordcloudlist)
-    """    
+        wordcloudlist.append(post.text.split())
+        for comment in post.comments:   
+            wordcloudlist.append(comment.text.split()) 
+    mergedwordcloudlist = list(itertools.chain(*wordcloudlist))
+    mergedwordcloudlist = [w for w in mergedwordcloudlist if not w in get_stop_words('english', 'dutch')]
+    commonwords = Counter(mergedwordcloudlist).most_common(10)
+
+    commonwordlabels = [row[0] for row in commonwords]
+    commonwordvalues = [row[1] for row in commonwords]
+
+    print(commonwordlabels)     
+    print(commonwordvalues)     
+
+
     #Now breaking up the ordered list into pages
     posts = posts.paginate(page=page, per_page=5)       
     userID = str(current_user.id)
@@ -111,7 +138,6 @@ def dashboard(username):
     totalresponses = nmbr_happy_users+nmbr_medium_users+nmbr_unhappy_users
     #Here we calculate what % of the free responses the user used. The modulus calculator sends back the remainder
     ModTotalpost = totalresponses % free_responses
-    print(ModTotalpost)
     #Making a dataframe out of the filtered responses so we an draw the graphs in the dashboard
     data = [
         ("Happy Users", nmbr_happy_users),
@@ -144,7 +170,7 @@ def dashboard(username):
         Franklyscore = round(((nmbr_happy_users/totalresponses)-(nmbr_unhappy_users/totalresponses))*100)
     except: 
         Franklyscore = 0    
-    return render_template("dashboard.html",haspaid=haspaid, page=page, ModTotalpost=ModTotalpost, percentagelabels=percentagelabels, percentagevalues=percentagevalues, urlPromotorQR=urlPromotorQR, urlNeutralQR=urlNeutralQR,urlDetractorQR=urlDetractorQR,  Franklyscore=Franklyscore, totalresponses=totalresponses, nmbr_happy_users=nmbr_happy_users, nmbr_medium_users=nmbr_medium_users, nmbr_unhappy_users=nmbr_unhappy_users,QRCodeURL=QRCodeURL, user=current_user, posts=posts, username=username, labels=labels, values=values)
+    return render_template("dashboard.html",haspaid=haspaid, commonwordlabels=commonwordlabels, commonwordvalues=commonwordvalues, page=page, ModTotalpost=ModTotalpost, percentagelabels=percentagelabels, percentagevalues=percentagevalues, urlPromotorQR=urlPromotorQR, urlNeutralQR=urlNeutralQR,urlDetractorQR=urlDetractorQR,  Franklyscore=Franklyscore, totalresponses=totalresponses, nmbr_happy_users=nmbr_happy_users, nmbr_medium_users=nmbr_medium_users, nmbr_unhappy_users=nmbr_unhappy_users,QRCodeURL=QRCodeURL, user=current_user, posts=posts, username=username, labels=labels, values=values)
   
   
 
