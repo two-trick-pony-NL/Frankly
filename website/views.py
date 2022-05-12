@@ -4,8 +4,6 @@ from .models import Post, User, Comment, Like
 from configparser import ConfigParser
 from . import db
 
-
-
 #fetching credentials used on this page
 config = ConfigParser()
 config.read('Env_Settings.cfg')
@@ -22,9 +20,6 @@ views = Blueprint("views", __name__)
 def home():
     posts = Post.query.all()
     return render_template("home.html", user=current_user, posts=posts)
-
-    
-
 
 #Renders the userdashboard requires a username to select the correct user dashboard
 @views.route("/dashboard/<username>", methods=['GET', 'POST'])
@@ -62,11 +57,7 @@ def dashboard(username):
 
 #Get requests just load the page with the regular logic
     user = User.query.filter_by(username=username).first()
-    print("testing which user we are looking at")
-    print(user)
-    print(type(user))
     haspaid = bool(user.haspaid)
-    print(haspaid)
     userID = user.id
     userID = str(userID)
     urlPromotorQR = userID+"_promotor.png"

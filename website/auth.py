@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash, session
 from sqlalchemy import false
 from . import db
-from .models import User, Post
+from .models import User
 from .qrgenerator import createQR
 from configparser import ConfigParser
 from .messaging import newuserconfirmation, passwordresettoken, newpasswordconfirmation
@@ -12,14 +12,12 @@ import phonenumbers
 import jwt
 from .wordanalysis import calculatecommonwords
 
-
-
 config = ConfigParser()
 config.read('Env_Settings.cfg')
 secretkey = config.get('SECRET_KEY', 'Session_Key')
 # These regexes are used to check whether the passwords, email addresses and usernames are valid during signup. 
 regexemail = re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+')
-regexpassword = re.compile('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){}[]:;<>,.?/~_+-=|\]).{8,32}$')                     
+regexpassword = re.compile('^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$')                     
 rexexusername = re.compile("^[a-zA-Z0-9_]*$")
 regexphonenumber = re.compile("(^\+[0-9]{2}|^\+[0-9]{2}\(0\)|^\(\+[0-9]{2}\)\(0\)|^00[0-9]{2}|^0)([0-9]{9}$|[0-9\-\s]{10}$)")
 
