@@ -32,7 +32,7 @@ print("\n\nImage pushed to Lightsail\n\n")
 print("\n########################\n")
 
 print("\n########################\n")
-print("\n\Image is deployed on AWS Lightsail. It might take a few minutes to appear online\nLog in here to verify it's status: https://lightsail.aws.amazon.com/ls/webapp/home/instances\n")
+print("\nImage is deployed on AWS Lightsail. It might take a few minutes to appear online\nLog in here to verify it's status: https://lightsail.aws.amazon.com/ls/webapp/home/instances\n")
 print("\n########################\n")
 print("Here is the configuration file: ")
 os.system("aws lightsail create-container-service-deployment --service-name franklyapp \
@@ -42,5 +42,5 @@ print("\n########################\n")
 print("Here are the logs of the last 24H")
 print("\n########################\n")
 #Getting the logs of the container with the preferences set so as in the file. The epoch at 3600 specifies all logs of the last 24H
-os.system("aws lightsail get-container-log --cli-input-json file://AWS/scriptpreferences.json --start-time " +str(epoch_time-86400))   
 
+os.system("aws lightsail get-container-log --cli-input-json file://AWS/scriptpreferences.json --start-time " +str(epoch_time-30000))   
