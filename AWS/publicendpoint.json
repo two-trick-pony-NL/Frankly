@@ -1,12 +1,4 @@
 {
   "containerName": "franklyapp",
-  "containerPort": 80,
-  "healthCheck": {
-      "healthyThreshold": 2,
-      "unhealthyThreshold": 2,
-      "timeoutSeconds": 2,
-      "intervalSeconds": 5,
-      "path": "/",
-      "successCodes": "200-499"
-}
+  "containerPort": 80
 }

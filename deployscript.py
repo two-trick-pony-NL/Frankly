@@ -1,5 +1,5 @@
 import os
-import time    
+import time
 epoch_time = int(time.time())
 print(epoch_time)
 
@@ -38,7 +38,9 @@ print("Here is the configuration file: ")
 os.system("aws lightsail create-container-service-deployment --service-name franklyapp \
 --containers file://AWS/deploymentconfig.json \
 --public-endpoint file://AWS/publicendpoint.json")
-
-os.system("aws lightsail get-container-log --service-name franklyapp --container-name franklyapp --start-time " +str(epoch_time-300) + " --end-time " +str(epoch_time))
-
+print("\n########################\n")
+print("Here is the log")
+print("\n########################\n")
+#Getting the logs of the container with the preferences set so as in the file. The epoch at 3600 specifies all logs of the last 24H
+os.system("aws lightsail get-container-log --cli-input-json file://AWS/scriptpreferences.json --start-time " +str(epoch_time-86400))   
 

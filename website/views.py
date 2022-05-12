@@ -19,6 +19,7 @@ views = Blueprint("views", __name__)
 @views.route("/home")
 def home():
     posts = Post.query.all()
+    print("homepage was loaded")
     return render_template("home.html", user=current_user, posts=posts)
 
 #Renders the userdashboard requires a username to select the correct user dashboard
@@ -57,14 +58,16 @@ def dashboard(username):
 
 #Get requests just load the page with the regular logic
     user = User.query.filter_by(username=username).first()
-    haspaid = bool(user.haspaid)
-    userID = user.id
-    userID = str(userID)
-    urlPromotorQR = userID+"_promotor.png"
-    urlNeutralQR = userID+"_neutral.png"
-    urlDetractorQR = userID+"_detractor.png"
-
-
+    try: #Addint a try/Except block here as I had ver weird error messages in this section
+        haspaid = bool(user.haspaid)
+        userID = user.id
+        userID = str(userID)
+        urlPromotorQR = userID+"_promotor.png"
+        urlNeutralQR = userID+"_neutral.png"
+        urlDetractorQR = userID+"_detractor.png"
+    except:
+        haspaid = 1    
+    
     if not user:
         flash("No user with that username exists, try creating a new account", category='info')
         return redirect(url_for('views.home'))

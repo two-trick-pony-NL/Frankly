@@ -1,4 +1,12 @@
 {"franklyapp": {
     "image": ":franklyapp.franklyapp.latest",
     "ports": {"80": "HTTP"}
+    "healthCheck": {
+      "healthyThreshold": 2,
+      "unhealthyThreshold": 2,
+      "timeoutSeconds": 2,
+      "intervalSeconds": 5,
+      "path": "/",
+      "successCodes": "200-499"
+}
   }}

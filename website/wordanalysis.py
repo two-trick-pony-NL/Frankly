@@ -5,19 +5,16 @@ from stop_words import get_stop_words
 from .models import Post
 from configparser import ConfigParser
 
+#This section of code creates a list of all the words used in posts by users, so we can draw a wordcloud.
+# We do this on login so that we only have to do it 1x and store in in session from there on
+#This is a list of local stopwords so we have some flexibility over words to exclude from the wordcount
 config = ConfigParser()
 config.read('Env_Settings.cfg')
-#This is a list of local stopwords so we have some flexibility over words to exclude from the wordcount
-#They have to be all lowercase
 localstopwords = config.get('localstopwords', 'localstopwords')
 
-"""This section of code creates a list of all the words used in posts by users, so we can draw a wordcloud."""
-# We do this on login so that we only have to do it 1x and store in in session from there on
 
 
-
-
-def calculatecommonwords(userID):
+def calculatecommonwords(userID): #Function is called in the Auth script on signin
     PositivePosts = Post.query.filter_by(author=userID, rating=3).order_by(Post.date_created.desc())
     NegativePosts = Post.query.filter_by(author=userID, rating=1).order_by(Post.date_created.desc())
     wordcloudlistPositive = []
@@ -58,13 +55,3 @@ def calculatecommonwords(userID):
     NegativeWordValues = [row[1] for row in negativecommonwords]
     session['NegativeWordLabels'] = NegativeWordLabels     
     session['NegativeWordValues'] = NegativeWordValues
-
-    print("### Printing the results of word analysis")
-    print("Negative words and count")
-    print(NegativeWordLabels)  
-    print(NegativeWordValues)   
-    print("Positive words and count")
-    print(PositiveWordLabels)
-    print(PositiveWordValues)
-    print(get_stop_words('dutch'))
-    print(get_stop_words('english'))
