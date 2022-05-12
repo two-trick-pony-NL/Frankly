@@ -10,14 +10,13 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import re
 import phonenumbers
 import jwt
-import itertools
-from collections import Counter
-from stop_words import get_stop_words
+from .wordanalysis import calculatecommonwords
+
+
 
 config = ConfigParser()
 config.read('Env_Settings.cfg')
 secretkey = config.get('SECRET_KEY', 'Session_Key')
-
 # These regexes are used to check whether the passwords, email addresses and usernames are valid during signup. 
 regexemail = re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+')
 regexpassword = re.compile('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){}[]:;<>,.?/~_+-=|\]).{8,32}$')                     
@@ -39,56 +38,10 @@ def signin():
                 flash("Logged in!", category='success')
                 login_user(user, remember=True)
                 userID=user.id
+                #Creating new QR codes for the user, as well as calculating the common words in their posts
                 createQR(userID)
-                
-                """This section of code creates a list of all the words used in posts by users, so we can draw a wordcloud."""
-                # We do this on login so that we only have to do it 1x and store in in session from there on
-                PositivePosts = Post.query.filter_by(author=user.id, rating=3).order_by(Post.date_created.desc())
-                NegativePosts = Post.query.filter_by(author=user.id, rating=1).order_by(Post.date_created.desc())
-                wordcloudlistPositive = []
-                wordcloudlistNegative = []
-                #Removing stopwords so only important words remain   
-                for post in PositivePosts: 
-                    wordcloudlistPositive.append(post.text.split())
-                    for comment in post.comments:   
-                        wordcloudlistPositive.append(comment.text.split()) 
-                mergedwordcloudlist = list(itertools.chain(*wordcloudlistPositive))
-                mergedwordcloudlist = [w for w in mergedwordcloudlist if not w in get_stop_words('english', 'dutch')]
-                positivecommonwords = Counter(mergedwordcloudlist).most_common(10)
-
-                #Here we convert the positive common words into values and labels and store these in the user session. 
-                # The dashboard can later retrieve these details to draw graphs
-                PositiveWordLabels = [row[0] for row in positivecommonwords]
-                PositiveWordValues = [row[1] for row in positivecommonwords]
-                session['PositiveWordLabels'] = PositiveWordLabels     
-                session['PositiveWordValues'] = PositiveWordValues
-
-                #Doing the same for negative posts
-                for post in NegativePosts: 
-                    wordcloudlistNegative.append(post.text.split())
-                    for comment in post.comments:   
-                        wordcloudlistNegative.append(comment.text.split()) 
-                mergedwordcloudlist = list(itertools.chain(*wordcloudlistNegative))
-                mergedwordcloudlist = [w for w in mergedwordcloudlist if not w in get_stop_words('english', 'dutch')]
-                negativecommonwords = Counter(mergedwordcloudlist).most_common(10)
-                
-                #Here we convert the positive common words into values and labels and store these in the user session. 
-                # The dashboard can later retrieve these details to draw graphs
-                NegativeWordLabels = [row[0] for row in negativecommonwords]
-                NegativeWordValues = [row[1] for row in negativecommonwords]
-                session['NegativeWordLabels'] = NegativeWordLabels     
-                session['NegativeWordValues'] = NegativeWordValues
-
-                print("### Printing the results of word analysis")
-                print("Negative words and count")
-                print(NegativeWordLabels)  
-                print(NegativeWordValues)   
-                print("Positive words and count")
-                print(PositiveWordLabels)
-                print(PositiveWordValues)
-                
-
-                #Redirecting to the dashboard if useris logged in
+                calculatecommonwords(userID)
+    #Redirecting to the dashboard if useris logged in
                 return redirect(url_for('views.dashboard', user=current_user, username=user.username))
             else:
                 flash("e-mail address does not exist, or password is incorrect.", category='danger')

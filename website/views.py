@@ -3,9 +3,6 @@ from flask_login import login_required, current_user
 from .models import Post, User, Comment, Like
 from configparser import ConfigParser
 from . import db
-import itertools
-from collections import Counter
-from stop_words import get_stop_words
 
 
 
