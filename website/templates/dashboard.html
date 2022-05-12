@@ -165,16 +165,17 @@
 <!--Commonly used words-->
 <h4>Words your users use:</h4>
 <p>Here are the top 10 most frequently used words in your responses</p>
+<h5>These are words your happy users use</h5>
     <canvas id="lineChartWords" width="300" height="200"></canvas>
   <script>
     var ctx = document.getElementById("lineChartWords").getContext("2d");
     var lineChartWords = new Chart(ctx, {
       type: "bar",
       data: {
-        labels: {{ commonwordlabels | safe }},
+        labels: {{ PositiveWordLabels | safe }},
         datasets: [
           {
-          data: {{ commonwordvalues |safe }},
+          data: {{ PositiveWordValues |safe }},
           fill: true,
           backgroundColor: [
             'rgb(180, 231, 218)',
@@ -189,6 +190,34 @@
     });
   </script>
 <br>
+<h5>These are words your unhappy users use</h5>
+<canvas id="lineChartWordsNegative" width="300" height="200"></canvas>
+  <script>
+    var ctx = document.getElementById("lineChartWordsNegative").getContext("2d");
+    var lineChartWords = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: {{ NegativeWordLabels | safe }},
+        datasets: [
+          {
+          data: {{ NegativeWordValues |safe }},
+          fill: true,
+          backgroundColor: [
+            'rgb(180, 231, 218)',
+       
+
+          ],
+          },
+        ]
+      },
+      options: { indexAxis: 'y',responsive: true, plugins: { legend: { display: false },title: { display: true},
+          text: 'Commonly used words' } }
+    });
+  </script>
+<br>
+
+
+
   <!--Pie chart with-->
   <h4>How your users are distributed</h4>
 
@@ -245,7 +274,48 @@
 
   <div class="col-sm-8"><div id="posts"></br >
     {% if totalresponses  > 0 %}
+
+<!--Here we have the section that controls pagination-->
+
+<!-- Pagination Links-->
+<div class="d-flex flex-row-reverse">
+  <div class="text-right">
+    <a href="/dashboard/{{user.username}}?page={{posts.prev_num}}"
     
+       class="btn btn-outline-dark 
+       {% if posts.page == 1 %}disabled{% endif %}">
+        &laquo;
+    </a>
+  <!-- Loop through the number of pages to display a link for each-->
+    {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+  {% if page_num %}
+  <!-- Check for the active page and set the link to "Active"-->
+            {% if posts.page == page_num %}
+            <a href="/dashboard/{{user.username}}?page={{ page_num }}"
+               class="btn btn-dark">
+                {{ page_num }}
+            </a>
+            {% else %}
+            <a href="/dashboard/{{user.username}}?page={{ page_num }}"
+               class="btn btn-outline-dark">
+                {{ page_num }}
+            </a>
+            {% endif %}
+        {% else %}
+            ...
+        {% endif %}
+    {% endfor %}
+    <a href="/dashboard/{{user.username}}?page={{posts.next_num}}"
+       class="btn btn-outline-dark 
+       {% if posts.page == posts.pages %}disabled{% endif %}">
+        &raquo;
+    </a>
+  </div>
+  <p class="text-right mt-3">
+   Showing page {{ posts.page }} of {{ posts.pages }}<br>
+  </p>
+  </div>
+  <!-- End of Pagination Links-->
     
 
     {% for post in posts.items %}
@@ -403,7 +473,7 @@
   </a>
 </div>
 <p class="text-right mt-3">
- Showing page {{ posts.page }} of {{ posts.pages }}
+ Showing page {{ posts.page }} of {{ posts.pages }}<br>
 </p>
 </div>
 <!-- End of Pagination Links-->
