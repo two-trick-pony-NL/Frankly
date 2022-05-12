@@ -1,4 +1,7 @@
 import os
+import time    
+epoch_time = int(time.time())
+print(epoch_time)
 
 
 #This file helps deploy the application by building the dockerfile and sending the docker image to amazon
@@ -35,3 +38,7 @@ print("Here is the configuration file: ")
 os.system("aws lightsail create-container-service-deployment --service-name franklyapp \
 --containers file://AWS/deploymentconfig.json \
 --public-endpoint file://AWS/publicendpoint.json")
+
+os.system("aws lightsail get-container-log --service-name franklyapp --container-name franklyapp --start-time " +str(epoch_time-300) + " --end-time " +str(epoch_time))
+
+
