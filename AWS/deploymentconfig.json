@@ -1,4 +1,3 @@
 {"franklyapp": {
   "image": ":franklyapp.franklyapp.latest",
-  "ports": {"80": "HTTP"}
-}}
+  "ports": {"80": "HTTP"}}}

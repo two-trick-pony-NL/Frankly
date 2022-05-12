@@ -41,6 +41,6 @@ os.system("aws lightsail create-container-service-deployment --service-name fran
 print("\n########################\n")
 print("Here are the logs of the last 24H")
 print("\n########################\n")
-#Getting the logs of the container with the preferences set so as in the file. The epoch at 3600 specifies all logs of the last 24H
+#Getting the logs of the container with the preferences set so as in the file. The epoch at 3600 specifies all logs of the last hour
 
-os.system("aws lightsail get-container-log --cli-input-json file://AWS/scriptpreferences.json --start-time " +str(epoch_time-30000))   
+os.system("aws lightsail get-container-log --cli-input-json file://AWS/scriptpreferences.json --start-time " +str(epoch_time-3600))   

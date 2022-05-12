@@ -19,7 +19,6 @@ views = Blueprint("views", __name__)
 @views.route("/home")
 def home():
     posts = Post.query.all()
-    print("homepage was loaded")
     return render_template("home.html", user=current_user, posts=posts)
 
 #Renders the userdashboard requires a username to select the correct user dashboard
@@ -287,3 +286,8 @@ def downloadFileDetractor (userid):
     qr1 = 'User_'+userid+'_detractor.png'
     file1 = "static/qrcodes/"+qr1
     return(send_file(file1, as_attachment=True)) 
+
+@views.route('/healthcheck')
+def healthcheck ():
+    return ('', 204)
+
