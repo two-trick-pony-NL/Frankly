@@ -40,6 +40,7 @@ def signin():
                 createQR(userID)
                 calculatecommonwords(userID)
     #Redirecting to the dashboard if useris logged in
+                print("User logged in: " + user.username)
                 return redirect(url_for('views.dashboard', user=current_user, username=user.username))
             else:
                 flash("e-mail address does not exist, or password is incorrect.", category='danger')
@@ -109,6 +110,7 @@ def sign_up():
             print(userID)
             createQR(userID)
             newuserconfirmation(email)
+            print("User signed up : " + username)
             return redirect(url_for('views.dashboard', username=username))
         return render_template("signup.html", user=current_user)    
     else:
@@ -120,9 +122,11 @@ def sign_up():
 @auth.route("/logout")
 @login_required
 def logout():
+    username = str(current_user)
+    print("User logged out " + username)
     logout_user()
     flash("You Logged out -- See you soon! !", category="success")
-    print("User logged out")
+    
     return redirect(url_for("views.home"))
 
 #Creates and validates tokens for password reset
@@ -159,8 +163,8 @@ def resetpassword(token):
         decoded_jwt = jwt.decode(token, secretkey, algorithms=["HS256"])
         user_id = decoded_jwt['user_id']
         print("Valid token, looking up the user")
+        print("Token belongs to:")
         print(decoded_jwt)
-        print(user_id)
         user = User.query.filter_by(id=user_id).first() 
     except: #If unsuccessful we'll redirect to the home page and log an error
         flash("Something went wrong!", category="warning")
@@ -199,6 +203,7 @@ def resetpassword(token):
 def get_reset_token(token):
     payload = {'user_id': token}
     encoded_jwt = jwt.encode(payload, secretkey, algorithm="HS256")
+    print("Password reset token generated")
     print(encoded_jwt)
     return encoded_jwt
 
