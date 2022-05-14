@@ -18,7 +18,7 @@ views = Blueprint("views", __name__)
 @views.route("/")
 @views.route("/home")
 def home():
-    posts = Post.query.all()
+    print("Homepage loaded")
     return render_template("home.html", user=current_user, posts=posts)
 
 #Renders the userdashboard requires a username to select the correct user dashboard

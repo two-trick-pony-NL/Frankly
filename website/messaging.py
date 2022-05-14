@@ -33,7 +33,7 @@ def SendWhatsapp(userid, phonenumber):
     neutralURL = str('\n\n\n😑 mehh! > https://franklyapp.nl/send-feedback/'+userid+'/2')
     detractorURL = str('\n\n\n😢 Not so good > https://franklyapp.nl/send-feedback/'+userid+'/1')
     message = user.customquestion0
-    sender= user.userpublicname
+    sender= str(user.userpublicname)
     print(userid)
     message = client.messages.create( 
                                 messaging_service_sid='MGcda453ae1d2d1f05cb4b8124367535b5', 
@@ -44,10 +44,11 @@ def SendWhatsapp(userid, phonenumber):
                                 #to='whatsapp:'+phonenumber
                                 to=phonenumber
                             ) 
-    
+    print("Sending text message, message ID: ")
     print(message.sid)
     flash("Message sent to your phone, check your Whatsapp!", category='success')
-    return('', 204) 
+    #return('', 204) 
+    return redirect(url_for('views.dashboard', user=current_user, username=user.username))
 
 #From here we have the email integration
 @messaging.route("/sendemail/<userid>/<email>")
@@ -62,13 +63,16 @@ def SendEmail(userid, email):
     detractorURL = str('https://franklyapp.nl/send-feedback/'+userid+'/1')
     msg = Message(
                   user.customquestion0,
-                  sender = publicusernamenospaces+'@franklyapp.nl',
+                  sender = str(publicusernamenospaces)+'@franklyapp.nl',
                   recipients = [email]
                 )
     #msg.body = 'Welcome to Frankly! Your account was registered succesfully!'
     msg.html = render_template('emailtemplates/feedbacktemplate.html', question = user.customquestion0, userpublicname = user.userpublicname, promotorURL = promotorURL, neutralURL = neutralURL, detractorURL = detractorURL)
     mail.send(msg)
-    return('', 204) 
+    print("Sending email message")
+    flash("Message sent to your mailbox!", category='success')
+    return redirect(url_for('views.dashboard', user=current_user, username=user.username))
+    #return('', 204) 
 
 
 #From here for the waiting list
