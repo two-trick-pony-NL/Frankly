@@ -1,7 +1,9 @@
+from audioop import mul
 from curses import flash
 from flask import Blueprint, render_template, request, flash, redirect, url_for, jsonify, session
 from flask_login import login_required, current_user
 from configparser import ConfigParser
+from numpy import number
 from twilio.rest import Client 
 import os
 from . import db
@@ -51,28 +53,55 @@ def SendWhatsapp(userid, phonenumber):
     return redirect(url_for('views.dashboard', user=current_user, username=user.username))
 
 #From here we have the email integration
+@messaging.route("/SendMultipleEmail/<userid>/")
+@login_required
+def SendMultipleEmail(userid):
+    user = User.query.filter_by(id=userid).first()
+    multiplerecipients = request.args.get('multiplerecipients')
+    multiplerecipients = multiplerecipients.split(", ")
+    print("Starting batch email from user " + str(user))
+    print(multiplerecipients)
+    numberofmessages = len(multiplerecipients)
+    failedmessages = []
+    flash("Sending surveys to " + str(numberofmessages)+" recipients", category='info')
+    for recipient in multiplerecipients:
+      try:
+        SendEmail(userid, recipient)
+        
+      except:
+        flash("Message to " + str(recipient)+" failed. Is the email address correct?", category='danger')
+        print("Message to " + str(recipient)+" failed.")
+        failedmessages.append("Error")
+
+    failedmessages = len(failedmessages)
+    succesfulmessagessend = numberofmessages - failedmessages    
+    flash("All surveys are sent! "+str(succesfulmessagessend)+" surveys were sent succesfully. \n" + str(failedmessages)+" surveys could not be send.", category='info')  
+    print("\n\n"+str(succesfulmessagessend)+" emails sent. \nThere were " + str(failedmessages)+" errors.\n\n")     
+    return redirect(url_for('views.dashboard', user=current_user, username=user.username))
+
+#From here we have the email integration
 @messaging.route("/sendemail/<userid>/<email>")
 @login_required
 def SendEmail(userid, email):
     user = User.query.filter_by(id=userid).first()
-    print(user)
     publicusernamenospaces = user.userpublicname.replace(" ", "_")
     email = str(email)
+    email = email.split()
     promotorURL = str('https://franklyapp.nl/send-feedback/'+userid+'/3')
     neutralURL = str('https://franklyapp.nl/send-feedback/'+userid+'/2')
     detractorURL = str('https://franklyapp.nl/send-feedback/'+userid+'/1')
     msg = Message(
                   user.customquestion0,
                   sender = str(publicusernamenospaces)+'@franklyapp.nl',
-                  recipients = [email]
+                  recipients = email
                 )
     #msg.body = 'Welcome to Frankly! Your account was registered succesfully!'
     msg.html = render_template('emailtemplates/feedbacktemplate.html', question = user.customquestion0, userpublicname = user.userpublicname, promotorURL = promotorURL, neutralURL = neutralURL, detractorURL = detractorURL)
     mail.send(msg)
-    print("Sending email message")
-    flash("Message sent to your mailbox!", category='success')
+    print("Sending survey to" + str(email) + " from user: " +str(user))
+    flash("Message sent to " + str(email), category='success')
     return redirect(url_for('views.dashboard', user=current_user, username=user.username))
-    #return('', 204) 
+
 
 
 #From here for the waiting list

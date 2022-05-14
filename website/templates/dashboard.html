@@ -631,11 +631,26 @@
     <br>
     <h5>Method 2: Send the feedback template to your contacts directly</h5>
     <p>Frankly can also send the email template to one of your contacts directly. Simply add the email address of your recipients and hit send.</p>
+    <form 
+    method="GET"
+    action="/SendMultipleEmail/{{user.id}}"
+    >
     <div class="input-group mb-3">
-      <input type="text" class="form-control" placeholder="Email address of your recipient" aria-label="Recipient's username" aria-describedby="button-addon2">
-      <button class="btn btn-primary text-dark" type="button" id="button-addon2">Send to client</button>
+      <input 
+      type="text" 
+      name="multiplerecipients" 
+      placeholder="bob@bob.com alice@alice.com"  
+      id="multiplerecipients" class="form-control" 
+      placeholder="Email address of your recipient" 
+      aria-label="Recipient's username" 
+      aria-describedby="multiplerecipients">
+
+      <button type="submit"class="btn btn-primary text-dark" type="button" id="multiplerecipients">Send to client</button>
     </div>
-    <small>Did you know you can add multiple recipients by separating email addresses using commas?</small>
+  </form>
+
+
+    <small>Did you know you can add multiple recipients by separating email addresses using a space?</small>
     <br>
     <br>
     <hr>
@@ -811,6 +826,7 @@
                       
                       <div id="emailHelp" class="form-text">This allows you to pick a name that your users will see when giving you feedback </div>
                     </div>
+                    <!-- Excluding the logo for now
                     <h6>Logo:</h6>
                     <div class="mb-3">
                       
@@ -828,7 +844,7 @@
                         <img src="{{user.userlogo}}" class="card-img-top" alt="...">
                         
                       </div>
-                    </div>
+                    </div>-->
                     <button type="submit" class="btn btn-primary text-dark"><i class="bi bi-check2-square"></i> Save branding</button>
                     <hr>
                     <h5>Custom Questions:</h5>

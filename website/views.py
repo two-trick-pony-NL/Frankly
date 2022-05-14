@@ -31,28 +31,38 @@ def dashboard(username):
         FollowUpQuestion1 = request.form.get("FollowUpQuestion1")
         FollowUpQuestion2 = request.form.get("FollowUpQuestion2")
         userpublicname = request.form.get("userpublicname")
-        userlogo = request.form.get("userlogo")
-
+        #userlogo = request.form.get("userlogo")
+        multiplerecipients = request.form.get("multiplerecipients")
         user = User.query.filter_by(username=username).first()
+
+    
         if len(FirstCustomQuestion) > 0:
             user.customquestion0 =  FirstCustomQuestion
             db.session.commit()
+            flash("Question saved", category='success')
             
         if len(FollowUpQuestion1) > 0:
             user.customquestion1 =  FollowUpQuestion1
             db.session.commit()
+            flash("Followup question saved", category='success')
             
         if len(FollowUpQuestion2) > 0:
             user.customquestion2 =  FollowUpQuestion2
             db.session.commit()
+            flash("Followup saved", category='success')
 
         if len(userpublicname) > 0:
             user.userpublicname =  userpublicname
             db.session.commit()
+            flash("Branding saved", category='success')
 
-        if len(userlogo) > 0:
-            user.userlogo =  userlogo
-            db.session.commit()    
+        #if len(userlogo) > 0:
+         #   user.userlogo =  userlogo
+          #  db.session.commit()
+
+
+
+
             
 
 #Get requests just load the page with the regular logic
