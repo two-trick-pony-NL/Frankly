@@ -184,9 +184,9 @@ def resetpassword(token):
             print("Passwords do NOT match")
             flash("The two passwords do not match", category="warning")
             return redirect(url_for('auth.resetpassword', token=token))
-        elif not re.fullmatch(regexpassword, password1): #Check if the password is a valid password regex
-            flash("This is not a strong password, pick at least 8 charachters and use numbers and symbols", category="danger")
-            return redirect(url_for('auth.resetpassword', token=token))    
+        #elif not re.fullmatch(regexpassword, password1): #Check if the password is a valid password regex
+            #flash("This is not a strong password, pick at least 8 charachters and use numbers and symbols", category="danger")
+            #return redirect(url_for('auth.resetpassword', token=token))    
         else: #If all is good we start hashing the new password
             password=generate_password_hash(password1, method='sha256')
             print("this is the new password hash")

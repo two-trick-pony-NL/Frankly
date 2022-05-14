@@ -146,6 +146,7 @@ def newpasswordconfirmation(recipient):
                 recipients = [recipient]
                )
    msg.body = 'Your Frankly password was reset succesfully!'
+   msg.html = render_template('emailtemplates/passwordresetconfirm.html')
    mail.send(msg)
 
 # This function sends the user a token to reset their password
