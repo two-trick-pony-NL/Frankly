@@ -95,8 +95,8 @@ def create_comment(post_id):
     return redirect(url_for('views.dashboard', user=user))    
 
 
-@chats.route("/sendlink/<user_id>", methods=["GET"])
-def sendlink(user_id):
+@chats.route("/getfeedback/<user_id>", methods=["GET"])
+def getfeedback(user_id):
     user = User.query.filter_by(id=user_id).first()
     print(user)
     promotorURL = str('https://franklyapp.nl/send-feedback/'+user_id+'/3')

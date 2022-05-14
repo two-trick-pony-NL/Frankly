@@ -297,6 +297,13 @@ def downloadFileDetractor (userid):
     file1 = "static/qrcodes/"+qr1
     return(send_file(file1, as_attachment=True)) 
 
+@views.route('/downloadQR/<userid>/generic')
+@login_required
+def downloadFileGeneric (userid):
+    qr1 = 'User_'+userid+'_generic.png'
+    file1 = "static/qrcodes/"+qr1
+    return(send_file(file1, as_attachment=True))     
+
 @views.route('/healthcheck')
 def healthcheck ():
     return ('', 204)

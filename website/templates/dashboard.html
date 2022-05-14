@@ -262,6 +262,7 @@
             <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSMS" aria-controls="offcanvasSMS"> <i class="bi bi-chat-dots"></i><br> SMS</button>
             <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasQR" aria-controls="offcanvasQR"><i class="bi bi-qr-code"></i> <br>QR Codes</button>
             <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLink" aria-controls="offcanvasLink"><i class="bi bi-share"></i> <br>Link</button>
+            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Toggle right offcanvas</button>
 
           </div>
           
@@ -433,14 +434,6 @@
     
 {% else %}
 <br><br>
-<hr>
-
-<div class="alert alert-warning" role="alert">
-  <h4 class="alert-heading">Welcome to Frankly!</h4>
-  <p>Thank you for trying out Frankly. We are very pleased to have you on board. From here you are only 2 minutes away of receiving your first pieces of feedback.</p>
-  <hr>
-  <p class="mb-0">Currently you have not received any feedback, yet. But, as soon as your first customers start interacting with your surveys the results will show up here.</p>
-</div>
 
 
 {% endif%}
@@ -655,73 +648,102 @@
   </div> 
   {% else %}
   <!-- If there are 0 posts we show this accordion helping the user getting started-->
-  <h2>Get started in 3 simple steps:</h2>
+  <h2>👋🏻 Welcome to Frankly</h2>
+  <h3>get started in 2 steps:</h3>
   <div class="accordion" id="accordionPanelsStayOpenExample">
     <div class="accordion-item">
       <h2 class="accordion-header" id="panelsStayOpen-headingOne">
         <button class="accordion-button bg-primary" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-          Step 1: Configure your custom questions
+          Step 1: Customize your survey
         </button>
       </h2>
       <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
         <div class="accordion-body">
-          <p>Custom questions allow you to ask your clients for something specific. It helps you ask them: <br>"How did you like your <strong>Pizza</strong>", <br>Instead of just: "How did you like it" </p>
-          <p>Frankly supports 3 custom questions out of the box, where the first question is the main question. Then youhave the ability to add 2 more follow up questions into the mix to ask them for something specific, like what kind of pizza they ordered. </p>
-          <button type="button" class="btn btn-primary text-dark" data-bs-toggle="modal" data-bs-target="#exampleModal"> <i class="bi bi-sliders"></i> Set up custom questions</button>
+          <p>Custom questions allow you to ask your clients for something specific. It helps you ask them: <br><i>"How did you like your <strong>Pizza</strong>"</i><br></p>
+          <form method="POST">
+            <div class="container">
+              <div class="row">
+                <div class="col">
+                  <h6>Main question: Usually you ask users to rate you with this question</h6>
+
+              <div class="mb-3">
+                <input 
+                type="text" 
+                class="form-control" 
+                name="FirstCustomQuestion" 
+                id="FirstCustomQuestion" 
+                placeholder="{{user.customquestion0}}" 
+                aria-describedby="emailHelp"/>
+              </div>
+              <h6>Follow up questions:</h6>
+              <div id="emailHelp" class="form-text">After the user answers the main question, they can get up to 2 followup questions in our chat.</div>
+              <div class="mb-3">
+                <input 
+                type="text" 
+                class="form-control" 
+                placeholder="{{user.customquestion1}}" 
+                name="FollowUpQuestion1" 
+                id="FollowUpQuestion1"/>
+              </div>
+              
+                <div class="mb-3">
+                  <input 
+                  type="text" 
+                  class="form-control" 
+                  placeholder="{{user.customquestion2}}" 
+                  name="FollowUpQuestion2" 
+                  id="FollowUpQuestion2"/>
+                </div>
+
+                <h6>What name should we show on the surveys?</h6>
+                <div class="mb-3">
+    
+                  <input 
+                  type="text" 
+                  class="form-control" 
+                  name="userpublicname" 
+                  id="userpublicname" 
+                  placeholder="{{user.userpublicname}}" 
+                  aria-describedby="emailHelp"/>
+                </div>
+
+            <button type="submit" class="btn btn-primary text-dark" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo"><i class="bi bi-check2-square"></i> Save Custom Questions</button>
+          </form>
+                </div>
+                <div class="col">
+                  <img class="p-2" src="{{ url_for('static',filename='assets/img/examplechat.jpeg') }}" width="250"  alt="Frankly">
+                </div>
+                
+              </div>
+            </div>
+            
+            
+
+
+
         </div>
       </div>
     </div>
     <div class="accordion-item">
       <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-          Step 2: Share your surveys online, through SMS or Email
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+          Step 2: Share your surveys
         </button>
       </h2>
       <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
         <div class="accordion-body">
-          <p>Frankly allows you to easily connect with your customers. We provide text templates that you can share with your customers. You can send yourself a template on SMS or through email.</p>
-          <p>After receiving the template you can easily forward it to a customer you'd like to get some feedback from!</p>
+          <p>Share your first survey!</p>
+          <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+            <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasEmail" aria-controls="offcanvasEmail"><i class="bi bi-envelope-check"></i><br> Email</button>
+            <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSMS" aria-controls="offcanvasSMS"> <i class="bi bi-chat-dots"></i><br> SMS</button>
+            <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasQR" aria-controls="offcanvasQR"><i class="bi bi-qr-code"></i> <br>QR Codes</button>
+            <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLink" aria-controls="offcanvasLink"><i class="bi bi-share"></i> <br>Link</button>
 
-            <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasEmail" aria-controls="offcanvasEmail"><i class="bi bi-envelope-check"></i> Email</button>
-            <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSMS" aria-controls="offcanvasSMS"><i class="bi bi-chat-dots"></i> SMS</button>
-        </div>
-      </div>
-    </div>
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="panelsStayOpen-headingThree">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
-          Step 3: Share your QR codes in the real world
-        </button>
-      </h2>
-      <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
-        <div class="accordion-body">
-          <p>The Frankly QR codes allow you to ask for feedback in the real world. Your customers can scan the QR codes with their phone and let you know if they liked your service in a matter of seconds </p>
-          <p>You can print our read-made template to get started right away, or download your unique QR codes to use in your own designs</p>
-
-
-          <h5>Scan a QR code to get your first piece of feedback!</h5>
-          <div class="card bg-primary" style="width: 500px;">
-            <div class="row no-gutters">
-                <div class="col-sm-5">
-                  <img class="card-img-top bg-secondary" src="{{ url_for('static',filename='qrcodes/User_')}}{{urlPromotorQR}}"  alt="Card image cap">
-                </div>
-                <div class="col-sm-7">
-                    <div class="card-body">
-                        <h5 class="card-title">This QR Code generates a bit of positive feedback</h5>
-                       
-                        
-                    </div>
-                </div>
-            </div>
           </div>
-
-          
-
-
-          
         </div>
       </div>
     </div>
+    
   </div>
   {% endif %}   
   <!-- end of the getting started accordion-->
@@ -735,6 +757,48 @@
 </div>
 
 <!-- These 2 offcanvas items manage the sliding in of information when users tap the SMS and Email buttons-->
+
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header">
+    <h3 id="offcanvasRightLabel">Download QR codes</h3>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <h5>Step 1: Download our custom QR codes</h5>
+    <p>Frankly allows for super simple feedback collection through QR codes. There are 3 QR separate QR codes and feedback is given by scanning a specific one.
+      <ul><b>Promotor</b> - If the user scans this QR code you'll receive positive feedback</ul>
+      <ul><b>Neutral</b> - If the user scans this QR code you'll receive neutral feedback</ul>
+      <ul><b>Detractor</b> - If the user scans this QR code you'll receive negative feedback</ul>
+
+    </p>
+    <div class="btn-group" role="group">
+      <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle text-dark" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="bi bi-download"></i> Download QR Codes
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+        <li><a class="dropdown-item text-dark " href="/downloadQR/{{user.id}}/generic"><i class="bi bi-qr-code"></i> Generic QR Code</a></li>
+        <hr>
+        <li><a class="dropdown-item text-dark " href="/downloadQR/{{user.id}}/promotor"><i class="bi bi-emoji-smile"></i> Happy Feedback QR code</a></li>
+        <li><a class="dropdown-item text-dark " href="/downloadQR/{{user.id}}/neutral"><i class="bi bi-emoji-expressionless"></i> Neutral Feedback QR code</a></li>
+        <li><a class="dropdown-item text-dark " href="/downloadQR/{{user.id}}/detractor"><i class="bi bi-emoji-frown"></i> Unhappy Feedback QR code</a></li>
+      
+      </ul>
+      <br>
+    </div>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <h5>Step 2: Add the QR codes to a design of your own</h5>
+    <p>Whether you're adding them on a t-shirt, coaster or make stickers to add to your foodtruck, Frankly has got you covered. These High resolution QR codes work everywhere you put them.</p>
+    <img class="app-badge center-block" src="{{ url_for('static',filename='assets/img/outdoors.jpeg') }}" alt="..." style="max-width: 100%"/>
+      <br>
+  </div>
+</div>
+
+
+
 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasSMS" aria-labelledby="offcanvasSMS">
   
   <div class="offcanvas-header">
@@ -742,13 +806,10 @@
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
-    <p><i>You can simply receive feedback through SMS using our pre-made SMS template it works super simple:</i></p>
-    <hr>
     <h5>Step 1: Send the template to your phone</h5>
-    <p>Frankly will send you template on your phone, all you have to do is tap this button:</p>
     <a href="/sendwhatsapp/{{user.id}}/{{user.phonenumber}}" class="btn btn-primary text-dark" tabindex="-1" role="button"><i class="bi bi-send-check"></i> Send the SMS template to my phone</a>
     <br>    <br>    <br>
-    <img class="app-badge center-block" src="{{ url_for('static',filename='assets/img/chat.png') }}" alt="..." style="max-width: 50%"/>
+    <img class="app-badge center-block" src="{{ url_for('static',filename='assets/img/chat.jpeg') }}" alt="..." style="max-width: 50%"/>
     <br>
     <br>
     <hr>
@@ -764,12 +825,19 @@
     <h5>Or: Copy + paste and make it your own</h5>
     <p>If you want to ask for feedback anywhere else, simply copy paste the template and make it your own!</p>
     <pre><code>
-      Hi 
+      {{user.customquestion0}}
 
-      dhdhdaldi
-      data-sb-feedbackdd
 
-      data-device
+      😃 it’s great! --> https://franklyapp.nl/send-feedback/{{user.id}}/3
+      
+      
+      😐 it’s ok --> https://franklyapp.nl/send-feedback/{{user.id}}/2
+      
+      
+      🙄 it’s lacking --> https://franklyapp.nl/send-feedback/{{user.id}}/1
+      
+      Thanks, 
+      {{user.userpublicname}}
     </code></pre>
   </div>
 </div>
@@ -779,17 +847,16 @@
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
-    <p></p><i>You can simply receive feedback through email using our pre-made email template it works super simple:</i></p>
-    <hr>
     <h5>Method 1: Send the template to your mailbox</h5>
-    <p>Frankly will send your template to your mailbox on the email address you used during signup, all you have to do is tap this button:</p>
     <a href="/sendemail/{{user.id}}/{{user.email}}" class="btn btn-primary text-dark" tabindex="-1" role="button"> <i class="bi bi-send-check"></i> Send the template to <b>my</b> email address</a>
-    <br>
+    <br>    <br>
+    <img class="app-badge center-block" src="{{ url_for('static',filename='assets/img/email.jpeg') }}" alt="..." style="max-width: 50%"/>
+
+
     <br>
     <hr>
     <br>
     <h5>Method 2: Send the feedback template to your contacts directly</h5>
-    <p>Frankly can also send the email template to one of your contacts directly. Simply add the email address of your recipients and hit send.</p>
     <form 
     method="GET"
     action="/SendMultipleEmail/{{user.id}}"
@@ -798,7 +865,7 @@
       <input 
       type="text" 
       name="multiplerecipients" 
-      placeholder="bob@bob.com alice@alice.com"  
+      placeholder="bob@bob.com, alice@alice.com"  
       id="multiplerecipients" class="form-control" 
       placeholder="Email address of your recipient" 
       aria-label="Recipient's username" 
@@ -809,7 +876,7 @@
   </form>
 
 
-    <small>Did you know you can add multiple recipients by separating email addresses using a space?</small>
+    <small><i>Did you know you can add multiple recipients by separating email addresses using a comma?</i></small>
     <br>
     <br>
     <hr>
@@ -817,12 +884,19 @@
     <h5>Method 3: Copy + paste and make it your own</h5>
     <p>If you want to ask for feedback anywhere else, simply copy paste the template and make it your own!</p>
     <pre><code>
-      Hi 
+      {{user.customquestion0}}
 
-      dhdhdaldi
-      data-sb-feedbackdd
 
-      data-device
+      😃 it’s great! --> https://franklyapp.nl/send-feedback/{{user.id}}/3
+      
+      
+      😑 🙄 it’s lacking! --> https://franklyapp.nl/send-feedback/{{user.id}}/2
+      
+      
+      🙄 it’s lacking --> https://franklyapp.nl/send-feedback/{{user.id}}/1
+      
+      Thanks, 
+      {{user.userpublicname}}
     </code></pre>
   </div>
 </div>
@@ -835,31 +909,33 @@
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
-    <p><i>Simply share this link to ask for feedback</i></p>
-    <hr>
-    <pre><code>
-      https://franklyapp.nl/sendlink/{{user.id}}
-    </code></pre>
-    <!-- The text field -->
-<!-- The button used to copy the text -->
     <button class="btn btn-primary text-dark" onclick="myFunction()"><i class="bi bi-share"></i><br> Copy link</button>
     <script>
       function myFunction() {
           /* Get the text field */
-          navigator.clipboard.writeText("https://franklyapp.nl/sendlink/{{user.id}}");
+          navigator.clipboard.writeText("https://franklyapp.nl/getfeedback/{{user.id}}");
           /* Alert the copied text */
-          alert("Copied https://franklyapp.nl/sendlink/{{user.id}} link to your clipboard." );
+          alert("Copied https://franklyapp.nl/getfeedback/{{user.id}} link to your clipboard." );
         }
     </script>
-    <a href="/sendlink/{{user.id}}" class="btn btn-primary text-dark" tabindex="-1" role="button"><i class="bi bi-box-arrow-up-right"></i><br>Go to link</a>
 
-  </div>
+    <a href="/getfeedback/{{user.id}}" class="btn btn-primary text-dark" tabindex="-1" role="button"><i class="bi bi-box-arrow-up-right"></i><br>Visit link</a>
+    <br><br>
+    <img class="app-badge center-block" src="{{ url_for('static',filename='assets/img/link.png') }}" alt="..." style="max-width: 100%"/>    <br><br>
+        <pre><code>
+
+      https://franklyapp.nl/getfeedback/{{user.id}}
+
+    </code></pre>
 
 
 
+  
+<!--
 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasQR" aria-labelledby="offcanvasQR">
+  
   <div class="offcanvas-header">
-    <h3 id="offcanvasSMS">How to get feedback through QRcode</h3>
+    <h3 id="offcanvasQR">How to get feedback through QRcode</h3>
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
@@ -897,61 +973,9 @@
     <p>Whether you're adding them on a t-shirt, coaster or make stickers to add to your foodtruck, Frankly has got you covered. These High resolution QR codes work everywhere you put them.</p>
     <img class="app-badge center-block" src="{{ url_for('static',filename='assets/img/outdoors.jpeg') }}" alt="..." style="max-width: 100%"/>
       <br>
-    <hr>
-    <div class="card bg-primary" style="max-width: 100%">
-      <div class="row no-gutters">
-          <div class="col-sm-3">
-            <img class="card-img-top bg-secondary" src="{{ url_for('static',filename='qrcodes/User_')}}{{urlPromotorQR}}" style="max-width: 100%" alt="Card image cap">
-          </div>
-          <div class="col-sm-7">
-              <div class="card-body">
-                  <h5 class="card-title">This QR Code generates a bit of positive feedback</h5>
-                 
-                  
-              </div>
-          </div>
-      </div>
-    </div>
-
-    <div class="card bg-secondary" style="max-width: 100%">
-      <div class="row no-gutters">
-          <div class="col-sm-3">
-            <img class="card-img-top bg-secondary" src="{{ url_for('static',filename='qrcodes/User_')}}{{urlNeutralQR}}" style="max-width: 100%" alt="Card image cap">
-          </div>
-          <div class="col-sm-7">
-              <div class="card-body">
-                  <h5 class="card-title">This QR Code generates a bit of neutral feedback</h5>
-                 
-                  
-              </div>
-          </div>
-      </div>
-    </div>
-
-    <div class="card bg-third" style="max-width: 100%">
-      <div class="row no-gutters">
-          <div class="col-sm-3">
-            <img class="card-img-top bg-secondary" src="{{ url_for('static',filename='qrcodes/User_')}}{{urlDetractorQR}}" style="max-width: 100%" alt="Card image cap">
-          </div>
-          <div class="col-sm-7">
-              <div class="card-body">
-                  <h5 class="card-title">This QR Code generates a bit of negative feedback</h5>
-                 
-              </div>    
-              </div>
-          </div>
-      </div>
-      <hr>
-    <br>
-    <!--Disabling this section as it;s not functional
-    <h5>Method 2: Or use our custom template with your QR codes</h5>
-    <p>If you want to ask for feedback right now without having to design anything, then just print the standard Frankly Template and you're on your way!</p>
-    <img class="app-badge center-block" src="{{ url_for('static',filename='assets/img/mockup.jpeg') }}" alt="..." style="max-width: 100%"/>
-    <br><br>
-    <button  type="button" class="btn btn-primary text-dark"><i class="bi bi-download"></i> Download our QR template </button>-->
   </div>
-
-<!-- Here end the 2 offcanvas items -->
+</div>
+-->
 
 
 

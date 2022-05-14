@@ -31,9 +31,9 @@ def SendWhatsapp(userid, phonenumber):
     user = User.query.filter_by(id=userid).first()
     client = Client(account_sid, auth_token) 
     phonenumber = str(phonenumber)
-    promotorURL = str('\n\n\n😃 great! > https://franklyapp.nl/send-feedback/'+userid+'/3')
-    neutralURL = str('\n\n\n😑 mehh! > https://franklyapp.nl/send-feedback/'+userid+'/2')
-    detractorURL = str('\n\n\n😢 Not so good > https://franklyapp.nl/send-feedback/'+userid+'/1')
+    promotorURL = str('\n\n\n😃 it’s great! > https://franklyapp.nl/send-feedback/'+userid+'/3')
+    neutralURL = str('\n\n\n😐 it’s ok > https://franklyapp.nl/send-feedback/'+userid+'/2')
+    detractorURL = str('\n\n\n🙄 it’s lacking > https://franklyapp.nl/send-feedback/'+userid+'/1')
     message = user.customquestion0
     sender= str(user.userpublicname)
     print(userid)
