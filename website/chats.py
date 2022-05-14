@@ -93,3 +93,13 @@ def create_comment(post_id):
         else:
             flash('Post does not exist.', category='warning')
     return redirect(url_for('views.dashboard', user=user))    
+
+
+@chats.route("/sendlink/<user_id>", methods=["GET"])
+def sendlink(user_id):
+    user = User.query.filter_by(id=user_id).first()
+    print(user)
+    promotorURL = str('https://franklyapp.nl/send-feedback/'+user_id+'/3')
+    neutralURL = str('https://franklyapp.nl/send-feedback/'+user_id+'/2')
+    detractorURL = str('https://franklyapp.nl/send-feedback/'+user_id+'/1')
+    return render_template("emailtemplates/feedbacktemplate.html", question = user.customquestion0, userpublicname = user.userpublicname, promotorURL = promotorURL, neutralURL = neutralURL, detractorURL = detractorURL)

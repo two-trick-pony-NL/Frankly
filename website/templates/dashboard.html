@@ -97,13 +97,14 @@
     <div class="row">
       <div class="jumbotron jumbotron-fluid rounded bg-light" style="height: 230px">
         <div class="container">
-          <p class="lead">Get your feedback templates now</p>
-          <p>Start asking your clients for feedback, by forwarding them one of our templates. We'll send you a ready-to-send copy that you can forward easily. </p>
+          <p class="lead">Ask for feedback now</p>
+          <p>Ask your clients for feedback, by forwarding them one of our templates or send them our link.</p>
           <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-            <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasEmail" aria-controls="offcanvasEmail"><i class="bi bi-envelope-check"></i> Email</button>
-            <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSMS" aria-controls="offcanvasSMS"> <i class="bi bi-chat-dots"></i> SMS</button>
-            <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasQR" aria-controls="offcanvasQR"><i class="bi bi-qr-code"></i> QR Codes</button>
-          
+            <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasEmail" aria-controls="offcanvasEmail"><i class="bi bi-envelope-check"></i><br> Email</button>
+            <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSMS" aria-controls="offcanvasSMS"> <i class="bi bi-chat-dots"></i><br> SMS</button>
+            <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasQR" aria-controls="offcanvasQR"><i class="bi bi-qr-code"></i> <br>QR Codes</button>
+            <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLink" aria-controls="offcanvasLink"><i class="bi bi-share"></i> <br>Link</button>
+
           </div>
           
         </div>
@@ -669,6 +670,36 @@
 </div>
 
 
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasLink" aria-labelledby="offcanvasLink">
+  
+  <div class="offcanvas-header">
+    <h3 id="offcanvasLink">Get feedback through a Link</h3>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <p><i>Simply share this link to ask for feedback</i></p>
+    <hr>
+    <pre><code>
+      https://franklyapp.nl/sendlink/{{user.id}}
+    </code></pre>
+    <!-- The text field -->
+
+<!-- The button used to copy the text -->
+    <button class="btn btn-primary text-dark" onclick="myFunction()"><i class="bi bi-share"></i><br> Copy link</button>
+    <script>
+      function myFunction() {
+          /* Get the text field */
+          navigator.clipboard.writeText("https://franklyapp.nl/sendlink/{{user.id}}");
+          /* Alert the copied text */
+          alert("Copied https://franklyapp.nl/sendlink/{{user.id}} link to your clipboard." );
+        }
+    </script>
+    <a href="/sendlink/{{user.id}}" class="btn btn-primary text-dark" tabindex="-1" role="button"><i class="bi bi-box-arrow-up-right"></i><br>Go to link</a>
+
+  </div>
+</div>
+
+
 
 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasQR" aria-labelledby="offcanvasQR">
   <div class="offcanvas-header">
@@ -763,7 +794,7 @@
     <br><br>
     <button  type="button" class="btn btn-primary text-dark"><i class="bi bi-download"></i> Download our QR template </button>-->
   </div>
-</div>
+
 <!-- Here end the 2 offcanvas items -->
 
 <!-- Modal for Settings -->
