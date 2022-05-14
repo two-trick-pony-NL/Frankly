@@ -4,6 +4,164 @@
 
 {% block Content %}
 
+<!-- Button trigger modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Account Settings</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="accordion" id="accordionExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Contact information
+              </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                
+              <div class="mb-3 row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-10">
+                  <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{user.email}}">
+                </div>
+              </div>
+
+
+              <div class="mb-3 row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">Username</label>
+                <div class="col-sm-10">
+                  <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{user.username}}">
+                </div>
+              </div>
+
+            
+              
+              <div class="mb-3 row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">Phone</label>
+                <div class="col-sm-10">
+                  <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{user.phonenumber}}">
+                </div>
+              </div>
+              </div>
+              
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                Remaining Credits
+              </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <p>With Frankly you get your first 100 responses for free, after that you an top up for another 100 responses for just €3,99. Here is how much credit you have used.<br><br>
+              <b>Used credits so far:</b>
+              <div class="progress">
+                <div class="progress-bar text-dark" role="progressbar" style="width: {{ModTotalpost}}%;" aria-valuenow="{{ModTotalpost}}" aria-valuemin="0" aria-valuemax="100">{{ModTotalpost}}%</div>
+              </div>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThree">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                Survey Settings
+              </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <!--Form for the usersettings-->
+                <form method="POST">
+                <h4>Customize your survey:</h4>
+                <h6>Name:</h6>
+                <div class="mb-3">
+                  <div id="emailHelp" class="form-text">This is the name your users will see when you ask them feedback</div>
+
+                  <input 
+                  type="text" 
+                  class="form-control" 
+                  name="userpublicname" 
+                  id="userpublicname" 
+                  placeholder="{{user.userpublicname}}" 
+                  aria-describedby="emailHelp"/>
+                </div>
+                <!--Logo is disabled as it's not fully implemented yet
+                <h6>Logo:</h6>
+                <div class="mb-3">
+                  
+                  <label for="userlogo" class="form-label">This is the logo users will see when interacting with you</label>
+                  <input 
+                  type="text" 
+                  class="form-control" 
+                  name="userlogo" 
+                  id="userlogo" 
+                  placeholder="{{user.userlogo}}" 
+                  aria-describedby="emailHelp"/>
+                  
+                  <div id="emailHelp" class="form-text">Make sure to link to a web-optimized URL of your image. 
+  
+                  </div>
+                  <div class="card" style="width: 20%">
+                    <img src="{{user.userlogo}}" class="card-img-top" alt="...">
+                    
+                  </div>
+                </div>
+                             
+                <button type="submit" class="btn btn-primary text-dark"><i class="bi bi-check2-square"></i> Save branding</button>
+                <hr>-->
+                <h6>Main question:</h6>
+  
+                  <div class="mb-3">
+                    <input 
+                    type="text" 
+                    class="form-control" 
+                    name="FirstCustomQuestion" 
+                    id="FirstCustomQuestion" 
+                    placeholder="{{user.customquestion0}}" 
+                    aria-describedby="emailHelp"/>
+                  </div>
+                  <h6>Follow up questions:</h6>
+                  <div id="emailHelp" class="form-text">After the user answers the main question, they can get up to 2 followup questions.</div>
+                  <div class="mb-3">
+                    <input 
+                    type="text" 
+                    class="form-control" 
+                    placeholder="{{user.customquestion1}}" 
+                    name="FollowUpQuestion1" 
+                    id="FollowUpQuestion1"/>
+                  </div>
+                  
+                    <div class="mb-3">
+                      <input 
+                      type="text" 
+                      class="form-control" 
+                      placeholder="{{user.customquestion2}}" 
+                      name="FollowUpQuestion2" 
+                      id="FollowUpQuestion2"/>
+                    </div>
+  
+                <button type="submit" class="btn btn-primary text-dark"><i class="bi bi-check2-square"></i> Save Custom Questions</button>
+              </form>
+                <!-- End form usersettings-->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer justify-content-between">
+        <small>{{user.date_created}} - {{user.id}}</small>
+        <button type="button" class="btn btn-primary text-dark" data-bs-dismiss="modal"> Back</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 {% if haspaid  < 1 %}
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -54,7 +212,7 @@
 <div class="container "></div>
 <br><br>
 <!--Header of dasbhoard-->
-<h1 class="d-inline align-middle"><img src="{{user.userlogo}}" alt="" width="10%"  class="d-inline-block align-text-top"> {{user.userpublicname}} // Dashboard</h1>
+<h1 class="d-inline align-middle"><img src="{{user.userlogo}}" alt="" width="10%"  class="d-inline-block align-text-top"> {{user.userpublicname}} Dashboard</h1>
 
 <hr>
 <!--Splitting up in grid view for the graphs-->
@@ -65,8 +223,8 @@
         <div class="container">
           <br><br>
           <h1 class="display-4">{{ Franklyscore }}</h1>
-          <p class="lead">Frankly Score</p>
-          <p>Your responses converted into a NPS  score</p>
+          <p class="lead">NPS Score</p>
+          <p>Your responses converted into a NPS  score.</p>
         </div>
       </div>
     <br>
@@ -509,7 +667,7 @@
         <div class="accordion-body">
           <p>Custom questions allow you to ask your clients for something specific. It helps you ask them: <br>"How did you like your <strong>Pizza</strong>", <br>Instead of just: "How did you like it" </p>
           <p>Frankly supports 3 custom questions out of the box, where the first question is the main question. Then youhave the ability to add 2 more follow up questions into the mix to ask them for something specific, like what kind of pizza they ordered. </p>
-          <button type="button" class="btn btn-primary text-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> <i class="bi bi-sliders"></i> Set up custom questions</button>
+          <button type="button" class="btn btn-primary text-dark" data-bs-toggle="modal" data-bs-target="#exampleModal"> <i class="bi bi-sliders"></i> Set up custom questions</button>
         </div>
       </div>
     </div>
@@ -683,7 +841,6 @@
       https://franklyapp.nl/sendlink/{{user.id}}
     </code></pre>
     <!-- The text field -->
-
 <!-- The button used to copy the text -->
     <button class="btn btn-primary text-dark" onclick="myFunction()"><i class="bi bi-share"></i><br> Copy link</button>
     <script>
@@ -697,7 +854,6 @@
     <a href="/sendlink/{{user.id}}" class="btn btn-primary text-dark" tabindex="-1" role="button"><i class="bi bi-box-arrow-up-right"></i><br>Go to link</a>
 
   </div>
-</div>
 
 
 
@@ -797,146 +953,6 @@
 
 <!-- Here end the 2 offcanvas items -->
 
-<!-- Modal for Settings -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title" id="staticBackdropLabel">Account Settings</h3>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-                  <form method="POST">
-                    <h4>Your details:</h4>
-                    <div class="mb-3 row">
-                      <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
-                      <div class="col-sm-10">
-                        <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{user.email}}">
-                      </div>
-                    </div>
-              
-
-                    <div class="mb-3 row">
-                      <label for="staticEmail" class="col-sm-2 col-form-label">Username</label>
-                      <div class="col-sm-10">
-                        <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{user.username}}">
-                      </div>
-                    </div>
-
-                  
-                    
-                    <div class="mb-3 row">
-                      <label for="staticEmail" class="col-sm-2 col-form-label">Phone</label>
-                      <div class="col-sm-10">
-                        <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{user.phonenumber}}">
-                      </div>
-                    </div>
-                    <hr>
-                    <h4>Your remaining Frankly Credit:</h4>
-                    With Frankly you get your first 100 responses for free, after that you an top up for another 100 responses for just €3,99. Here is how much credit you have used.<br><br>
-                    <b>Responses so far:</b>
-                    <div class="progress">
-                      <div class="progress-bar text-dark" role="progressbar" style="width: {{ModTotalpost}}%;" aria-valuenow="{{ModTotalpost}}" aria-valuemin="0" aria-valuemax="100">{{ModTotalpost}}%</div>
-                    </div>
-                    
-
-                    <hr>
-                    <h4>Customize your chat:</h4>
-                    <p>By customizing these settings, you can change how customers interact with you. You can set the name customers see, and  add custom questions that allow you to ask your customers specific things You can add up to 3 custom questions. </p>
-                    <h5>Branding:</h5>
-                    <h6>Name:</h6>
-                    <div class="mb-3">
-                      <label for="userpublicname" class="form-label">The name your users see in the chat and email templates</label>
-                      <input 
-                      type="text" 
-                      class="form-control" 
-                      name="userpublicname" 
-                      id="userpublicname" 
-                      placeholder="{{user.userpublicname}}" 
-                      aria-describedby="emailHelp"/>
-                      
-                      <div id="emailHelp" class="form-text">This allows you to pick a name that your users will see when giving you feedback </div>
-                    </div>
-                    <!-- Excluding the logo for now
-                    <h6>Logo:</h6>
-                    <div class="mb-3">
-                      
-                      <label for="userlogo" class="form-label">This is the logo users will see when interacting with you</label>
-                      <input 
-                      type="text" 
-                      class="form-control" 
-                      name="userlogo" 
-                      id="userlogo" 
-                      placeholder="{{user.userlogo}}" 
-                      aria-describedby="emailHelp"/>
-                      
-                      <div id="emailHelp" class="form-text">Make sure to link to a web-optimized URL of your image. </div>
-                      <div class="card" style="width: 20%">
-                        <img src="{{user.userlogo}}" class="card-img-top" alt="...">
-                        
-                      </div>
-                    </div>-->
-                    <button type="submit" class="btn btn-primary text-dark"><i class="bi bi-check2-square"></i> Save branding</button>
-                    <hr>
-                    <h5>Custom Questions:</h5>
-                    <h6>First question:</h6>
-
-                    <div class="mb-3">
-                      <label for="FirstCustomQuestion" class="form-label"> Ask your customers to rate you</label>
-                      <input 
-                      type="text" 
-                      class="form-control" 
-                      name="FirstCustomQuestion" 
-                      id="FirstCustomQuestion" 
-                      placeholder="{{user.customquestion0}}" 
-                      aria-describedby="emailHelp"/>
-                      
-                      <div id="emailHelp" class="form-text">This question is used in the SMS and email template to invoke a response from your customer </div>
-                    </div>
-                    <h6>Follow up questions:</h6>
-                    <div class="mb-3">
-                      <label for="FollowUpQuestion1" class="form-label">Followup Question 1</label>
-                      <input 
-                      type="text" 
-                      class="form-control" 
-                      placeholder="{{user.customquestion1}}" 
-                      name="FollowUpQuestion1" 
-                      id="FollowUpQuestion1"/>
-                      <div id="emailHelp" class="form-text">If users enter the chat, this will be a followup question they will see</div>
-                    </div>
-                    
-                    <div class="mb-3">
-                      <label for="FollowUpQuestion2" class="form-label">Followup Question 2</label>
-                      <input 
-                      type="text" 
-                      class="form-control" 
-                      placeholder="{{user.customquestion2}}" 
-                      name="FollowUpQuestion2" 
-                      id="FollowUpQuestion2"/>
-                      <div id="emailHelp" class="form-text">If users enter the chat, this will be a followup question they will see </div>
-                    </div>
-    
-                    <button type="submit" class="btn btn-primary text-dark"><i class="bi bi-check2-square"></i> Save Custom Questions</button>
-                  </form>
-                  <!--
-                  <hr>
-                  <h6>Download & Reset</h6>
-                  <p>
-                    If you want to start over you can download the feedback you have received so far in a CSV file for your archive and then delete all the responses you have received. 
-                   Be aware that you can't restore deleted responses</p>
-                  <button type="button" class="btn btn-primary text-dark"><i class="bi bi-file-earmark-spreadsheet"></i> Download CSV</button>
-
-                  <button type="button" class="btn btn-danger"><i class="bi bi-trash"></i> Reset account</button>
--->
-      </div>
-      <div class="modal-footer justify-content-between">
-        <small>{{user.date_created}} - {{user.id}}</small>
-        <button type="button" class="btn btn-primary text-dark" data-bs-dismiss="modal"> Back</button>
-       
-      </div>
-    </div>
-  </div>
-</div>
 
 
 
