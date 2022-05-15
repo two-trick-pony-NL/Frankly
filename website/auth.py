@@ -10,7 +10,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import re
 import phonenumbers
 import jwt
-from .wordanalysis import calculatecommonwords
+from .calculations import calculatecommonwords, calculatepostsovertime
 
 config = ConfigParser()
 config.read('Env_Settings.cfg')
@@ -39,6 +39,7 @@ def signin():
                 #Creating new QR codes for the user, as well as calculating the common words in their posts
                 createQR(userID)
                 calculatecommonwords(userID)
+                calculatepostsovertime(userID)
     #Redirecting to the dashboard if useris logged in
                 print("User logged in: " + user.username)
                 return redirect(url_for('views.dashboard', user=current_user, username=user.username))

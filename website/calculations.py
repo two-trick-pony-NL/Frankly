@@ -1,9 +1,14 @@
+from distutils.command.build_scripts import first_line_re
 from flask import session
 import itertools
 from collections import Counter
 from stop_words import get_stop_words
 from .models import Post
 from configparser import ConfigParser
+from datetime import datetime
+import pandas as pd
+
+
 
 #This section of code creates a list of all the words used in posts by users, so we can draw a wordcloud.
 # We do this on login so that we only have to do it 1x and store in in session from there on
@@ -55,3 +60,24 @@ def calculatecommonwords(userID): #Function is called in the Auth script on sign
     NegativeWordValues = [row[1] for row in negativecommonwords]
     session['NegativeWordLabels'] = NegativeWordLabels     
     session['NegativeWordValues'] = NegativeWordValues
+
+
+def calculatepostsovertime(userID):
+    posts = Post.query.filter_by(author=userID).order_by(Post.date_created.desc())
+    daterange = []
+    for post in posts:
+        datecreated = post.date_created.strftime("%Y-%m-%d")
+        datecreated = str(datecreated)
+        daterange.append(datecreated[0:10])
+    commondates = Counter(daterange).most_common(1000)
+    commondates.sort()
+    now = datetime.now().strftime("%Y-%m-%d")
+    first = commondates[0][0]
+
+    print("Printing most common dates\n\n\n")
+    print(commondates)
+    print("stopped printing \n\n")
+    timestamplabels = [row[0] for row in commondates]
+    countvalues = [row[1] for row in commondates]
+    session['timestamplabels'] = timestamplabels     
+    session['countvalues'] = countvalues

@@ -260,9 +260,9 @@
           <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
             <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasEmail" aria-controls="offcanvasEmail"><i class="bi bi-envelope-check"></i><br> Email</button>
             <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSMS" aria-controls="offcanvasSMS"> <i class="bi bi-chat-dots"></i><br> SMS</button>
-            <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasQR" aria-controls="offcanvasQR"><i class="bi bi-qr-code"></i> <br>QR Codes</button>
+   
             <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLink" aria-controls="offcanvasLink"><i class="bi bi-share"></i> <br>Link</button>
-            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Toggle right offcanvas</button>
+            <button class="btn btn-primary text-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="bi bi-qr-code"></i> <br>QR Codes</button>
 
           </div>
           
@@ -314,9 +314,14 @@
             },
           ]
         },
-        options: { plugins: { 
+        options: { 
+          plugins: { 
           legend: { display: false }
-        } }
+            },
+          ticks: {
+          stepSize: 10
+        }   
+         }
       });
     </script></div>
     {% else %}
@@ -359,7 +364,15 @@
           },
         ]
       },
-      options: { indexAxis: 'y',responsive: true, plugins: { legend: { display: false },title: { display: true},
+      options: { 
+        ticks: {
+          stepSize: 10
+        },
+        indexAxis: 'y',
+        responsive: true, 
+        plugins: { 
+          legend: { display: false },
+          title: { display: true},
           text: 'Commonly used words' } }
     });
   </script>
@@ -384,8 +397,53 @@
           },
         ]
       },
-      options: { indexAxis: 'y',responsive: true, plugins: { legend: { display: false },title: { display: true},
+      options: { 
+        ticks: {
+          stepSize: 10
+        },
+        indexAxis: 'y',
+        responsive: true, 
+        plugins: { 
+          legend: { display: false },
+          title: { display: true},
           text: 'Commonly used words' } }
+    });
+  </script>
+<br>
+
+<h5>This is when your responses came in</h5>
+<canvas id="lineChartDates" width="300" height="200"></canvas>
+  <script>
+    var ctx = document.getElementById("lineChartDates").getContext("2d");
+    var lineChartDates = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: {{ timestamplabels | safe }},
+        datasets: [
+          {
+          data: {{ countvalues |safe }},
+          fill: true,
+          backgroundColor: [
+          'rgb(245, 228, 81)',
+       
+
+          ],
+          },
+        ]
+      },
+      options: { 
+        scales: {
+          
+        },
+        ticks: {
+          stepSize: 10
+        },
+        indexAxis: 'x',
+        responsive: true, 
+        plugins: { 
+          legend: { display: false },
+          title: { display: true},
+          text: 'When did your responses came in' } }
     });
   </script>
 <br>
@@ -549,6 +607,7 @@
                 <div>
                   <small class="text-muted"> {{comment.date_created}}</small>
                   {% if user.id == comment.author or user.id == post.author %}
+                    <!--Disabling deletion of comments,
                   <div class="btn-group">
                     <button
                       type="button"
@@ -556,7 +615,8 @@
                       data-bs-toggle="dropdown"
                     ><i class="bi bi-trash"></i></button>
                     <ul class="dropdown-menu">
-                      <li>
+                    
+                        <li>
                         <a
                           href="/delete-comment/{{comment.id}}"
                           class="dropdown-item"
@@ -565,6 +625,7 @@
                       </li>
                     </ul>
                   </div>
+                -->
                   {% endif %}
                 </div>
               </div>
@@ -575,12 +636,13 @@
         <p class="card-text">
           {% if totalresponses > 0 %}
           <a data-bs-toggle="collapse" href="#comments-{{post.id}}" role="button">
-            <small class="text-dark">View {{post.comments|length}} Comments</small>
+            <small class="text-dark">View {{post.comments|length}} answers to followup questions</small>
           </a>
           {% else %}
           <small class="text-muted">No Comments</small>
           {% endif %}
         </p>
+        <!-- Add note feature disabled
         <form
           class="input-group mb-3"
           method="POST"
@@ -594,7 +656,7 @@
             placeholder="Add a note"
           />
           <button type="submit" class="btn btn-dark"><i class="bi bi-pen"></i> Add note</button>
-        </form>
+        </form>-->
       </div>
       <div class="card-footer text-muted justify-content-between d-inline">
         <div class="d-inline justify-content-between">{{post.date_created}}</div>
@@ -707,7 +769,7 @@
                   aria-describedby="emailHelp"/>
                 </div>
 
-            <button type="submit" class="btn btn-primary text-dark" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo"><i class="bi bi-check2-square"></i> Save Custom Questions</button>
+            <button type="submit" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLink" aria-controls="offcanvasLink"><i class="bi bi-check2-square"></i> Save Custom Questions</button>
           </form>
                 </div>
                 <div class="col">
@@ -736,7 +798,8 @@
           <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
             <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasEmail" aria-controls="offcanvasEmail"><i class="bi bi-envelope-check"></i><br> Email</button>
             <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSMS" aria-controls="offcanvasSMS"> <i class="bi bi-chat-dots"></i><br> SMS</button>
-            <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasQR" aria-controls="offcanvasQR"><i class="bi bi-qr-code"></i> <br>QR Codes</button>
+            <button class="btn btn-primary text-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="bi bi-qr-code"></i> <br>QR Codes</button>
+
             <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLink" aria-controls="offcanvasLink"><i class="bi bi-share"></i> <br>Link</button>
 
           </div>
@@ -765,35 +828,17 @@
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
-    <h5>Step 1: Download our custom QR codes</h5>
-    <p>Frankly allows for super simple feedback collection through QR codes. There are 3 QR separate QR codes and feedback is given by scanning a specific one.
-      <ul><b>Promotor</b> - If the user scans this QR code you'll receive positive feedback</ul>
-      <ul><b>Neutral</b> - If the user scans this QR code you'll receive neutral feedback</ul>
-      <ul><b>Detractor</b> - If the user scans this QR code you'll receive negative feedback</ul>
-
-    </p>
-    <div class="btn-group" role="group">
-      <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle text-dark" data-bs-toggle="dropdown" aria-expanded="false">
-        <i class="bi bi-download"></i> Download QR Codes
-      </button>
-      <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-        <li><a class="dropdown-item text-dark " href="/downloadQR/{{user.id}}/generic"><i class="bi bi-qr-code"></i> Generic QR Code</a></li>
-        <hr>
-        <li><a class="dropdown-item text-dark " href="/downloadQR/{{user.id}}/promotor"><i class="bi bi-emoji-smile"></i> Happy Feedback QR code</a></li>
-        <li><a class="dropdown-item text-dark " href="/downloadQR/{{user.id}}/neutral"><i class="bi bi-emoji-expressionless"></i> Neutral Feedback QR code</a></li>
-        <li><a class="dropdown-item text-dark " href="/downloadQR/{{user.id}}/detractor"><i class="bi bi-emoji-frown"></i> Unhappy Feedback QR code</a></li>
-      
-      </ul>
-      <br>
-    </div>
-    <br>
-    <br>
-    <hr>
-    <br>
-    <h5>Step 2: Add the QR codes to a design of your own</h5>
-    <p>Whether you're adding them on a t-shirt, coaster or make stickers to add to your foodtruck, Frankly has got you covered. These High resolution QR codes work everywhere you put them.</p>
+    <p>Share your QR Codes to start collecting feedback    </p>
     <img class="app-badge center-block" src="{{ url_for('static',filename='assets/img/outdoors.jpeg') }}" alt="..." style="max-width: 100%"/>
-      <br>
+    <br><br>
+
+      <a href="/downloadQR/{{user.id}}/generic" class="btn btn-primary text-dark" tabindex="-1" role="button"><i class="bi bi-qr-code"></i> Generic QR Code</a>
+      <br><br>
+      <div class="btn-group-vertical">      
+      <a href="/downloadQR/{{user.id}}/promotor" class="btn btn-primary text-dark" tabindex="-1" role="button"><i class="bi bi-emoji-smile"></i> Happy Feedback QR code</a>
+      <a href="/downloadQR/{{user.id}}/neutral" class="btn btn-primary text-dark" tabindex="-1" role="button"><i class="bi bi-emoji-expressionless"></i> Neutral Feedback QR code</a>
+      <a href="/downloadQR/{{user.id}}/detractor" class="btn btn-primary text-dark" tabindex="-1" role="button"></i><i class="bi bi-emoji-frown"></i> Unhappy Feedback QR code</a>
+    </div>
   </div>
 </div>
 
@@ -927,56 +972,6 @@
       https://franklyapp.nl/getfeedback/{{user.id}}
 
     </code></pre>
-
-
-
-  
-<!--
-<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasQR" aria-labelledby="offcanvasQR">
-  
-  <div class="offcanvas-header">
-    <h3 id="offcanvasQR">How to get feedback through QRcode</h3>
-    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div class="offcanvas-body">
-    <p></p><i>You can simply receive feedback by having your customers scan our custom QR Codes. The QR codes will take your users to our chat to answer some followup questions:</i></p>
-    <p>How it works:
-      <ul>1. Your customers scan the QR code that fits with how they liked your service (Happy, neutral, unhappy)</ul>
-      <ul>2. Your customer ends in our custom built chat to answer some follow up questions</ul>
-      <ul>3. The responses end up in your dashboard</ul>
-    </p>
-    <hr>
-    <h5>Step 1: Download our custom QR codes</h5>
-    <p>Frankly allows for super simple feedback collection through QR codes. There are 3 QR separate QR codes and feedback is given by scanning a specific one.
-      <ul><b>Promotor</b> - If the user scans this QR code you'll receive positive feedback</ul>
-      <ul><b>Neutral</b> - If the user scans this QR code you'll receive neutral feedback</ul>
-      <ul><b>Detractor</b> - If the user scans this QR code you'll receive negative feedback</ul>
-
-    </p>
-    <div class="btn-group" role="group">
-      <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle text-dark" data-bs-toggle="dropdown" aria-expanded="false">
-        <i class="bi bi-download"></i> Download QR Codes
-      </button>
-      <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-        <li><a class="dropdown-item text-dark " href="/downloadQR/{{user.id}}/promotor"><i class="bi bi-emoji-smile"></i> Happy Feedback QR code</a></li>
-        <li><a class="dropdown-item text-dark " href="/downloadQR/{{user.id}}/neutral"><i class="bi bi-emoji-expressionless"></i> Neutral Feedback QR code</a></li>
-        <li><a class="dropdown-item text-dark " href="/downloadQR/{{user.id}}/detractor"><i class="bi bi-emoji-frown"></i> Unhappy Feedback QR code</a></li>
-      
-      </ul>
-      <br>
-    </div>
-    <br>
-    <br>
-    <hr>
-    <br>
-    <h5>Step 2: Add the QR codes to a design of your own</h5>
-    <p>Whether you're adding them on a t-shirt, coaster or make stickers to add to your foodtruck, Frankly has got you covered. These High resolution QR codes work everywhere you put them.</p>
-    <img class="app-badge center-block" src="{{ url_for('static',filename='assets/img/outdoors.jpeg') }}" alt="..." style="max-width: 100%"/>
-      <br>
-  </div>
-</div>
--->
-
 
 
 

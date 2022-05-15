@@ -3,6 +3,8 @@ from flask_login import login_required, current_user
 from .models import Post, User, Comment, Like
 from configparser import ConfigParser
 from . import db
+from .calculations import calculatepostsovertime
+
 
 #fetching credentials used on this page
 config = ConfigParser()
@@ -95,6 +97,8 @@ def dashboard(username):
     NegativeWordValues = session.get('NegativeWordValues')
     PositiveWordLabels = session.get('PositiveWordLabels')
     PositiveWordValues = session.get('PositiveWordValues')
+    timestamplabels = session.get('timestamplabels')
+    countvalues = session.get('countvalues')
 
     #Now breaking up the ordered list into pages
     posts = posts.paginate(page=page, per_page=5)       
@@ -152,7 +156,7 @@ def dashboard(username):
         Franklyscore = round(((nmbr_happy_users/totalresponses)-(nmbr_unhappy_users/totalresponses))*100)
     except: 
         Franklyscore = 0    
-    return render_template("dashboard.html",haspaid=haspaid, PositiveWordValues=PositiveWordValues, PositiveWordLabels=PositiveWordLabels, NegativeWordValues=NegativeWordValues, NegativeWordLabels=NegativeWordLabels,  page=page, ModTotalpost=ModTotalpost, percentagelabels=percentagelabels, percentagevalues=percentagevalues, urlPromotorQR=urlPromotorQR, urlNeutralQR=urlNeutralQR,urlDetractorQR=urlDetractorQR,  Franklyscore=Franklyscore, totalresponses=totalresponses, nmbr_happy_users=nmbr_happy_users, nmbr_medium_users=nmbr_medium_users, nmbr_unhappy_users=nmbr_unhappy_users,QRCodeURL=QRCodeURL, user=current_user, posts=posts, username=username, labels=labels, values=values)
+    return render_template("dashboard.html",haspaid=haspaid,countvalues=countvalues, timestamplabels=timestamplabels, PositiveWordValues=PositiveWordValues, PositiveWordLabels=PositiveWordLabels, NegativeWordValues=NegativeWordValues, NegativeWordLabels=NegativeWordLabels,  page=page, ModTotalpost=ModTotalpost, percentagelabels=percentagelabels, percentagevalues=percentagevalues, urlPromotorQR=urlPromotorQR, urlNeutralQR=urlNeutralQR,urlDetractorQR=urlDetractorQR,  Franklyscore=Franklyscore, totalresponses=totalresponses, nmbr_happy_users=nmbr_happy_users, nmbr_medium_users=nmbr_medium_users, nmbr_unhappy_users=nmbr_unhappy_users,QRCodeURL=QRCodeURL, user=current_user, posts=posts, username=username, labels=labels, values=values)
   
   
 
@@ -306,5 +310,12 @@ def downloadFileGeneric (userid):
 
 @views.route('/healthcheck')
 def healthcheck ():
+    return ('', 204)
+
+
+
+@views.route('/testfunction')
+def testfunction ():
+    calculatepostsovertime(2)
     return ('', 204)
 
