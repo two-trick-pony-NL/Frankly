@@ -348,21 +348,22 @@
 
 
 
-  <div id="myCarousel" class="carousel carousel-dark slide" data-bs-ride="carousel">
+  <div id="myCarousel"  class="carousel carousel-dark slide"   data-bs-ride="carousel">
     <div class="carousel-indicators">
       <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
       <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
       <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
     </div>
-    <div class="carousel-inner" width="100%" >
+    <div class="carousel-inner" >
 
       <div class="carousel-item active">
         <div class="bg-light text-dark">
           <br><br>
-          <h5>Users per category</h5>
-          <canvas id="lineChart" width="900" height="200"></canvas>
           
+          <div class="w-50 p-3 mh-25 mx-auto">
+            <h5>Users per category</h5>
+          <canvas id="lineChart" ></canvas>
+        </div><br><br>
         </div>
 
       </div>
@@ -370,6 +371,7 @@
         <div class="bg-light text-dark">
           <br><br>
           <div class="container">
+            <div class="w-50 p-3 mh-25 mx-auto">
             <div class="row align-items-start">
               <h4>Words your users use:</h4>
               <div class="col">
@@ -381,6 +383,7 @@
                 <canvas id="lineChartWordsNegative" width="300" height="200"></canvas>
               </div>
             </div>
+          </div><br><br>
           </div>
           
         </div>
@@ -390,20 +393,23 @@
       <div class="carousel-item" width="100%">
         <div class="bg-light text-dark">
           <br><br>
-          <h5>This is when your responses came in</h5>
-          <canvas id="lineChartDates" ></canvas>
+          <div class="w-50 p-3 mh-25 mx-auto">
+            <div class="row align-items-start">
+              <h4>Times and distribution:</h4>
+              <div class="col-8">
+                <h5>Surveys over time</h5>
+                <canvas id="lineChartDates" ></canvas>
+              </div>
+              <div class="col-4">
+                <h5>Distribution</h5>
+                <canvas id="pieChart"></canvas>
+              </div>
+            </div>
           
+        </div><br><br>
       </div>
     </div>
 
-    <div class="carousel-item">
-        <div class="bg-light text-dark">
-          <br><br>
-          <h4>How your users are distributed</h4>
-          <canvas id="pieChart" width="900" height="200"></canvas>
-          
-      </div>
-    </div>
 
 
     <button class="carousel-control-prev text-dark" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
@@ -447,6 +453,7 @@
           ]
         },
         options: { 
+          
           plugins: { 
           legend: { display: false }
             },
@@ -525,6 +532,7 @@
         ]
       },
       options: { 
+        
         ticks: {
           stepSize: 10
         },
@@ -557,6 +565,7 @@
         ]
       },
       options: { 
+        
         scales: {
           
         },
@@ -598,6 +607,7 @@
           ]
         },
         options: {
+          
           responsive: true,
           
         }
