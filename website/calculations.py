@@ -63,20 +63,27 @@ def calculatecommonwords(userID): #Function is called in the Auth script on sign
 
 def calculatepostsovertime(userID):
     posts = Post.query.filter_by(author=userID).order_by(Post.date_created.desc())
-    daterange = []
-    for post in posts:
-        datecreated = post.date_created.strftime("%Y-%m-%d")
-        datecreated = str(datecreated)
-        daterange.append(datecreated[0:10])
-    commondates = Counter(daterange).most_common(1000)
-    commondates.sort()
-    now = datetime.now().strftime("%Y-%m-%d")
-    first = commondates[0][0]
+    postcount = posts.count()
+    if postcount < 1:
+        print("There are 0 responses. Can't complete the calculation for posts over time. Skipping")
+        session['timestamplabels'] = 0     
+        session['countvalues'] = 0
+        
+    else:
+        daterange = []
+        for post in posts:
+            datecreated = post.date_created.strftime("%Y-%m-%d")
+            datecreated = str(datecreated)
+            daterange.append(datecreated[0:10])
+        commondates = Counter(daterange).most_common(1000)
+        commondates.sort()
+        now = datetime.now().strftime("%Y-%m-%d")
+        first = commondates[0][0]
 
-    print("Printing most common dates\n\n\n")
-    print(commondates)
-    print("stopped printing \n\n")
-    timestamplabels = [row[0] for row in commondates]
-    countvalues = [row[1] for row in commondates]
-    session['timestamplabels'] = timestamplabels     
-    session['countvalues'] = countvalues
+        print("Printing most common dates\n\n\n")
+        print(commondates)
+        print("stopped printing \n\n")
+        timestamplabels = [row[0] for row in commondates]
+        countvalues = [row[1] for row in commondates]
+        session['timestamplabels'] = timestamplabels     
+        session['countvalues'] = countvalues
