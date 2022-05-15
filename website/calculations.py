@@ -6,7 +6,6 @@ from stop_words import get_stop_words
 from .models import Post
 from configparser import ConfigParser
 from datetime import datetime
-import pandas as pd
 
 
 
