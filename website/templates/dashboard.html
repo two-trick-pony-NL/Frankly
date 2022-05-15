@@ -296,6 +296,8 @@
       <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
       <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
       <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="4" aria-label="Slide 5"></button>
     </div>
     <div class="carousel-inner">
 
@@ -304,54 +306,67 @@
           <br><br>
           
           <div class="w-75 p-3 mh-25 align-items-start">
+            <div class="row align-items-start row-sm-8">
             <h5>Users per category</h5>
           <canvas id="lineChart" ></canvas>
+        </div>
         </div><br><br>
         </div>
-
       </div>
-      <div class="carousel-item" data-bs-interval="false">
-        <div>
-          <br><br>
-          <div class="container">
-            <div class="w-75 p-3 mh-25 align-items-start">
-            <div class="row align-items-start row-sm-12">
-              <h4>Words your users use:</h4>
-              <div class="col-sm-6">
-                <h5>Happy users</h5>
-                <canvas id="lineChartWords" width="300" height="200"></canvas>
-              </div>
-              <div class="col-sm-6">
-                <h5>Unhappy users</h5>
-                <canvas id="lineChartWordsNegative" width="300" height="200"></canvas>
-              </div>
+
+
+    <div class="carousel-item" data-bs-interval="false">
+      <div>
+        <br><br>
+        <div class="w-75 p-3 mh-25 align-items-start">
+          <div class="row align-items-start row-sm-12">
+              <h5>Words your happy users use:</h5>
+              <canvas id="lineChartWords" ></canvas>
             </div>
-          </div><br><br>
           </div>
-          
-        </div>
-
-      </div>
-
-      <div class="carousel-item" data-bs-interval="false">
-        <div>
-          <br><br>
-          <div class="w-75 p-3 mh-25 align-items-start">
-            <div class="row align-items-start row-sm-12">
-              <h4>Times and distribution:</h4>
-              <div class="col-sm-8">
-                <h5>Responses over time</h5>
-                <canvas id="lineChartDates" ></canvas>
-              </div>
-              <div class="col-sm-4">
-                <h5>Percentage of users per category</h5>
-                <canvas id="pieChart"></canvas>
-              </div>
-            </div>
-          
-        </div><br><br>
-      </div>
+        
+      </div><br><br>
     </div>
+
+    <div class="carousel-item" data-bs-interval="false">
+      <div>
+        <br><br>
+        <div class="w-75 p-3 mh-25 align-items-start">
+          <div class="row align-items-start row-sm-12">
+              <h5>Words your unhappy users use:</h5>
+              <canvas id="lineChartWordsNegative" ></canvas>
+            </div>
+          </div>
+        
+      </div><br><br>
+    </div>
+
+    <div class="carousel-item" data-bs-interval="false">
+      <div>
+        <br><br>
+        <div class="w-75 p-3 mh-25 align-items-start">
+          <div class="row align-items-start row-sm-12">
+              <h5>Responses over time</h5>
+              <canvas id="lineChartDates" ></canvas>
+            </div>
+          </div>
+        
+      </div><br><br>
+    </div>
+
+    <div class="carousel-item" data-bs-interval="false">
+      <div>
+        <br><br>
+        <div class="w-50 p-3 mh-25 align-items-start row-6">
+          <div class="row align-items-start row-sm-6">
+              <h5>Distribution of your users</h5>
+              <canvas id="pieChart" ></canvas>
+            </div>
+          </div>
+        
+      </div><br><br>
+    </div>
+  </div>
 
 
 
@@ -555,7 +570,9 @@
         options: {
           
           responsive: true,
-          
+          legend: {
+                position: 'chartArea'
+            }
         }
       });
     </script>
