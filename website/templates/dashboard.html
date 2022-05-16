@@ -234,7 +234,7 @@
     
   </div>
   <div class="col-sm-4 height=100%">
-    <div class="row">
+    <div class="row ">
       <div class="jumbotron jumbotron-fluid rounded bg-light" style="height: 230px">
         <div class="container">
           <br><br>
@@ -253,12 +253,12 @@
   
 
   <div class="col-sm-4">
-    <div class="row">
+    <div class="row ">
       <div class="jumbotron jumbotron-fluid rounded bg-light" style="height: 230px">
         <div class="container">
           <p class="lead">Ask for feedback now</p>
           <p>Ask your clients for feedback, by forwarding them one of our templates or send them our link.</p>
-          <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+          <div class="btn-group d-flex flex-nowrap" role="group" aria-label="Button group with nested dropdown">
             <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasEmail" aria-controls="offcanvasEmail"><i class="bi bi-envelope-check"></i><br> Email</button>
             <button type="button" class="btn btn-primary text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSMS" aria-controls="offcanvasSMS"> <i class="bi bi-chat-dots"></i><br> SMS</button>
    
@@ -302,69 +302,50 @@
     </div>
     <div class="carousel-inner">
 
-      <div class="carousel-item active" data-bs-interval="false">
+      <div class="carousel-item active align-items-start" data-bs-interval="false">
         <div>
           <br><br>
-          
-          <div class="w-75 p-3 mh-25 align-items-start">
-            <div class="row align-items-start row-sm-8">
             <h5>Users per category</h5>
-          <canvas id="lineChart" ></canvas>
-        </div>
-        </div><br><br>
+          <canvas id="lineChart" width="800"></canvas>
+          <br><br>
         </div>
       </div>
 
 
-    <div class="carousel-item" data-bs-interval="false">
+    <div class="carousel-item align-items-start" data-bs-interval="false">
       <div>
         <br><br>
-        <div class="w-75 p-3 mh-25 align-items-start">
-          <div class="row align-items-start row-sm-12">
               <h5>Words your happy users use:</h5>
-              <canvas id="lineChartWords" ></canvas>
-            </div>
-          </div>
+              <canvas id="lineChartWords" width="800"></canvas>
         
       </div><br><br>
     </div>
 
-    <div class="carousel-item" data-bs-interval="false">
+    <div class="carousel-item align-items-start" data-bs-interval="false">
       <div>
         <br><br>
-        <div class="w-75 p-3 mh-25 align-items-start">
-          <div class="row align-items-start row-sm-12">
               <h5>Words your unhappy users use:</h5>
-              <canvas id="lineChartWordsNegative" ></canvas>
-            </div>
-          </div>
+              <canvas id="lineChartWordsNegative" width="800"></canvas>
         
       </div><br><br>
     </div>
 
-    <div class="carousel-item" data-bs-interval="false">
+    <div class="carousel-item align-items-start" data-bs-interval="false">
       <div>
         <br><br>
-        <div class="w-75 p-3 mh-25 align-items-start">
-          <div class="row align-items-start row-sm-12">
+      
               <h5>Responses over time</h5>
-              <canvas id="lineChartDates" ></canvas>
-            </div>
-          </div>
+              <canvas id="lineChartDates" width="800"></canvas>
         
       </div><br><br>
     </div>
 
-    <div class="carousel-item" data-bs-interval="false">
+    <div class="carousel-item align-items-center" data-bs-interval="false">
       <div>
         <br><br>
-        <div class="w-50 p-3 mh-25 align-items-start row-6">
-          <div class="row align-items-start row-sm-12">
-              <h5>Distribution of your users</h5>
-              <canvas id="pieChart" ></canvas>
-            </div>
-          </div>
         
+              <h5>Distribution of your users</h5>
+              <canvas id="pieChart"  height="400"></canvas>
       </div><br><br>
     </div>
   </div>
@@ -467,7 +448,7 @@
           stepSize: 10
         },
         indexAxis: 'y',
-        responsive: true, 
+        responsive: false, 
         plugins: { 
           legend: { display: false },
           title: { display: true},
@@ -499,7 +480,7 @@
           stepSize: 10
         },
         indexAxis: 'y',
-        responsive: true, 
+        responsive: false, 
         plugins: { 
           legend: { display: false },
           title: { display: true},
@@ -535,7 +516,7 @@
           stepSize: 10
         },
         indexAxis: 'x',
-        responsive: true, 
+        responsive: false, 
         plugins: { 
           legend: { display: false },
           title: { display: true},
@@ -570,7 +551,7 @@
         },
         options: {
           
-          responsive: true,
+          responsive: false,
           legend: {
                 position: 'chartArea'
             }
