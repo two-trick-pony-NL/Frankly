@@ -24,6 +24,9 @@ Frankly helps to make giving feedback easier. There are 4 methods that frankly c
 - Upon startup the server will load in these keys so it can function 
 - You'll need an SQL server to store records. Connection details are also added to the env_settings file, however SQLite can be used as well
 
+#### Technology: 
+The Frankly app is a Flask app wrapped in a docker image. The docker image is ran from AWS Lightsail container service. Most of the functionality has been hand built from scratch, except for SQLAlchemy for the Database, and a Twillio API for sending text messages. Most of the frontend is Bootstrap5.
+
 #### how to run:
 To run a developmentserver run: 
 - python Developmentserver.py
