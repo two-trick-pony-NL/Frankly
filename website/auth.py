@@ -1,3 +1,4 @@
+from email.policy import EmailPolicy
 from flask import Blueprint, render_template, redirect, url_for, request, flash, session
 from sqlalchemy import false
 from . import db
@@ -58,6 +59,7 @@ def sign_up():
     #Getting all the fields from the sign up page
     if request.method == 'POST':
         email = request.form.get("email")
+        email = email.lower()
         username = request.form.get("username")
         phonenumber = request.form.get("phonenumber")
         password1 = request.form.get("password1")
