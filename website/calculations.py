@@ -93,7 +93,7 @@ def calculatepostsovertime(userID):
 def calculateseatsremaining():
     print(User.query.count())
     users_in_db = int(User.query.count())
-    freeseats = 100
+    freeseats = 500
     remainingseats = freeseats - users_in_db
     print("Calculating how many seats we have left")
     print(remainingseats)
