@@ -28,6 +28,7 @@ auth = Blueprint("auth", __name__)
 def signin():
     if request.method == 'POST':
         email = request.form.get("email")
+        email = email.lower()
         password = request.form.get("password")
 
         user = User.query.filter_by(email=email).first()

@@ -306,7 +306,7 @@
         <div>
           <br><br>
             <h5>Users per category</h5>
-          <canvas id="lineChart" width="800"></canvas>
+          <canvas id="lineChart" width="720" ></canvas>
           <br><br>
         </div>
       </div>
@@ -316,7 +316,7 @@
       <div>
         <br><br>
               <h5>Words your happy users use:</h5>
-              <canvas id="lineChartWords" width="800"></canvas>
+              <canvas id="lineChartWords" width="720"></canvas>
         
       </div><br><br>
     </div>
@@ -325,7 +325,7 @@
       <div>
         <br><br>
               <h5>Words your unhappy users use:</h5>
-              <canvas id="lineChartWordsNegative" width="800"></canvas>
+              <canvas id="lineChartWordsNegative" width="720"></canvas>
         
       </div><br><br>
     </div>
@@ -335,7 +335,7 @@
         <br><br>
       
               <h5>Responses over time</h5>
-              <canvas id="lineChartDates" width="800"></canvas>
+              <canvas id="lineChartDates" width="720"></canvas>
         
       </div><br><br>
     </div>
@@ -376,36 +376,51 @@
 
 
     <!--Drawing the bar chart-->
-
     <script>
-      var ctx = document.getElementById("lineChart").getContext("2d");
-      var lineChart = new Chart(ctx, {
-        type: "bar",
-        data: {
-          labels: {{ labels | safe }},
-          datasets: [
-            {
-            data: {{ values |safe }},
-            fill: true,
-            backgroundColor: [
+    var ctx = document.getElementById("lineChart").getContext("2d");
+    var lineChart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: {{ labels | safe }},
+        datasets: [
+          {
+          data: {{ values |safe }},
+          fill: true,
+          backgroundColor: [
               'rgb(180, 231, 218)',
               'rgb(245, 228, 81)',
               'rgb(172, 173, 200)'
             ],
-            },
-          ]
-        },
-        options: { 
+          },
+        ]
+      },
+      options: { 
+        scales: {
+          y: {
+            grid: {
+              display: false
+            }
+          },
+          x: {
+            grid: {
+              display: false
+            }
+          }
           
-          plugins: { 
-          legend: { display: false }
-            },
-          ticks: {
+        },
+        ticks: {
           stepSize: 10
-        }   
-         }
-      });
-    </script></div>
+        },
+        indexAxis: 'x',
+        responsive: false, 
+        plugins: { 
+          legend: { display: false },
+          title: { display: true},
+          text: 'Commonly used words' } }
+    });
+  </script>
+
+    </div>
     {% else %}
 
 
@@ -444,10 +459,23 @@
         ]
       },
       options: { 
+        scales: {
+          y: {
+            grid: {
+              display: false
+            }
+          },
+          x: {
+            grid: {
+              display: false
+            }
+          }
+          
+        },
         ticks: {
           stepSize: 10
         },
-        indexAxis: 'y',
+        indexAxis: 'x',
         responsive: false, 
         plugins: { 
           legend: { display: false },
@@ -475,11 +503,24 @@
         ]
       },
       options: { 
+        scales: {
+          y: {
+            grid: {
+              display: false
+            }
+          },
+          x: {
+            grid: {
+              display: false
+            }
+          }
+          
+        },       
         
         ticks: {
           stepSize: 10
         },
-        indexAxis: 'y',
+        indexAxis: 'x',
         responsive: false, 
         plugins: { 
           legend: { display: false },
@@ -504,12 +545,23 @@
        
 
           ],
+          lineTension: 0.5
           },
         ]
       },
       options: { 
-        
+         
         scales: {
+          y: {
+            grid: {
+              display: false
+            }
+          },
+          x: {
+            grid: {
+              display: false
+            }
+          }
           
         },
         ticks: {
