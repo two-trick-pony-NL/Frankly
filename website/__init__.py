@@ -61,7 +61,7 @@ def create_app():
     app.register_blueprint(blog, url_prefix="/blog")
     app.register_blueprint(legal, url_prefix="/legal")
 
-    from .models import User, Post, Comment, Like
+    from .models import User, Post, Comment
 
 #This seems not to be used. 
     #This function creates a new database if none exists and updates tables if those are updated in the models

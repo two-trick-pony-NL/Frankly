@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for, jsonify, send_file, session
 from flask_login import login_required, current_user
-from .models import Post, User, Comment, Like
+from .models import Post, User, Comment
 from configparser import ConfigParser
 from . import db
 from .calculations import calculatepostsovertime
@@ -92,6 +92,7 @@ def dashboard(username):
     page = request.args.get('page', 1, type=int)
     #First getting all posts and ordering decendign order
     posts = Post.query.filter_by(author=user.id).order_by(Post.date_created.desc())
+    print(User.query.count())
     #This section fetches common words from the session. We calculate these in the sign-in function. So we only have to do it 1x
     NegativeWordLabels = session.get('NegativeWordLabels')
     NegativeWordValues = session.get('NegativeWordValues')

@@ -8,7 +8,7 @@ from twilio.rest import Client
 import os
 from . import db
 from . import mail
-from .models import Post, User, Comment, Like
+from .models import Post, User
 from flask_mail import Mail, Message
 from datetime import datetime
 #I'm using this template for emails: https://github.com/leemunroe/responsive-html-email-template
