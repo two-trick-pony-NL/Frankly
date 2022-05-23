@@ -685,22 +685,7 @@
         <h1><i class="far fa-frown" bg-primary></i></h1> <h4> {{user.customquestion0}}</h4>
         {%endif%}
         <div>
-         <!-- <span id="likes-count-{{post.id}}">
-          {{ post.likes|length }}</span> 
-          {% if user.id in post.likes|map(attribute="author")|list %}
-          Disabled the thubs up
-            </1><i
-            class="fas fa-thumbs-up"
-            id="like-button-{{post.id}}"
-            onclick="like({{post.id}})"
-          ></i>
-          {% else %}
-          <i
-            class="far fa-thumbs-up"
-            id="like-button-{{post.id}}"
-            onclick="like({{post.id}})"
-          ></i>
-          {% endif %}--> {% if user.id == post.author %}
+         {% if user.id == post.author %}
           <div class="btn-group">
             <button
               type="button"

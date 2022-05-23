@@ -23,7 +23,6 @@ class User(db.Model, UserMixin):
     date_created = db.Column(db.DateTime(timezone=True), default=func.now())
     posts = db.relationship('Post', backref='user', passive_deletes=True) #This is all posts for this user
     comments = db.relationship('Comment', backref='user', passive_deletes=True)
-    likes = db.relationship('Like', backref='user', passive_deletes=True)
     customquestion0 = db.Column(db.String(150))
     customquestion1 = db.Column(db.String(150))
     customquestion2 = db.Column(db.String(150))
@@ -38,7 +37,6 @@ class Post(db.Model):
     author = db.Column(db.Integer, db.ForeignKey(
         'user.id', ondelete="CASCADE"), nullable=False)
     comments = db.relationship('Comment', backref='post', passive_deletes=True)
-    likes = db.relationship('Like', backref='post', passive_deletes=True)
     rating = db.Column(db.Integer, nullable=True)
 
 
