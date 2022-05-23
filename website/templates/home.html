@@ -35,6 +35,7 @@
          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>   
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
      
          <!-- Google fonts-->
@@ -267,6 +268,50 @@
                   </div>
                 </div>
 
+                <canvas id="myChart" width="400" height="400"></canvas>
+<script>
+const ctx = document.getElementById('myChart').getContext('2d');
+const myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Pizza', 'Crust', 'Staff', 'Wine', 'Terrace', 'Food'],
+        datasets: [{
+            label: '# of Votes',
+            data: [19, 12, 5, 4, 3, 2],
+            backgroundColor: [
+            'rgb(180, 231, 218)',
+            ],
+            borderColor: [
+            'rgb(180, 231, 218)',
+            ],
+            borderWidth: 2
+        }]
+    },
+    options: { 
+        scales: {
+          y: {
+            grid: {
+              display: false
+            }
+          },
+          x: {
+            grid: {
+              display: false
+            }
+          }
+          
+        },
+        ticks: {
+          stepSize: 10
+        },
+        indexAxis: 'y',
+        responsive: false, 
+        plugins: { 
+          legend: { display: false },
+          title: { display: true},
+          text: 'Commonly used words' } }
+});
+</script>
 
             </div>
         </div>
