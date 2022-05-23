@@ -11,7 +11,11 @@
 ![WhatsApp Image 2022-03-30 at 8 51 00 PM](https://user-images.githubusercontent.com/71013416/161023180-2cc41cbf-9648-4f59-95da-060578e74263.jpeg)
 
 ## Frankly
-Frankly helps to make giving feedback easier. Users can generate QR codes that they can add to workshops, powerpoints, put in waiting areas or share after events to collect feedback on how visitors liked the event. 
+Frankly helps to make giving feedback easier. There are 4 methods that frankly can help you get feedback: 
+1. Through SMS: Frankly sends you the template to your phone, and you can copy it to any messaging app you like
+2. Link: Simply share a URL 
+3. QR codes: Simply print QR codes to your own design and share it in the real world
+4. Email: Simply email yourself the template or send it in a batch to your customers directly 
 
 ## Installation
 
@@ -28,14 +32,4 @@ For production server:
 - gunicorn.sh (for local running)
 - deployscript.py to deploy to Lightsail and start the server there (This probably only works for me as you need very specific keys to deploy to amazon) 
 
-## Feature roadmap
 
-- [x] Recieve feedback assets via Whatsapp / Email functionality
-- [ ] Create password reset logic
-- [ ] Add Terms and conditions
-- [ ] Add blog
-- [ ] Link to this github and make user feature ideas possible
-- [x] Implement pricing for multiple campaigns
-- [x] Implement logic for calculating pricing
-- [ ] Improve the look and feel of the chat functionality
-- [x] Add custom questions to be added from the interface
