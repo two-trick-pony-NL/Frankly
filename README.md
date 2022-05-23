@@ -17,20 +17,23 @@ Frankly helps to make giving feedback easier. There are 4 methods that frankly c
 
 ## Installation
 
+
+
+#### Technology: 
+The Frankly app is a Flask app wrapped in a docker image. The docker image is ran from AWS Lightsail container service. Most of the functionality has been hand built from scratch, except for SQLAlchemy for the Database, and a Twillio API for sending text messages. Most of the frontend is Bootstrap5 and chartJS for the graphs. 
+
 #### Set up: 
-- You'll need a configfile named `Env_Settings.cfg`  that containt the API keys to the services used (Twilio and some other API'). 
+- You'll need a configfile named `Env_Settings.cfg` that takes configuration keys like (Secret key, sql details, twillio API key, number of free responses , SMTP credentials, and a list of local stopwords). 
 - Upon startup the server will load in these keys so it can function 
 - You'll need an SQL server to store records. Connection details are also added to the env_settings file, however SQLite can be used as well
 
-#### Technology: 
-The Frankly app is a Flask app wrapped in a docker image. The docker image is ran from AWS Lightsail container service. Most of the functionality has been hand built from scratch, except for SQLAlchemy for the Database, and a Twillio API for sending text messages. Most of the frontend is Bootstrap5.
-
 #### how to run:
 To run a developmentserver run: 
-- python Developmentserver.py
+- `python3 Developmentserver.py` this will start the built in Flask development server. This is not recommended for production use
 
 For production server: 
-- gunicorn.sh (for local running)
-- deployscript.py to deploy to Lightsail and start the server there (This probably only works for me as you need very specific keys to deploy to amazon) 
+- `gunicorn.sh` (for local running)
+Or to deploy to AWS:
+- `python3 deployscript.py` to deploy to Lightsail and start the server there (This probably only works for me as you need very specific keys to deploy to amazon) 
 
 
