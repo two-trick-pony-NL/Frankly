@@ -3,7 +3,7 @@ from curses import flash
 from flask import Blueprint, render_template, request, flash, redirect, url_for, jsonify, session
 from flask_login import login_required, current_user
 from configparser import ConfigParser
-from numpy import number
+from numpy import number, reciprocal
 from twilio.rest import Client 
 import os
 from . import db
@@ -132,11 +132,25 @@ def newuserconfirmation(recipient):
    msg = Message(
                 'Welcome to Frankly!',
                 sender ='noreply@franklyapp.nl',
-                recipients = [recipient]
+                recipients = [recipient, 'hello@franklyapp.nl']
                )
    msg.body = 'Welcome to Frankly! Your account was registered succesfully!'
    msg.html = render_template('emailtemplates/welcome.html')
    mail.send(msg)
+   recipient = str(recipient)
+   newusernotification(recipient)
+
+def newusernotification(recipient):
+   msg = Message(
+                'A new user signed up to Frankly this is his email address:  ' + recipient,
+                sender ='noreply@franklyapp.nl',
+                recipients = ['hello@franklyapp.nl']
+   )
+   msg.body = 'A new user signed up to Frankly this is his email address:   ' + recipient
+   print("Sending copy to hello@frankly.com")
+   mail.send(msg)
+
+
 
 #This function triggers if the user resets their password
 def newpasswordconfirmation(recipient):

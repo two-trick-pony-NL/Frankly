@@ -204,7 +204,6 @@
             </div>
             <div class="col-sm-8 col-md-6">
                 <!--<div class="px-5 px-sm-0"><img class="img-fluid" src="{{ url_for('static',filename='assets/img/dashboard-big.png') }}" alt="..." /></div> -->
-
                 <div class=" shadow-lg card border-grey">
 
                     <div class="card-header d-flex bg-primary justify-content-between align-items-center">
@@ -267,8 +266,9 @@
                     <div class="d-inline justify-content-between">2022-05-23</div>
                   </div>
                 </div>
-
-                <canvas id="myChart" width="400" height="400"></canvas>
+                <br><br><br>
+                <h3>Common Word Analysis</h3>
+                <canvas class="shadow-sm bg-light" id="myChart"width="400" height="400"></canvas>
 <script>
 const ctx = document.getElementById('myChart').getContext('2d');
 const myChart = new Chart(ctx, {
@@ -276,7 +276,7 @@ const myChart = new Chart(ctx, {
     data: {
         labels: ['Pizza', 'Crust', 'Staff', 'Wine', 'Terrace', 'Food'],
         datasets: [{
-            label: '# of Votes',
+            label: 'Number of times this word exists in your feedback: ',
             data: [19, 12, 5, 4, 3, 2],
             backgroundColor: [
             'rgb(180, 231, 218)',
@@ -284,7 +284,8 @@ const myChart = new Chart(ctx, {
             borderColor: [
             'rgb(180, 231, 218)',
             ],
-            borderWidth: 2
+            borderWidth: 2,
+            
         }]
     },
     options: { 
@@ -305,7 +306,7 @@ const myChart = new Chart(ctx, {
           stepSize: 10
         },
         indexAxis: 'y',
-        responsive: false, 
+        responsive: true, 
         plugins: { 
           legend: { display: false },
           title: { display: true},
@@ -593,7 +594,7 @@ const myChart = new Chart(ctx, {
        
     </section>
     <!-- App badge section-->
-    <section class="bg-third" id="download">
+    <section class="bg-primary" id="download">
         <div class="container px-5">
             <h2 class="text-center text-dark font-alt mb-4">Get feedback now!</h2>
             <div class="d-flex flex-column flex-lg-row align-items-center justify-content-center">
