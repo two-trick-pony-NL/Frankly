@@ -1,7 +1,9 @@
 # Franklyapp
-## Currently in pre-production stage
-![WhatsApp Image 2022-03-18 at 6 31 34 PM](https://user-images.githubusercontent.com/71013416/159140820-3f84a0a2-acf1-43b4-991b-93ff60fd82b4.jpeg)
 
+## Currently in Beta release
+![Schermafbeelding 2022-05-23 om 14 46 48](https://user-images.githubusercontent.com/71013416/169822424-08e2365c-4cef-48f5-9643-33ac5e8313ce.png)
+
+![Schermafbeelding 2022-05-23 om 14 45 53](https://user-images.githubusercontent.com/71013416/169822311-34d87a49-b1c6-4138-989a-e8f7aa47f612.png)
 ![Schermafbeelding 2022-03-19 om 23 50 08](https://user-images.githubusercontent.com/71013416/159141082-ea9481c5-9e38-48ec-859d-417d132c3e38.png)
 
 ![WhatsApp Image 2022-03-30 at 6 30 49 PM](https://user-images.githubusercontent.com/71013416/161023146-d84b51a8-0b2c-4b24-a12f-8b4420363762.jpeg)
