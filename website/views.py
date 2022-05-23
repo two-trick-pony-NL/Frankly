@@ -3,8 +3,7 @@ from flask_login import login_required, current_user
 from .models import Post, User, Comment
 from configparser import ConfigParser
 from . import db
-from .calculations import calculatepostsovertime
-
+from .calculations import calculatepostsovertime, calculateseatsremaining
 
 #fetching credentials used on this page
 config = ConfigParser()
@@ -21,6 +20,7 @@ views = Blueprint("views", __name__)
 @views.route("/home")
 def home():
     print("Homepage loaded")
+    calculateseatsremaining()
     return render_template("home.html", user=current_user, posts=posts)
 
 #Renders the userdashboard requires a username to select the correct user dashboard
@@ -92,7 +92,6 @@ def dashboard(username):
     page = request.args.get('page', 1, type=int)
     #First getting all posts and ordering decendign order
     posts = Post.query.filter_by(author=user.id).order_by(Post.date_created.desc())
-    print(User.query.count())
     #This section fetches common words from the session. We calculate these in the sign-in function. So we only have to do it 1x
     NegativeWordLabels = session.get('NegativeWordLabels')
     NegativeWordValues = session.get('NegativeWordValues')

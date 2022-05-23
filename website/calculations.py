@@ -2,8 +2,9 @@ from distutils.command.build_scripts import first_line_re
 from flask import session
 import itertools
 from collections import Counter
+from regex import P
 from stop_words import get_stop_words
-from .models import Post
+from .models import Post, User
 from configparser import ConfigParser
 from datetime import datetime
 
@@ -87,3 +88,14 @@ def calculatepostsovertime(userID):
         countvalues = [row[1] for row in commondates]
         session['timestamplabels'] = timestamplabels     
         session['countvalues'] = countvalues
+
+
+def calculateseatsremaining():
+    print(User.query.count())
+    users_in_db = int(User.query.count())
+    freeseats = 100
+    remainingseats = freeseats - users_in_db
+    print("Calculating how many seats we have left")
+    print(remainingseats)
+    return remainingseats
+

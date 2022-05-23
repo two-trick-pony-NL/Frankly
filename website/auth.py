@@ -10,7 +10,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import re
 import phonenumbers
 import jwt
-from .calculations import calculatecommonwords, calculatepostsovertime
+from .calculations import calculatecommonwords, calculatepostsovertime, calculateseatsremaining
 
 config = ConfigParser()
 config.read('Env_Settings.cfg')
@@ -54,6 +54,8 @@ def signin():
 #This function handles signup 
 @auth.route("/sign-up", methods=['GET', 'POST'])
 def sign_up():
+    #If there is a post request, we assume the user filled out the sign-up form and we want to create an account. 
+    #Getting all the fields from the sign up page
     if request.method == 'POST':
         email = request.form.get("email")
         username = request.form.get("username")
@@ -64,8 +66,9 @@ def sign_up():
         customquestion0 = "How did you like our service?"
         customquestion1 = "What do you think we can improve?"
         customquestion2 = "is there anything else you'd like to tell us?"
+
         
-# checking if user exists
+        # checking if user exists, and running some other form validatuons
         email_exists = User.query.filter_by(email=email).first()
         username_exists = User.query.filter_by(username=username).first()
         if not option == "accepted":
@@ -114,9 +117,18 @@ def sign_up():
             newuserconfirmation(email)
             print("User signed up : " + username)
             return redirect(url_for('views.dashboard', username=username))
-        return render_template("signup.html", user=current_user)    
-    else:
         return render_template("signup.html", user=current_user)
+     
+    # If it is not a POST request it is a get and then we'll return the normal template
+    else:
+        # Making some logic so users will see the waiting list if we exceed the number of open spots for the beta launch
+        remainingseats = calculateseatsremaining()
+        print(remainingseats)
+    
+        if remainingseats == 0:
+            return redirect(url_for('messaging.getinvited')) 
+        else: 
+            return render_template("signup.html", user=None)
 
 
 
