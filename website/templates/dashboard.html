@@ -375,50 +375,7 @@
 
 
 
-    <!--Drawing the bar chart-->
-    <script>
-    var ctx = document.getElementById("lineChart").getContext("2d");
-    var lineChart = new Chart(ctx, {
-      type: "bar",
-      data: {
-        labels: {{ labels | safe }},
-        datasets: [
-          {
-          data: {{ values |safe }},
-          fill: true,
-          backgroundColor: [
-              'rgb(180, 231, 218)',
-              'rgb(245, 228, 81)',
-              'rgb(172, 173, 200)'
-            ],
-          },
-        ]
-      },
-      options: { 
-        scales: {
-          y: {
-            grid: {
-              display: false
-            }
-          },
-          x: {
-            grid: {
-              display: false
-            }
-          }
-          
-        },
-        ticks: {
-          stepSize: 10
-        },
-        indexAxis: 'x',
-        responsive: false, 
-        plugins: { 
-          legend: { display: false },
-          title: { display: true},
-          text: 'Commonly used words' } }
-    });
-  </script>
+    
 
     </div>
     {% else %}
@@ -431,7 +388,6 @@
 <!-- Drawing the doughnut chart-->
 {% if totalresponses  > 0 %}
 <hr>
-<h2> What your users are saying:</h2><br>
 
 
 <div class="row justify-content-between">
@@ -439,7 +395,50 @@
   
   <div class="col-sm-4">
 <!--Commonly used words-->
-
+<!--Drawing the bar chart-->
+<script>
+  var ctx = document.getElementById("lineChart").getContext("2d");
+  var lineChart = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: {{ labels | safe }},
+      datasets: [
+        {
+        data: {{ values |safe }},
+        fill: true,
+        backgroundColor: [
+            'rgb(180, 231, 218)',
+            'rgb(245, 228, 81)',
+            'rgb(172, 173, 200)'
+          ],
+        },
+      ]
+    },
+    options: { 
+      scales: {
+        y: {
+          grid: {
+            display: false
+          }
+        },
+        x: {
+          grid: {
+            display: false
+          }
+        }
+        
+      },
+      ticks: {
+        stepSize: 10
+      },
+      indexAxis: 'x',
+      responsive: false, 
+      plugins: { 
+        legend: { display: false },
+        title: { display: true},
+        text: 'Commonly used words' } }
+  });
+</script>
   <script>
     var ctx = document.getElementById("lineChartWords").getContext("2d");
     var lineChartWords = new Chart(ctx, {
@@ -475,7 +474,7 @@
         ticks: {
           stepSize: 10
         },
-        indexAxis: 'x',
+        indexAxis: 'y',
         responsive: false, 
         plugins: { 
           legend: { display: false },
@@ -520,7 +519,7 @@
         ticks: {
           stepSize: 10
         },
-        indexAxis: 'x',
+        indexAxis: 'y',
         responsive: false, 
         plugins: { 
           legend: { display: false },
@@ -619,7 +618,6 @@
     </div>  
   </div>
 
-    
 {% else %}
 <br><br>
 
@@ -628,6 +626,7 @@
 
   <div class="col-sm-8"><div id="posts"></br >
     {% if totalresponses  > 0 %}
+    <h2> What your users are saying:</h2><br>
 
 <!--Here we have the section that controls pagination-->
 
