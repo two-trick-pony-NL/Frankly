@@ -6,8 +6,6 @@
 ![Schermafbeelding 2022-05-23 om 14 45 53](https://user-images.githubusercontent.com/71013416/169822311-34d87a49-b1c6-4138-989a-e8f7aa47f612.png)
 
 ![WhatsApp Image 2022-03-30 at 6 30 49 PM](https://user-images.githubusercontent.com/71013416/161023146-d84b51a8-0b2c-4b24-a12f-8b4420363762.jpeg)
-
-![WhatsApp Image 2022-03-30 at 8 51 00 PM (1)](https://user-images.githubusercontent.com/71013416/161023157-b4e2c01f-53de-44af-90d0-6e676667c86a.jpeg)
 ![WhatsApp Image 2022-03-30 at 8 51 00 PM](https://user-images.githubusercontent.com/71013416/161023180-2cc41cbf-9648-4f59-95da-060578e74263.jpeg)
 
 ## Frankly
