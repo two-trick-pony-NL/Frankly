@@ -132,7 +132,7 @@ def newuserconfirmation(recipient):
    msg = Message(
                 'Welcome to Frankly!',
                 sender ='noreply@franklyapp.nl',
-                recipients = [recipient, 'hello@franklyapp.nl']
+                recipients = [recipient]
                )
    msg.body = 'Welcome to Frankly! Your account was registered succesfully!'
    msg.html = render_template('emailtemplates/welcome.html')

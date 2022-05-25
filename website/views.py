@@ -20,7 +20,6 @@ views = Blueprint("views", __name__)
 @views.route("/home")
 def home():
     print("Homepage loaded")
-    calculateseatsremaining()
     return render_template("home.html", user=current_user, posts=posts)
 
 #Renders the userdashboard requires a username to select the correct user dashboard
@@ -61,12 +60,6 @@ def dashboard(username):
         #if len(userlogo) > 0:
          #   user.userlogo =  userlogo
           #  db.session.commit()
-
-
-
-
-            
-
 #Get requests just load the page with the regular logic
     user = User.query.filter_by(username=username).first()
     try: #Addint a try/Except block here as I had ver weird error messages in this section

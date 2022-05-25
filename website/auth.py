@@ -1,4 +1,5 @@
 from email.policy import EmailPolicy
+from readline import set_auto_history
 from flask import Blueprint, render_template, redirect, url_for, request, flash, session
 from sqlalchemy import false
 from . import db
@@ -125,12 +126,16 @@ def sign_up():
     else:
         # Making some logic so users will see the waiting list if we exceed the number of open spots for the beta launch
         remainingseats = calculateseatsremaining()
-        print(remainingseats)
     
-        if remainingseats == 0:
+        if remainingseats < 1:
+            print("A new user is signing up but no more remaining seats, redirecting user to waiting list")
+            print(remainingseats)
             return redirect(url_for('messaging.getinvited')) 
+            
         else: 
-            return render_template("signup.html", user=None)
+            print("New user is signing up. There are still seats available so the user can sign up. here is how many seats we have left:  ")
+            print(remainingseats)
+            return render_template("signup.html", user=None, remainingseats=remainingseats)
 
 
 

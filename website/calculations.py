@@ -16,6 +16,7 @@ from datetime import datetime
 config = ConfigParser()
 config.read('Env_Settings.cfg')
 localstopwords = config.get('localstopwords', 'localstopwords')
+freeseats = config.get('freeseats', 'freeseats')
 
 
 
@@ -91,11 +92,11 @@ def calculatepostsovertime(userID):
 
 
 def calculateseatsremaining():
-    print(User.query.count())
+    config = ConfigParser()
+    config.read('Env_Settings.cfg')
+    freeseats = config.get('freeseats', 'freeseats')
     users_in_db = int(User.query.count())
-    freeseats = 500
+    freeseats = int(freeseats)
     remainingseats = freeseats - users_in_db
-    print("Calculating how many seats we have left")
-    print(remainingseats)
     return remainingseats
 
