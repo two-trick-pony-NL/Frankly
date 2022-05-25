@@ -15,7 +15,6 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(150), unique=True)
     username = db.Column(db.String(150), unique=True)
     userpublicname = db.Column(db.String(150))
-    userlogo = db.Column(db.String(250))
     password = db.Column(db.String(150))
     phonenumber = db.Column(db.String(20))
     isadmin = db.Column(db.Boolean())
