@@ -14,7 +14,7 @@ def createQR(userID):
     img = qrcode.make('https://franklyapp.nl/send-feedback/'+userID+'/1')
     img.save("./website/static/qrcodes/User_"+userID+"_detractor.png")
     #Creating a generic QR code
-    img = qrcode.make('https://franklyapp.nl/getfeedback/'+userID+'/1')
+    img = qrcode.make('https://franklyapp.nl/getfeedback/'+userID)
     img.save("./website/static/qrcodes/User_"+userID+"_generic.png")
   
 createQR(1)
