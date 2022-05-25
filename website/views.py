@@ -20,7 +20,8 @@ views = Blueprint("views", __name__)
 @views.route("/home")
 def home():
     print("Homepage loaded")
-    return render_template("home.html", user=current_user, posts=posts)
+    remainingseats = calculateseatsremaining()
+    return render_template("home.html", user=current_user, posts=posts, remainingseats=remainingseats)
 
 #Renders the userdashboard requires a username to select the correct user dashboard
 @views.route("/dashboard/<username>", methods=['GET', 'POST'])

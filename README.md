@@ -15,7 +15,7 @@ Frankly helps to make giving feedback easier. There are 4 methods that frankly c
 3. QR codes: Simply print QR codes to your own design and share it in the real world
 4. Email: Simply email yourself the template or send it in a batch to your customers directly 
 
-## Installation
+## Installation:
 
 
 

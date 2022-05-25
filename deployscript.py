@@ -19,7 +19,7 @@ print("\n########################\n")
 os.system("docker build --pull --rm -f \"dockerfile\" -t franklyapp:latest \".\"")
 
 print("\n########################\n")
-print("\n\nContainer created!\n\n")
+print("\n\nContainer created!!\n\n")
 print("\n########################\n")
 
 print("\n########################\n")

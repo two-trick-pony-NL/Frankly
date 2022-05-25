@@ -110,7 +110,11 @@
                          
                          <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 text-dark rounded" href="/sign-in">Sign In</a></li>
                          <!--<a class="btn bg-secondary py-3 px-4 border-dark " href="/sign-up" >Try for free!</a>  -->
+                        {% if remainingseats > 5%}
+                         <a class="btn bg-secondary py-3 px-4 border-dark " href="sign-up" ><b>Try for free!</b>  <span class="badge rounded-pill bg-dark"> {{remainingseats}} spots left</span></a>
+                         {% else%}
                          <a class="btn bg-secondary py-3 px-4 border-dark " href="sign-up" ><b>Try for free!</b></a>
+                         {% endif%}
                         
                      {% endif%}
                      </ul>
