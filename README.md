@@ -1,6 +1,6 @@
 # Franklyapp
 [![Build and deploy Docker app to Lightsail](https://github.com/two-trick-pony-NL/Frankly/actions/workflows/deploytoaws.yml/badge.svg)](https://github.com/two-trick-pony-NL/Frankly/actions/workflows/deploytoaws.yml)
-
+[![Dependency Review](https://github.com/two-trick-pony-NL/Frankly/actions/workflows/dependency-review.yml/badge.svg)](https://github.com/two-trick-pony-NL/Frankly/actions/workflows/dependency-review.yml)
 ## Currently in Beta release
 ![Schermafbeelding 2022-05-23 om 14 46 48](https://user-images.githubusercontent.com/71013416/169822424-08e2365c-4cef-48f5-9643-33ac5e8313ce.png)
 
