@@ -33,7 +33,7 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       - name: Setting all the secrets
-        run: wget https://franklyappsecret.s3.eu-central-1.amazonaws.com/Env_Settings.cfg
+        run: wget https://franklyappsecret.s3.eu-central-1.amazonaws.com/Env_Settings.cfg?${{ secrets.AWS_ACCESS_KEY_ID }}?${{ secrets.AWS_SECRET_ACCESS_KEY }}
         
       - name: Build Docker Image
         run: docker build -t franklyapp:latest .
