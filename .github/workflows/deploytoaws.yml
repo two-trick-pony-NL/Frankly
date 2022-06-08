@@ -32,6 +32,13 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: Setting all the secrets
+        run: |
+        touch Env_Settings.cfg
+        echo ${{ secrets.Env_Settings}} >> Env_Settings.cfg
+          
+          
+          
       - name: Build Docker Image
         run: docker build -t franklyapp:latest .
       - name: Push and Deploy
