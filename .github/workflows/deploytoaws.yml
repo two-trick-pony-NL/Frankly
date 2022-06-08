@@ -34,8 +34,8 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       - name: Setting all the secrets
         run: |
-        touch Env_Settings.cfg
-        echo ${{ secrets.Env_Settings}} >> Env_Settings.cfg
+          touch Env_Settings.cfg
+          echo ${{ secrets.Env_Settings}} >> Env_Settings.cfg
           
           
           
