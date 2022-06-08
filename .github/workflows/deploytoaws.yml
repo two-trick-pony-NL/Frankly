@@ -1,4 +1,4 @@
-name: Build and deploy Docker app to Lightsail
+name: 🚀 CI/CD
 on:
   push:
     branches:
