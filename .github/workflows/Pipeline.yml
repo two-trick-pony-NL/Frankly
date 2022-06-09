@@ -46,6 +46,10 @@ jobs:
         run: pip install playwright
       - name: Setting up playwright
         run: playwright install
+      - name: Starting development server 
+        run: python developmentserver.py
+      - name: Starting development server 
+        run: sleep 5s
       - name: Running playwright functional tests in a browser
         run: python website/test_functionaltest/test_homepage.py
 
