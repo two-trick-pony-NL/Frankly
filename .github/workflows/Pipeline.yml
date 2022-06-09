@@ -42,6 +42,8 @@ jobs:
         run: aws s3 cp s3://franklyappsecret/Env_Settings.cfg .
       - name: Running pytests on the code
         uses: cclauss/GitHub-Action-for-pytest@0.5.0
+      - name: Getting the secrets for the app to spin up the app
+        run: python website/test_functionaltest/test_homepage.py
 
 
   buildingimage:
@@ -86,7 +88,7 @@ jobs:
 
   deploy:
     needs: buildingimage
-    name: Deploy to app to AWS 
+    name: Deploy to AWS 
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -113,61 +115,9 @@ jobs:
 
       - name: Deploying app to production
         run: |
-
           aws lightsail create-container-service-deployment --service-name franklyapp \
             --containers file://AWS/deploymentconfig.json \
             --public-endpoint file://AWS/publicendpoint.json
-
-  Validation:
-    needs: deploy
-    name: Is the app live? 
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Install Utilities
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y jq unzip
-      - name: Install AWS Client
-        run: |
-          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-          unzip awscliv2.zip
-          sudo ./aws/install || true
-          aws --version
-          curl "https://s3.us-west-2.amazonaws.com/lightsailctl/latest/linux-amd64/lightsailctl" -o "lightsailctl"
-          sudo mv "lightsailctl" "/usr/local/bin/lightsailctl"
-          sudo chmod +x /usr/local/bin/lightsailctl
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-region: ${{ env.AWS_REGION }}
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-
-      - name: Validating the app is live 1st attempt
-        run: |
-            if aws lightsail get-container-service-deployments --service-name franklyapp | head -n 1   | grep -q 'ACTIVE'; then
-              echo "app is live!"; else sleep 2m
-            fi
-
-      - name: Validating the app is live 2nd attempt
-        run: |
-              if aws lightsail get-container-service-deployments --service-name franklyapp | head -n 1   | grep -q 'ACTIVE'; then
-                echo "app is live!"; else sleep 2m
-              fi
-
-      - name: Validating the app is live 3rd attempt
-        run: |
-              if aws lightsail get-container-service-deployments --service-name franklyapp | head -n 1   | grep -q 'ACTIVE'; then
-                echo "app is live!"; else sleep 2m
-              fi
-
-      - name: Validating the app is live 4h attempt
-        run: |
-          if aws lightsail get-container-service-deployments --service-name franklyapp | head -n 1   | grep -q 'ACTIVE'; then
-            echo "app is live!"; else exit 1
-          fi
 
       
       
