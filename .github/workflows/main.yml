@@ -27,7 +27,7 @@ jobs:
       
         # Runs a single command using the runners shell
       - name: Downloading pyscript
-        run: pip install pyscript
+        run: pip install pytest
 
       # Runs a single command using the runners shell
       - name: running the testscript
