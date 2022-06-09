@@ -124,15 +124,15 @@ jobs:
               echo "app is live!"; sleep 1m
             fi
 
-     - name: Validating the app is live 2nd attempt
-        run: |
-            if aws lightsail get-container-service-deployments --service-name franklyapp | head -n 1   | grep -q 'ACTIVE'; then
-              echo "app is live!"; sleep 1m
-            fi
-    - name: Validating the app is live 3th attempt
-        run: |
-        if aws lightsail get-container-service-deployments --service-name franklyapp | head -n 1   | grep -q 'ACTIVE'; then
-          echo "app is live!"; exit 1
-        fi
+      - name: Validating the app is live 2nd attempt
+          run: |
+              if aws lightsail get-container-service-deployments --service-name franklyapp | head -n 1   | grep -q 'ACTIVE'; then
+                echo "app is live!"; sleep 1m
+              fi
+      - name: Validating the app is live 3th attempt
+          run: |
+          if aws lightsail get-container-service-deployments --service-name franklyapp | head -n 1   | grep -q 'ACTIVE'; then
+            echo "app is live!"; exit 1
+          fi
 
       
