@@ -1,16 +1,51 @@
 name: 🚀 Deployment
 # Only trigger, when the build workflow succeeded
 on:
-  workflow_run:
-    workflows: ["🧪 Run tests with Pytest"]
-    types:
-      - completed
+  # Triggers the workflow on push or pull request events but only for the "master" branch
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+    
 env:
   AWS_REGION: eu-central-1
   AWS_LIGHTSAIL_SERVICE_NAME: franklyapp
 jobs:
-  deploy:
-    name: Build and deploy
+  testing:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: Taking a look at the code
+        uses: actions/checkout@v3
+      - name: Install utilities
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq unzip
+      - name: Install AWS Client
+        run: |
+          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+          unzip awscliv2.zip
+          sudo ./aws/install || true
+          aws --version
+          curl "https://s3.us-west-2.amazonaws.com/lightsailctl/latest/linux-amd64/lightsailctl" -o "lightsailctl"
+          sudo mv "lightsailctl" "/usr/local/bin/lightsailctl"
+          sudo chmod +x /usr/local/bin/lightsailctl
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-region: ${{ env.AWS_REGION }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: Getting the secrets for the app to spin up the app
+        run: aws s3 cp s3://franklyappsecret/Env_Settings.cfg .
+      - name: Running pytests on the code
+        uses: cclauss/GitHub-Action-for-pytest@0.5.0
+
+
+  building app:
+    needs: testing
+    name: Build image and deploy to Lightsail
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -48,6 +83,37 @@ jobs:
             --label ${service_name} \
             --image ${service_name}:latest
 
-          aws lightsail create-container-service-deployment --service-name franklyapp \
-            --containers file://AWS/deploymentconfig.json \
-            --public-endpoint file://AWS/publicendpoint.json
+      deploy:
+        needs: building app
+        needs: testing
+        name: Deploy to lightsail
+        runs-on: ubuntu-latest
+        steps:
+          - name: Checkout
+            uses: actions/checkout@v2
+          - name: Install Utilities
+            run: |
+              sudo apt-get update
+              sudo apt-get install -y jq unzip
+          - name: Install AWS Client
+            run: |
+              curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+              unzip awscliv2.zip
+              sudo ./aws/install || true
+              aws --version
+              curl "https://s3.us-west-2.amazonaws.com/lightsailctl/latest/linux-amd64/lightsailctl" -o "lightsailctl"
+              sudo mv "lightsailctl" "/usr/local/bin/lightsailctl"
+              sudo chmod +x /usr/local/bin/lightsailctl
+          - name: Configure AWS credentials
+            uses: aws-actions/configure-aws-credentials@v1
+            with:
+              aws-region: ${{ env.AWS_REGION }}
+              aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+              aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+          - name: Deploy to production
+            run: |
+
+              aws lightsail create-container-service-deployment --service-name franklyapp \
+                --containers file://AWS/deploymentconfig.json \
+                --public-endpoint file://AWS/publicendpoint.json
