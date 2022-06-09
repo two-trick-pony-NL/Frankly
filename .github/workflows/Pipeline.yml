@@ -50,8 +50,8 @@ jobs:
       - name: setting up dependencies
         run: pip3 install -r requirements.txt
       - name: Starting development server 
-        run: sudo python3 developmentserver.py
-      - name: Starting development server 
+        run: python3 developmentserver.py
+      - name: Waiting 5 seconds for the server to fully boot 
         run: sleep 5s
       - name: Running playwright functional tests in a browser
         run: python website/test_functionaltest/test_homepage.py
