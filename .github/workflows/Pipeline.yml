@@ -42,7 +42,11 @@ jobs:
         run: aws s3 cp s3://franklyappsecret/Env_Settings.cfg .
       - name: Running pytests on the code
         uses: cclauss/GitHub-Action-for-pytest@0.5.0
-      - name: Getting the secrets for the app to spin up the app
+      - name: Downloading playwright for testing
+        run: pip install playwright
+      - name: Setting up playwright
+        run: playwright install
+      - name: Running playwright functional tests in a browser
         run: python website/test_functionaltest/test_homepage.py
 
 
