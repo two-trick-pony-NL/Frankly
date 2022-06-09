@@ -1,4 +1,4 @@
-name: 🚀 Deployment
+name: 🚀 Test and deploy
 # Only trigger, when the build workflow succeeded
 on:
   # Triggers the workflow on push or pull request events but only for the "master" branch
@@ -85,7 +85,6 @@ jobs:
 
   deploy:
     needs: building app
-    needs: testing
     name: Deploy to lightsail
     runs-on: ubuntu-latest
     steps:
