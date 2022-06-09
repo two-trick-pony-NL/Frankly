@@ -48,9 +48,9 @@ jobs:
       - name: Setting up playwright
         run: playwright install
       - name: setting up dependencies
-        run: pip install -r requirements.txt
+        run: pip3 install -r requirements.txt
       - name: Starting development server 
-        run: sudo python developmentserver.py
+        run: sudo python3 developmentserver.py
       - name: Starting development server 
         run: sleep 5s
       - name: Running playwright functional tests in a browser
