@@ -1,0 +1,2 @@
+- name: 🧪 With Pytest
+  uses: cclauss/GitHub-Action-for-pytest@0.5.0
