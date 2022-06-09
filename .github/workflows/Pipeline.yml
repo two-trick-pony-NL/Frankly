@@ -46,6 +46,8 @@ jobs:
         run: pip install playwright
       - name: Setting up playwright
         run: playwright install
+      - name: setting up dependencies
+        run: pip install -r requirements.txt
       - name: Starting development server 
         run: python developmentserver.py
       - name: Starting development server 
