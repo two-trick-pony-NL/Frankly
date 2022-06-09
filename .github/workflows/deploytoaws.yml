@@ -1,8 +1,10 @@
 name: 🚀 Deployment
+# Only trigger, when the build workflow succeeded
 on:
-  push:
-    branches:
-      - master
+  workflow_run:
+    workflows: ["🧪 Run tests with Pytest"]
+    types:
+      - completed
 env:
   AWS_REGION: eu-central-1
   AWS_LIGHTSAIL_SERVICE_NAME: franklyapp
