@@ -1,4 +1,3 @@
-from distutils.command.build_scripts import first_line_re
 from flask import session
 import itertools
 from collections import Counter

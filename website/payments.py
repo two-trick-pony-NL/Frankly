@@ -12,10 +12,16 @@ payments = Blueprint("payments", __name__)
 
 @payments.route("/incoming_payment/<paymentID>", methods=['GET', 'POST'])
 def incoming_payment(paymentID):
-    user = User.query.filter_by(id=paymentID).first()
-    usernumber = str(user)
-    invoiceconfirmation(paymentID)
-    print("We got paid: $$$$$$$  " +usernumber + " has paid his bill")
-    user.haspaid =  1
-    db.session.commit()
-    return('', 204)
+    try:
+        user = User.query.filter_by(id=paymentID).first()
+        usernumber = str(user)
+        invoiceconfirmation(paymentID)
+        print("We got paid: $$$$$$$  " +usernumber + " has paid his bill")
+        user.haspaid =  1
+        db.session.commit()
+        return('', 204)
+    except:
+        return('404 Not found', 404)
+
+def func(x):
+    return x + 1
