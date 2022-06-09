@@ -31,7 +31,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y jq unzip
-      - name: Install AWS Client1
+      - name: Install AWS Client
         run: |
           curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
           unzip awscliv2.zip
@@ -52,4 +52,4 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: running the testscript
-        run: pytest
+        run: python pytest
