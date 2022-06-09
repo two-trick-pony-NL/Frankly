@@ -43,7 +43,7 @@ jobs:
         uses: cclauss/GitHub-Action-for-pytest@0.5.0
 
 
-  building app:
+  buildingimage:
     needs: testing
     name: Build image and deploy to Lightsail
     runs-on: ubuntu-latest
@@ -84,7 +84,7 @@ jobs:
             --image ${service_name}:latest
 
   deploy:
-    needs: building app
+    needs: buildingimage
     name: Deploy to lightsail
     runs-on: ubuntu-latest
     steps:
