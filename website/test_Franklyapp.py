@@ -58,7 +58,7 @@ def test_qrcodeneutrallink():
     im = cv.imread("./website/static/qrcodes/User_3_generic.png")
     det = cv.QRCodeDetector()
     retval, points, straight_qrcode = det.detectAndDecode(im)
-    assert retval == str("https://franklyapp.nl/getfeedback/2")
+    assert retval == str("https://franklyapp.nl/getfeedback/2eee333")
 
 
 
