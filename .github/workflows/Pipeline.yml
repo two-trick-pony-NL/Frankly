@@ -43,20 +43,6 @@ jobs:
       - name: Running pytests on the code
         uses: cclauss/GitHub-Action-for-pytest@0.5.0
       
-      - name: Downloading playwright for testing
-        run: pip install playwright
-      - name: Setting up playwright
-        run: playwright install
-      - name: setting up dependencies
-        run: pip3 install -r requirements.txt
-      - name: Starting development server 
-        run: python3 developmentserver.py
-      - name: Waiting 5 seconds for the server to fully boot 
-        run: sleep 5s
-      - name: Running playwright functional tests in a browser
-        run: python website/test_functionaltest/test_homepage.py
-
-
   buildingimage:
     needs: testing
     name: Building container image
