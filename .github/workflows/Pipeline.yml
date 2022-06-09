@@ -12,7 +12,7 @@ env:
   AWS_LIGHTSAIL_SERVICE_NAME: franklyapp
 jobs:
   testing:
-    name: Testing the code with Pytest
+    name: Running automated tests
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     # Steps represent a sequence of tasks that will be executed as part of the job
@@ -46,7 +46,7 @@ jobs:
 
   buildingimage:
     needs: testing
-    name: Build container image
+    name: Building container image
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -86,7 +86,7 @@ jobs:
 
   deploy:
     needs: buildingimage
-    name: Deploy to lightsail [PRODUCTION]
+    name: Deploy to app to AWS 
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -117,3 +117,22 @@ jobs:
           aws lightsail create-container-service-deployment --service-name franklyapp \
             --containers file://AWS/deploymentconfig.json \
             --public-endpoint file://AWS/publicendpoint.json
+
+      - name: Validating the app is live 1st attempt
+        run: |
+            if aws lightsail get-container-service-deployments --service-name franklyapp | head -n 1   | grep -q 'ACTIVE'; then
+              echo "app is live!"; sleep 1m
+            fi
+
+     - name: Validating the app is live 2nd attempt
+        run: |
+            if aws lightsail get-container-service-deployments --service-name franklyapp | head -n 1   | grep -q 'ACTIVE'; then
+              echo "app is live!"; sleep 1m
+            fi
+    - name: Validating the app is live 3th attempt
+        run: |
+        if aws lightsail get-container-service-deployments --service-name franklyapp | head -n 1   | grep -q 'ACTIVE'; then
+          echo "app is live!"; exit 1
+        fi
+
+      
