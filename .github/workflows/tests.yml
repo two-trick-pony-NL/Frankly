@@ -1,2 +1,9 @@
-- name: 🧪 With Pytest
+name:  🧪 Run Tests with Pytest
+on:
+  push:
+    branches:
+      - master
+jobs:
+
+- name: 🧪 Start testing
   uses: cclauss/GitHub-Action-for-pytest@0.5.0
