@@ -40,8 +40,12 @@ jobs:
       run: |
         aws s3 cp s3://franklyappsecret/Env_Settings.cfg .
         ls
+    - name: Running the server for tests
+      run: |
+          aws s3 cp s3://franklyappsecret/Env_Settings.cfg .
+          python3 developmentserver.py
     
-  Runtests:
+  tests:
     concurrency: tests
     needs: RunServer
     runs-on: ubuntu-latest
@@ -55,14 +59,9 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt
         pip install flake8 pytest              
 
-    - name: Running the server for tests
-      run: |
-          aws s3 cp s3://franklyappsecret/Env_Settings.cfg .
-          #python3 developmentserver.py
-          pytest
+    
     - name: Test with pytest
       run: |    
             pytest
