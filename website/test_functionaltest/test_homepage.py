@@ -9,7 +9,7 @@ def run(playwright: Playwright) -> None:
     page = context.new_page()
 
     # Go to http://localhost/
-    page.goto("http://localhost:8080")
+    page.goto("http://localhost/")
 
     # Click text=Who is behind Frankly?
     page.locator("text=Who is behind Frankly?").click()

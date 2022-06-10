@@ -38,10 +38,8 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
     - name: Getting the secrets for the app
       run: aws s3 cp s3://franklyappsecret/Env_Settings.cfg .
-    - name: Set up Python 2.7.18
-      uses: actions/setup-python@v3
-      with:
-        python-version: "2.7.18"
+    - name: Set up Python 
+      run: sudo apt-get install python3
     - name: Install dependencies
       run: |
         pip3 install flake8 pytest
