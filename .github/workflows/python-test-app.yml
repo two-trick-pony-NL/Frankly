@@ -49,10 +49,12 @@ jobs:
     
   tests:
     concurrency: tests
-    needs: RunServer
     runs-on: ubuntu-latest
 
     steps:
+    - name: Sleep for 30 seconds
+      run: sleep 4m
+      shell: bash
     - uses: actions/checkout@v3
     - name: Set up Python
       uses: actions/setup-python@v3
