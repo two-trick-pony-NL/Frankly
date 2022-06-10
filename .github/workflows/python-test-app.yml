@@ -55,6 +55,7 @@ jobs:
         
     - name: Running the server for tests
       run: |
+          ls
           python3 developmentserver.py
     - name: Test with pytest
       run: |    
