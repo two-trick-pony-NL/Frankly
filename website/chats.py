@@ -92,7 +92,7 @@ def create_comment(post_id):
             db.session.commit()
         else:
             flash('Post does not exist.', category='warning')
-    return redirect(url_for('views.dashboard', user=user))    
+    return redirect(url_for('views.dashboard', user=current_user))    
 
 
 @chats.route("/getfeedback/<user_id>", methods=["GET"])
