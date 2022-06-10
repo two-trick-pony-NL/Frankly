@@ -37,21 +37,29 @@ jobs:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
     - name: Getting the secrets for the app
-      run: aws s3 cp s3://franklyappsecret/Env_Settings.cfg .
-
-    - name: Set up Python 
-      run: sudo apt-get install python3
-
+      run: |
+        aws s3 cp s3://franklyappsecret/Env_Settings.cfg .
+        ls
+    
+    
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.x'
     - name: Install dependencies
       run: |
-        pip3 install flake8 pytest
-              
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install flake8 pytest              
         
-    - name: Test with pytest
+    - name: Running the server for tests
       run: |
-        pip3 install -r requirements.txt 
-        sudo python3 developmentserver.py
-        pytest
+          aws s3 cp s3://franklyappsecret/Env_Settings.cfg .
+          python3 developmentserver.py
+    - name: Test with pytest
+      run: |    
+           pytest
     
     - name: Lint with flake8
       run: |
