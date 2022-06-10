@@ -42,16 +42,19 @@ jobs:
     - name: Set up Python 
       run: sudo apt-get install python3
 
-    - name: Install dependencies
+    - name: Install test dependencies
       run: |
         pip3 install flake8 pytest
               
         
-    - name: Test with pytest
+    - name: Set up Python
       run: |
         sudo apt-get -y install python3-pip
-        python3 -m pip3 install -r requirements.txt
+        pip3 --version
+        python -m pip3 install -r requirements.txt
         sudo python3 developmentserver.py
+    - name: Test with pytest
+      run: |    
         pytest
     
     - name: Lint with flake8
