@@ -50,9 +50,9 @@ jobs:
           aws s3 cp s3://franklyappsecret/Env_Settings.cfg .
           python3 developmentserver.py
     
-  tests:
+  Testing:
     concurrency: tests
-    needs: RunServer
+
     runs-on: ubuntu-latest
 
     steps:            
@@ -61,7 +61,7 @@ jobs:
             pytest
   Linter:
     concurrency: tests
-    needs: RunServer
+    needs: Testing
     runs-on: ubuntu-latest
     steps:  
       - name: Lint with flake8
