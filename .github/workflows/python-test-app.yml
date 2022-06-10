@@ -41,7 +41,7 @@ jobs:
         aws s3 cp s3://franklyappsecret/Env_Settings.cfg .
         ls
     
-Runtests:
+  Runtests:
     concurrency: tests
     needs: RunServer
     runs-on: ubuntu-latest
