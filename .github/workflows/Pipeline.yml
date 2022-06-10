@@ -1,5 +1,6 @@
 name: 🚀 Test and deploy
 # Only trigger, when the build workflow succeeded
+
   release:
     types:
       - created
@@ -71,26 +72,6 @@ jobs:
         
       - name: Build Docker Image
         run: docker build -t franklyapp:latest .
-        
-        
-      - name: Run Snyk to check Docker image for vulnerabilities
-        # Snyk can be used to break the build when it detects vulnerabilities.
-        # In this case we want to upload the issues to GitHub Code Scanning
-        continue-on-error: true
-        uses: snyk/actions/docker@14818c4695ecc4045f33c9cee9e795a788711ca4
-        env:
-          # In order to use the Snyk Action you will need to have a Snyk API token.
-          # More details in https://github.com/snyk/actions#getting-your-snyk-token
-          # or you can signup for free at https://snyk.io/login
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          image: franklyapp:latest
-          args: --file=Dockerfile
-
-    - name: Upload result to GitHub Code Scanning
-      uses: github/codeql-action/upload-sarif@v2
-      with:
-        sarif_file: snyk.sarif
       - name: Push image to container register
         run: |
           service_name=${{ env.AWS_LIGHTSAIL_SERVICE_NAME }}
@@ -99,7 +80,6 @@ jobs:
             --service-name ${service_name} \
             --label ${service_name} \
             --image ${service_name}:latest
-
   deploy:
     needs: buildingimage
     name: Deploy to AWS 
@@ -132,6 +112,3 @@ jobs:
           aws lightsail create-container-service-deployment --service-name franklyapp \
             --containers file://AWS/deploymentconfig.json \
             --public-endpoint file://AWS/publicendpoint.json
-
-      
-      
