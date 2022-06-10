@@ -56,7 +56,8 @@ jobs:
     - name: Running the server for tests
       run: |
           aws s3 cp s3://franklyappsecret/Env_Settings.cfg .
-          python3 developmentserver.py
+          #python3 developmentserver.py
+          pytest
     - name: Test with pytest
       run: |    
            pytest
