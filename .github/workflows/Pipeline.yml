@@ -41,65 +41,65 @@ jobs:
       - name: Running pytests on the code
         uses: cclauss/GitHub-Action-for-pytest@0.5.0
       
-  buildingimage:
-    needs: testing
-    name: Building container image
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Install Utilities
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y jq unzip
-      - name: Install AWS Client
-        run: |
-          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-          unzip awscliv2.zip
-          sudo ./aws/install || true
-          aws --version
-          curl "https://s3.us-west-2.amazonaws.com/lightsailctl/latest/linux-amd64/lightsailctl" -o "lightsailctl"
-          sudo mv "lightsailctl" "/usr/local/bin/lightsailctl"
-          sudo chmod +x /usr/local/bin/lightsailctl
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-region: ${{ env.AWS_REGION }}
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      - name: Getting the secrets for the app
-        run: aws s3 cp s3://franklyappsecret/Env_Settings.cfg .
-        
-      - name: Build Docker Image
-        run: docker build -t franklyapp:latest .
-        
-        
-      - name: Run Snyk to check Docker image for vulnerabilities
-        # Snyk can be used to break the build when it detects vulnerabilities.
-        # In this case we want to upload the issues to GitHub Code Scanning
-        continue-on-error: true
-        uses: snyk/actions/docker@14818c4695ecc4045f33c9cee9e795a788711ca4
-        env:
-          # In order to use the Snyk Action you will need to have a Snyk API token.
-          # More details in https://github.com/snyk/actions#getting-your-snyk-token
-          # or you can signup for free at https://snyk.io/login
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          image: franklyapp:latest
-          args: --file=Dockerfile
+    buildingimage:
+      needs: testing
+      name: Building container image
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+        - name: Install Utilities
+          run: |
+            sudo apt-get update
+            sudo apt-get install -y jq unzip
+        - name: Install AWS Client
+          run: |
+            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+            unzip awscliv2.zip
+            sudo ./aws/install || true
+            aws --version
+            curl "https://s3.us-west-2.amazonaws.com/lightsailctl/latest/linux-amd64/lightsailctl" -o "lightsailctl"
+            sudo mv "lightsailctl" "/usr/local/bin/lightsailctl"
+            sudo chmod +x /usr/local/bin/lightsailctl
+        - name: Configure AWS credentials
+          uses: aws-actions/configure-aws-credentials@v1
+          with:
+            aws-region: ${{ env.AWS_REGION }}
+            aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        - name: Getting the secrets for the app
+          run: aws s3 cp s3://franklyappsecret/Env_Settings.cfg .
 
-    - name: Upload result to GitHub Code Scanning
-      uses: github/codeql-action/upload-sarif@v2
-      with:
-        sarif_file: snyk.sarif
-      - name: Push image to container register
-        run: |
-          service_name=${{ env.AWS_LIGHTSAIL_SERVICE_NAME }}
-          aws lightsail push-container-image \
-            --region ${{ env.AWS_REGION }} \
-            --service-name ${service_name} \
-            --label ${service_name} \
-            --image ${service_name}:latest
+        - name: Build Docker Image
+          run: docker build -t franklyapp:latest .
+
+
+        - name: Run Snyk to check Docker image for vulnerabilities
+          # Snyk can be used to break the build when it detects vulnerabilities.
+          # In this case we want to upload the issues to GitHub Code Scanning
+          continue-on-error: true
+          uses: snyk/actions/docker@14818c4695ecc4045f33c9cee9e795a788711ca4
+          env:
+            # In order to use the Snyk Action you will need to have a Snyk API token.
+            # More details in https://github.com/snyk/actions#getting-your-snyk-token
+            # or you can signup for free at https://snyk.io/login
+            SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+          with:
+            image: franklyapp:latest
+            args: --file=Dockerfile
+
+      - name: Upload result to GitHub Code Scanning
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: snyk.sarif
+        - name: Push image to container register
+          run: |
+            service_name=${{ env.AWS_LIGHTSAIL_SERVICE_NAME }}
+            aws lightsail push-container-image \
+              --region ${{ env.AWS_REGION }} \
+              --service-name ${service_name} \
+              --label ${service_name} \
+              --image ${service_name}:latest
 
   deploy:
     needs: buildingimage
