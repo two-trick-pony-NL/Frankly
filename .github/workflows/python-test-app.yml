@@ -69,7 +69,8 @@ jobs:
 Linter:
   concurrency: tests
   needs: RunServer
-  runs-on: ubuntu-latest  
+  runs-on: ubuntu-latest
+  steps:  
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
