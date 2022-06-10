@@ -36,32 +36,38 @@ jobs:
         aws-region: ${{ env.AWS_REGION }}
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      - uses: actions/checkout@v3
-      - name: Set up Python
-        uses: actions/setup-python@v3
-        with:
-      python-version: '3.x'
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install flake8 pytest  
-      - name: Running the server for tests
-        run: |
+    - name: Getting the secrets for the app
+      run: |
+        aws s3 cp s3://franklyappsecret/Env_Settings.cfg .
+        ls
+    - name: Running the server for tests
+      run: |
           aws s3 cp s3://franklyappsecret/Env_Settings.cfg .
           python3 developmentserver.py
     
-  Testing:
+  tests:
     concurrency: tests
-
+    needs: RunServer
     runs-on: ubuntu-latest
 
-    steps:            
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.x'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install flake8 pytest              
+
+    
     - name: Test with pytest
       run: |    
             pytest
   Linter:
     concurrency: tests
-    needs: Testing
+    needs: RunServer
     runs-on: ubuntu-latest
     steps:  
       - name: Lint with flake8
