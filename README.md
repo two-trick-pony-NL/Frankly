@@ -1,6 +1,7 @@
 # Franklyapp
 [![🚀 Test and deploy](https://github.com/two-trick-pony-NL/Frankly/actions/workflows/Pipeline.yml/badge.svg)](https://github.com/two-trick-pony-NL/Frankly/actions/workflows/Pipeline.yml)
-[![Dependency Review](https://github.com/two-trick-pony-NL/Frankly/actions/workflows/dependency-review.yml/badge.svg)]
+[![ 🐍 Snyk Container](https://github.com/two-trick-pony-NL/Frankly/actions/workflows/snyk-container.yml/badge.svg)](https://github.com/two-trick-pony-NL/Frankly/actions/workflows/snyk-container.yml)
+[![ 🔐 Dependency Review](https://github.com/two-trick-pony-NL/Frankly/actions/workflows/dependency-review.yml/badge.svg)]
 
 
 ## Currently in Beta release
