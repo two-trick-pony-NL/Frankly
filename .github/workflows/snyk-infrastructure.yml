@@ -11,7 +11,9 @@
 # and fail PR checks, see https://github.com/snyk/actions/
 
 name: Snyk Infrastructure as Code
-
+env:
+  AWS_REGION: eu-central-1
+  AWS_LIGHTSAIL_SERVICE_NAME: franklyapp
 on:
   push:
     branches: [ "master" ]

@@ -21,7 +21,9 @@ on:
     branches: [ "master" ]
   schedule:
     - cron: '32 15 * * 3'
-
+env:
+  AWS_REGION: eu-central-1
+  AWS_LIGHTSAIL_SERVICE_NAME: franklyapp
 permissions:
   contents: read
 
