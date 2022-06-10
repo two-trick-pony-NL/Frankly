@@ -16,9 +16,11 @@ env:
   AWS_LIGHTSAIL_SERVICE_NAME: franklyapp
 jobs:
   Runtests:
-    concurrency: tests
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        python-version: [ '2.x', '3.x']
+    name: Python ${{ matrix.python-version }} sample
     steps:
     - uses: actions/checkout@v3
     - name: Install AWS Client

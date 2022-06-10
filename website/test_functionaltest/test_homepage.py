@@ -1,4 +1,22 @@
 from playwright.sync_api import Playwright, sync_playwright, expect
+from urllib import response
+from website.payments import *
+from website.qrgenerator import *
+import os
+import tempfile
+
+import pytest
+
+from app import app
+
+
+@pytest.fixture
+def client():
+    app.config.update({'TESTING': True})
+
+    with app.test_client() as client:
+        yield client
+
 
 
 def run(playwright: Playwright) -> None:
