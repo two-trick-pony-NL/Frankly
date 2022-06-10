@@ -48,7 +48,6 @@ MarkupSafe==2.1.0
 matplotlib==3.5.1
 msgpack==1.0.3
 mysql-connector-python==8.0.28
-mysql-connector-python-rf==2.2.2
 nltk==3.7
 numpy==1.22.3
 packaging==21.3
