@@ -45,8 +45,7 @@ jobs:
     - name: Install dependencies
       run: |
         pip3 install flake8 pytest
-        pip3 install -r requirements.txt
-        
+        pip3 install --user -r requirements.txt        
         
     - name: Test with pytest
       run: |
