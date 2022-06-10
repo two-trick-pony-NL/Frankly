@@ -20,8 +20,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: becoming superuser
-      run: sudo su
     - uses: actions/checkout@v3
     - name: Install AWS Client
       run: |
@@ -40,7 +38,6 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
     - name: Getting the secrets for the app
       run: |
-        sudo su
         aws s3 cp s3://franklyappsecret/Env_Settings.cfg .
     
     
@@ -51,16 +48,16 @@ jobs:
         python-version: '3.x'
     - name: Install dependencies
       run: |
-        sudo python -m pip install --upgrade pip
-        sudo pip install -r requirements.txt
-        sudo pip install flake8 pytest              
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install flake8 pytest              
         
     - name: Running the server for tests
       run: |
-        sudo python developmentserver.py
+          python developmentserver.py
     - name: Test with pytest
       run: |    
-        sudo pytest
+           pytest
     
     - name: Lint with flake8
       run: |
