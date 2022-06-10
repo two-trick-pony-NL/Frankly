@@ -1,4 +1,4 @@
-from flask import Flask, flash 
+
 from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_login import LoginManager
@@ -7,7 +7,7 @@ from sqlalchemy import true
 from apilytics.flask import apilytics_middleware
 from flask_migrate import Migrate
 from flask_mail import Mail, Message
-
+from flask import Flask, flash 
 
 db = SQLAlchemy()
 mail = Mail()
