@@ -1,3 +1,4 @@
+from csv import excel_tab
 from playwright.sync_api import Playwright, sync_playwright, expect
 from urllib import response
 from website.payments import *
@@ -5,22 +6,12 @@ from website.qrgenerator import *
 import os
 import subprocess
 import tempfile
+from developmentserver import create_app
 
 import pytest
 
-from app import app
-
-
-
-@pytest.fixture
-def client():
-    app.config.update({'TESTING': True})
-    with app.test_client() as client:
-        yield client
 
 def run(playwright: Playwright) -> None:
-    subprocess.run('pwd')
-    subprocess.run('cd ../..; cd ..; aws s3 cp s3://franklyappsecret/Env_Settings.cfg .; python3 developmentserver.py')
     browser = playwright.chromium.launch(headless=True)
     context = browser.new_context()
 

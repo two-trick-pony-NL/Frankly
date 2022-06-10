@@ -80,3 +80,6 @@ def test_useroutofrange(client):
     response = client.get('/incoming_payment/99999999')
     assert response.status_code == 404
     assert b"404 Not found" in response.data
+
+from website import create_app
+
