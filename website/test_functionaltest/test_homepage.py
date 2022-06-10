@@ -3,6 +3,7 @@ from urllib import response
 from website.payments import *
 from website.qrgenerator import *
 import os
+import subprocess
 import tempfile
 
 import pytest
@@ -10,16 +11,16 @@ import pytest
 from app import app
 
 
+
 @pytest.fixture
 def client():
     app.config.update({'TESTING': True})
-
     with app.test_client() as client:
         yield client
 
-
-
 def run(playwright: Playwright) -> None:
+    subprocess.run('pwd')
+    subprocess.run('cd ../..; cd ..; aws s3 cp s3://franklyappsecret/Env_Settings.cfg .; python3 developmentserver.py')
     browser = playwright.chromium.launch(headless=True)
     context = browser.new_context()
 
@@ -76,6 +77,6 @@ def run(playwright: Playwright) -> None:
     context.close()
     browser.close()
 
-
 with sync_playwright() as playwright:
+    
     run(playwright)
