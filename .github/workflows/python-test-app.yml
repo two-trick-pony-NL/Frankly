@@ -15,7 +15,7 @@ env:
   AWS_REGION: eu-central-1
   AWS_LIGHTSAIL_SERVICE_NAME: franklyapp
 jobs:
-  RunServer:
+  Runtests:
     concurrency: tests
     runs-on: ubuntu-latest
 

@@ -83,3 +83,4 @@ Werkzeug==2.0.3
 WTForms==2.1
 zope.event==4.5.0
 zope.interface==5.4.0
+opencv-python==4.6.0.66
