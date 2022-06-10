@@ -1,6 +1,6 @@
 name: 🚀 Test and deploy
 # Only trigger, when the build workflow succeeded
-
+on:
   release:
     types:
       - created
