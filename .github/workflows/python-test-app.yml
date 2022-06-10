@@ -38,6 +38,7 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
     - name: Getting the secrets for the app
       run: aws s3 cp s3://franklyappsecret/Env_Settings.cfg .
+      run: ls
     
     
     - uses: actions/checkout@v3
