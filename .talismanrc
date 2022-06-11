@@ -1,7 +1,5 @@
 fileignoreconfig:
 - filename: .github/workflows/python-test-app.yml
-  checksum: 1f8a8f0a7be611c309fc1650885ecaec340df3dcfffa21d705d0f8a51296da7f
-version: ""
 
 scopeconfig:
   - scope: yml
@@ -11,3 +9,8 @@ custom_severities:
   severity: medium
 - detector: HexContent
   severity: medium
+
+allowed_patterns:
+- keyword
+- aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+- aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}    
