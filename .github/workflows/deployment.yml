@@ -11,7 +11,6 @@ env:
 jobs:
         
   buildingimage:
-    needs: testing
     name: Building container image
     runs-on: ubuntu-latest
     steps:
