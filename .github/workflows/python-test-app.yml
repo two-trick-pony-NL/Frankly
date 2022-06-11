@@ -17,7 +17,7 @@ env:
 jobs:
   Runtests:
     runs-on: ubuntu-latest
-      concurrency: 
+    concurrency: 
     group: tests
     strategy:
       matrix:
