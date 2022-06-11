@@ -14,10 +14,11 @@ permissions:
 env:
   AWS_REGION: eu-central-1
   AWS_LIGHTSAIL_SERVICE_NAME: franklyapp
+
 jobs:
   flake8Linter:
     runs-on: ubuntu-latest
-    needs: [SnykCodescan, Bandit-Scan, dependency-review]
+    needs: [SnykCodescan, Bandit-Scan, dependency-review, ScanSensitiveData]
     concurrency: 
       group: tests
       cancel-in-progress: true
@@ -150,12 +151,16 @@ jobs:
   dependency-review:
     runs-on: ubuntu-latest
     concurrency: 
-      group: SecurityChecks
+      group: Security
       cancel-in-progress: true
     steps:
     - uses: actions/setup-python@v2
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: '3.8'
+
+    - uses: homoluctus/pip-audit-action@v1
+      with:
+        type: pip
 
     - uses: homoluctus/pip-audit-action@v1
       with:
@@ -164,6 +169,7 @@ jobs:
 
   playwright:
     runs-on: ubuntu-latest
+    needs: [SnykCodescan, Bandit-Scan, dependency-review, ScanSensitiveData]
     concurrency: 
       group: tests
       cancel-in-progress: true
@@ -174,7 +180,7 @@ jobs:
   ScanSensitiveData:
     runs-on: ubuntu-18.04
     concurrency: 
-      group: SecurityChecks
+      group: Security
       cancel-in-progress: true
     steps:
       - uses: actions/checkout@v2
@@ -183,10 +189,12 @@ jobs:
           path: website
           token: ${{ secrets.GITHUB_TOKEN }}
           ignorePaths: '["src/__tests__/checker.*.test.ts"]'
-          ignoreEmails: '[".*@franklyapp.com", ".*@petervandoorn.com"]'
+          ignoreEmails: '[".*@franklyapp.com", ".*@petervandoorn.com", "email"]'
 
   Finishingtests:
       runs-on: ubuntu-latest
-      needs: [ScanSensitiveData, SnykCodescan, Bandit-Scan, pytest, dependency-review, playwright, flake8Linter]
+      concurrency: 
+      group: Nope
+      needs: [ pytest, playwright, flake8Linter]
       steps:
       - run: echo "all done!"
