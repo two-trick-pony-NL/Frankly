@@ -1,6 +1,5 @@
 # Franklyapp
 [![CICDPipeline](https://github.com/two-trick-pony-NL/Frankly/actions/workflows/CI.yml/badge.svg)](https://github.com/two-trick-pony-NL/Frankly/actions/workflows/CI.yml)
-[![ 🐍 Snyk Container](https://github.com/two-trick-pony-NL/Frankly/actions/workflows/snyk-container.yml/badge.svg)](https://github.com/two-trick-pony-NL/Frankly/actions/workflows/snyk-container.yml)
 [![Testing Python application](https://github.com/two-trick-pony-NL/Frankly/actions/workflows/python-test-app.yml/badge.svg)](https://github.com/two-trick-pony-NL/Frankly/actions/workflows/python-test-app.yml)
 [![ 🛠 Dependency Review](https://github.com/two-trick-pony-NL/Frankly/actions/workflows/dependency-review.yml/badge.svg)](https://github.com/two-trick-pony-NL/Frankly/actions/workflows/dependency-review.yml)
 
