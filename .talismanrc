@@ -1,5 +1,7 @@
 fileignoreconfig:
 - filename: .github/workflows/python-test-app.yml
+  checksum: 7e2511dd54bfb60fb162b093cfdd8b840f0a1e08361cb851dcdef57f541b6df7
+version: ""
 
 scopeconfig:
   - scope: yml

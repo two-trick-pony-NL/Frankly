@@ -202,7 +202,19 @@ jobs:
   Finishingtests:
       runs-on: ubuntu-latest
       concurrency: 
-        group: None
+        group: done
       needs: [ pytest, playwright, flake8Linter]
       steps:
       - run: echo "all done!"
+
+  MinorRelease:
+      runs-on: ubuntu-latest
+      concurrency: 
+        group: done
+      needs: [ pytest, playwright, flake8Linter]
+      steps:
+      - uses: actions/checkout@v2
+      - uses: ncipollo/release-action@v1
+      with:
+        bodyFile: "readme.md"
+        token: ${{ secrets.GITHUB_TOKEN }}
