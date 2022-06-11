@@ -110,7 +110,7 @@ jobs:
       - name: 'Dependency Review'
         uses: actions/dependency-review-action@v1
 
-  Finishingtests:
+  playwright:
     runs-on: ubuntu-latest
     concurrency: 
       group: tests
@@ -120,6 +120,6 @@ jobs:
 
   Finishingtests:
       runs-on: ubuntu-latest
-      needs: [SnykCodescan, Bandit-Scan, pytest, dependency-review]
+      needs: [SnykCodescan, Bandit-Scan, pytest, dependency-review, playwright]
       steps:
       - run: echo "all done!"
