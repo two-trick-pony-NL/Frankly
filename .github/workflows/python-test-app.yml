@@ -57,7 +57,9 @@ jobs:
         pip install flake8 pytest               
 
     - name: Test with pytest
-      run: |    
+      run: |
+            nohup python developmentserver.py
+            sleep 10s
             pytest
     - name: Lint with flake8
       run: |
