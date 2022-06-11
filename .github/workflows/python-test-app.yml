@@ -200,6 +200,7 @@ jobs:
       
 
   Finishingtests:
+      name: Sending success notification
       runs-on: ubuntu-latest
       concurrency: 
         group: done
@@ -208,6 +209,7 @@ jobs:
       - run: echo "all done!"
 
   MinorRelease:
+      name: Releasing to Production
       runs-on: ubuntu-latest
       concurrency: 
         group: done
