@@ -21,12 +21,12 @@ jobs:
     needs: [SnykCodescan, Bandit-Scan, dependency-review, ScanSensitiveData]
     concurrency: 
       group: tests
-      cancel-in-progress: true
+      cancel-in-progress: false
     strategy:
       matrix:
         python-version: [ '2.x', '3.x']
         #python-version: ['3.x']
-    name: Python ${{ matrix.python-version }} sample
+    name: Python ${{ matrix.python-version }} Linter
     steps:
     - uses: actions/checkout@v3
     - name: Install AWS Client
@@ -48,7 +48,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v3
       with:
-        python-version: '3.x'
+        python-version: ${{ matrix.python-version }}
     - name: Running the server for tests
       run: |
           pip install -r requirements.txt
@@ -73,7 +73,7 @@ jobs:
     needs: [SnykCodescan, Bandit-Scan, dependency-review, ScanSensitiveData]
     concurrency: 
       group: tests
-      cancel-in-progress: true
+      cancel-in-progress: false
     strategy:
       matrix:
         python-version: [ '2.x', '3.x']
@@ -100,7 +100,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v3
       with:
-        python-version: '3.x'
+        python-version: ${{ matrix.python-version }}
     - name: Running the server for tests
       run: |
           pip install -r requirements.txt
@@ -123,7 +123,7 @@ jobs:
     runs-on: ubuntu-latest
     concurrency: 
       group: codescan
-      cancel-in-progress: true
+      cancel-in-progress: false
     steps:
     # Checkout the code from GitHub
       - uses: actions/checkout@v2
@@ -138,7 +138,7 @@ jobs:
     runs-on: ubuntu-latest
     concurrency: 
         group: codescan
-        cancel-in-progress: true
+        cancel-in-progress: false
     steps:
       - uses: actions/checkout@master
       - name: Run Snyk to check for vulnerabilities
@@ -152,11 +152,17 @@ jobs:
     runs-on: ubuntu-latest
     concurrency: 
       group: Security
-      cancel-in-progress: true
+      cancel-in-progress: false
+    strategy:
+      matrix:
+        python-version: [ '2.x', '3.x']
+        #python-version: ['3.x']
+    name: Python ${{ matrix.python-version }} Checking dependencies
     steps:
+    - uses: actions/checkout@v3
     - uses: actions/setup-python@v2
       with:
-        python-version: '3.8'
+        python-version: ${{ matrix.python-version }}
 
     - uses: homoluctus/pip-audit-action@v1
       with:
@@ -172,7 +178,7 @@ jobs:
     needs: [SnykCodescan, Bandit-Scan, dependency-review, ScanSensitiveData]
     concurrency: 
       group: tests
-      cancel-in-progress: true
+      cancel-in-progress: false
     steps:
     - run: echo "Placeholder for playwright"
 
@@ -180,7 +186,7 @@ jobs:
     runs-on: ubuntu-18.04
     concurrency: 
       group: Security
-      cancel-in-progress: true
+      cancel-in-progress: false
     steps:
       - uses: actions/checkout@v2
       - uses: Vannevelj/sensitivity@v1.11
