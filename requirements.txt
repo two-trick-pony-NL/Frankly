@@ -29,7 +29,6 @@ Flask-Migrate==3.1.0
 Flask-Session==0.4.0
 Flask-Share==0.1.1
 Flask-SQLAlchemy==2.5.1
-Flask-WTF==3.0.0a1
 fonttools==4.32.0
 gevent==21.12.0
 geventhttpclient==1.5.3
@@ -80,7 +79,6 @@ twilio==7.8.0
 typing_extensions==4.1.1
 urllib3==1.26.8
 Werkzeug==2.0.3
-WTForms==2.1
 zope.event==4.5.0
 zope.interface==5.4.0
 opencv-python==4.6.0.66

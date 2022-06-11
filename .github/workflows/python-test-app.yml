@@ -153,11 +153,8 @@ jobs:
     concurrency: 
       group: Security
       cancel-in-progress: false
-    strategy:
-      matrix:
-        #python-version: [ '2.x', '3.x']
-        python-version: ['3.x']
-    name: Python ${{ matrix.python-version }} Checking dependencies
+    
+    name: Scanning dependancies
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-python@v2
