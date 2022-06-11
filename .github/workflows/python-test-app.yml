@@ -76,9 +76,9 @@ jobs:
       cancel-in-progress: false
     strategy:
       matrix:
-        python-version: [ '2.x', '3.x']
-        #python-version: ['3.x']
+        python-version: [ '2.x', '3.x' ]
     name: Python ${{ matrix.python-version }} sample
+        #python-version: ['3.x']
     steps:
     - uses: actions/checkout@v3
     - name: Install AWS Client
@@ -159,7 +159,7 @@ jobs:
     - uses: actions/checkout@v3
     - uses: actions/setup-python@v2
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: 3.x
 
     - uses: homoluctus/pip-audit-action@v1
       with:
@@ -176,7 +176,12 @@ jobs:
     concurrency: 
       group: tests
       cancel-in-progress: false
+    strategy:
+      matrix:
+        python-version: [ '2.x', '3.x' ]
+    name: Python ${{ matrix.python-version }}
     steps:
+    - run: echo ${{ matrix.python-version }}
     - run: echo "Placeholder for playwright"
 
   ScanSensitiveData:
