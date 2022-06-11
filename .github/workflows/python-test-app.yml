@@ -24,7 +24,7 @@ jobs:
       cancel-in-progress: false
     strategy:
       matrix:
-        python-version: [ '2.x', '3.x']
+        python-version: [ '3.8', '3.10.4']
         #python-version: ['3.x']
     name: Python ${{ matrix.python-version }} Linter
     steps:
@@ -76,7 +76,7 @@ jobs:
       cancel-in-progress: false
     strategy:
       matrix:
-        python-version: [ '2.x', '3.x' ]
+        python-version: [ '3.8', '3.10.4']
     name: Python ${{ matrix.python-version }} sample
         #python-version: ['3.x']
     steps:
@@ -178,7 +178,7 @@ jobs:
       cancel-in-progress: false
     strategy:
       matrix:
-        python-version: [ '2.x', '3.x' ]
+        python-version: [ '3.8', '3.10.4']
     name: Python ${{ matrix.python-version }}
     steps:
     - run: echo ${{ matrix.python-version }}
