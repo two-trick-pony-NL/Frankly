@@ -59,8 +59,6 @@ jobs:
 
     - name: Test with pytest
       run: |
-            nohup python3 developmentserver.py & &>/dev/null
-            sleep 10s
             pytest
     - name: Lint with flake8
       run: |

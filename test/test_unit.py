@@ -9,12 +9,29 @@ import pytest
 from app import app
 
 
-@pytest.fixture
-def client():
-    app.config.update({'TESTING': True})
+@pytest.fixture()
+def app():
+    app = create_app()
+    app.run(debug=True, host='0.0.0.0', port=8080, use_reloader=True)
+    app.config.update({
+        "TESTING": True,
+    })
 
-    with app.test_client() as client:
-        yield client
+    # other setup can go here
+
+    yield app
+
+    # clean up / reset resources here
+
+
+@pytest.fixture()
+def client(app):
+    return app.test_client()
+
+
+@pytest.fixture()
+def runner(app):
+    return app.test_cli_runner()
 
 
 """
