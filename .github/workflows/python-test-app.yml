@@ -156,8 +156,6 @@ jobs:
     concurrency: 
       group: Security
       cancel-in-progress: false
-    
-    name: Scanning dependancies
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-python@v2
@@ -174,7 +172,6 @@ jobs:
 
 
   playwright:
-    name: Browsertesting
     runs-on: ubuntu-latest
     needs: [SnykCodescan, Bandit-Scan, dependency-review, ScanSensitiveData]
     concurrency: 
@@ -189,6 +186,7 @@ jobs:
     - run: echo "Placeholder for playwright"
 
   ScanSensitiveData:
+    name: Scanning for sensitive data in code
     runs-on: ubuntu-18.04
     concurrency: 
       group: Security
