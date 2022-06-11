@@ -29,7 +29,7 @@ Flask-Migrate==3.1.0
 Flask-Session==0.4.0
 Flask-Share==0.1.1
 Flask-SQLAlchemy==2.5.1
-Flask-WTF==0.14.2
+Flask-WTF==3.0.0
 fonttools==4.32.0
 gevent==21.12.0
 geventhttpclient==1.5.3

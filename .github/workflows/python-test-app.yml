@@ -193,8 +193,8 @@ jobs:
         with:
           path: website
           token: ${{ secrets.GITHUB_TOKEN }}
-          ignorePaths: '["src/__tests__/checker.*.test.ts"]'
-          ignoreEmails: '[".*@franklyapp.com", ".*@petervandoorn.com", "email"]'
+          ignorePaths: '["/website/views.py"]'
+          ignoreEmails: '[".*@franklyapp.com", ".*@petervandoorn.com", "^email$."]'
 
   Finishingtests:
       runs-on: ubuntu-latest
