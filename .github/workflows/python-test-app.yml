@@ -17,6 +17,7 @@ env:
 jobs:
   pytest:
     runs-on: ubuntu-latest
+    needs: [SnykCodescan, Bandit-Scan, dependency-review]
     concurrency: 
       group: tests
       cancel-in-progress: true
@@ -98,9 +99,27 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           args: --severity-threshold=high
+  
+  dependency-review:
+    runs-on: ubuntu-latest
+    concurrency: 
+      group: Dependenciesreview
+    steps:
+      - name: 'Checkout Repository'
+        uses: actions/checkout@v3
+      - name: 'Dependency Review'
+        uses: actions/dependency-review-action@v1
+
+  Finishingtests:
+    runs-on: ubuntu-latest
+    concurrency: 
+      group: tests
+    needs: [SnykCodescan, Bandit-Scan, dependency-review]
+    steps:
+    - run: echo "Placeholder for playwright"
 
   Finishingtests:
       runs-on: ubuntu-latest
-      needs: [SnykCodescan, Bandit-Scan, pytest]
+      needs: [SnykCodescan, Bandit-Scan, pytest, dependency-review]
       steps:
       - run: echo "all done!"
