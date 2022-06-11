@@ -120,7 +120,7 @@ jobs:
     
   
   Bandit-Scan:
-    name: Scanning Python code
+    name: Scan for Python security
     runs-on: ubuntu-latest
     concurrency: 
       group: codescan
