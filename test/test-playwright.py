@@ -8,11 +8,11 @@ import subprocess
 import tempfile
 from developmentserver import create_app
 
-import pytest
-
+print("this file ran")
+"""
 
 def run(playwright: Playwright) -> None:
-    browser = playwright.chromium.launch(headless=True)
+    browser = playwright.chromium.launch(headless=False)
     context = browser.new_context()
 
     # Open new page
@@ -71,3 +71,4 @@ def run(playwright: Playwright) -> None:
 with sync_playwright() as playwright:
     
     run(playwright)
+"""
