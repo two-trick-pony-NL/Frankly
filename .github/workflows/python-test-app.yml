@@ -102,6 +102,5 @@ jobs:
   Finishingtests:
       runs-on: ubuntu-latest
       needs: [SnykCodescan, Bandit-Scan, pytest]
-      needs: tests
       steps:
       - run: echo "all done!"
