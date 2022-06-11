@@ -18,7 +18,8 @@ jobs:
   Runtests:
     runs-on: ubuntu-latest
     concurrency: 
-    group: tests
+      group: tests
+      cancel-in-progress: true
     strategy:
       matrix:
         #python-version: [ '2.x', '3.x']
@@ -72,7 +73,8 @@ jobs:
   Bandit-Scan:
     runs-on: ubuntu-latest
     concurrency: 
-    group: tests
+      group: tests
+      cancel-in-progress: true
     steps:
     # Checkout the code from GitHub
       - uses: actions/checkout@v2
