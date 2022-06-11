@@ -202,15 +202,14 @@ jobs:
 
       needs: [ pytest, playwright, flake8Linter, snykcontainer]
       steps:
-      - uses: actions/checkout@v2
-      - uses: ncipollo/release-action@v1
-        with:
-          bodyFile: "readme.md"
-          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
 
   snykcontainer:
     name: Scanning containerfile
-    needs: [SnykCodescan, Bandit-Scan, dependency-review, ScanSensitiveData]
     permissions:
       contents: read # for actions/checkout to fetch code
       security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
