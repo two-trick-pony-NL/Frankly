@@ -1,6 +1,6 @@
 fileignoreconfig:
 - filename: .github/workflows/python-test-app.yml
-  checksum: c5a4786d9c4ebb41301d3ed06de485f844df0d926b4edb6076b0a9413e9e5f03
+  checksum: d792559a333322a69e0f68c23c38923642ae06955ff83af178344912dd2dc1b1
   ignore_detectors: [filename] 
 version: ""
 
