@@ -193,7 +193,7 @@ jobs:
   Finishingtests:
       runs-on: ubuntu-latest
       concurrency: 
-      group: Nope
+        group: None
       needs: [ pytest, playwright, flake8Linter]
       steps:
       - run: echo "all done!"
