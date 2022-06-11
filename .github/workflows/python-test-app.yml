@@ -19,7 +19,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [ '2.x', '3.x']
+        #python-version: [ '2.x', '3.x']
+        python-version: ['3.x']
     name: Python ${{ matrix.python-version }} sample
     steps:
     - uses: actions/checkout@v3
@@ -58,7 +59,7 @@ jobs:
 
     - name: Test with pytest
       run: |
-            nohup python developmentserver.py
+            nohup python3 developmentserver.py & &>/dev/null
             sleep 10s
             pytest
     - name: Lint with flake8
