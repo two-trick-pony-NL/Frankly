@@ -103,3 +103,5 @@ jobs:
       runs-on: ubuntu-latest
       needs: codescan
       needs: tests
+      steps:
+      - run: echo "all done!"
