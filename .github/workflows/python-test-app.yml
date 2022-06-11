@@ -21,7 +21,7 @@ jobs:
     needs: [SnykCodescan, Bandit-Scan, dependency-review, ScanSensitiveData]
     concurrency: 
       group: tests
-      cancel-in-progress: false
+      
     strategy:
       matrix:
         python-version: [ '3.8', '3.10.4']
@@ -73,7 +73,7 @@ jobs:
     needs: [SnykCodescan, Bandit-Scan, dependency-review, ScanSensitiveData]
     concurrency: 
       group: tests
-      cancel-in-progress: false
+      
     strategy:
       matrix:
         python-version: [ '3.8', '3.10.4']
@@ -120,11 +120,11 @@ jobs:
     
   
   Bandit-Scan:
-    name: Scan for security threads in Python code
+    name: Scanning Python code
     runs-on: ubuntu-latest
     concurrency: 
       group: codescan
-      cancel-in-progress: false
+    
     steps:
     # Checkout the code from GitHub
       - uses: actions/checkout@v2
@@ -136,11 +136,11 @@ jobs:
           path: './website'
 
   SnykCodescan:
-    name: Scan for security threats with Snyk
+    name: Scan code with Snyk
     runs-on: ubuntu-latest
     concurrency: 
         group: codescan
-        cancel-in-progress: false
+        
     steps:
       - uses: actions/checkout@master
       - name: Run Snyk to check for vulnerabilities
@@ -151,11 +151,11 @@ jobs:
           args: --severity-threshold=high
   
   dependency-review:
-    name: Scan for security issues in dependancies
+    name: Scan dependancies
     runs-on: ubuntu-latest
     concurrency: 
       group: Security
-      cancel-in-progress: false
+      
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-python@v2
@@ -176,21 +176,20 @@ jobs:
     needs: [SnykCodescan, Bandit-Scan, dependency-review, ScanSensitiveData]
     concurrency: 
       group: tests
-      cancel-in-progress: false
+      
     strategy:
       matrix:
-        python-version: [ '3.8', '3.10.4']
-    name: Python ${{ matrix.python-version }}
+        browser-version: [ 'Chrome', 'Webkit', 'Edge']
+    name: Testing browser ${{ matrix.browser-version }}
     steps:
-    - run: echo ${{ matrix.python-version }}
+    - run: echo ${{ matrix.browser-version }}
     - run: echo "Placeholder for playwright"
 
   ScanSensitiveData:
-    name: Scanning for sensitive data in code
+    name: Scanning for sensitive data
     runs-on: ubuntu-18.04
     concurrency: 
       group: Security
-      cancel-in-progress: false
     steps:
     - uses: actions/checkout@v2
       with:
