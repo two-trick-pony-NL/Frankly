@@ -77,7 +77,7 @@ jobs:
     strategy:
       matrix:
         python-version: [ '3.8', '3.10.4']
-    name: Python ${{ matrix.python-version }} sample
+    name: Python ${{ matrix.python-version }} 
         #python-version: ['3.x']
     steps:
     - uses: actions/checkout@v3
