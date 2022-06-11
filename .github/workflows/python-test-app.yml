@@ -173,7 +173,6 @@ jobs:
     concurrency: 
       group: tests
       cancel-in-progress: true
-    needs: [SnykCodescan, Bandit-Scan, dependency-review, ScanSensitiveData]
     steps:
     - run: echo "Placeholder for playwright"
 
