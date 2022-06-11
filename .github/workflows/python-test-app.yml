@@ -51,7 +51,7 @@ jobs:
       run: |
           pip install -r requirements.txt
           aws s3 cp s3://franklyappsecret/Env_Settings.cfg .
-  # python3 developmentserver.py
+    # python3 developmentserver.py
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -85,7 +85,7 @@ jobs:
         # only scans under this path
           path: './website'
 
-  security:
+  SnykCodescan:
     runs-on: ubuntu-latest
     concurrency: 
         group: codescan
@@ -101,7 +101,7 @@ jobs:
 
   Finishingtests:
       runs-on: ubuntu-latest
-      needs: codescan
+      needs: [SnykCodescan, Bandit-Scan, pytest]
       needs: tests
       steps:
       - run: echo "all done!"
