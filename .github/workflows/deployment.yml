@@ -4,7 +4,10 @@ on:
   release:
     types:
       - created
-  workflow_call:
+  workflow_run:
+    workflows: ["CICDPipeline"]
+    types:
+      - completed
 
 env:
   AWS_REGION: eu-central-1
