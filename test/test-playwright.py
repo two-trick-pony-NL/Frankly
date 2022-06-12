@@ -1,15 +1,7 @@
 from csv import excel_tab
 from playwright.sync_api import Playwright, sync_playwright, expect
 from urllib import response
-from website.payments import *
-from website.qrgenerator import *
-import os
-import subprocess
-import tempfile
-from developmentserver import create_app
 
-print("this file ran")
-"""
 
 def run(playwright: Playwright) -> None:
     browser = playwright.chromium.launch(headless=False)
@@ -18,7 +10,7 @@ def run(playwright: Playwright) -> None:
     # Open new page
     page = context.new_page()
 
-    # Go to http://localhost/
+    # Go to http://localhost:8080/
     page.goto("http://localhost:8080/")
 
     # Click text=Who is behind Frankly?
@@ -50,15 +42,15 @@ def run(playwright: Playwright) -> None:
 
     # Click text=Privacy
     page.locator("text=Privacy").click()
-    expect(page).to_have_url("http://localhost/legal/privacy")
+    expect(page).to_have_url("http://localhost:8080/legal/privacy")
 
     # Click footer >> text=Terms
     page.locator("footer >> text=Terms").click()
-    expect(page).to_have_url("http://localhost/legal/terms")
+    expect(page).to_have_url("http://localhost:8080/legal/terms")
 
     # Click footer >> text=Pricing
     page.locator("footer >> text=Pricing").click()
-    expect(page).to_have_url("http://localhost/legal/pricing")
+    expect(page).to_have_url("http://localhost:8080/legal/pricing")
 
     # Click text=Github
     page.locator("text=Github").click()
@@ -71,4 +63,3 @@ def run(playwright: Playwright) -> None:
 with sync_playwright() as playwright:
     
     run(playwright)
-"""
