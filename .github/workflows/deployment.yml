@@ -4,6 +4,7 @@ on:
   release:
     types:
       - created
+  workflow_call:
 
 env:
   AWS_REGION: eu-central-1
