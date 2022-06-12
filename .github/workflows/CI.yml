@@ -175,7 +175,7 @@ jobs:
         testtorun: ['test-homepage', 'test-login', 'test-dashboard']
         browser-version: [ 'Chrome']
         
-    name: Testing browser ${{ matrix.browser-version }}
+    name: Testing function ${{ matrix.testtorun }} on ${{ matrix.browser-version }}
     steps:
     - uses: actions/checkout@v3
     - name: Install AWS Client
