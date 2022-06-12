@@ -197,8 +197,9 @@ jobs:
       steps:
       - uses: appleboy/telegram-action@master
         with:
-          to: ${{ secrets.chat }}
-          token: ${{ secrets.token }}
+          to: ${{ secrets.CHAT }}
+          token: ${{ secrets.TOKEN}}
+
 
 
   Deployment:
@@ -211,7 +212,7 @@ jobs:
         run: echo "calling deployment script"
 
   snykcontainer:
-    name: Scanning containerfile
+    name: Scanning container image
     permissions:
       contents: read # for actions/checkout to fetch code
       security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
