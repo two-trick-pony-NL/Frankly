@@ -201,7 +201,6 @@ jobs:
         chat: ${{ secrets.chat }} # user id or channel name secret
         token: ${{ secrets.token }} # token secret
         status: ${{ job.status }} # do not modify this line
-      - run: echo "all done!"
 
   Deployment:
       name: Releasing to Production
