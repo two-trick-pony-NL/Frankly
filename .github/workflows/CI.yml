@@ -172,11 +172,46 @@ jobs:
       
     strategy:
       matrix:
-        browser-version: [ 'Chrome', 'Webkit', 'Edge']
+        browser-version: [ 'Chrome']
     name: Testing browser ${{ matrix.browser-version }}
     steps:
-    - run: echo ${{ matrix.browser-version }}
-    - run: echo "Placeholder for playwright"
+    - uses: actions/checkout@v3
+    - name: Install AWS Client
+      run: |
+        curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+        unzip awscliv2.zip
+        sudo ./aws/install || true
+        aws --version
+        curl "https://s3.us-west-2.amazonaws.com/lightsailctl/latest/linux-amd64/lightsailctl" -o "lightsailctl"
+        sudo mv "lightsailctl" "/usr/local/bin/lightsailctl"
+        sudo chmod +x /usr/local/bin/lightsailctl
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-region: ${{ env.AWS_REGION }}
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Running the server for tests
+      run: |
+          pip install -r requirements.txt
+          aws s3 cp s3://franklyappsecret/Env_Settings.cfg .
+    # python3 developmentserver.py
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install --upgrade pip
+        pip install playwright
+        playwright install
+        pip install flake8 pytest               
+
+    - name: Run Playwright
+      run: |
+            python3 developmentserver.py & python3 test/test-playwright.py & &> /dev/null
 
   ScanSensitiveData:
     name: Scanning for sensitive data

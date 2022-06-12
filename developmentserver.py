@@ -4,4 +4,4 @@ from website import create_app
 app = create_app()
 #This line is disabled om production so that Gunicorn can take port 80 to expose to the public. 
 app.run(debug=True, host='0.0.0.0', port=8080, use_reloader=True)
-print("Starting DEVELOPMENT server")
+print("Starting DEVELOPMENT server.")
