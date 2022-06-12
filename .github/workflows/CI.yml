@@ -205,7 +205,7 @@ jobs:
       steps:
       - name: Checkout
         uses: actions/checkout@v2
-      -name: Calling deployment workflow
+      - name: Calling deployment workflow
         uses: two-trick-pony-NL/Frankly/.github/workflows/deployment.yml
       - name: Release
         uses: softprops/action-gh-release@v1
