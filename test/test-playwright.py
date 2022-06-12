@@ -1,12 +1,14 @@
 from csv import excel_tab
 from playwright.sync_api import Playwright, sync_playwright, expect
 from urllib import response
+import time
+
 
 
 def run(playwright: Playwright) -> None:
     browser = playwright.chromium.launch(headless=True)
     context = browser.new_context()
-
+    time.sleep( 5)
     # Open new page
     page = context.new_page()
 
@@ -50,7 +52,7 @@ def run(playwright: Playwright) -> None:
 
     # Click footer >> text=Pricing
     page.locator("footer >> text=Pricing").click()
-    expect(page).to_have_url("http://localhost:8081/legal/pricing")
+    expect(page).to_have_url("http://localhost:8080/legal/pricingaaa")
 
     # Click text=Github
     page.locator("text=Github").click()
