@@ -226,7 +226,7 @@ jobs:
         fetch-depth: 0
     - name: Detect secrets with Talisman in incoming commits
       uses: carhartl/talisman-secrets-scan-action@v1.2.1
-      continue-on-error: true
+      
       
 
 
