@@ -172,8 +172,9 @@ jobs:
       
     strategy:
       matrix:
-        browser-version: [ 'Chrome']
         testtorun: ['test-homepage.py', 'test-login.py']
+        browser-version: [ 'Chrome']
+        
     name: Testing browser ${{ matrix.browser-version }}
     steps:
     - uses: actions/checkout@v3
