@@ -87,7 +87,9 @@ jobs:
             --containers file://AWS/deploymentconfig.json \
             --public-endpoint file://AWS/publicendpoint.json
   on-failure:
+    name: Cancelling deployment test failed
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'failure' }}
     steps:
-      - run: echo 'The triggering workflow failed'
+      - name: Deploying app to production
+        run: exit 1
