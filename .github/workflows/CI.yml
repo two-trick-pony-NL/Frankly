@@ -172,7 +172,7 @@ jobs:
       
     strategy:
       matrix:
-        testtorun: ['homepage', 'login', 'dashboard']
+        testtorun: ['homepage', 'login', 'dashboard', 'survey']
         browser-version: [ 'Chrome']
         
     name: Testing ${{ matrix.testtorun }} on ${{ matrix.browser-version }}
