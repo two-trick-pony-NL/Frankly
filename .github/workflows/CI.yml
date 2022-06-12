@@ -172,7 +172,7 @@ jobs:
       
     strategy:
       matrix:
-        testtorun: ['test-homepage.py', 'test-login.py']
+        testtorun: ['test-homepage', 'test-login', 'test-dashboard']
         browser-version: [ 'Chrome']
         
     name: Testing browser ${{ matrix.browser-version }}
@@ -213,7 +213,7 @@ jobs:
 
     - name: Run Playwright
       run: |
-            python3 developmentserver.py & python3 test/playwright/${{ matrix.testtorun }}
+            python3 developmentserver.py & python3 test/playwright/${{ matrix.testtorun }}.py
 
 
   ScanSensitiveData:
