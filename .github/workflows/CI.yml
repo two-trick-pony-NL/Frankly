@@ -17,6 +17,23 @@ env:
   AWS_LIGHTSAIL_SERVICE_NAME: franklyapp
 
 jobs:
+
+  Pylint:
+    runs-on: ubuntu-latest
+    name:  pylint
+    needs: [SnykCodescan, Bandit-Scan, dependency-review, ScanSensitiveData]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Lint
+        uses: gabriel-milan/action-pylint@v1
+        with:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}} # GitHub token
+          path: "./*.py" # Glob pattern for files to lint
+          fail: true # Fail the action if pylint errors are found
+          pr-message: true # Send a PR message if pylint errors are found
+
   flake8Linter:
     runs-on: ubuntu-latest
     needs: [SnykCodescan, Bandit-Scan, dependency-review, ScanSensitiveData]
@@ -235,7 +252,7 @@ jobs:
       name: Releasing new version
       runs-on: ubuntu-latest
 
-      needs: [ pytest, playwright, flake8Linter, snykcontainer]
+      needs: [ pytest, playwright, flake8Linter, snykcontainer, Pylint]
       steps:
       - name: Calling deployment script
         run: echo "calling deployment script"
