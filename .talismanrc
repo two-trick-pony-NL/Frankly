@@ -1,7 +1,8 @@
 fileignoreconfig:
-- filename: .github/workflows/python-test-app.yml
-  checksum: 1e9e0a646af2d9598aee0b703560c45a015b0ffa54325346ab1dd70ab6a4b57b
-  ignore_detectors: [filename] 
+- filename: .github/workflows/CI.yml
+  checksum: 5b13983725d642124eda18ce65c3858e3567c99bd20a61ea8463c4e157d1329c
+- filename: .github/workflows/deployment.yml
+  checksum: 915ab6143733f89bf27e45ac40494e20064477414b225174e37b62894c5815c1
 version: ""
 
 scopeconfig:
