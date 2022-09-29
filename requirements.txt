@@ -38,7 +38,7 @@ idna==3.3
 image==1.5.33
 itsdangerous==2.1.0
 Jinja2==3.0.3
-joblib==1.1.0
+joblib==1.2.0
 kiwisolver==1.4.2
 locust==2.8.4
 lxml==4.9.1
