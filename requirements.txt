@@ -13,7 +13,7 @@ charset-normalizer==2.0.12
 clang==14.0
 click==8.0.4
 ConfigArgParse==1.5.3
-cryptography==36.0.2
+cryptography==39.0.1
 cssselect==1.1.0
 cssutils==2.4.0
 cycler==0.11.0
