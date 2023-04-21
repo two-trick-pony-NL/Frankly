@@ -70,7 +70,7 @@ roundrobin==0.0.2
 sendgrid==6.9.7
 six==1.11.0
 SQLAlchemy==1.4.32
-sqlparse==0.4.2
+sqlparse==0.4.4
 starkbank-ecdsa==2.0.3
 stop-words==2018.7.23
 termcolor==1.1.0
